@@ -20,7 +20,7 @@ export function setTab(tabIndex) {
 function navigateForward(state) {
   return {
     type: types.NAVIGATION_FORWARD,
-    state,
+    payload: state,
   };
 }
 
@@ -32,6 +32,9 @@ export function navigate(state) {
 
 export function navigateBack(state) {
   return (dispatch, getState) => {
-    dispatch({ type: types.NAVIGATION_BACK });
+    dispatch({
+      type: types.NAVIGATION_BACK,
+      payload: state,
+    });
   };
 }

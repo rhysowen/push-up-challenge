@@ -34,7 +34,7 @@ const ApplicationTabs = props => (
         title="Programs"
         onPress={() => props.setTab(1)}
       >
-        {<ProgramContainer />}
+        {<ProgramContainer {...props} />}
       </TabNavigator.Item>
       <TabNavigator.Item
         selected={props.tabs.index === 2}

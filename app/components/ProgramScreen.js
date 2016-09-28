@@ -4,7 +4,23 @@ import {
   View,
   Text,
   ListView,
+  TouchableHighlight,
 } from 'react-native';
+
+const pressRow = (rowID, props) => (
+  props.navigate({ key: 'ExerciseContainer' })
+);
+
+const renderRow = (rowData, sectionID, rowID, highlightRow, props) => (
+  <TouchableHighlight
+    onPress={() => pressRow(rowID, props)}
+  >
+    <View>
+      <Text>{rowData.name}</Text>
+      <Text>{rowData.description}</Text>
+    </View>
+  </TouchableHighlight>
+);
 
 const propTypes = {
   programs: PropTypes.object,
@@ -24,7 +40,8 @@ export default ProgramScreen = (props) => {
     <View style={{marginTop: 90}}>
       <ListView
         dataSource={dataSource}
-        renderRow={rowData => <Text>{rowData.name}</Text>}
+        renderRow={(rowData, sectionID, rowID, highlightRow) =>
+          renderRow(rowData, sectionID, rowID, highlightRow, props)}
       />
     </View>
   );

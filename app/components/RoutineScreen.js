@@ -1,12 +1,28 @@
 import React from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
+
+const renderRoutineScreen = (props) => {
+  let ret;
+
+  const { programId } = props;
+
+  if (programId === undefined) {
+    // No program has been selected.
+    ret = (<Text>Please select a program - none selected!</Text>);
+  } else {
+    // A program has been selected.
+    ret = (<Text>You have selected program {programId}</Text>);
+  }
+
+  return ret;
+};
 
 export default (props) => (
-  <View style={{marginTop: 90}}>
-    <TouchableHighlight
-      onPress={() => props.navigate({ key: 'Detail' })}
-    >
-      <Text>Select a progra2m!</Text>
-    </TouchableHighlight>
-  </View>
+  <ScrollView style={{ marginTop: 90 }}>
+    {renderRoutineScreen(props)}
+  </ScrollView>
 );

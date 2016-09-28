@@ -16,7 +16,7 @@ const allTabs = [
 
 const allPages = [
   { key: 'ApplicationTabs' },
-  { key: 'Detail' },
+  { key: 'ExerciseContainer' },
 ];
 
 export const tabs = createReducer({ key: 'home', index: 0, routes: allTabs }, {
@@ -35,11 +35,5 @@ export const navigationState = createReducer({ index: 0, routes: allPages }, {
   },
   [types.NAVIGATION_BACK](state, action) {
     return NavigationStateUtils.back(state);
-  },
-});
-
-export const navigationParams = createReducer({}, {
-  [types.NAVIGATION_FORWARD](state, action) {
-    return action.state;
   },
 });

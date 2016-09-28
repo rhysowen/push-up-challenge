@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import ApplicationTabs from './ApplicationTabs';
+import ExerciseContainer from './ExerciseContainer';
 
 const {
   Card: NavigationCard,
@@ -37,7 +38,7 @@ export default (props) => {
   let Scene = null;
 
   if (props.scene.route.key === 'ApplicationTabs') { Scene = ApplicationTabs; }
-  if (props.scene.route.key === 'Detail') { Scene = Detail; }
+  if (props.scene.route.key === 'ExerciseContainer') { Scene = ExerciseContainer; }
 
   return (
     <Animated.View style={style}>
