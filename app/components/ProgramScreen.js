@@ -7,13 +7,14 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-const pressRow = (rowID, props) => (
-  props.navigate({ key: 'ExerciseContainer' })
-);
+const pressRow = (rowData, props) => {
+  props.setProgramName(rowData.name);
+  return props.navigate({ key: 'ExerciseContainer' });
+};
 
 const renderRow = (rowData, sectionID, rowID, highlightRow, props) => (
   <TouchableHighlight
-    onPress={() => pressRow(rowID, props)}
+    onPress={() => pressRow(rowData, props)}
   >
     <View>
       <Text>{rowData.name}</Text>

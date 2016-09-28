@@ -58,6 +58,7 @@ function mapStateToProps(state) {
   return {
     navigationState: state.navigationState,
     recipeCounter: state.recipeCount,
+    program: state.program,
   };
 }
 

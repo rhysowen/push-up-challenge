@@ -1,28 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   ScrollView,
   Text,
   View,
 } from 'react-native';
 
-const renderRoutineScreen = (props) => {
-  let ret;
+export default class RoutineScreen extends Component {
 
-  const { programId } = props;
-
-  if (programId === undefined) {
-    // No program has been selected.
-    ret = (<Text>Please select a program - none selected!</Text>);
-  } else {
-    // A program has been selected.
-    ret = (<Text>You have selected program {programId}</Text>);
+  componentDidMount() {
+    this.props.getProgram();
   }
 
-  return ret;
-};
+  renderRoutineScreen() {
+    let ret;
 
-export default (props) => (
-  <ScrollView style={{ marginTop: 90 }}>
-    {renderRoutineScreen(props)}
-  </ScrollView>
-);
+    const { program } = this.props;
+
+    if (program === undefined) {
+      // No program has been selected.
+      ret = (<Text>Please select a program - none selected!</Text>);
+    } else {
+      // A program has been selected.
+      ret = (<Text>You have selected program {program.exercise.name}</Text>);
+    }
+
+    return ret;
+  }
+
+  render() {
+    return (
+      <ScrollView style={{ marginTop: 90 }}>
+        {this.renderRoutineScreen()}
+      </ScrollView>
+    );
+  }
+}
+

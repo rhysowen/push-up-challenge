@@ -98,3 +98,43 @@ const programElements = Immutable.List([
 export const programs = createReducer(programElements, {
 
 });
+
+/*export const dayId = createReducer(storage.getKey(storage.SELECTED_DAY), {
+
+});*/
+
+const programInitialState = {
+  isFetching: false,
+  isFetched: false,
+  isError: false,
+  exercise: {},
+};
+
+const findProgramByName = name => programElements.find(program => program.name === name);
+
+export const program = createReducer(programInitialState, {
+  [types.PROGRAM_GET_NAME_FETCH](state, action) {
+    return Object.assign(
+      {},
+      programInitialState,
+      { isFetching: true }
+    );
+  },
+  [types.PROGRAM_GET_NAME_SUCCESS](state, action) {
+    return Object.assign(
+      {},
+      programInitialState,
+      {
+        isFetched: true,
+        exercise: findProgramByName(action.payload),
+      }
+    );
+  },
+  [types.PROGRAM_GET_NAME_FAILURE](state, action) {
+    return Object.assign(
+      {},
+      programInitialState,
+      { isError: true }
+    );
+  },
+});
