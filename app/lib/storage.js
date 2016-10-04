@@ -2,6 +2,8 @@ import { AsyncStorage } from 'react-native';
 
 const SELECTED_PROGRAM_NAME = '@SELECTED_PROGRAM_NAME:key';
 const SELECTED_DAY = '@SELECTED_DAY:key';
+const TOTAL_EXERCISE = '@TOTAL_EXERCISE:key';
+const RECORD_EXERCISE = '@RECORD_EXERCISE:key';
 
 const setKey = async function(key, data) {
   try {
@@ -19,9 +21,18 @@ const getKey = async function(key) {
   }
 };
 
+const removeKey = async function(key) {
+  try {
+    return await AsyncStorage.removeItem(key);
+  } catch (error) {
+    // Log this?
+  }
+};
+
 export { 
   SELECTED_PROGRAM_NAME,
   SELECTED_DAY,
   setKey,
   getKey,
+  removeKey,
 };

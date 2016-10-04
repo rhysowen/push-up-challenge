@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  Animated,
   StyleSheet,
   View,
   NavigationExperimental,
-  Text,
+  Image,
+  StatusBar,
 } from 'react-native';
 
 // Takes in state & actions - will wrap any component we give it.
@@ -13,57 +13,92 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 
 import SceneContainer from './SceneContainer';
+import {
+  TAB_COLOR,
+  BASE_BACKGROUND_COLOR,
+} from '../theme/style';
 
 const {
   Card: NavigationCard,
   Transitioner: NavigationTransitioner,
-  Header: NavigationHeader
+  Header: NavigationHeader,
 } = NavigationExperimental;
 
 const {
   PagerStyleInterpolator: NavigationPagerStyleInterpolator
 } = NavigationCard;
 
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
+  navHeader: {
+    backgroundColor: TAB_COLOR,
+  },
+  navLogo: {
+    width: 165,
+    height: 20,
+  },
+  cardWrapper: {
+    backgroundColor: 'white',
+    marginTop: NavigationHeader.HEIGHT,
+  },
+});
+
+const AppLogo = require('../theme/images/PushUpsLogo.png');
+
 const AppContainer = (props) => {
   const { navigationState } = props;
 
   return (
-    <NavigationTransitioner
-      navigationState={navigationState}
-      style={{flex: 1}}
-      render={renderProps => (
-        <View style={{flex: 1}}>
-          <NavigationCard
-            {...renderProps}
-            onNavigateBack={() => props.navigateBack()}
-            key={renderProps.scene.route.key}
-            renderScene={() => (<SceneContainer {...renderProps} {...props } />)}
-          />
-          <NavigationHeader
-            {...renderProps}
-            onNavigateBack={() => props.navigateBack()}
-            renderTitleComponent={() => {
-              const title = 'lol';
-              return (<NavigationHeader.Title>{title}</NavigationHeader.Title>);
-            }}
-            // When dealing with modals you may also want to override renderLeftComponent...
-          />
-        </View>
-      )}
-    />
+    <View
+      style={styles.wrapper}
+    >
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={TAB_COLOR}
+      />
+      <NavigationTransitioner
+        navigationState={navigationState}
+        style={styles.wrapper}
+        render={renderProps => (
+          <View style={styles.wrapper}>
+            <NavigationCard
+              {...renderProps}
+              onNavigateBack={() => props.navigateBack()}
+              key={renderProps.scene.route.key}
+              renderScene={() => (<SceneContainer {...renderProps} {...props } />)}
+              style={styles.cardWrapper}
+            />
+            <NavigationHeader
+              {...renderProps}
+              onNavigateBack={() => props.navigateBack()}
+              style={styles.navHeader}
+              renderTitleComponent={() => {
+                return (
+                  <NavigationHeader.Title>
+                    <Image
+                      source={AppLogo}
+                      style={styles.navLogo}
+                    />
+                  </NavigationHeader.Title>
+                );
+              }}
+              // When dealing with modals you may also want to override renderLeftComponent...
+            />
+          </View>
+        )}
+      />
+    </View>
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    navigationState: state.navigationState,
-    recipeCounter: state.recipeCount,
-    program: state.program,
-  };
-}
+const mapStateToProps = state => ({
+  navigationState: state.navigationState,
+  recipeCounter: state.recipeCount,
+  program: state.program,
+});
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ActionCreators, dispatch);
-}
+const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

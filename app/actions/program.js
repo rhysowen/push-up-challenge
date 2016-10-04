@@ -1,35 +1,37 @@
 import * as types from './types';
 import * as storage from '../lib/storage';
+import {
+  SET_KEY,
+  GET_KEY,
+  REMOVE_KEY,
+  storageAsync,
+} from '../lib/storageAsync';
 
-export function setProgramByName(programName) {
-  return (dispatch, getState) => {
-    dispatch({
-      type: types.PROGRAM_SAVE,
-      payload: programName,
-    });
-  };
+export function setProgramByName(name) {
+  const actionTypes = [
+    types.PROGRAM_SAVE_NAME_SUCCESS,
+    types.PROGRAM_SAVE_NAME_FAILURE,
+  ];
+
+  return storageAsync(storage.SELECTED_PROGRAM_NAME, actionTypes, SET_KEY, null, name);
 }
 
-export function getProgram() {
-  return (dispatch, getState) => {
+export function removeSelectedProgram() {
+  const actionTypes = [
+    types.PROGRAM_REMOVE_SELECTED_SUCCESS,
+    types.PROGRAM_REMOVE_SELECTED_FAILURE,
+  ];
 
-    dispatch({ type: types.PROGRAM_GET_NAME_FETCH });
+  return storageAsync(storage.SELECTED_PROGRAM_NAME, actionTypes, REMOVE_KEY);
+}
 
-    const key = storage.getKey(storage.SELECTED_PROGRAM_NAME);
+export function fetchSelectedProgram() {
+  const actionTypes = [
+    types.PROGRAM_GET_SUCCESS,
+    types.PROGRAM_GET_FAILURE,
+  ];
 
-    key.then(
-      (response) => {
-        dispatch({
-          type: types.PROGRAM_GET_NAME_SUCCESS,
-          payload: response,
-        });
-      },
-      (error) => {
-        dispatch({
-          type: types.PROGRAM_GET_NAME_FAILURE,
-          payload: error,
-        });
-      }
-    );
-  };
+  const initDispatch = types.PROGRAM_GET_FETCH;
+
+  return storageAsync(storage.SELECTED_PROGRAM_NAME, actionTypes, GET_KEY, initDispatch);
 }

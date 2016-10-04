@@ -107,34 +107,48 @@ const programInitialState = {
   isFetching: false,
   isFetched: false,
   isError: false,
+  isProgramFound: false,
+  isViewRender: false,
   exercise: {},
 };
 
 const findProgramByName = name => programElements.find(program => program.name === name);
 
 export const program = createReducer(programInitialState, {
-  [types.PROGRAM_GET_NAME_FETCH](state, action) {
+  [types.PROGRAM_GET_FETCH](state, action) {
     return Object.assign(
       {},
       programInitialState,
       { isFetching: true }
     );
   },
-  [types.PROGRAM_GET_NAME_SUCCESS](state, action) {
+  [types.PROGRAM_GET_SUCCESS](state, action) {
     return Object.assign(
       {},
       programInitialState,
       {
         isFetched: true,
-        exercise: findProgramByName(action.payload),
+        exercise: action.payload !== null ? findProgramByName(action.payload) : null,
+        isProgramFound: action.payload !== null,
+        isViewRender: true,
       }
     );
   },
-  [types.PROGRAM_GET_NAME_FAILURE](state, action) {
+  [types.PROGRAM_GET_FAILURE](state, action) {
     return Object.assign(
       {},
       programInitialState,
       { isError: true }
     );
+  },
+  [types.PROGRAM_REMOVE_SELECTED_SUCCESS](state, action) {
+    return Object.assign(
+      {},
+      programInitialState,
+      { isViewRender: true }
+    );
+  },
+  [types.PROGRAM_REMOVE_SELECTED_FAILURE](state, action) {
+    return {}; // Todo
   },
 });

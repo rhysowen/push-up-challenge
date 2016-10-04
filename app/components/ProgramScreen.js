@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import Immutable from 'immutable';
 import {
   View,
   Text,
@@ -8,7 +7,7 @@ import {
 } from 'react-native';
 
 const pressRow = (rowData, props) => {
-  props.setProgramName(rowData.name);
+  props.setProgramByName(rowData.name);
   return props.navigate({ key: 'ExerciseContainer' });
 };
 
@@ -23,13 +22,7 @@ const renderRow = (rowData, sectionID, rowID, highlightRow, props) => (
   </TouchableHighlight>
 );
 
-const propTypes = {
-  programs: PropTypes.object,
-};
-
-let ProgramScreen;
-
-export default ProgramScreen = (props) => {
+const ProgramScreen = (props) => {
   const ds = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
   });
@@ -38,7 +31,8 @@ export default ProgramScreen = (props) => {
   const dataSource = ds.cloneWithRows(programs.toArray());
 
   return (
-    <View style={{marginTop: 90}}>
+    <View
+      style={{marginTop: 90}}>
       <ListView
         dataSource={dataSource}
         renderRow={(rowData, sectionID, rowID, highlightRow) =>
@@ -48,4 +42,8 @@ export default ProgramScreen = (props) => {
   );
 };
 
-ProgramScreen.propTypes = propTypes;
+ProgramScreen.propTypes = {
+  programs: PropTypes.object,
+};
+
+export default ProgramScreen;
