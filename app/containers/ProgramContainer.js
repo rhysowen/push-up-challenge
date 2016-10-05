@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import ActionCreators from '../actions';
 
-import ProgramScreen from '../components/ProgramScreen';
+import ProgramScreen from '../components/program/ProgramScreen';
 
 function mapStateToProps(state) {
   return {
@@ -8,4 +10,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ProgramScreen);
+const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProgramScreen);

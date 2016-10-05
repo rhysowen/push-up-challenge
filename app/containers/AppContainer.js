@@ -10,7 +10,7 @@ import {
 // Takes in state & actions - will wrap any component we give it.
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../actions';
+import ActionCreators from '../actions';
 
 import SceneContainer from './SceneContainer';
 import {
@@ -67,23 +67,21 @@ const AppContainer = (props) => {
               {...renderProps}
               onNavigateBack={() => props.navigateBack()}
               key={renderProps.scene.route.key}
-              renderScene={() => (<SceneContainer {...renderProps} {...props } />)}
+              renderScene={() => (<SceneContainer {...renderProps} {...props} />)}
               style={styles.cardWrapper}
             />
             <NavigationHeader
               {...renderProps}
               onNavigateBack={() => props.navigateBack()}
               style={styles.navHeader}
-              renderTitleComponent={() => {
-                return (
-                  <NavigationHeader.Title>
-                    <Image
-                      source={AppLogo}
-                      style={styles.navLogo}
-                    />
-                  </NavigationHeader.Title>
-                );
-              }}
+              renderTitleComponent={() => (
+                <NavigationHeader.Title>
+                  <Image
+                    source={AppLogo}
+                    style={styles.navLogo}
+                  />
+                </NavigationHeader.Title>
+              )}
               // When dealing with modals you may also want to override renderLeftComponent...
             />
           </View>

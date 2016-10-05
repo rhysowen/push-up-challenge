@@ -5,13 +5,13 @@ import {
   Alert,
 } from 'react-native';
 
-import DefaultButton from '../theme/DefaultButton';
+import DefaultButton from '../../theme/DefaultButton';
 import {
-  COLOR_BLUE,
+  COLOR_ORANGE,
   COLOR_RED,
-} from '../theme/style';
-import BaseScreen from '../theme/BaseScreen';
-import Info from './routine/Info';
+} from '../../theme/style';
+import BaseScreen from '../../theme/BaseScreen';
+import Info from './Info';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -38,6 +38,7 @@ export default class RoutineScreen extends Component {
 
   componentDidMount() {
     this.props.fetchSelectedProgram();
+    this.props.fetchStatistics();
   }
 
   renderButtons() {
@@ -52,9 +53,10 @@ export default class RoutineScreen extends Component {
         >
           <DefaultButton
             name="Continue Training"
-            buttonColor={COLOR_BLUE}
+            buttonColor={COLOR_ORANGE}
             textColor="white"
             style={styles.btnStyle}
+            onPress={() => console.log('Todo')}
           />
           <DefaultButton
             name="Abort Training"
@@ -79,9 +81,10 @@ export default class RoutineScreen extends Component {
         >
           <DefaultButton
             name="Select Program"
-            buttonColor={COLOR_BLUE}
+            buttonColor={COLOR_ORANGE}
             textColor="white"
             style={styles.btnStyle}
+            onPress={() => console.log('Todo')}
           />
         </View>
       );
@@ -91,11 +94,14 @@ export default class RoutineScreen extends Component {
   }
 
   render() {
-    const { program } = this.props;
+    const {
+      program,
+      statistics,
+    } = this.props;
 
     let ret;
 
-    if (program.isViewRender) {
+    if (program.isViewRender && statistics.isViewRender) {
       ret = (
         <BaseScreen
           style={styles.wrapper}
@@ -109,15 +115,15 @@ export default class RoutineScreen extends Component {
             />
             <Info
               title="Day"
-              value="1"
+              value={1}
             />
             <Info
               title="Total"
-              value="25"
+              value={statistics.total}
             />
             <Info
               title="Record"
-              value="7"
+              value={statistics.record}
             />
           </View>
           {this.renderButtons()}
@@ -133,3 +139,26 @@ export default class RoutineScreen extends Component {
   }
 
 }
+
+RoutineScreen.propTypes = {
+  fetchSelectedProgram: React.PropTypes.func.isRequired,
+  fetchStatistics: React.PropTypes.func.isRequired,
+  program: React.PropTypes.shape({
+    isViewRender: React.PropTypes.bool.isRequired,
+    isProgramFound: React.PropTypes.bool.isRequired,
+    exercise: React.PropTypes.shape({
+      name: React.PropTypes.string,
+      description: React.PropTypes.string,
+      days: React.PropTypes.arrayOf(
+        React.PropTypes.shape({
+          sets: React.PropTypes.arrayOf(React.PropTypes.number),
+        }),
+      ),
+    }),
+  }),
+  statistics: React.PropTypes.shape({
+    isViewRender: React.PropTypes.bool,
+    total: React.PropTypes.number,
+    record: React.PropTypes.number,
+  }),
+};

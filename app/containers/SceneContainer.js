@@ -38,7 +38,6 @@ export default (props) => {
   let Scene = null;
 
   if (props.scene.route.key === 'ApplicationTabs') { Scene = ApplicationTabs; }
-  if (props.scene.route.key === 'Advert') { Scene = Advert; }
   if (props.scene.route.key === 'ExerciseContainer') { Scene = ExerciseContainer; }
 
   return (

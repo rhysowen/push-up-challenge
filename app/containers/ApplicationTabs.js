@@ -7,17 +7,17 @@ import {
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import ActionCreators from '../actions';
 import TabNavigator from 'react-native-tab-navigator';
 
-// Screens
-import RoutineScreen from '../components/RoutineScreen';
-import MoreScreen from '../components/MoreScreen';
-import StatisticScreen from '../components/StatisticScreen';
-
 // Screen containers
+import RoutineContainer from './RoutineContainer';
 import ProgramContainer from './ProgramContainer';
+import StatisticContainer from './StatisticContainer';
+import MoreContainer from './MoreContainer';
 
-// styles
+// Styles
 import { TAB_COLOR } from '../theme/style';
 
 const propTypes = {
@@ -79,7 +79,7 @@ const ApplicationTabs = props => (
         renderIcon={() => imageJsxGen(pushUpImage, styles.pushUpImage, CONTAIN_MODE)}
         renderSelectedIcon={() => imageJsxGen(pushUpSelectedImage, styles.pushUpImage, CONTAIN_MODE)}
       >
-        {<RoutineScreen {...props} />}
+        {<RoutineContainer />}
       </TabNavigator.Item>
       <TabNavigator.Item
         selected={props.tabs.index === 1}
@@ -87,7 +87,7 @@ const ApplicationTabs = props => (
         renderIcon={() => imageJsxGen(programImage, styles.programImage, CONTAIN_MODE)}
         renderSelectedIcon={() => imageJsxGen(programSelectedImage, styles.programImage, CONTAIN_MODE)}
       >
-        {<ProgramContainer {...props} />}
+        {<ProgramContainer />}
       </TabNavigator.Item>
       <TabNavigator.Item
         selected={props.tabs.index === 2}
@@ -95,7 +95,7 @@ const ApplicationTabs = props => (
         renderIcon={() => imageJsxGen(statsImage, styles.statsImage, CONTAIN_MODE)}
         renderSelectedIcon={() => imageJsxGen(statsSelectedImage, styles.statsImage, CONTAIN_MODE)}
       >
-        {<StatisticScreen {...props} />}
+        {<StatisticContainer />}
       </TabNavigator.Item>
       <TabNavigator.Item
         selected={props.tabs.index === 3}
@@ -103,7 +103,7 @@ const ApplicationTabs = props => (
         renderIcon={() => imageJsxGen(moreImage, styles.moreImage, CONTAIN_MODE)}
         renderSelectedIcon={() => imageJsxGen(moreSelectedImage, styles.moreImage, CONTAIN_MODE)}
       >
-        {<MoreScreen {...props} />}
+        {<MoreContainer />}
       </TabNavigator.Item>
     </TabNavigator>
   </View>
@@ -117,4 +117,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ApplicationTabs);
+const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApplicationTabs);

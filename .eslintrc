@@ -14,6 +14,6 @@
     "airbnb"
   ],
   "rules": {
-    // overrides
+    "react/no-unused-prop-types": [1, { "skipShapeProps": true }]
   }
 }

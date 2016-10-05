@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { COLOR_BLUE } from '../../theme/style';
+import { COLOR_ORANGE } from '../../theme/style';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
   value: {
     fontSize: 20,
-    color: COLOR_BLUE,
+    color: COLOR_ORANGE,
   },
 });
 
@@ -29,7 +29,10 @@ const Info = props => (
 
 Info.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number,
+  ]).isRequired,
 };
 
 export default Info;

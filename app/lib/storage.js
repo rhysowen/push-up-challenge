@@ -2,8 +2,7 @@ import { AsyncStorage } from 'react-native';
 
 const SELECTED_PROGRAM_NAME = '@SELECTED_PROGRAM_NAME:key';
 const SELECTED_DAY = '@SELECTED_DAY:key';
-const TOTAL_EXERCISE = '@TOTAL_EXERCISE:key';
-const RECORD_EXERCISE = '@RECORD_EXERCISE:key';
+const STATISTICS = '@STATISTICS:key';
 
 const setKey = async function(key, data) {
   try {
@@ -32,6 +31,7 @@ const removeKey = async function(key) {
 export { 
   SELECTED_PROGRAM_NAME,
   SELECTED_DAY,
+  STATISTICS,
   setKey,
   getKey,
   removeKey,
