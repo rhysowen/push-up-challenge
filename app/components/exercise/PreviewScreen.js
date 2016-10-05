@@ -1,22 +1,60 @@
 import React from 'react';
 import {
-  ScrollView,
-  Text,
   View,
+  Text,
+  StyleSheet,
 } from 'react-native';
 
-export default (props) => (
-  <ScrollView style={{ marginTop: 90 }}>
-    <Text>Training overview</Text>
-    <Text>Beginner level 1</Text>
-    <Text>OK</Text>
-    <View>
-      <Text>Day 1</Text>
-      <Text>2 - 3 - 4 - 3 - 2</Text>
-      <Text>Day 2</Text>
-      <Text>2 - 3 - 4 - 3 - 2</Text>
-      <Text>Day 3</Text>
-      <Text>2 - 3 - 4 - 3 - 2</Text>
-    </View>
-  </ScrollView>
-);
+import {
+  BASE_PADDING_LEFT,
+  BASE_PADDING_RIGHT,
+  COLOR_ORANGE,
+} from '../../theme/style';
+import DefaultButton from '../../theme/DefaultButton';
+
+import Day from './Day';
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    paddingTop: 10,
+    paddingLeft: BASE_PADDING_LEFT,
+    paddingRight: BASE_PADDING_RIGHT,
+  },
+});
+
+const renderDaysJsx = (program) => {
+  const ret = [];
+
+  if (program.isProgramFound && program.exercise.days !== 'undefined') {
+    return program.exercise.days.map((day, index) => (
+      <Day
+        key={index}
+        complete
+      />
+    ));
+  } else {
+    return [];
+  }
+};
+
+export default (props) => {
+  const { program } = props;
+
+  const days = renderDaysJsx(program);
+
+  return (
+  <View
+    style={styles.wrapper}
+  >
+    <DefaultButton
+      name="Start this program!"
+      buttonColor={COLOR_ORANGE}
+      textColor="white"
+      // style={styles.btnStyle}
+      onPress={() => console.log('Todo')}
+    />
+    {days}
+  </View>
+  );
+};

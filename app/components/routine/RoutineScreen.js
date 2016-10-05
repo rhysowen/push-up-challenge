@@ -9,14 +9,16 @@ import DefaultButton from '../../theme/DefaultButton';
 import {
   COLOR_ORANGE,
   COLOR_RED,
+  BASE_PADDING_LEFT,
+  BASE_PADDING_RIGHT,
 } from '../../theme/style';
 import BaseScreen from '../../theme/BaseScreen';
 import Info from './Info';
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingLeft: 25,
-    paddingRight: 25,
+    paddingLeft: BASE_PADDING_LEFT,
+    paddingRight: BASE_PADDING_RIGHT,
   },
   infoWapper: {
     flexDirection: 'column',

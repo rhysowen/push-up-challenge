@@ -11,10 +11,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const ScreenWrapper = props => (
+const BaseScreen = props => (
   <View style={[styles.wrapper, props.style]}>
     {props.children}
   </View>
 );
 
-export default ScreenWrapper;
+export default BaseScreen;

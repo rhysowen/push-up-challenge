@@ -5,8 +5,9 @@ import {
    StyleSheet,
 } from 'react-native';
 
+// Containers
 import ApplicationTabs from './ApplicationTabs';
-import ExerciseContainer from './ExerciseContainer';
+import PreviewContainer from './PreviewContainer';
 
 const {
   Card: NavigationCard,
@@ -38,11 +39,11 @@ export default (props) => {
   let Scene = null;
 
   if (props.scene.route.key === 'ApplicationTabs') { Scene = ApplicationTabs; }
-  if (props.scene.route.key === 'ExerciseContainer') { Scene = ExerciseContainer; }
+  if (props.scene.route.key === 'PreviewContainer') { Scene = PreviewContainer; }
 
   return (
     <Animated.View style={style}>
-      <Scene style={style} {...props} {...containerProps} />
+      <Scene style={style} />
     </Animated.View>
   );
 };

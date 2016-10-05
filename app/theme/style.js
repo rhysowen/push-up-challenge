@@ -1,14 +1,16 @@
-import { StyleSheet } from 'react-native';
-
 const COLOR_ORANGE = '#C9A643';
 const COLOR_RED = '#B20000';
 
 const TAB_COLOR = '#302D30';
 const BASE_BACKGROUND_COLOR = '#F6F6F6';
+const BASE_PADDING_LEFT = 25;
+const BASE_PADDING_RIGHT = 25;
 
 export {
   COLOR_ORANGE,
   COLOR_RED,
   TAB_COLOR,
   BASE_BACKGROUND_COLOR,
+  BASE_PADDING_LEFT,
+  BASE_PADDING_RIGHT,
 };

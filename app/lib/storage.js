@@ -6,7 +6,7 @@ const STATISTICS = '@STATISTICS:key';
 
 const setKey = async function(key, data) {
   try {
-    await AsyncStorage.setItem(key, data);
+    return await AsyncStorage.setItem(key, data);
   } catch (error) {
     // Log this?
   }

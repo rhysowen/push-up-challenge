@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ActionCreators from '../actions';
 
-import ExerciseScreen from '../components/exercise/ExerciseScreen';
+import PreviewScreen from '../components/exercise/PreviewScreen';
 
 function mapStateToProps(state) {
   return {
@@ -12,4 +12,4 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExerciseScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(PreviewScreen);

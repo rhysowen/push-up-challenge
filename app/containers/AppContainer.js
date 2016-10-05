@@ -93,8 +93,6 @@ const AppContainer = (props) => {
 
 const mapStateToProps = state => ({
   navigationState: state.navigationState,
-  recipeCounter: state.recipeCount,
-  program: state.program,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);

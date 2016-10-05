@@ -16,7 +16,7 @@ const allTabs = [
 
 const allPages = [
   { key: 'ApplicationTabs' },
-  { key: 'ExerciseContainer' },
+  { key: 'PreviewContainer' },
 ];
 
 export const tabs = createReducer({ key: 'home', index: 0, routes: allTabs }, {

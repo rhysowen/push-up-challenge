@@ -8,7 +8,8 @@ import {
 
 const pressRow = (rowData, props) => {
   props.setProgramByName(rowData.name);
-  return props.navigate({ key: 'ExerciseContainer' });
+  props.fetchSelectedProgram();
+  props.navigate({ key: 'PreviewContainer' });
 };
 
 const renderRow = (rowData, sectionID, rowID, highlightRow, props) => (
