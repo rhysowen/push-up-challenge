@@ -24,18 +24,19 @@ const styles = StyleSheet.create({
 });
 
 const renderDaysJsx = (program) => {
-  const ret = [];
-
   if (program.isProgramFound && program.exercise.days !== 'undefined') {
     return program.exercise.days.map((day, index) => (
       <Day
         key={index}
+        day={index + 1}
+        sets={day.sets.length}
+        total={day.sets.reduce((total, number) => total + number)}
         complete
       />
     ));
-  } else {
-    return [];
   }
+
+  return [];
 };
 
 export default (props) => {
@@ -51,8 +52,7 @@ export default (props) => {
       name="Start this program!"
       buttonColor={COLOR_ORANGE}
       textColor="white"
-      // style={styles.btnStyle}
-      onPress={() => console.log('Todo')}
+      onPress={() => props.navigate({ key: 'ExerciseActivityContainer' })}
     />
     {days}
   </View>

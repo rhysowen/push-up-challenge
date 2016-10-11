@@ -29,16 +29,13 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
   },
-  btnStyle: {
-    marginBottom: 10,
-  },
 });
 
 const NO_PROGRAM_SELECTED = 'No program selected';
 
 export default class RoutineScreen extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchSelectedProgram();
     this.props.fetchStatistics();
   }
@@ -57,14 +54,12 @@ export default class RoutineScreen extends Component {
             name="Continue Training"
             buttonColor={COLOR_ORANGE}
             textColor="white"
-            style={styles.btnStyle}
             onPress={() => console.log('Todo')}
           />
           <DefaultButton
             name="Abort Training"
             buttonColor={COLOR_RED}
             textColor="white"
-            style={styles.btnStyle}
             onPress={() => Alert.alert(
               'Confirmation',
               'Are you sure you want to abort training?',
@@ -85,7 +80,6 @@ export default class RoutineScreen extends Component {
             name="Select Program"
             buttonColor={COLOR_ORANGE}
             textColor="white"
-            style={styles.btnStyle}
             onPress={() => console.log('Todo')}
           />
         </View>

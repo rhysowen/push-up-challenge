@@ -24,9 +24,7 @@ const {
   Header: NavigationHeader,
 } = NavigationExperimental;
 
-const {
-  PagerStyleInterpolator: NavigationPagerStyleInterpolator
-} = NavigationCard;
+const { PagerStyleInterpolator: NavigationPagerStyleInterpolator } = NavigationCard;
 
 const styles = StyleSheet.create({
   wrapper: {

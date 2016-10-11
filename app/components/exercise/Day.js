@@ -36,11 +36,15 @@ export default (props) => {
       {checkImage}
       <View>
         <View>
-          <Text>Day 1</Text>
+          <Text>Day {props.day}</Text>
         </View>
 
         <View>
-          <Text>Total 12</Text>
+          <Text>Sets {props.sets}</Text>
+        </View>
+
+        <View>
+          <Text>Total {props.total}</Text>
         </View>
       </View>
     </View>

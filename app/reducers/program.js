@@ -83,10 +83,10 @@ const programElements = Immutable.List([
       { sets: [10, 6, 8, 8, 10] },
     ],
   },
-  { name: 'Expert Level 1',
+  { name: 'Expert Level 2',
     description: '71 - 80 pushups',
     days: [
-      { sets: [6, 6, 7, 6, 6] },
+      { sets: [55, 108, 55, 255, 1] },
       { sets: [7, 6, 8, 6, 6] },
       { sets: [8, 7, 6, 8, 7] },
       { sets: [9, 8, 7, 6, 8] },
@@ -123,13 +123,17 @@ export const program = createReducer(programInitialState, {
     );
   },
   [types.PROGRAM_GET_SUCCESS](state, action) {
+
+    const isProgramFound = action.payload !== null;
+    const exerciseData = isProgramFound ? JSON.parse(action.payload) : null;
+
     return Object.assign(
       {},
       programInitialState,
       {
         isFetched: true,
-        exercise: action.payload !== null ? findProgramByName(action.payload) : null,
-        isProgramFound: action.payload !== null,
+        exercise: exerciseData !== null ? findProgramByName(exerciseData.name) : null,
+        isProgramFound,
         isViewRender: true,
       }
     );
