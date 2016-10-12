@@ -123,17 +123,13 @@ export const program = createReducer(programInitialState, {
     );
   },
   [types.PROGRAM_GET_SUCCESS](state, action) {
-
-    const isProgramFound = action.payload !== null;
-    const exerciseData = isProgramFound ? JSON.parse(action.payload) : null;
-
     return Object.assign(
       {},
       programInitialState,
       {
         isFetched: true,
-        exercise: exerciseData !== null ? findProgramByName(exerciseData.name) : null,
-        isProgramFound,
+        exercise: action.payload !== null ? findProgramByName(action.payload) : null,
+        isProgramFound: action.payload !== null,
         isViewRender: true,
       }
     );

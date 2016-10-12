@@ -3,33 +3,38 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight,
 } from 'react-native';
 
 import {
   COLOR_ORANGE,
   BASE_FONT_FAMILY_IOS,
+  BASE_PADDING_LEFT,
+  BASE_PADDING_RIGHT,
 } from '../../theme/style';
+import DefaultButton from '../../theme/DefaultButton';
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    flex: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
   repsWrapper: {
-    backgroundColor: COLOR_ORANGE,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 200,
-    width: 200,
-    marginBottom: 20,
   },
   repsRemaining: {
-    color: 'white',
-    fontSize: 70,
+    color: COLOR_ORANGE,
+    fontSize: 140,
     fontFamily: BASE_FONT_FAMILY_IOS,
-    fontWeight: 'bold',
+  },
+  timerBtnWrapper: {
+    flexDirection: 'row',
+    paddingLeft: BASE_PADDING_LEFT,
+    paddingRight: BASE_PADDING_RIGHT,
+  },
+  timerBtn: {
+    flex: 1,
   },
 });
 
@@ -37,9 +42,7 @@ export default props => (
   <View
     style={styles.wrapper}
   >
-    <TouchableHighlight
-      onPress={() => console.log('Todo')}
-    >
+
     <View
       style={styles.repsWrapper}
     >
@@ -49,6 +52,30 @@ export default props => (
         6
       </Text>
     </View>
-    </TouchableHighlight>
+
+    <View
+      style={styles.timerBtnWrapper}
+    >
+      <DefaultButton
+        name="-"
+        buttonColor="transparent"
+        textColor={COLOR_ORANGE}
+        textSize={50}
+        outerStyle={[styles.timerBtn]}
+        onPress={() => console.log('Todo')}
+      />
+      <View
+        style={styles.timerBtn}
+      />
+      <DefaultButton
+        name="+"
+        buttonColor="transparent"
+        textColor={COLOR_ORANGE}
+        textSize={50}
+        outerStyle={[styles.timerBtn]}
+        onPress={() => console.log('Todo')}
+      />
+    </View>
+
   </View>
 );

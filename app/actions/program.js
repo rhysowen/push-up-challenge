@@ -13,21 +13,14 @@ export function setProgramByName(name) {
     types.PROGRAM_SAVE_NAME_FAILURE,
   ];
 
-  const currentDate = new Date();
-  const currentSet = 0;
-
-  const data = {
-    name,
-    currentDate,
-    currentSet,
-  };
+  const data = name;
 
   return storageAsync(
     storage.SELECTED_PROGRAM_NAME,
     actionTypes,
     SET_KEY,
     null,
-    JSON.stringify(data)
+    data,
   );
 }
 

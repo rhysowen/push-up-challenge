@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 
 import { BASE_FONT_FAMILY_IOS } from './style';
@@ -26,23 +26,31 @@ const DefaultButton = props => (
   <View
     style={[props.outerStyle, styles.outerStyle]}
   >
-    <TouchableHighlight
+    <TouchableOpacity
       onPress={() => props.onPress()}
     >
       <View
-        style={[styles.wrapper, props.style, { backgroundColor: props.buttonColor }]}>
+        style={[styles.wrapper, props.style, { backgroundColor: props.buttonColor }]}
+      >
         <Text
-          style={[styles.text, { color: props.textColor }]}>
-            {props.name.toUpperCase()}
+          style={[styles.text,
+            {
+              color: props.textColor,
+              fontSize: props.textSize,
+            },
+          ]}
+        >
+          {props.name.toUpperCase()}
         </Text>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   </View>
 );
 
 DefaultButton.propTypes = {
   buttonColor: PropTypes.string.isRequired,
   textColor: PropTypes.string.isRequired,
+  textSize: PropTypes.number,
   name: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
   style: View.propTypes.style,

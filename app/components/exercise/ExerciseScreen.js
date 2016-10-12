@@ -24,10 +24,9 @@ const styles = StyleSheet.create({
   },
   activeState: {
     color: COLOR_ORANGE,
-    fontSize: 20,
+    fontSize: 26,
     textAlign: 'center',
     fontFamily: BASE_FONT_FAMILY_IOS,
-    fontWeight: 'bold',
   },
   btnWapper: {
     flexDirection: 'column',
@@ -37,12 +36,6 @@ const styles = StyleSheet.create({
     paddingLeft: BASE_PADDING_LEFT,
     paddingRight: BASE_PADDING_RIGHT,
     //maxHeight: 150,
-  },
-  timerBtnWrapper: {
-    flexDirection: 'row',
-  },
-  timerBtn: {
-    flex: 1,
   },
 });
 
@@ -76,36 +69,15 @@ export default (props) => {
       <View
         style={styles.btnWapper}
       >
-        <View
-          style={styles.timerBtnWrapper}
-        >
-          <DefaultButton
-            name="-30 secs"
-            buttonColor={COLOR_ORANGE}
-            textColor="white"
-            outerStyle={[styles.timerBtn]}
-            onPress={() => console.log('Todo')}
-          />
-          <View
-            style={styles.timerBtn}
-          />
-          <DefaultButton
-            name="+30 secs"
-            buttonColor={COLOR_ORANGE}
-            textColor="white"
-            outerStyle={[styles.timerBtn]}
-            onPress={() => console.log('Todo')}
-          />
-        </View>
 
         <DefaultButton
-          name="Pause Training"
+          name="Done"
           buttonColor={COLOR_ORANGE}
           textColor="white"
           onPress={() => console.log('Todo')}
         />
         <DefaultButton
-          name="Abort Training"
+          name="Abort"
           buttonColor={COLOR_RED}
           textColor="white"
           onPress={() => console.log('Todo')}
