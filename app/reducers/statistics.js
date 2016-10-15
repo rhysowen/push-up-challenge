@@ -8,6 +8,7 @@ const statisticsInitialState = {
   isViewRender: false,
   total: 0,
   record: 0,
+  completed: {},
 };
 
 export default createReducer(statisticsInitialState, {

@@ -16,6 +16,7 @@ export function setPreviewExercise(name) {
 
 export function saveProgramByNameAsync(name) {
   const actionTypes = [
+    types.PROGRAM_SAVE_NAME_ATTEMPT,
     types.PROGRAM_SAVE_NAME_SUCCESS,
     types.PROGRAM_SAVE_NAME_FAILURE,
   ];
@@ -33,13 +34,13 @@ export function saveProgramByNameAsync(name) {
     storage.SELECTED_PROGRAM_NAME,
     actionTypes,
     SET_KEY,
-    null,
     dataJson,
   );
 }
 
 export function removeSelectedProgramAsync() {
   const actionTypes = [
+    types.PROGRAM_REMOVE_SELECTED_ATTEMPT,
     types.PROGRAM_REMOVE_SELECTED_SUCCESS,
     types.PROGRAM_REMOVE_SELECTED_FAILURE,
   ];
@@ -49,11 +50,10 @@ export function removeSelectedProgramAsync() {
 
 export function fetchSelectedProgramAsync() {
   const actionTypes = [
+    types.PROGRAM_GET_FETCH,
     types.PROGRAM_GET_SUCCESS,
     types.PROGRAM_GET_FAILURE,
   ];
 
-  const initDispatch = types.PROGRAM_GET_FETCH;
-
-  return storageAsync(storage.SELECTED_PROGRAM_NAME, actionTypes, GET_KEY, initDispatch);
+  return storageAsync(storage.SELECTED_PROGRAM_NAME, actionTypes, GET_KEY);
 }

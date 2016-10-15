@@ -4,7 +4,7 @@ const SET_KEY = 'SET_KEY';
 const GET_KEY = 'GET_KEY';
 const REMOVE_KEY = 'REMOVE_KEY';
 
-const storageAsync = (key, actionTypes, mode, initDispatch = null, data = null) => (
+const storageAsync = (key, actionTypes, mode, data = null) => (
   (dispatch, getState) => {
     let storageKey;
 
@@ -19,26 +19,23 @@ const storageAsync = (key, actionTypes, mode, initDispatch = null, data = null) 
         storageKey = storage.removeKey(key);
         break;
       default:
-        // Handle error - perhaps log it?
-        break;
+        throw new Error('Mode is not legal');
     }
 
     // We can update the view to show the initial dispatch - usually a fetch
-    if (initDispatch !== null) {
-      dispatch({ type: initDispatch });
-    }
+    dispatch({ type: actionTypes[0] });
 
     if (storageKey !== 'undefined') {
       storageKey.then(
         (response) => {
           dispatch({
-            type: actionTypes[0],
+            type: actionTypes[1],
             payload: response,
           });
         },
         (error) => {
           dispatch({
-            type: actionTypes[1],
+            type: actionTypes[2],
             payload: error,
           });
         }
