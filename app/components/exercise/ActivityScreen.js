@@ -94,7 +94,7 @@ export default (props) => {
       >
 
         <DefaultButton
-          name="Save & Complete"
+          name="Save & Close"
           buttonColor={COLOR_ORANGE}
           textColor="white"
           onPress={() => console.log('Todo')}
