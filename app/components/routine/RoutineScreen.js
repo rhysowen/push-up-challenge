@@ -36,8 +36,8 @@ const NO_PROGRAM_SELECTED = 'No program selected';
 export default class RoutineScreen extends Component {
 
   componentWillMount() {
-    this.props.fetchSelectedProgram();
-    this.props.fetchStatistics();
+    this.props.fetchSelectedProgramAsync();
+    this.props.fetchStatisticsAsync();
   }
 
   renderButtons() {
@@ -65,7 +65,7 @@ export default class RoutineScreen extends Component {
               'Are you sure you want to abort training?',
               [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'Abort', onPress: () => this.props.removeSelectedProgram() },
+                { text: 'Abort', onPress: () => this.props.removeSelectedProgramAsync() },
               ]
             )}
           />
@@ -137,8 +137,8 @@ export default class RoutineScreen extends Component {
 }
 
 RoutineScreen.propTypes = {
-  fetchSelectedProgram: React.PropTypes.func.isRequired,
-  fetchStatistics: React.PropTypes.func.isRequired,
+  fetchSelectedProgramAsync: React.PropTypes.func.isRequired,
+  fetchStatisticsAsync: React.PropTypes.func.isRequired,
   program: React.PropTypes.shape({
     isViewRender: React.PropTypes.bool.isRequired,
     isProgramFound: React.PropTypes.bool.isRequired,

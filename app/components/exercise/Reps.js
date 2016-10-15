@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const renderRepsJsx = reps => reps.map((rep, index) => (
+const renderRepsJsx = props => props.sets.map((rep, index) => (
   <View
     key={index}
-    style={[styles.viewRep, index === 0 ? styles.activeViewRep : {}]}
+    style={[styles.viewRep, index === props.exercise.set ? styles.activeViewRep : {}]}
   >
     <Text
-      style={[styles.rep, index === 0 ? styles.activeRep : styles.defaultRep]}
+      style={[styles.rep, index === props.exercise.set ? styles.activeRep : styles.defaultRep]}
     >
       {rep}
     </Text>
@@ -55,7 +55,7 @@ const renderRepsJsx = reps => reps.map((rep, index) => (
 ));
 
 export default (props) => {
-  const repsJsx = renderRepsJsx(props.reps);
+  const repsJsx = renderRepsJsx(props);
 
   return (
     <View

@@ -25,16 +25,26 @@ function navigateForward(state) {
 }
 
 export function navigate(state) {
-  return (dispatch, getState) => {
-    dispatch(navigateForward(state));
-  };
+  return navigateForward(state);
 }
 
 export function navigateBack(state) {
-  return (dispatch, getState) => {
-    dispatch({
-      type: types.NAVIGATION_BACK,
-      payload: state,
-    });
+  return {
+    type: types.NAVIGATION_BACK,
+    payload: state,
+  };
+}
+
+/*export function replaceScreenByKey(key) {
+  return {
+    type: types.NAVIGATION_REPLACE_SCREEN_BY_KEY,
+    payload: key,
+  };
+}*/
+
+export function navigateReset(key) {
+  return {
+    type: types.NAVIGATION_RESET,
+    payload: key,
   };
 }

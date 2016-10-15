@@ -7,8 +7,7 @@ import {
 } from 'react-native';
 
 const pressRow = (rowData, props) => {
-  props.setProgramByName(rowData.name);
-  props.fetchSelectedProgram();
+  props.setPreviewExercise(rowData.name);
   props.navigate({ key: 'PreviewContainer' });
 };
 

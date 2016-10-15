@@ -16,6 +16,11 @@ import {
 } from '../../theme/style';
 import BaseScreen from '../../theme/BaseScreen';
 import DefaultButton from '../../theme/DefaultButton';
+import {
+  EXERCISE_ACTIVE,
+  EXERCISE_PAUSE,
+  EXERCISE_REST,
+} from '../../lib/constants';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -41,19 +46,35 @@ const styles = StyleSheet.create({
 
 // Todo: centralize such code?
 const programReps = (props) => {
-  const {
-    program,
-    exerciseData,
-  } = props;
+  const { exercise } = props;
 
-  const programDays = program.exercise.days.length;
-  const currentDay = 0; // exerciseData.currentDay;
+  const currentDay = exercise.day;
 
-  return program.exercise.days[currentDay].sets;
+  return exercise.days[currentDay].sets;
+};
+
+const getActiveStateTitle = (exercise) => {
+  switch (exercise.mode) {
+    case EXERCISE_ACTIVE:
+      return 'Perform Push-Ups';
+    case EXERCISE_PAUSE:
+      return 'Paused';
+    case EXERCISE_REST:
+      return 'Rest';
+    default:
+      return '';
+  }
+};
+
+const saveComplete = (props) => {
+  //props.
 };
 
 export default (props) => {
-  const reps = programReps(props);
+  const { exercise } = props;
+
+  const sets = exercise.sets;
+  const activeState = getActiveStateTitle(exercise);
 
   return (
     <BaseScreen
@@ -62,30 +83,27 @@ export default (props) => {
       <Text
         style={styles.activeState}
       >
-        Perform Push-Ups
+        {activeState}
       </Text>
-      <RepTimer />
+      <RepTimer
+        {...props}
+      />
 
       <View
         style={styles.btnWapper}
       >
 
         <DefaultButton
-          name="Done"
+          name="Save & Complete"
           buttonColor={COLOR_ORANGE}
-          textColor="white"
-          onPress={() => console.log('Todo')}
-        />
-        <DefaultButton
-          name="Abort"
-          buttonColor={COLOR_RED}
           textColor="white"
           onPress={() => console.log('Todo')}
         />
       </View>
 
       <Reps
-        reps={reps}
+        {...props}
+        sets={sets}
       />
     </BaseScreen>
   );

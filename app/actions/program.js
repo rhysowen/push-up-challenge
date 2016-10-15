@@ -7,24 +7,38 @@ import {
   storageAsync,
 } from '../lib/storageAsync';
 
-export function setProgramByName(name) {
+export function setPreviewExercise(name) {
+  return {
+    type: types.PROGRAM_SET_PREVIEW_EXERCISE,
+    payload: name,
+  };
+}
+
+export function saveProgramByNameAsync(name) {
   const actionTypes = [
     types.PROGRAM_SAVE_NAME_SUCCESS,
     types.PROGRAM_SAVE_NAME_FAILURE,
   ];
 
-  const data = name;
+  const dateSelected = new Date();
+
+  const data = {
+    name,
+    dateSelected,
+  };
+
+  const dataJson = JSON.stringify(data);
 
   return storageAsync(
     storage.SELECTED_PROGRAM_NAME,
     actionTypes,
     SET_KEY,
     null,
-    data,
+    dataJson,
   );
 }
 
-export function removeSelectedProgram() {
+export function removeSelectedProgramAsync() {
   const actionTypes = [
     types.PROGRAM_REMOVE_SELECTED_SUCCESS,
     types.PROGRAM_REMOVE_SELECTED_FAILURE,
@@ -33,7 +47,7 @@ export function removeSelectedProgram() {
   return storageAsync(storage.SELECTED_PROGRAM_NAME, actionTypes, REMOVE_KEY);
 }
 
-export function fetchSelectedProgram() {
+export function fetchSelectedProgramAsync() {
   const actionTypes = [
     types.PROGRAM_GET_SUCCESS,
     types.PROGRAM_GET_FAILURE,

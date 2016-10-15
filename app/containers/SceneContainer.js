@@ -8,8 +8,8 @@ import {
 
 // Containers
 import ApplicationTabs from './ApplicationTabs';
-import PreviewContainer from './PreviewContainer';
-import ExerciseContainer from './ExerciseContainer';
+import PreviewContainer from './exercise/PreviewContainer';
+import ActivityContainer from './exercise/ActivityContainer';
 
 const {
   Card: NavigationCard,
@@ -36,7 +36,7 @@ const SceneContainer = (props) => {
     NavigationPagerStyleInterpolator.forHorizontal(props),
   ];
 
-  let Scene = ExerciseContainer;
+  let Scene;
 
   switch (props.scene.route.key) {
     case 'ApplicationTabs':
@@ -45,10 +45,11 @@ const SceneContainer = (props) => {
     case 'PreviewContainer':
       Scene = PreviewContainer;
       break;
-    case 'ExerciseContainer':
-      Scene = ExerciseContainer;
+    case 'ActivityContainer':
+      Scene = ActivityContainer;
       break;
     default:
+      Scene = View;
       break;
   }
 

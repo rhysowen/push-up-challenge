@@ -7,7 +7,7 @@ import {
   storageAsync,
 } from '../lib/storageAsync';
 
-export function fetchStatistics() {
+export function fetchStatisticsAsync() {
   const actionTypes = [
     types.STATISTICS_GET_SUCCESS,
     types.STATISTICS_GET_FAILURE,
@@ -18,20 +18,22 @@ export function fetchStatistics() {
   return storageAsync(storage.STATISTICS, actionTypes, GET_KEY, initDispatch);
 }
 
-export function setStatistics(total, record) {
+export function setStatisticsAsync(total, record, currentDay) {
   const actionTypes = [
-    types.STATISTICS_GET_SUCCESS,
-    types.STATISTICS_GET_FAILURE,
+    types.STATISTICS_SAVE_SUCCESS,
+    types.STATISTICS_SAVE_FAILURE,
   ];
 
-  const initDispatch = types.STATISTICS_GET_FETCH;
+  const data = {
+    total,
+    record,
+    currentDay,
+  };
 
-  const data = { total, record };
-
-  return storageAsync(storage.STATISTICS, actionTypes, SET_KEY, initDispatch, data);
+  return storageAsync(storage.STATISTICS, actionTypes, SET_KEY, null, data);
 }
 
-export function removeStatistics() {
+export function removeStatisticsAsync() {
   const actionTypes = [
     types.STATISTICS_REMOVE_SUCCESS,
     types.STATISTICS_REMOVE_FAILURE,

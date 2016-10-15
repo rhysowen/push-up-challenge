@@ -95,13 +95,25 @@ const programElements = Immutable.List([
   },
 ]);
 
+const findProgramByName = name => programElements.find(program => program.name === name);
+
 export const programs = createReducer(programElements, {
 
 });
 
-/*export const dayId = createReducer(storage.getKey(storage.SELECTED_DAY), {
+const previewProgramInitialState = {
+  selectedProgram: {},
+};
 
-});*/
+export const previewProgram = createReducer(previewProgramInitialState, {
+  [types.PROGRAM_SET_PREVIEW_EXERCISE](state, action) {
+    return Object.assign(
+      {},
+      previewProgramInitialState,
+      { selectedProgram: findProgramByName(action.payload) },
+    );
+  },
+});
 
 const programInitialState = {
   isFetching: false,
@@ -110,9 +122,8 @@ const programInitialState = {
   isProgramFound: false,
   isViewRender: false,
   exercise: {},
+  dateSelected: {},
 };
-
-const findProgramByName = name => programElements.find(program => program.name === name);
 
 export const program = createReducer(programInitialState, {
   [types.PROGRAM_GET_FETCH](state, action) {
@@ -123,14 +134,18 @@ export const program = createReducer(programInitialState, {
     );
   },
   [types.PROGRAM_GET_SUCCESS](state, action) {
+    const exerciseObj = JSON.parse(action.payload);
+    const isExerciseExist = exerciseObj !== null;
+
     return Object.assign(
       {},
       programInitialState,
       {
         isFetched: true,
-        exercise: action.payload !== null ? findProgramByName(action.payload) : null,
-        isProgramFound: action.payload !== null,
+        exercise: isExerciseExist ? findProgramByName(exerciseObj.name) : null,
+        isProgramFound: isExerciseExist,
         isViewRender: true,
+        dateSelected: isExerciseExist ? exerciseObj.dateSelected : null,
       }
     );
   },

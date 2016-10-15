@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const renderDaysJsx = (program) => {
-  if (program.isProgramFound && program.exercise.days !== 'undefined') {
-    return program.exercise.days.map((day, index) => (
+const renderDaysJsx = (selectedProgram) => {
+  if (selectedProgram.days !== 'undefined') {
+    return selectedProgram.days.map((day, index) => (
       <Day
         key={index}
         day={index + 1}
@@ -39,22 +39,33 @@ const renderDaysJsx = (program) => {
   return [];
 };
 
-export default (props) => {
-  const { program } = props;
+const onPress = (props) => {
+  const { previewProgram } = props;
 
-  const days = renderDaysJsx(program);
+  props.setSets(previewProgram.selectedProgram.days[0].sets);
+  props.saveProgramByNameAsync(previewProgram.selectedProgram.name);
+  // Consider refactoring this.
+  props.navigateReset({
+    key: 'ActivityContainer',
+    title: 'Activity',
+  });
+};
+
+export default (props) => {
+  const { previewProgram } = props;
+  const days = renderDaysJsx(previewProgram.selectedProgram);
 
   return (
-  <View
-    style={styles.wrapper}
-  >
-    <DefaultButton
-      name="Start this program!"
-      buttonColor={COLOR_ORANGE}
-      textColor="white"
-      onPress={() => props.navigate({ key: 'ExerciseActivityContainer' })}
-    />
-    {days}
-  </View>
+    <View
+      style={styles.wrapper}
+    >
+      <DefaultButton
+        name="Start this program!"
+        buttonColor={COLOR_ORANGE}
+        textColor="white"
+        onPress={() => onPress(props)}
+      />
+      {days}
+    </View>
   );
 };
