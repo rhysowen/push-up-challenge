@@ -9,12 +9,6 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
-  BEGINNER_LEVEL,
-  INTERMEDIATE_LEVEL,
-  ADVANCED_LEVEL,
-  EXPERT_LEVEL,
-} from '../../lib/constants';
-import {
   BASE_FONT_FAMILY_IOS,
   COLOR_ORANGE,
 } from '../../theme/style';
@@ -27,15 +21,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 15,
   },
-  level: {
+  icon: {
     width: 50,
     height: 50,
   },
   textWrapper: {
     justifyContent: 'center',
     paddingLeft: 15,
+    flex: 2,
   },
-  name: {
+  titleText: {
     fontSize: 16,
     fontFamily: BASE_FONT_FAMILY_IOS,
   },
@@ -54,34 +49,44 @@ const styles = StyleSheet.create({
   },
 });
 
-const beginnerLevel = require('../../theme/images/program/Beginner.png');
-const intermediateLevel = require('../../theme/images/program/Intermediate.png');
-const advancedLevel = require('../../theme/images/program/Advanced.png');
-const expertLevel = require('../../theme/images/program/Expert.png');
-
-const getImageLevelSource = (props) => {
-  const { exercise } = props;
-
-  switch (exercise.level) {
-    case BEGINNER_LEVEL:
-      return beginnerLevel;
-    case INTERMEDIATE_LEVEL:
-      return intermediateLevel;
-    case ADVANCED_LEVEL:
-      return advancedLevel;
-    case EXPERT_LEVEL:
-      return expertLevel;
-    default:
-      return beginnerLevel;
+const getDescriptionText = (props) => {
+  if (typeof props.descriptionText !== 'undefined') {
+    return (
+      <Text
+        style={styles.description}
+      >
+        {props.descriptionText}
+      </Text>
+    );
   }
+
+  return (
+    <View />
+  );
+};
+
+const getPrimaryIcon = (props) => {
+  if (typeof props.iconSource !== 'undefined') {
+    return (
+      <Image
+        style={styles.icon}
+        source={props.iconSource}
+      />
+    );
+  }
+
+  return props.vectorJsx;
 };
 
 const Row = (props) => {
-  const { exercise } = props;
-
-  const imageLevelSource = getImageLevelSource(props);
+  const primaryIcon = getPrimaryIcon(props);
+  const descriptionText = getDescriptionText(props);
   const arrowIcon = (
-    <Icon name="keyboard-arrow-right" size={30} color={COLOR_ORANGE} />
+    <Icon
+      name="keyboard-arrow-right"
+      size={30}
+      color={COLOR_ORANGE}
+    />
   );
 
   return (
@@ -89,27 +94,20 @@ const Row = (props) => {
       onPress={() => props.onPress()}
     >
       <View
-        style={styles.wrapper}
+        style={props.wrapperStyle || styles.wrapper}
       >
         <View>
-          <Image
-            style={styles.level}
-            source={imageLevelSource}
-          />
+          {primaryIcon}
         </View>
         <View
           style={styles.textWrapper}
         >
           <Text
-            style={styles.name}
+            style={props.titleTextStyle || styles.titleText}
           >
-            {exercise.name}
+            {props.titleText}
           </Text>
-          <Text
-            style={styles.description}
-          >
-            {exercise.description}
-          </Text>
+          {descriptionText}
         </View>
         <View
           style={styles.rightWrapper}

@@ -7,6 +7,14 @@ const BASE_PADDING_LEFT = 25;
 const BASE_PADDING_RIGHT = 25;
 const BASE_FONT_FAMILY_IOS = 'Helvetica-Light';
 
+const ROW_WRAPPER = {
+  flex: 1,
+  flexDirection: 'row',
+  borderBottomColor: '#EEEEEE',
+  borderBottomWidth: 1,
+  padding: 15,
+};
+
 export {
   COLOR_ORANGE,
   COLOR_RED,
@@ -15,4 +23,5 @@ export {
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
+  ROW_WRAPPER,
 };
