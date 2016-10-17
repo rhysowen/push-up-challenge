@@ -2,6 +2,7 @@ import * as storage from '../lib/storage';
 
 const SET_KEY = 'SET_KEY';
 const GET_KEY = 'GET_KEY';
+const MERGE_KEY = 'MERGE_KEY';
 const REMOVE_KEY = 'REMOVE_KEY';
 
 const storageAsync = (key, actionTypes, mode, data = null) => (
@@ -15,8 +16,8 @@ const storageAsync = (key, actionTypes, mode, data = null) => (
       case GET_KEY:
         storageKey = storage.getKey(key);
         break;
-      case REMOVE_KEY:
-        storageKey = storage.removeKey(key);
+      case MERGE_KEY:
+        storageKey = storage.mergeKey(key, data);
         break;
       default:
         throw new Error('Mode is not legal');

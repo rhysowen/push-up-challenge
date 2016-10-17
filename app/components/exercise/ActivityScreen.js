@@ -66,8 +66,8 @@ const getActiveStateTitle = (exercise) => {
   }
 };
 
-const saveComplete = (props) => {
-  //props.
+const saveActivity = (props) => {
+  props.saveActivity(exercise);
 };
 
 export default (props) => {
@@ -97,7 +97,7 @@ export default (props) => {
           name="Save & Close"
           buttonColor={COLOR_ORANGE}
           textColor="white"
-          onPress={() => console.log('Todo')}
+          onPress={() => saveActivity(props)}
         />
       </View>
 

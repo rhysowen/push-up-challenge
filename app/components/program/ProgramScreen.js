@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import {
   View,
-  Text,
   ListView,
-  TouchableHighlight,
 } from 'react-native';
+
+import Row from './Row';
 
 const pressRow = (rowData, props) => {
   props.setPreviewExercise(rowData.name);
@@ -12,14 +12,10 @@ const pressRow = (rowData, props) => {
 };
 
 const renderRow = (rowData, sectionID, rowID, highlightRow, props) => (
-  <TouchableHighlight
+  <Row
+    exercise={rowData}
     onPress={() => pressRow(rowData, props)}
-  >
-    <View>
-      <Text>{rowData.name}</Text>
-      <Text>{rowData.description}</Text>
-    </View>
-  </TouchableHighlight>
+  />
 );
 
 const ProgramScreen = (props) => {
@@ -31,14 +27,11 @@ const ProgramScreen = (props) => {
   const dataSource = ds.cloneWithRows(programs.toArray());
 
   return (
-    <View
-      style={{marginTop: 90}}>
-      <ListView
-        dataSource={dataSource}
-        renderRow={(rowData, sectionID, rowID, highlightRow) =>
-          renderRow(rowData, sectionID, rowID, highlightRow, props)}
-      />
-    </View>
+    <ListView
+      dataSource={dataSource}
+      renderRow={(rowData, sectionID, rowID, highlightRow) =>
+        renderRow(rowData, sectionID, rowID, highlightRow, props)}
+    />
   );
 };
 

@@ -1,7 +1,13 @@
 {
-  "parser": "babel-eslint",
   "env": {
     "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true
+    }
   },
   "plugins": [
       "react",
@@ -14,6 +20,7 @@
     "airbnb"
   ],
   "rules": {
-    "react/no-unused-prop-types": [1, { "skipShapeProps": true }]
+    "react/no-unused-prop-types": [1, { "skipShapeProps": true }],
+    "react/jsx-filename-extension": "off"
   }
 }
