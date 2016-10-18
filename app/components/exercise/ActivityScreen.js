@@ -24,6 +24,7 @@ import {
   PERFORM_PUSH_UP_SOUND,
   REST_SOUND,
   EXERCISE_COMPLETE_SOUND,
+  BEEP_SOUND,
 } from '../../lib/constants';
 
 const styles = StyleSheet.create({
@@ -74,6 +75,7 @@ const playSound = (soundCb) => {
 const peformPushUps = loadSound('perform-push-ups.mp3');
 const exerciseComplete = loadSound('exercise-complete.mp3');
 const rest = loadSound('rest.mp3');
+const beep = loadSound('beep.mp3');
 
 // Todo: centralize such code?
 const programReps = (props) => {
@@ -113,6 +115,8 @@ const getActiveSoundObj = (props) => {
       return rest;
     case EXERCISE_COMPLETE_SOUND:
       return exerciseComplete;
+    case BEEP_SOUND:
+      return beep;
     default:
       return null;
   }

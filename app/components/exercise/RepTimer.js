@@ -53,9 +53,9 @@ export default class RepTimer extends Component {
       mode,
     } = exercise;
 
-    if (mode === EXERCISE_PAUSE && !intervalSet) {
+    if (mode === EXERCISE_REST && !intervalSet) {
       this.props.setIntervalId(setInterval(this.props.timerDecrease, 1000));
-    } else if (intervalSet && mode !== EXERCISE_PAUSE) {
+    } else if (intervalSet && mode !== EXERCISE_REST) {
       clearInterval(this.props.exercise.intervalId);
       this.props.clearIntervalId();
     }
@@ -73,7 +73,7 @@ export default class RepTimer extends Component {
     switch (mode) {
       case EXERCISE_ACTIVE:
         return rep;
-      case EXERCISE_PAUSE:
+      case EXERCISE_REST:
         return timer;
       default:
         return 0;

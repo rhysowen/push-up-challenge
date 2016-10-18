@@ -8,6 +8,7 @@ import {
   PERFORM_PUSH_UP_SOUND,
   REST_SOUND,
   EXERCISE_COMPLETE_SOUND,
+  BEEP_SOUND,
 } from '../lib/constants';
 
 const TIMER_SECONDS = 5;
@@ -56,7 +57,7 @@ const getDecreaseTimerState = (state) => {
   let mode = state.mode;
   let sound = state.sound;
 
-  if (state.mode === EXERCISE_PAUSE && state.timer - 1 === 0) {
+  if (state.mode === EXERCISE_REST && state.timer - 1 === 0) {
     mode = EXERCISE_ACTIVE;
     sound = PERFORM_PUSH_UP_SOUND;
   } else {
@@ -99,12 +100,16 @@ export default createReducer(exerciseInitialState, {
     return Object.assign(
       {},
       state,
-      { rep: state.rep + 1 }
+      {
+        rep: state.rep + 1,
+        sound: BEEP_SOUND,
+      },
     );
   },
   [types.EXERCISE_DECREMENT_REP](state, action) {
 
     const nextRep = state.sets[state.set + 1];
+    const isLastRep = state.rep - 1 === 0;
 
     return Object.assign(
       {},
@@ -112,7 +117,8 @@ export default createReducer(exerciseInitialState, {
       {
         rep: getReps(state, nextRep),
         set: getSet(state, nextRep),
-        mode: state.rep - 1 === 0 ? EXERCISE_PAUSE : state.mode,
+        mode: isLastRep ? EXERCISE_REST : state.mode,
+        sound: isLastRep ? REST_SOUND : BEEP_SOUND,
       },
     );
   },

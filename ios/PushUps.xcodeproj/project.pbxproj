@@ -34,6 +34,7 @@
 		98D0284F1DB686370033330B /* rest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D0284E1DB686370033330B /* rest.mp3 */; };
 		98D028511DB6863F0033330B /* exercise-complete.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D028501DB6863F0033330B /* exercise-complete.mp3 */; };
 		98D028531DB69CC80033330B /* perform-push-ups.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D028521DB69CC80033330B /* perform-push-ups.mp3 */; };
+		98D028551DB6C6F60033330B /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D028541DB6C6F60033330B /* beep.mp3 */; };
 		DE89A98E2BFF4C79AA1C70D1 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2FA180C56054604A8309201 /* FontAwesome.ttf */; };
 		E0179F34CAF440D1A3832AC4 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71D67712C4BB44B7B15034FF /* libRNVectorIcons.a */; };
 /* End PBXBuildFile section */
@@ -165,6 +166,7 @@
 		98D0284E1DB686370033330B /* rest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = rest.mp3; path = ../app/sounds/rest.mp3; sourceTree = "<group>"; };
 		98D028501DB6863F0033330B /* exercise-complete.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "exercise-complete.mp3"; path = "../app/sounds/exercise-complete.mp3"; sourceTree = "<group>"; };
 		98D028521DB69CC80033330B /* perform-push-ups.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "perform-push-ups.mp3"; path = "../app/sounds/perform-push-ups.mp3"; sourceTree = "<group>"; };
+		98D028541DB6C6F60033330B /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = beep.mp3; path = ../app/sounds/beep.mp3; sourceTree = "<group>"; };
 		A8B4226D403D4A8885E8C72B /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		F2FA180C56054604A8309201 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		F762E974DED64E549F3403D0 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 		13B07FAE1A68108700A75B9A /* PushUps */ = {
 			isa = PBXGroup;
 			children = (
+				98D028541DB6C6F60033330B /* beep.mp3 */,
 				98D028521DB69CC80033330B /* perform-push-ups.mp3 */,
 				98D028501DB6863F0033330B /* exercise-complete.mp3 */,
 				98D0284E1DB686370033330B /* rest.mp3 */,
@@ -625,6 +628,7 @@
 				2431882F8FDC4B2FB4CF0F77 /* Octicons.ttf in Resources */,
 				98D028511DB6863F0033330B /* exercise-complete.mp3 in Resources */,
 				98D028531DB69CC80033330B /* perform-push-ups.mp3 in Resources */,
+				98D028551DB6C6F60033330B /* beep.mp3 in Resources */,
 				71C3C45190CB4379B05AFAF2 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
