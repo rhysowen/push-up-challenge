@@ -3,7 +3,10 @@ import { ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Row from '../shared/Row';
-import { COLOR_ORANGE } from '../../theme/style';
+import {
+  COLOR_ORANGE,
+  ICON_SIZE,
+} from '../../theme/style';
 
 const options = [
   {
@@ -36,11 +39,15 @@ const options = [
   },
 ];
 
+const ICON_PADDING = 5;
+const ICON_STYLE = { width: ICON_SIZE + ICON_PADDING };
+
 const renderVectorJsx = icon => (
   <Icon
     name={icon}
-    size={30}
+    size={ICON_SIZE}
     color={COLOR_ORANGE}
+    style={ICON_STYLE}
   />
 );
 

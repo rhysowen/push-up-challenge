@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   BASE_FONT_FAMILY_IOS,
   COLOR_ORANGE,
+  ICON_SIZE,
 } from '../../theme/style';
 
 const styles = StyleSheet.create({
@@ -21,14 +22,17 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 15,
   },
+  iconWrapper: {
+    paddingRight: 10,
+  },
   icon: {
     width: 50,
     height: 50,
   },
   textWrapper: {
+   // backgroundColor: 'yellow',
     justifyContent: 'center',
-    paddingLeft: 15,
-    flex: 2,
+    flex: 3,
   },
   titleText: {
     fontSize: 16,
@@ -40,7 +44,7 @@ const styles = StyleSheet.create({
     color: '#777777',
   },
   rightWrapper: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
@@ -75,7 +79,7 @@ const getPrimaryIcon = (props) => {
     );
   }
 
-  return props.vectorJsx;
+  return props.vectorJsx !== 'undefined' ? props.vectorJsx : <View />;
 };
 
 const Row = (props) => {
@@ -84,10 +88,12 @@ const Row = (props) => {
   const arrowIcon = (
     <Icon
       name="keyboard-arrow-right"
-      size={30}
+      size={ICON_SIZE}
       color={COLOR_ORANGE}
     />
   );
+
+  const ICON_WRAPPER = typeof props.iconSource !== 'undefined' ? styles.iconWrapper : 0;
 
   return (
     <TouchableOpacity
@@ -96,7 +102,9 @@ const Row = (props) => {
       <View
         style={props.wrapperStyle || styles.wrapper}
       >
-        <View>
+        <View
+          style={ICON_WRAPPER}
+        >
           {primaryIcon}
         </View>
         <View
