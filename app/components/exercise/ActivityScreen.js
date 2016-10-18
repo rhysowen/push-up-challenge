@@ -4,12 +4,12 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import Sound from 'react-native-sound';
 
 import RepTimer from './RepTimer';
 import Reps from './Reps';
 import {
   COLOR_ORANGE,
-  COLOR_RED,
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
@@ -20,6 +20,10 @@ import {
   EXERCISE_ACTIVE,
   EXERCISE_PAUSE,
   EXERCISE_REST,
+  NOT_SET_SOUND,
+  PERFORM_PUSH_UP_SOUND,
+  REST_SOUND,
+  EXERCISE_COMPLETE_SOUND,
 } from '../../lib/constants';
 
 const styles = StyleSheet.create({
@@ -43,6 +47,33 @@ const styles = StyleSheet.create({
     //maxHeight: 150,
   },
 });
+
+const loadSound = fileName => (
+  new Sound(fileName, Sound.MAIN_BUNDLE, (error) => {
+    if (error) {
+      // Log this?
+    } else {
+      // All OK.
+    }
+  })
+);
+
+const playSound = (soundCb) => {
+  if (soundCb !== null) {
+    soundCb.play((success) => {
+      if (success) {
+        // All OK.
+      } else {
+        // Log this?
+      }
+    });
+  }
+};
+
+// Load all the sounds
+const peformPushUps = loadSound('perform-push-ups.mp3');
+const exerciseComplete = loadSound('exercise-complete.mp3');
+const rest = loadSound('rest.mp3');
 
 // Todo: centralize such code?
 const programReps = (props) => {
@@ -70,11 +101,31 @@ const saveActivity = (props) => {
   props.saveActivity(exercise);
 };
 
+const getActiveSoundObj = (props) => {
+  const { exercise } = props;
+
+  switch (exercise.sound) {
+    case NOT_SET_SOUND:
+      return null;
+    case PERFORM_PUSH_UP_SOUND:
+      return peformPushUps;
+    case REST_SOUND:
+      return rest;
+    case EXERCISE_COMPLETE_SOUND:
+      return exerciseComplete;
+    default:
+      return null;
+  }
+};
+
 export default (props) => {
   const { exercise } = props;
 
   const sets = exercise.sets;
   const activeState = getActiveStateTitle(exercise);
+
+  const activeSoundObj = getActiveSoundObj(props);
+  playSound(activeSoundObj);
 
   return (
     <BaseScreen

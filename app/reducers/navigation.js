@@ -57,6 +57,8 @@ const allPages = [
     key: 'ActivityContainer',
     index: 2,
     title: 'Activity',
+    leftComponent: { icon: 'pause' },
+    rightComponent: { icon: 'volume-up' },
   },
 ];
 

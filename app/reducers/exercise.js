@@ -4,18 +4,23 @@ import {
   EXERCISE_ACTIVE,
   EXERCISE_PAUSE,
   EXERCISE_REST,
+  NOT_SET_SOUND,
+  PERFORM_PUSH_UP_SOUND,
+  REST_SOUND,
+  EXERCISE_COMPLETE_SOUND,
 } from '../lib/constants';
 
-const timer = 5;
+const TIMER_SECONDS = 5;
 
 const exerciseInitialState = {
   set: 0,
   rep: 0,
   mode: EXERCISE_ACTIVE,
   sets: [],
-  timer,
+  timer: TIMER_SECONDS,
   intervalId: 0,
   intervalSet: false,
+  sound: PERFORM_PUSH_UP_SOUND,
 };
 
 const getReps = (state, nextRep) => {
@@ -43,6 +48,26 @@ const getSet = (state, nextRep) => {
   }
 
   return set;
+};
+
+const getDecreaseTimerState = (state) => {
+  const timer = state.timer - 1;
+
+  let mode = state.mode;
+  let sound = state.sound;
+
+  if (state.mode === EXERCISE_PAUSE && state.timer - 1 === 0) {
+    mode = EXERCISE_ACTIVE;
+    sound = PERFORM_PUSH_UP_SOUND;
+  } else {
+    sound = NOT_SET_SOUND;
+  }
+
+  return {
+    mode,
+    sound,
+    timer,
+  };
 };
 
 export default createReducer(exerciseInitialState, {
@@ -115,16 +140,17 @@ export default createReducer(exerciseInitialState, {
       {
         intervalId: 0,
         intervalSet: false,
-        timer,
+        timer: TIMER_SECONDS,
       },
     );
   },
   [types.EXERCISE_DECREASE_TIMER](state, action) {
+    const decreaseTimerState = getDecreaseTimerState(state);
+
     return Object.assign(
       {},
       state,
-      { timer: state.timer - 1 },
-      { mode: state.mode === EXERCISE_PAUSE && state.timer - 1 === 0 ? EXERCISE_ACTIVE : state.mode },
+      decreaseTimerState,
     );
   },
 });
