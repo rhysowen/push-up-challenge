@@ -79,14 +79,21 @@ const getIconJsx = (name, color = 'white', size = 30) => (
 
 const renderRightComponent = (props) => {
   const { navigationState } = props;
-  const icon = getIconJsx('volume-up');
+
+  if (navigationState.routes[navigationState.index].key === 'ActivityContainer') {
+    const icon = getIconJsx('volume-up');
+
+    return (
+      <View
+        style={styles.rightComponentWrapper}
+      >
+        {icon}
+      </View>
+    );
+  }
 
   return (
-    <View
-      style={styles.rightComponentWrapper}
-    >
-      {icon}
-    </View>
+    <View />
   );
 };
 
