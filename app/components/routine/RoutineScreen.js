@@ -13,7 +13,7 @@ import {
   BASE_PADDING_RIGHT,
 } from '../../theme/style';
 import BaseScreen from '../../theme/BaseScreen';
-import Info from './Info';
+import Info from '../shared/Info';
 
 const styles = StyleSheet.create({
   wrapper: {

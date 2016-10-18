@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
   repsWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'transparent',
   },
   repsRemaining: {
     color: COLOR_ORANGE,

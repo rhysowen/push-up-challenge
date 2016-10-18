@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     height: 50,
   },
   textWrapper: {
-   // backgroundColor: 'yellow',
     justifyContent: 'center',
     flex: 3,
   },
