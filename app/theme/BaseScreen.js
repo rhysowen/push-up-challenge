@@ -4,10 +4,13 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import { BASE_BACKGROUND_COLOR } from './style';
+
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     paddingTop: 10,
+    backgroundColor: BASE_BACKGROUND_COLOR,
   },
 });
 

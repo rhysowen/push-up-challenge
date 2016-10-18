@@ -6,7 +6,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { BASE_FONT_FAMILY_IOS } from './style';
+import {
+  BASE_FONT_FAMILY_IOS,
+} from './style';
 
 const styles = StyleSheet.create({
   wrapper: {

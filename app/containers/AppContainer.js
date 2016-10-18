@@ -15,9 +15,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ActionCreators from '../actions';
 import SceneContainer from './SceneContainer';
 import {
-  TAB_COLOR,
   BASE_FONT_FAMILY_IOS,
   BASE_PADDING_RIGHT,
+  TAB_COLOR,
 } from '../theme/style';
 import { NOT_SET } from '../lib/constants';
 
@@ -30,14 +30,9 @@ const {
 const { PagerStyleInterpolator: NavigationPagerStyleInterpolator } = NavigationCard;
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
-  navHeader: {
-    backgroundColor: TAB_COLOR,
-  },
+  wrapper: { flex: 1 },
+  navHeader: { backgroundColor: TAB_COLOR },
   navTitle: {
-    fontSize: 20,
     color: 'white',
     fontFamily: BASE_FONT_FAMILY_IOS,
   },

@@ -5,18 +5,24 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { COLOR_ORANGE } from '../../theme/style';
+import {
+  COLOR_ORANGE,
+  BASE_FONT_FAMILY_IOS,
+} from '../../theme/style';
 
 const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
   },
   title: {
-    fontSize: 15,
+    color: 'black',
+    fontSize: 18,
+    fontFamily: BASE_FONT_FAMILY_IOS,
   },
   value: {
-    fontSize: 20,
+    fontSize: 23,
     color: COLOR_ORANGE,
+    fontFamily: BASE_FONT_FAMILY_IOS,
   },
 });
 
