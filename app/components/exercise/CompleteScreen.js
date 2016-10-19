@@ -32,10 +32,7 @@ const styles = StyleSheet.create({
 
 const onDashboardPress = (props) => {
   props.setTab(0);
-  props.navigateReset({
-    key: 'ApplicationTabs',
-    title: NOT_SET,
-  });
+  props.navigateReset('ApplicationTabs');
 };
 
 const CompleteScreen = (props) => {

@@ -67,6 +67,12 @@ const allPages = [
   },
 ];
 
+const getAllPagesIndex = (key, allPages) => (
+  allPages.reduce((cur, val, index) => {
+    return val.key === key && cur === -1 ? index : cur;
+  }, -1)
+);
+
 export const navigationState = createReducer({ index: 0, routes: allPages }, {
   [types.NAVIGATION_FORWARD](state, action) {
     return NavigationStateUtils.forward(state);
@@ -75,11 +81,14 @@ export const navigationState = createReducer({ index: 0, routes: allPages }, {
     return NavigationStateUtils.back(state);
   },
   [types.NAVIGATION_RESET](state, action) {
-    return {
-      index: 0,
-      routes: [
-        action.payload,
-      ],
-    };
+    const index = getAllPagesIndex(action.payload, allPages);
+    return Object.assign(
+      {},
+      {
+        key: action.payload,
+        index,
+        routes: allPages,
+      }
+    );
   },
 });

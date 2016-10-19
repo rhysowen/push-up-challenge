@@ -47,10 +47,7 @@ const onPress = (props) => {
   props.setSets(previewProgram.selectedProgram.days[0].sets);
   props.saveProgramByNameAsync(previewProgram.selectedProgram.name);
   // Consider refactoring this.
-  props.navigateReset({
-    key: 'ActivityContainer',
-    title: 'Activity',
-  });
+  props.navigateReset('ActivityContainer');
 };
 
 export default (props) => {

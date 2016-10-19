@@ -131,10 +131,7 @@ export default class ActivityScreen extends Component {
     const { exercise } = this.props;
 
     if (exercise.mode === EXERCISE_COMPLETE) {
-      this.props.navigateReset({
-        key: 'CompleteContainer',
-        title: 'Complete',
-      });
+      this.props.navigateReset('CompleteContainer');
     }
   }
 
