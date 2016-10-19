@@ -4,6 +4,7 @@ import {
   EXERCISE_ACTIVE,
   EXERCISE_PAUSE,
   EXERCISE_REST,
+  EXERCISE_COMPLETE,
   NOT_SET_SOUND,
   PERFORM_PUSH_UP_SOUND,
   REST_SOUND,
@@ -27,6 +28,7 @@ const exerciseInitialState = {
 const getDecrementRepState = (state) => {
   const nextRep = state.sets[state.set + 1];
   const isLastRep = state.rep - 1 === 0;
+  const isExerciseComplete = isLastRep && state.set + 1 === state.sets.length;
 
   const {
     rep,
@@ -52,7 +54,10 @@ const getDecrementRepState = (state) => {
     setReturn = set + 1;
   }
 
-  if (isLastRep) {
+  if (isExerciseComplete) {
+    modeReturn = EXERCISE_COMPLETE;
+    soundReturn = EXERCISE_COMPLETE_SOUND;
+  } else if (isLastRep) {
     modeReturn = EXERCISE_REST;
     soundReturn = REST_SOUND;
   } else {

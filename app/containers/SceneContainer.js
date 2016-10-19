@@ -10,6 +10,7 @@ import {
 import ApplicationTabs from './ApplicationTabs';
 import PreviewContainer from './exercise/PreviewContainer';
 import ActivityContainer from './exercise/ActivityContainer';
+import CompleteContainer from './exercise/CompleteContainer';
 
 const {
   Card: NavigationCard,
@@ -47,6 +48,9 @@ const SceneContainer = (props) => {
       break;
     case 'ActivityContainer':
       Scene = ActivityContainer;
+      break;
+    case 'CompleteContainer':
+      Scene = CompleteContainer;
       break;
     default:
       Scene = View;

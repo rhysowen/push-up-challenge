@@ -60,6 +60,11 @@ const allPages = [
     leftComponent: { icon: 'pause' },
     rightComponent: { icon: 'volume-up' },
   },
+  {
+    key: 'CompleteContainer',
+    index: 3,
+    title: 'Complete',
+  },
 ];
 
 export const navigationState = createReducer({ index: 0, routes: allPages }, {

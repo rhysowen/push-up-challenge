@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -20,6 +20,7 @@ import {
   EXERCISE_ACTIVE,
   EXERCISE_PAUSE,
   EXERCISE_REST,
+  EXERCISE_COMPLETE,
   NOT_SET_SOUND,
   PERFORM_PUSH_UP_SOUND,
   REST_SOUND,
@@ -94,6 +95,8 @@ const getActiveStateTitle = (exercise) => {
       return 'Paused';
     case EXERCISE_REST:
       return 'Rest';
+    case EXERCISE_COMPLETE:
+      return 'Complete';
     default:
       return '';
   }
@@ -122,44 +125,58 @@ const getActiveSoundObj = (props) => {
   }
 };
 
-export default (props) => {
-  const { exercise } = props;
+export default class ActivityScreen extends Component {
 
-  const sets = exercise.sets;
-  const activeState = getActiveStateTitle(exercise);
+  componentDidUpdate() {
+    const { exercise } = this.props;
 
-  const activeSoundObj = getActiveSoundObj(props);
-  playSound(activeSoundObj);
+    if (exercise.mode === EXERCISE_COMPLETE) {
+      this.props.navigateReset({
+        key: 'CompleteContainer',
+        title: 'Complete',
+      });
+    }
+  }
 
-  return (
-    <BaseScreen
-      style={styles.wrapper}
-    >
-      <Text
-        style={styles.activeState}
+  render() {
+    const { exercise } = this.props;
+
+    const sets = exercise.sets;
+    const activeState = getActiveStateTitle(exercise);
+
+    const activeSoundObj = getActiveSoundObj(this.props);
+    playSound(activeSoundObj);
+
+    return (
+      <BaseScreen
+        style={styles.wrapper}
       >
-        {activeState}
-      </Text>
-      <RepTimer
-        {...props}
-      />
-
-      <View
-        style={styles.btnWapper}
-      >
-
-        <DefaultButton
-          name="Save & Close"
-          buttonColor={COLOR_ORANGE}
-          textColor="white"
-          onPress={() => saveActivity(props)}
+        <Text
+          style={styles.activeState}
+        >
+          {activeState}
+        </Text>
+        <RepTimer
+          {...this.props}
         />
-      </View>
 
-      <Reps
-        {...props}
-        sets={sets}
-      />
-    </BaseScreen>
-  );
-};
+        <View
+          style={styles.btnWapper}
+        >
+
+          <DefaultButton
+            name="Save & Close"
+            buttonColor={COLOR_ORANGE}
+            textColor="white"
+            onPress={() => saveActivity(this.props)}
+          />
+        </View>
+
+        <Reps
+          {...this.props}
+          sets={sets}
+        />
+      </BaseScreen>
+    );
+  }
+}
