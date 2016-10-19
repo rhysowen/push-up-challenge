@@ -1,5 +1,6 @@
 import { NavigationExperimental } from 'react-native';
 import createReducer from '../lib/createReducer';
+import swap from '../lib/swap';
 import * as types from '../actions/types';
 import { NOT_SET } from '../lib/constants';
 
@@ -67,10 +68,8 @@ const allPages = [
   },
 ];
 
-const getAllPagesIndex = (key, allPages) => (
-  allPages.reduce((cur, val, index) => {
-    return val.key === key && cur === -1 ? index : cur;
-  }, -1)
+const getIndexByKey = key => (
+  allPages.reduce((cur, val, index) => (val.key === key && cur === -1 ? index : cur), -1)
 );
 
 export const navigationState = createReducer({ index: 0, routes: allPages }, {
@@ -81,13 +80,15 @@ export const navigationState = createReducer({ index: 0, routes: allPages }, {
     return NavigationStateUtils.back(state);
   },
   [types.NAVIGATION_RESET](state, action) {
-    const index = getAllPagesIndex(action.payload, allPages);
+    const indexByKey = getIndexByKey(action.payload);
+    const routes = swap(allPages, 0, indexByKey);
+
     return Object.assign(
       {},
       {
         key: action.payload,
-        index,
-        routes: allPages,
+        index: 0,
+        routes,
       }
     );
   },
