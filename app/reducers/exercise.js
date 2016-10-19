@@ -24,31 +24,47 @@ const exerciseInitialState = {
   sound: PERFORM_PUSH_UP_SOUND,
 };
 
-const getReps = (state, nextRep) => {
-  const { rep } = state;
+const getDecrementRepState = (state) => {
+  const nextRep = state.sets[state.set + 1];
+  const isLastRep = state.rep - 1 === 0;
 
-  if (rep > 1) {
-    return rep - 1;
-  }
-
-  if (nextRep !== undefined) {
-    return nextRep;
-  }
-
-  return 0;
-};
-
-const getSet = (state, nextRep) => {
   const {
     rep,
     set,
+    mode,
+    sound,
   } = state;
 
-  if (rep === 1 && nextRep !== undefined) {
-    return set + 1;
+  let repReturn = rep;
+  let setReturn = set;
+  let modeReturn = mode;
+  let soundReturn = sound;
+
+  if (rep > 1) {
+    repReturn = rep - 1;
+  } else if (nextRep !== undefined) {
+    repReturn = nextRep;
+  } else {
+    repReturn = 0;
   }
 
-  return set;
+  if (rep === 1 && nextRep !== undefined) {
+    setReturn = set + 1;
+  }
+
+  if (isLastRep) {
+    modeReturn = EXERCISE_REST;
+    soundReturn = REST_SOUND;
+  } else {
+    soundReturn = BEEP_SOUND;
+  }
+
+  return {
+    rep: repReturn,
+    set: setReturn,
+    mode: modeReturn,
+    sound: soundReturn,
+  };
 };
 
 const getDecreaseTimerState = (state) => {
@@ -107,19 +123,12 @@ export default createReducer(exerciseInitialState, {
     );
   },
   [types.EXERCISE_DECREMENT_REP](state, action) {
-
-    const nextRep = state.sets[state.set + 1];
-    const isLastRep = state.rep - 1 === 0;
+    const decrementRepState = getDecrementRepState(state);
 
     return Object.assign(
       {},
       state,
-      {
-        rep: getReps(state, nextRep),
-        set: getSet(state, nextRep),
-        mode: isLastRep ? EXERCISE_REST : state.mode,
-        sound: isLastRep ? REST_SOUND : BEEP_SOUND,
-      },
+      decrementRepState
     );
   },
   [types.EXERCISE_SET_MODE](state, action) {
