@@ -15,7 +15,7 @@ export function setPreviewExercise(name) {
   };
 }
 
-function saveProgramStateAsync(programState, key) {
+function saveProgramStateAsync(programState, mode) {
   const actionTypes = [
     types.PROGRAM_SAVE_ATTEMPT,
     types.PROGRAM_SAVE_SUCCESS,
@@ -27,7 +27,7 @@ function saveProgramStateAsync(programState, key) {
   return storageAsync(
     storage.SELECTED_PROGRAM_NAME,
     actionTypes,
-    key,
+    mode,
     dataJson
   );
 }
