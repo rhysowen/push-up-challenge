@@ -33,29 +33,48 @@ export function decrementRep() {
   };
 }
 
-export function setMode(mode) {
+function setMode(mode) {
   return {
     type: types.EXERCISE_SET_MODE,
     payload: mode,
   };
 }
 
-export function setIntervalId(intervalId) {
+export function setDecIntervalId(decIntervalId) {
   return {
-    type: types.EXERCISE_SET_INTERVAL_ID,
-    payload: intervalId,
+    type: types.EXERCISE_SET_DEC_INTERVAL_ID,
+    payload: decIntervalId,
   };
 }
 
-export function clearIntervalId() {
+export function clearDecIntervalId() {
   return {
-    type: types.EXERCISE_CLEAR_INTERVAL_ID,
+    type: types.EXERCISE_CLEAR_DEC_INTERVAL_ID,
+  };
+}
+
+export function setTimeElapsedIntervalId(timeElapsedIntervalId) {
+  return {
+    type: types.EXERCISE_SET_TIME_ELAPSED_INTERVAL_ID,
+    payload: timeElapsedIntervalId,
+  };
+}
+
+export function clearTimeElapsedIntervalId() {
+  return {
+    type: types.EXERCISE_CLEAR_TIME_ELAPSED_INTERVAL_ID,
   };
 }
 
 export function timerDecrease() {
   return {
     type: types.EXERCISE_DECREASE_TIMER,
+  };
+}
+
+export function timerElapsedTimeIncrease() {
+  return {
+    type: types.EXERCISE_ELAPSED_TIME_INCREASE,
   };
 }
 

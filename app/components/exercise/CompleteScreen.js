@@ -14,7 +14,7 @@ import {
   BASE_FONT_FAMILY_IOS,
 } from '../../theme/style';
 import DefaultButton from '../../theme/DefaultButton';
-import { NOT_SET } from '../../lib/constants';
+import format from '../../lib/format';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -35,8 +35,26 @@ const onDashboardPress = (props) => {
   props.navigateReset('ApplicationTabs');
 };
 
+const getCalories = (props) => {
+  const { exercise } = props;
+
+  // Assumption is that 3 push ups burn a single calorie
+  const PUSH_UP_CALORIE_BURNT = 3;
+  const CALORIES_BURNT = Math.floor(exercise.repsCompleted / PUSH_UP_CALORIE_BURNT);
+
+  return CALORIES_BURNT;
+};
+
+const getTimeElapsed = (props) => {
+  const { exercise } = props;
+
+  return format(exercise.timeElapsed);
+};
+
 const CompleteScreen = (props) => {
   const { exercise } = props;
+  const calories = getCalories(props);
+  const timeElapsed = getTimeElapsed(props);
 
   return (
     <BaseScreen
@@ -54,15 +72,15 @@ const CompleteScreen = (props) => {
       style={{flex: 2, justifyContent: 'space-between'}}>
         <Info
           title="Total Reps"
-          value="154"
+          value={exercise.repsCompleted}
         />
         <Info
           title="Calories"
-          value="240"
+          value={calories}
         />
         <Info
           title="Time Elapsed"
-          value="5m 34s"
+          value={timeElapsed}
         />
       </View>
       <View

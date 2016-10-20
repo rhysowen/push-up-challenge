@@ -35,13 +35,6 @@ export function navigateBack(state) {
   };
 }
 
-/*export function replaceScreenByKey(key) {
-  return {
-    type: types.NAVIGATION_REPLACE_SCREEN_BY_KEY,
-    payload: key,
-  };
-}*/
-
 export function navigateReset(key) {
   return {
     type: types.NAVIGATION_RESET,

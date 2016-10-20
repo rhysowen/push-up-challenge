@@ -33,15 +33,22 @@ const styles = StyleSheet.create({
 
 const NO_PROGRAM_SELECTED = 'No program selected';
 
+const fetchAsync = (props) => {
+  props.fetchSelectedProgramAsync();
+  props.fetchStatisticsAsync();
+};
+
 export default class RoutineScreen extends Component {
 
   componentWillMount() {
-    this.props.fetchSelectedProgramAsync();
-    this.props.fetchStatisticsAsync();
+    fetchAsync(this.props);
   }
 
   renderButtons() {
-    const { program } = this.props;
+    const {
+      program,
+      statistics,
+    } = this.props;
 
     let ret;
 
@@ -111,7 +118,7 @@ export default class RoutineScreen extends Component {
             />
             <Info
               title="Day"
-              value={1}
+              value={program.day}
             />
             <Info
               title="Total"

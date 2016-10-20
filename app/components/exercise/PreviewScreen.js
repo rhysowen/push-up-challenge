@@ -45,8 +45,10 @@ const onPress = (props) => {
   const { previewProgram } = props;
 
   props.setSets(previewProgram.selectedProgram.days[0].sets);
-  props.saveProgramByNameAsync(previewProgram.selectedProgram.name);
-  // Consider refactoring this.
+
+  const FIRST_DAY = 1;
+  props.setProgramStateAsync(previewProgram.selectedProgram.name, FIRST_DAY);
+
   props.navigateReset('ActivityContainer');
 };
 

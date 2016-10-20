@@ -50,15 +50,15 @@ export default class RepTimer extends Component {
     const { exercise } = this.props;
 
     const {
-      intervalSet,
+      decIntervalSet,
       mode,
     } = exercise;
 
-    if (mode === EXERCISE_REST && !intervalSet) {
-      this.props.setIntervalId(setInterval(this.props.timerDecrease, 1000));
-    } else if (intervalSet && mode !== EXERCISE_REST) {
-      clearInterval(this.props.exercise.intervalId);
-      this.props.clearIntervalId();
+    if (mode === EXERCISE_REST && !decIntervalSet) {
+      this.props.setDecIntervalId(setInterval(this.props.timerDecrease, 1000));
+    } else if (decIntervalSet && mode !== EXERCISE_REST) {
+      clearInterval(this.props.exercise.decIntervalId);
+      this.props.clearDecIntervalId();
     }
   }
 

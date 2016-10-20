@@ -125,14 +125,49 @@ const getActiveSoundObj = (props) => {
   }
 };
 
+const saveStatistics = (props) => {
+  
+};
+
+const cleanUpTimers = (props) => {
+  const { exercise } = props;
+
+  clearInterval(exercise.decIntervalId);
+  props.clearDecIntervalId();
+
+  clearInterval(exercise.timeElapsedIntervalId);
+  props.clearTimeElapsedIntervalId();
+};
+
 export default class ActivityScreen extends Component {
 
+  componentDidMount() {
+    this.props.setTimeElapsedIntervalId(setInterval(this.props.timerElapsedTimeIncrease, 1000));
+  }
+
   componentDidUpdate() {
-    const { exercise } = this.props;
+    const {
+      exercise,
+      program,
+    } = this.props;
 
     if (exercise.mode === EXERCISE_COMPLETE) {
+      // Update to next day, or unselect program if complete
+      this.props.programComplete();
+
+      if (program.exerciseComplete) {
+        this.props.removeSelectedProgramAsync();
+      } else {
+        this.props.mergeDayAsync(program.day);
+      }
+
       this.props.navigateReset('CompleteContainer');
     }
+  }
+
+  componentWillUnmount() {
+    // Consider using TimerMixin - no ES6 API so use react-mixin?
+    cleanUpTimers(this.props);
   }
 
   render() {
@@ -142,7 +177,7 @@ export default class ActivityScreen extends Component {
     const activeState = getActiveStateTitle(exercise);
 
     const activeSoundObj = getActiveSoundObj(this.props);
-    playSound(activeSoundObj);
+    //playSound(activeSoundObj);
 
     return (
       <BaseScreen

@@ -20,9 +20,14 @@ const exerciseInitialState = {
   mode: EXERCISE_ACTIVE,
   sets: [],
   timer: TIMER_SECONDS,
-  intervalId: 0,
-  intervalSet: false,
+  decIntervalId: 0,
+  decIntervalSet: false,
+  timeElapsedIntervalId: 0,
+  timeElapsedIntervalSet: false,
   sound: PERFORM_PUSH_UP_SOUND,
+  repsCompleted: 0,
+  timeElapsed: 0,
+  calories: 0,
 };
 
 const getDecrementRepState = (state) => {
@@ -35,12 +40,18 @@ const getDecrementRepState = (state) => {
     set,
     mode,
     sound,
+    repsCompleted,
   } = state;
 
   let repReturn = rep;
   let setReturn = set;
   let modeReturn = mode;
   let soundReturn = sound;
+  let repsCompletedReturn = repsCompleted;
+
+  if (rep > 0) {
+    repsCompletedReturn = repsCompletedReturn += 1;
+  }
 
   if (rep > 1) {
     repReturn = rep - 1;
@@ -69,6 +80,7 @@ const getDecrementRepState = (state) => {
     set: setReturn,
     mode: modeReturn,
     sound: soundReturn,
+    repsCompleted: repsCompletedReturn,
   };
 };
 
@@ -143,23 +155,23 @@ export default createReducer(exerciseInitialState, {
       { mode: action.payload },
     );
   },
-  [types.EXERCISE_SET_INTERVAL_ID](state, action) {
+  [types.EXERCISE_SET_DEC_INTERVAL_ID](state, action) {
     return Object.assign(
       {},
       state,
       {
-        intervalId: action.payload,
-        intervalSet: true,
+        decIntervalId: action.payload,
+        decIntervalSet: true,
       },
     );
   },
-  [types.EXERCISE_CLEAR_INTERVAL_ID](state, action) {
+  [types.EXERCISE_CLEAR_DEC_INTERVAL_ID](state, action) {
     return Object.assign(
       {},
       state,
       {
-        intervalId: 0,
-        intervalSet: false,
+        decIntervalId: 0,
+        decIntervalSet: false,
         timer: TIMER_SECONDS,
       },
     );
@@ -171,6 +183,36 @@ export default createReducer(exerciseInitialState, {
       {},
       state,
       decreaseTimerState,
+    );
+  },
+  [types.EXERCISE_SET_TIME_ELAPSED_INTERVAL_ID](state, action) {
+    return Object.assign(
+      {},
+      state,
+      {
+        timeElapsedIntervalId: action.payload,
+        timeElapsedIntervalSet: true,
+      },
+    );
+  },
+  [types.EXERCISE_CLEAR_TIME_ELAPSED_INTERVAL_ID](state, action) {
+    return Object.assign(
+      {},
+      state,
+      {
+        timeElapsedIntervalId: 0,
+        timeElapsedIntervalSet: false,
+      },
+    );
+  },
+  [types.EXERCISE_ELAPSED_TIME_INCREASE](state, action) {
+    return Object.assign(
+      {},
+      state,
+      {
+        timeElapsed: state.timeElapsed + 1,
+        sound: NOT_SET_SOUND,
+      }
     );
   },
 });

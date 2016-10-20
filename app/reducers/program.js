@@ -137,7 +137,24 @@ const programInitialState = {
   isProgramFound: false,
   isViewRender: false,
   exercise: {},
-  dateSelected: {},
+  day: 1,
+  exerciseComplete: false,
+};
+
+const getExerciseComplete = (state) => {
+  let exerciseCompleteReturn = state.exerciseComplete;
+  let dayReturn = state.day;
+
+  if (state.exercise.days.length === state.day) {
+    exerciseCompleteReturn = true;
+  } else {
+    dayReturn += 1;
+  }
+
+  return {
+    exerciseComplete: exerciseCompleteReturn,
+    day: dayReturn,
+  };
 };
 
 export const program = createReducer(programInitialState, {
@@ -160,7 +177,7 @@ export const program = createReducer(programInitialState, {
         exercise: isExerciseExist ? findProgramByName(exerciseObj.name) : null,
         isProgramFound: isExerciseExist,
         isViewRender: true,
-        dateSelected: isExerciseExist ? exerciseObj.dateSelected : null,
+        day: isExerciseExist ? exerciseObj.day : programInitialState.day,
       }
     );
   },
@@ -180,5 +197,13 @@ export const program = createReducer(programInitialState, {
   },
   [types.PROGRAM_REMOVE_SELECTED_FAILURE](state, action) {
     return {}; // Todo
+  },
+  [types.PROGRAM_EXERCISE_COMPLETE](state, action) {
+    const exerciseComplete = getExerciseComplete(state);
+
+    return Object.assign(
+      state,
+      exerciseComplete,
+    );
   },
 });

@@ -4,6 +4,7 @@ import {
   SET_KEY,
   GET_KEY,
   REMOVE_KEY,
+  MERGE_KEY,
   storageAsync,
 } from '../lib/storageAsync';
 
@@ -14,28 +15,36 @@ export function setPreviewExercise(name) {
   };
 }
 
-export function saveProgramByNameAsync(name) {
+function saveProgramStateAsync(programState, key) {
   const actionTypes = [
-    types.PROGRAM_SAVE_NAME_ATTEMPT,
-    types.PROGRAM_SAVE_NAME_SUCCESS,
-    types.PROGRAM_SAVE_NAME_FAILURE,
+    types.PROGRAM_SAVE_ATTEMPT,
+    types.PROGRAM_SAVE_SUCCESS,
+    types.PROGRAM_SAVE_FAILURE,
   ];
 
-  const dateSelected = new Date();
-
-  const data = {
-    name,
-    dateSelected,
-  };
-
-  const dataJson = JSON.stringify(data);
+  const dataJson = JSON.stringify(programState);
 
   return storageAsync(
     storage.SELECTED_PROGRAM_NAME,
     actionTypes,
-    SET_KEY,
-    dataJson,
+    key,
+    dataJson
   );
+}
+
+export function mergeDayAsync(day) {
+  const programState = { day };
+
+  return saveProgramStateAsync(programState, MERGE_KEY);
+}
+
+export function setProgramStateAsync(name, day) {
+  const programState = {
+    name,
+    day,
+  };
+
+  return saveProgramStateAsync(programState, SET_KEY);
 }
 
 export function removeSelectedProgramAsync() {
@@ -56,4 +65,8 @@ export function fetchSelectedProgramAsync() {
   ];
 
   return storageAsync(storage.SELECTED_PROGRAM_NAME, actionTypes, GET_KEY);
+}
+
+export function programComplete() {
+  return { type: types.PROGRAM_EXERCISE_COMPLETE };
 }

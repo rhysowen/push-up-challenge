@@ -19,6 +19,9 @@ const storageAsync = (key, actionTypes, mode, data = null) => (
       case MERGE_KEY:
         storageKey = storage.mergeKey(key, data);
         break;
+      case REMOVE_KEY:
+        storageKey = storage.removeKey(key);
+        break;
       default:
         throw new Error('Mode is not legal');
     }
@@ -49,5 +52,6 @@ export {
   SET_KEY,
   GET_KEY,
   REMOVE_KEY,
+  MERGE_KEY,
   storageAsync,
 };
