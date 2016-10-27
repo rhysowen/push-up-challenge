@@ -7,7 +7,7 @@ import RoutineScreen from '../components/routine/RoutineScreen';
 function mapStateToProps(state) {
   return {
     program: state.program,
-    statistics: state.statistics,
+    exercise: state.exercise,
   };
 }
 

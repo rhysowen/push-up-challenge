@@ -102,8 +102,14 @@ const getActiveStateTitle = (exercise) => {
   }
 };
 
-const saveActivity = (props) => {
-  props.saveActivity(exercise);
+const saveExerciseSaveClose = (props) => {
+  props.setActivitySaveClose(
+    props.exercise.timeElapsed,
+    props.exercise.rep,
+    props.exercise.repsCompleted,
+    props.exercise.set,
+    props.exercise.day,
+  );
 };
 
 const getActiveSoundObj = (props) => {
@@ -176,7 +182,7 @@ export default class ActivityScreen extends Component {
       if (program.exerciseComplete) {
         this.props.removeSelectedProgramAsync();
       } else {
-        this.props.mergeDayAsync(program.day);
+        //this.props.mergeDayAsync(program.day);
       }
 
       saveStatistics(this.props);
@@ -220,7 +226,7 @@ export default class ActivityScreen extends Component {
             name="Save & Close"
             buttonColor={COLOR_ORANGE}
             textColor="white"
-            onPress={() => saveActivity(this.props)}
+            onPress={() => saveExerciseSaveClose(this.props)}
           />
         </View>
 

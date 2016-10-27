@@ -35,7 +35,42 @@ const NO_PROGRAM_SELECTED = 'No program selected';
 
 const fetchAsync = (props) => {
   props.fetchSelectedProgramAsync();
-  props.fetchStatisticsAsync();
+  props.fetchExerciseStateAsync();
+};
+
+const continueTraining = (props) => {
+  const { program } = props;
+
+  props.setSets(program.exercise.days[program.day - 1].sets);
+
+  props.navigateReset('ActivityContainer');
+};
+
+const abortTraining = (props) => {
+  Alert.alert(
+    'Confirmation',
+    'Are you sure you want to abort training?',
+    [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Abort', onPress: () => props.removeSelectedProgramAsync() },
+    ]
+  );
+};
+
+const getProgress = (props) => {
+  const {
+    program,
+    exercise,
+  } = props;
+
+  const totalReps = program.exercise.days
+    .reduce((prev, cur) => prev + cur.sets
+    .reduce((_prev, _cur) => _prev + _cur, 0), 0);
+
+  const MAX_PERCENT = 100;
+  const ret = Math.ceil((exercise.repsCompleted / totalReps) * MAX_PERCENT);
+
+  return ret > MAX_PERCENT ? MAX_PERCENT : ret;
 };
 
 export default class RoutineScreen extends Component {
@@ -45,10 +80,7 @@ export default class RoutineScreen extends Component {
   }
 
   renderButtons() {
-    const {
-      program,
-      statistics,
-    } = this.props;
+    const { program } = this.props;
 
     let ret;
 
@@ -61,20 +93,13 @@ export default class RoutineScreen extends Component {
             name="Continue Training"
             buttonColor={COLOR_ORANGE}
             textColor="white"
-            onPress={() => console.log('Todo')}
+            onPress={() => continueTraining(this.props)}
           />
           <DefaultButton
             name="Abort Training"
             buttonColor={COLOR_RED}
             textColor="white"
-            onPress={() => Alert.alert(
-              'Confirmation',
-              'Are you sure you want to abort training?',
-              [
-                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'Abort', onPress: () => this.props.removeSelectedProgramAsync() },
-              ]
-            )}
+            onPress={() => abortTraining(this.props)}
           />
         </View>
       );
@@ -99,12 +124,20 @@ export default class RoutineScreen extends Component {
   render() {
     const {
       program,
-      statistics,
+      exercise,
     } = this.props;
 
     let ret;
 
-    if (program.isViewRender && statistics.isViewRender) {
+    if (program.isViewRender && exercise.isViewRender) {
+      let progress = 0;
+
+      if (program.isProgramFound) {
+        progress = getProgress(this.props);
+      }
+
+      const progressFormat = String.raw`${progress}%`;
+
       ret = (
         <BaseScreen
           style={styles.wrapper}
@@ -118,15 +151,15 @@ export default class RoutineScreen extends Component {
             />
             <Info
               title="Day"
-              value={program.day}
+              value={exercise.day}
             />
             <Info
-              title="Total"
-              value={statistics.total}
+              title="Reps Complete"
+              value={exercise.repsCompleted}
             />
             <Info
-              title="Record"
-              value={statistics.record}
+              title="Progress"
+              value={progressFormat}
             />
           </View>
           {this.renderButtons()}

@@ -1,5 +1,62 @@
 import * as types from './types';
 import { EXERCISE_ABORT } from '../lib/constants';
+import * as storage from '../lib/storage';
+import {
+  SET_KEY,
+  GET_KEY,
+  REMOVE_KEY,
+  MERGE_KEY,
+  storageAsync,
+} from '../lib/storageAsync';
+
+function saveExerciseStateAsync(exerciseState, mode) {
+  const actionTypes = [
+    types.EXERCISE_SAVE_ATTEMPT,
+    types.EXERCISE_SAVE_SUCCESS,
+    types.EXERCISE_SAVE_FAILURE,
+  ];
+
+  const exerciseStateJson = JSON.stringify(exerciseState);
+
+  return storageAsync(
+    storage.EXERCISE_STATE,
+    actionTypes,
+    mode,
+    exerciseStateJson
+  );
+}
+
+export function setActivitySaveClose(timeElapsed, rep, repsCompleted, set, day) {
+  const exerciseState = {
+    timeElapsed,
+    rep,
+    repsCompleted,
+    set,
+    day,
+  };
+
+  return saveExerciseStateAsync(exerciseState, SET_KEY);
+}
+
+export function removeExerciseStateAsync() {
+  const actionTypes = [
+    types.EXERCISE_REMOVE_ATTEMPT,
+    types.EXERCISE_REMOVE_SUCCESS,
+    types.EXERCISE_REMOVE_FAILURE,
+  ];
+
+  return storageAsync(storage.EXERCISE_STATE, actionTypes, REMOVE_KEY);
+}
+
+export function fetchExerciseStateAsync() {
+  const actionTypes = [
+    types.EXERCISE_GET_FETCH,
+    types.EXERCISE_GET_SUCCESS,
+    types.EXERCISE_GET_FAILURE,
+  ];
+
+  return storageAsync(storage.EXERCISE_STATE, actionTypes, GET_KEY);
+}
 
 export function setRep(rep) {
   return {

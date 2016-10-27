@@ -15,6 +15,10 @@ import {
 const TIMER_SECONDS = 5;
 
 const exerciseInitialState = {
+  isFetching: false,
+  isFetched: false,
+  isError: false,
+  isViewRender: false,
   set: 0,
   rep: 0,
   mode: EXERCISE_ACTIVE,
@@ -28,6 +32,8 @@ const exerciseInitialState = {
   repsCompleted: 0,
   timeElapsed: 0,
   calories: 0,
+  day: 1,
+  progress: 0,
 };
 
 const getCalories = (state) => {
@@ -118,7 +124,60 @@ const getDecreaseTimerState = (state) => {
   };
 };
 
+
 export default createReducer(exerciseInitialState, {
+  [types.EXERCIE_GET_FETCH](state, action) {
+    return Object.assign(
+      {},
+      exerciseInitialState,
+      { isFetching: true }
+    );
+  },
+  [types.EXERCISE_GET_SUCCESS](state, action) {
+    const exerciseObj = JSON.parse(action.payload);
+    const exerciseExist = exerciseObj !== null;
+
+    let ret;
+
+    if (exerciseExist) {
+      ret = {
+        timeElapsed: exerciseObj.timeElapsed,
+        rep: exerciseObj.rep,
+        repsCompleted: exerciseObj.repsCompleted,
+        set: exerciseObj.set,
+        day: exerciseObj.day,
+      };
+    } else {
+      ret = {
+        timeElapsed: state.timeElapsed,
+        rep: state.rep,
+        repsCompleted: state.repsCompleted,
+        set: state.set,
+        day: state.day,
+      };
+    }
+
+    return Object.assign(
+      {},
+      exerciseInitialState,
+      {
+        isFetched: true,
+        isViewRender: true,
+        timeElapsed: ret.timeElapsed,
+        rep: ret.rep,
+        repsCompleted: ret.repsCompleted,
+        set: ret.set,
+        day: ret.day,
+      }
+    );
+  },
+  [types.EXERCISE_GET_FAILURE](state, action) {
+    return Object.assign(
+      {},
+      exerciseInitialState,
+      { isError: true }
+    );
+  },
   [types.EXERCISE_SET_REP](state, action) {
     return Object.assign(
       {},

@@ -137,7 +137,6 @@ const programInitialState = {
   isProgramFound: false,
   isViewRender: false,
   exercise: {},
-  day: 1,
   exerciseComplete: false,
 };
 
@@ -166,18 +165,16 @@ export const program = createReducer(programInitialState, {
     );
   },
   [types.PROGRAM_GET_SUCCESS](state, action) {
-    const exerciseObj = JSON.parse(action.payload);
-    const isExerciseExist = exerciseObj !== null;
+    const programObj = findProgramByName(action.payload);
 
     return Object.assign(
       {},
       programInitialState,
       {
         isFetched: true,
-        exercise: isExerciseExist ? findProgramByName(exerciseObj.name) : null,
-        isProgramFound: isExerciseExist,
+        exercise: programObj,
+        isProgramFound: typeof programObj !== 'undefined',
         isViewRender: true,
-        day: isExerciseExist ? exerciseObj.day : programInitialState.day,
       }
     );
   },

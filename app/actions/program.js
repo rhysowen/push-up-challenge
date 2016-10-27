@@ -22,27 +22,16 @@ function saveProgramStateAsync(programState, mode) {
     types.PROGRAM_SAVE_FAILURE,
   ];
 
-  const dataJson = JSON.stringify(programState);
-
   return storageAsync(
     storage.SELECTED_PROGRAM_NAME,
     actionTypes,
     mode,
-    dataJson
+    programState
   );
 }
 
-export function mergeDayAsync(day) {
-  const programState = { day };
-
-  return saveProgramStateAsync(programState, MERGE_KEY);
-}
-
-export function setProgramStateAsync(name, day) {
-  const programState = {
-    name,
-    day,
-  };
+export function setProgramStateAsync(name) {
+  const programState = name;
 
   return saveProgramStateAsync(programState, SET_KEY);
 }
