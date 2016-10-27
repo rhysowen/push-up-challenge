@@ -38,12 +38,36 @@ const fetchAsync = (props) => {
   props.fetchExerciseStateAsync();
 };
 
-const continueTraining = (props) => {
-  const { program } = props;
+const getMapSets = (props) => {
+  const {
+    program,
+    exercise,
+  } = props;
 
-  props.setSets(program.exercise.days[program.day - 1].sets);
+  return program.exercise.days[exercise.day - 1].sets.map((cur, index) => {
+    if (index === exercise.set) {
+      return exercise.rep > 0 ? exercise.rep : cur;
+    }
+
+    return cur;
+  });
+};
+
+const continueTraining = (props) => {
+  const {
+    program,
+    exercise,
+  } = props;
+
+  const mapSets = getMapSets(props);
+  props.setSets(mapSets);
 
   props.navigateReset('ActivityContainer');
+};
+
+const onAbort = (props) => {
+  props.removeSelectedProgramAsync();
+  props.removeExerciseStateAsync();
 };
 
 const abortTraining = (props) => {
@@ -52,7 +76,7 @@ const abortTraining = (props) => {
     'Are you sure you want to abort training?',
     [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Abort', onPress: () => props.removeSelectedProgramAsync() },
+      { text: 'Abort', onPress: () => onAbort(props) },
     ]
   );
 };

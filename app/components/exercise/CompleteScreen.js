@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 });
 
 const onDashboardPress = (props) => {
+  props.resetExerciseState();
   props.setTab(0);
   props.navigateReset('ApplicationTabs');
 };

@@ -56,6 +56,13 @@ export function fetchSelectedProgramAsync() {
   return storageAsync(storage.SELECTED_PROGRAM_NAME, actionTypes, GET_KEY);
 }
 
+export function setProgramByName(name) {
+  return {
+    type: types.PROGRAM_GET_EXERCISE_BY_NAME,
+    payload: name,
+  };
+}
+
 export function programComplete() {
   return { type: types.PROGRAM_EXERCISE_COMPLETE };
 }

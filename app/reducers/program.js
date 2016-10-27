@@ -156,6 +156,17 @@ const getExerciseComplete = (state) => {
   };
 };
 
+const getProgramByName = (name) => {
+  const programObj = findProgramByName(name);
+
+  return {
+    isFetched: true,
+    exercise: programObj,
+    isProgramFound: typeof programObj !== 'undefined',
+    isViewRender: true,
+  };
+};
+
 export const program = createReducer(programInitialState, {
   [types.PROGRAM_GET_FETCH](state, action) {
     return Object.assign(
@@ -165,17 +176,12 @@ export const program = createReducer(programInitialState, {
     );
   },
   [types.PROGRAM_GET_SUCCESS](state, action) {
-    const programObj = findProgramByName(action.payload);
+    const programByName = getProgramByName(action.payload);
 
     return Object.assign(
       {},
       programInitialState,
-      {
-        isFetched: true,
-        exercise: programObj,
-        isProgramFound: typeof programObj !== 'undefined',
-        isViewRender: true,
-      }
+      programByName,
     );
   },
   [types.PROGRAM_GET_FAILURE](state, action) {
@@ -201,6 +207,15 @@ export const program = createReducer(programInitialState, {
     return Object.assign(
       state,
       exerciseComplete,
+    );
+  },
+  [types.PROGRAM_GET_EXERCISE_BY_NAME](state, action) {
+    const programByName = getProgramByName(action.payload);
+
+    return Object.assign(
+      {},
+      state,
+      programByName,
     );
   },
 });

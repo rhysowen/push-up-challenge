@@ -49,6 +49,9 @@ const onPress = (props) => {
   const FIRST_DAY = 1;
   props.setProgramStateAsync(previewProgram.selectedProgram.name, FIRST_DAY);
 
+  // Skip doing an async fetch
+  props.setProgramByName(previewProgram.selectedProgram.name);
+
   props.navigateReset('ActivityContainer');
 };
 

@@ -178,6 +178,20 @@ export default createReducer(exerciseInitialState, {
       { isError: true }
     );
   },
+  [types.EXERCISE_REMOVE_SUCCESS](state, action) {
+    return Object.assign(
+      {},
+      exerciseInitialState,
+      { isViewRender: true },
+    );
+  },
+  [types.EXERCISE_RESET](state, action) {
+    return Object.assign(
+      {},
+      exerciseInitialState,
+      { day: state.day },
+    );
+  },
   [types.EXERCISE_SET_REP](state, action) {
     return Object.assign(
       {},

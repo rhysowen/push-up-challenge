@@ -26,7 +26,19 @@ function saveExerciseStateAsync(exerciseState, mode) {
   );
 }
 
-export function setActivitySaveClose(timeElapsed, rep, repsCompleted, set, day) {
+export function setNextDayAsync(day) {
+  const exerciseState = {
+    day,
+    timeElapsed: 0,
+    rep: 0,
+    repsCompleted: 0,
+    set: 0,
+  };
+
+  return saveExerciseStateAsync(exerciseState, MERGE_KEY);
+}
+
+export function setActivitySaveCloseAsync(timeElapsed, rep, repsCompleted, set, day) {
   const exerciseState = {
     timeElapsed,
     rep,
@@ -56,6 +68,12 @@ export function fetchExerciseStateAsync() {
   ];
 
   return storageAsync(storage.EXERCISE_STATE, actionTypes, GET_KEY);
+}
+
+export function resetExerciseState() {
+  return {
+    type: types.EXERCISE_RESET,
+  };
 }
 
 export function setRep(rep) {
