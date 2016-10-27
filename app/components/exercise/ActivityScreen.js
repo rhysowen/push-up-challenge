@@ -126,7 +126,24 @@ const getActiveSoundObj = (props) => {
 };
 
 const saveStatistics = (props) => {
-  
+  const {
+    exercise,
+    statistics,
+  } = props;
+
+  props.setStatistics(
+    exercise.repsCompleted,
+    10, // Record
+    exercise.calories,
+    exercise.timeElapsed
+  );
+
+  props.setStatisticsAsync(
+    statistics.total,
+    statistics.record,
+    statistics.calories,
+    statistics.timeElapsed
+  );
 };
 
 const cleanUpTimers = (props) => {
@@ -149,6 +166,7 @@ export default class ActivityScreen extends Component {
     const {
       exercise,
       program,
+      statistics,
     } = this.props;
 
     if (exercise.mode === EXERCISE_COMPLETE) {
@@ -160,6 +178,8 @@ export default class ActivityScreen extends Component {
       } else {
         this.props.mergeDayAsync(program.day);
       }
+
+      saveStatistics(this.props);
 
       this.props.navigateReset('CompleteContainer');
     }

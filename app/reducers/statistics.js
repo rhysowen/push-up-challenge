@@ -22,14 +22,18 @@ export default createReducer(statisticsInitialState, {
     );
   },
   [types.STATISTICS_GET_SUCCESS](state, action) {
+    const statisticsObj = JSON.parse(action.payload);
     return Object.assign(
       {},
       statisticsInitialState,
       {
         isFetched: true,
         isViewRender: true,
-      },
-      action.payload
+        total: statisticsObj.total,
+        record: statisticsObj.record,
+        calories: statisticsObj.calories,
+        timeElapsed: statisticsObj.timeElapsed,
+      }
     );
   },
   [types.STATISTICS_GET_FAILURE](state, action) {
@@ -49,34 +53,15 @@ export default createReducer(statisticsInitialState, {
   [types.STATISTICS_REMOVE_FAILURE](state, action) {
     return {}; // Todo
   },
-  [types.STATISTICS_SET_REPS](state, action) {
+  [types.STATISTICS_SET](state, action) {
     return Object.assign(
       state,
-      { total: state.total + action.payload }
-    );
-  },
-  [types.STATISTICS_SET_TOTAL](state, action) {
-    return Object.assign(
-      state,
-      { record: state.record + action.payload }
-    );
-  },
-  [types.STATISTICS_SET_RECORD](state, action) {
-    return Object.assign(
-      state,
-      { record: action.payload }
-    );
-  },
-  [types.STATISTICS_SET_CALORIES](state, action) {
-    return Object.assign(
-      state,
-      { calories: state.calories + action.payload }
-    );
-  },
-  [types.STATISTICS_SET_TIME_ELAPSED](state, action) {
-    return Object.assign(
-      state,
-      { timeElapsed: state.timeElapsed + action.payload }
+      {
+        total: state.total + action.payload.total,
+        record: action.payload.record > state.record ? action.payload.record : state.record,
+        calories: state.calories + action.payload.calories,
+        timeElapsed: state.timeElapsed + action.payload.timeElapsed,
+      }
     );
   },
 });

@@ -35,16 +35,6 @@ const onDashboardPress = (props) => {
   props.navigateReset('ApplicationTabs');
 };
 
-const getCalories = (props) => {
-  const { exercise } = props;
-
-  // Assumption is that 3 push ups burn a single calorie
-  const PUSH_UP_CALORIE_BURNT = 3;
-  const CALORIES_BURNT = Math.floor(exercise.repsCompleted / PUSH_UP_CALORIE_BURNT);
-
-  return CALORIES_BURNT;
-};
-
 const getTimeElapsed = (props) => {
   const { exercise } = props;
 
@@ -53,7 +43,6 @@ const getTimeElapsed = (props) => {
 
 const CompleteScreen = (props) => {
   const { exercise } = props;
-  const calories = getCalories(props);
   const timeElapsed = getTimeElapsed(props);
 
   return (
@@ -76,7 +65,7 @@ const CompleteScreen = (props) => {
         />
         <Info
           title="Calories"
-          value={calories}
+          value={exercise.calories}
         />
         <Info
           title="Time Elapsed"

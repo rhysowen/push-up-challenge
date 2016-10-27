@@ -46,22 +46,12 @@ export function removeStatisticsAsync() {
   return storageAsync(storage.STATISTICS, actionTypes, REMOVE_KEY);
 }
 
-export const setTotal = total => ({
-  type: types.STATISTICS_SET_REPS,
-  payload: total,
-});
-
-export const setRecord = record => ({
-  type: types.STATISTICS_SET_RECORD,
-  payload: record,
-});
-
-export const setCalories = calories => ({
-  type: types.STATISTICS_SET_CALORIES,
-  payload: calories,
-});
-
-export const setTimeElapsed = timeElapsed => ({
-  type: types.STATISTICS_SET_TIME_ELAPSED,
-  payload: timeElapsed,
+export const setStatistics = (total, record, calories, timeElapsed) => ({
+  type: types.STATISTICS_SET,
+  payload: {
+    total,
+    record,
+    calories,
+    timeElapsed,
+  },
 });

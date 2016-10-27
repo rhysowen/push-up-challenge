@@ -30,6 +30,16 @@ const exerciseInitialState = {
   calories: 0,
 };
 
+const getCalories = (state) => {
+  const { repsCompleted } = state;
+
+  // Assumption is that 3 push ups burn a single calorie
+  const PUSH_UP_CALORIE_BURNT = 3;
+  const CALORIES_BURNT = Math.floor(repsCompleted / PUSH_UP_CALORIE_BURNT);
+
+  return CALORIES_BURNT;
+};
+
 const getDecrementRepState = (state) => {
   const nextRep = state.sets[state.set + 1];
   const isLastRep = state.rep - 1 === 0;
@@ -41,6 +51,7 @@ const getDecrementRepState = (state) => {
     mode,
     sound,
     repsCompleted,
+    calories,
   } = state;
 
   let repReturn = rep;
@@ -48,6 +59,7 @@ const getDecrementRepState = (state) => {
   let modeReturn = mode;
   let soundReturn = sound;
   let repsCompletedReturn = repsCompleted;
+  let caloriesReturn = calories;
 
   if (rep > 0) {
     repsCompletedReturn = repsCompletedReturn += 1;
@@ -68,6 +80,7 @@ const getDecrementRepState = (state) => {
   if (isExerciseComplete) {
     modeReturn = EXERCISE_COMPLETE;
     soundReturn = EXERCISE_COMPLETE_SOUND;
+    caloriesReturn = getCalories(state);
   } else if (isLastRep) {
     modeReturn = EXERCISE_REST;
     soundReturn = REST_SOUND;
@@ -81,6 +94,7 @@ const getDecrementRepState = (state) => {
     mode: modeReturn,
     sound: soundReturn,
     repsCompleted: repsCompletedReturn,
+    calories: caloriesReturn,
   };
 };
 
