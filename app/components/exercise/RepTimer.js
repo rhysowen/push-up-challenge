@@ -44,6 +44,12 @@ const styles = StyleSheet.create({
   },
 });
 
+const onButtonPress = (callback, buttonEnabled) => {
+  if (buttonEnabled) {
+    callback();
+  }
+};
+
 export default class RepTimer extends Component {
 
   componentDidUpdate() {
@@ -87,6 +93,8 @@ export default class RepTimer extends Component {
     const remainingReps = exercise.rep;
     const activeTimer = this.getActiveTimer();
 
+    const buttonsEnabled = exercise.mode === EXERCISE_ACTIVE;
+
     return (
       <View
         style={styles.wrapper}
@@ -111,7 +119,7 @@ export default class RepTimer extends Component {
             textColor={COLOR_ORANGE}
             textSize={50}
             outerStyle={[styles.timerBtn]}
-            onPress={() => this.props.decrementRep()}
+            onPress={() => onButtonPress(this.props.decrementRep, buttonsEnabled)}
           />
           <View
             style={styles.timerBtn}
@@ -122,7 +130,7 @@ export default class RepTimer extends Component {
             textColor={COLOR_ORANGE}
             textSize={50}
             outerStyle={[styles.timerBtn]}
-            onPress={() => this.props.incrementRep()}
+            onPress={() => onButtonPress(this.props.incrementRep, buttonsEnabled)}
           />
         </View>
 
