@@ -228,4 +228,10 @@ export const program = createReducer(programInitialState, {
       },
     );
   },
+  [types.PROGRAM_RESET](state, action) {
+    return Object.assign(
+      {},
+      programInitialState,
+    );
+  },
 });

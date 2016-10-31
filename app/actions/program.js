@@ -97,3 +97,7 @@ export function fetchSelectedProgramAsync() {
 
   return storageAsync(storage.SELECTED_PROGRAM, actionTypes, GET_KEY);
 }
+
+export function resetProgram() {
+  return { type: types.PROGRAM_RESET };
+}

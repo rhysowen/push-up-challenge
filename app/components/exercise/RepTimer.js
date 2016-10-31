@@ -119,7 +119,7 @@ export default class RepTimer extends Component {
             textColor={COLOR_ORANGE}
             textSize={50}
             outerStyle={[styles.timerBtn]}
-            onPress={() => onButtonPress(this.props.decrementRep, buttonsEnabled)}
+            onPress={() => onButtonPress(this.props.decrementRep, true /**buttonsEnabled*/)}
           />
           <View
             style={styles.timerBtn}
@@ -130,7 +130,7 @@ export default class RepTimer extends Component {
             textColor={COLOR_ORANGE}
             textSize={50}
             outerStyle={[styles.timerBtn]}
-            onPress={() => onButtonPress(this.props.incrementRep, buttonsEnabled)}
+            onPress={() => onButtonPress(this.props.incrementRep, true /**buttonsEnabled*/)}
           />
         </View>
 

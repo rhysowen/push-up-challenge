@@ -45,6 +45,7 @@ const onPress = (props) => {
   const { previewProgram } = props;
 
   props.resetExercise();
+  props.resetProgram();
 
   props.setSets(previewProgram.selectedProgram.days[0].sets);
   props.setNewProgramStateAsync(previewProgram.selectedProgram.name);
