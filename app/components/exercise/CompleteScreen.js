@@ -19,6 +19,7 @@ import {
   PROGRAM_ACTIVE,
   PROGRAM_COMPLETE,
 } from '../../lib/constants';
+import navigateReset from '../../lib/navigator';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -35,9 +36,7 @@ const styles = StyleSheet.create({
 });
 
 const onDashboardPress = (props) => {
-  // props.resetExerciseState();
-  props.setTab(0);
-  props.navigateReset('ApplicationTabs');
+  navigateReset(props);
 };
 
 const getTimeElapsed = (props) => {

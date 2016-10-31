@@ -27,6 +27,7 @@ import {
   EXERCISE_COMPLETE_SOUND,
   BEEP_SOUND,
 } from '../../lib/constants';
+import navigateReset from '../../lib/navigator';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -112,6 +113,8 @@ const saveExerciseSaveClose = (props) => {
     props.exercise.set,
     props.exercise.day,
   );
+
+  navigateReset(props);
 };
 
 const getActiveSoundObj = (props) => {
@@ -178,7 +181,6 @@ export default class ActivityScreen extends Component {
 
       this.props.programDayComplete(exercise.repsCompleted);
 
-      debugger;
       this.props.setComplete(exercise.repsCompleted, exercise.calories, exercise.timeElapsed);
 
       this.props.navigateReset('CompleteContainer');
