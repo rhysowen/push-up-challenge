@@ -14,6 +14,10 @@ import {
 } from '../../theme/style';
 import BaseScreen from '../../theme/BaseScreen';
 import Info from '../shared/Info';
+import {
+  PROGRAM_ACTIVE,
+  PROGRAM_COMPLETE,
+} from '../../lib/constants';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -81,7 +85,7 @@ const abortTraining = (props) => {
   );
 };
 
-/*const getProgress = (props) => {
+const getProgress = (props) => {
   const { program } = props;
 
   const totalReps = program.exercise.days
@@ -92,7 +96,7 @@ const abortTraining = (props) => {
   const ret = Math.ceil((program.repsCompleted / totalReps) * MAX_PERCENT);
 
   return ret > MAX_PERCENT ? MAX_PERCENT : ret;
-};*/
+};
 
 export default class RoutineScreen extends Component {
 
@@ -105,7 +109,7 @@ export default class RoutineScreen extends Component {
 
     let ret;
 
-    if (program.isProgramFound) {
+    if (program.isProgramFound && program.status === PROGRAM_ACTIVE) {
       ret = (
         <View
           style={styles.defaultBtnWrapper}
@@ -133,7 +137,7 @@ export default class RoutineScreen extends Component {
             name="Select Program"
             buttonColor={COLOR_ORANGE}
             textColor="white"
-            onPress={() => console.log('Todo')}
+            onPress={() => this.props.setTab(1)}
           />
         </View>
       );
@@ -151,7 +155,7 @@ export default class RoutineScreen extends Component {
       let progress = 0;
 
       if (program.isProgramFound) {
-        progress = 0; //getProgress(this.props);
+        progress = getProgress(this.props);
       }
 
       const progressFormat = String.raw`${progress}%`;
