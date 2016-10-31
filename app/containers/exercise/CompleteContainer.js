@@ -4,7 +4,12 @@ import ActionCreators from '../../actions';
 
 import CompleteScreen from '../../components/exercise/CompleteScreen';
 
-const mapStateToProps = state => ({ exercise: state.exercise });
+const mapStateToProps = state => (
+  {
+    complete: state.complete,
+    program: state.program,
+  }
+);
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
 

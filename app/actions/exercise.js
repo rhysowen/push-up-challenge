@@ -26,12 +26,12 @@ function saveExerciseStateAsync(exerciseState, mode) {
   );
 }
 
-export function setNextDayAsync(day) {
+export function setNextDayAsync(day, repsCompleted) {
   const exerciseState = {
     day,
+    repsCompleted,
     timeElapsed: 0,
     rep: 0,
-    repsCompleted: 0,
     set: 0,
   };
 
@@ -68,12 +68,6 @@ export function fetchExerciseStateAsync() {
   ];
 
   return storageAsync(storage.EXERCISE_STATE, actionTypes, GET_KEY);
-}
-
-export function resetExerciseState() {
-  return {
-    type: types.EXERCISE_RESET,
-  };
 }
 
 export function setRep(rep) {
@@ -155,4 +149,8 @@ export function timerElapsedTimeIncrease() {
 
 export function abort() {
   return setMode(EXERCISE_ABORT);
+}
+
+export function resetExercise() {
+  return { type: types.EXERCISE_RESET };
 }

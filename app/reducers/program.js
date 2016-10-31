@@ -6,6 +6,8 @@ import {
   INTERMEDIATE_LEVEL,
   ADVANCED_LEVEL,
   EXPERT_LEVEL,
+  PROGRAM_ACTIVE,
+  PROGRAM_COMPLETE,
 } from '../lib/constants';
 
 const programElements = Immutable.List([
@@ -137,34 +139,9 @@ const programInitialState = {
   isProgramFound: false,
   isViewRender: false,
   exercise: {},
-  exerciseComplete: false,
-};
-
-const getExerciseComplete = (state) => {
-  let exerciseCompleteReturn = state.exerciseComplete;
-  let dayReturn = state.day;
-
-  if (state.exercise.days.length === state.day) {
-    exerciseCompleteReturn = true;
-  } else {
-    dayReturn += 1;
-  }
-
-  return {
-    exerciseComplete: exerciseCompleteReturn,
-    day: dayReturn,
-  };
-};
-
-const getProgramByName = (name) => {
-  const programObj = findProgramByName(name);
-
-  return {
-    isFetched: true,
-    exercise: programObj,
-    isProgramFound: typeof programObj !== 'undefined',
-    isViewRender: true,
-  };
+  day: 1,
+  repsCompleted: 0,
+  status: PROGRAM_ACTIVE,
 };
 
 export const program = createReducer(programInitialState, {
@@ -176,12 +153,34 @@ export const program = createReducer(programInitialState, {
     );
   },
   [types.PROGRAM_GET_SUCCESS](state, action) {
-    const programByName = getProgramByName(action.payload);
+    const programObj = JSON.parse(action.payload);
+    const programObjExist = programObj !== null;
+
+    let ret = {};
+
+    if (programObjExist) {
+      const exercise = findProgramByName(programObj.name);
+
+      ret = Object.assign(
+        {},
+        programInitialState,
+        {
+          exercise,
+          day: programObj.day,
+          repsCompleted: programObj.repsCompleted,
+          status: programObj.status,
+          isFetched: true,
+          isProgramFound: true,
+        },
+      );
+    } else {
+      ret = programInitialState;
+    }
 
     return Object.assign(
       {},
-      programInitialState,
-      programByName,
+      ret,
+      { isViewRender: true }
     );
   },
   [types.PROGRAM_GET_FAILURE](state, action) {
@@ -201,21 +200,32 @@ export const program = createReducer(programInitialState, {
   [types.PROGRAM_REMOVE_SELECTED_FAILURE](state, action) {
     return {}; // Todo
   },
-  [types.PROGRAM_EXERCISE_COMPLETE](state, action) {
-    const exerciseComplete = getExerciseComplete(state);
-
-    return Object.assign(
-      state,
-      exerciseComplete,
-    );
-  },
-  [types.PROGRAM_GET_EXERCISE_BY_NAME](state, action) {
-    const programByName = getProgramByName(action.payload);
+  [types.PROGRAM_DAY_COMPLETE](state, action) {
+    const NEXT_DAY_INCREMENT = 1;
+    const NEXT_DAY = state.day + NEXT_DAY_INCREMENT;
+    const IS_PROGRAM_COMPLETE = NEXT_DAY > state.exercise.days.length;
 
     return Object.assign(
       {},
       state,
-      programByName,
+      {
+        repsCompleted: state.repsCompleted + action.payload,
+        day: IS_PROGRAM_COMPLETE ? state.day : NEXT_DAY,
+        status: IS_PROGRAM_COMPLETE ? PROGRAM_COMPLETE : PROGRAM_ACTIVE,
+      },
+    );
+  },
+  [types.PROGRAM_GET_EXERCISE_BY_NAME](state, action) {
+    const exercise = findProgramByName(action.payload);
+
+    return Object.assign(
+      {},
+      state,
+      {
+        exercise,
+        isFetched: true,
+        isProgramFound: true,
+      },
     );
   },
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -31,62 +31,79 @@ const styles = StyleSheet.create({
 });
 
 const onDashboardPress = (props) => {
-  props.resetExerciseState();
+  // props.resetExerciseState();
   props.setTab(0);
   props.navigateReset('ApplicationTabs');
 };
 
 const getTimeElapsed = (props) => {
-  const { exercise } = props;
+  const { complete } = props;
 
-  return format(exercise.timeElapsed);
+  return format(complete.timeElapsed);
 };
 
-const CompleteScreen = (props) => {
-  const { exercise } = props;
-  const timeElapsed = getTimeElapsed(props);
+export class CompleteScreen extends Component {
 
-  return (
-    <BaseScreen
-      style={styles.wrapper}
-    >
-      <View
-      style={{flex: 1, alignItems: 'center'}}>
-        <Text
-          style={styles.exerciseCompleteText}
-        >
-          Exercise Complete
-        </Text>
-      </View>
-      <View
-      style={{flex: 2, justifyContent: 'space-between'}}>
-        <Info
-          title="Total Reps"
-          value={exercise.repsCompleted}
-        />
-        <Info
-          title="Calories"
-          value={exercise.calories}
-        />
-        <Info
-          title="Time Elapsed"
-          value={timeElapsed}
-        />
-      </View>
-      <View
-        style={{flex: 2, justifyContent: 'center'}}
+  componentDidMount() {
+    const { program } = this.props;
+
+    this.props.setCompleteProgramStateAsync(
+      program.day,
+      program.repsCompleted,
+      program.status
+    );
+
+    this.props.removeExerciseStateAsync();
+  }
+
+  render() {
+    const { complete } = this.props;
+    const timeElapsed = getTimeElapsed(this.props);
+
+    return (
+      <BaseScreen
+        style={styles.wrapper}
       >
-        <DefaultButton
-          name="Back to dashboard"
-          buttonColor={COLOR_ORANGE}
-          textColor="white"
-          onPress={() => onDashboardPress(props)}
-        />
-      </View>
+        <View
+          style={{flex: 1, alignItems: 'center'}}
+        >
+          <Text
+            style={styles.exerciseCompleteText}
+          >
+            Exercise Complete
+          </Text>
+        </View>
+        <View
+          style={{flex: 2, justifyContent: 'space-between'}}
+        >
+          <Info
+            title="Total Reps"
+            value={complete.repsCompleted}
+          />
+          <Info
+            title="Calories"
+            value={complete.calories}
+          />
+          <Info
+            title="Time Elapsed"
+            value={timeElapsed}
+          />
+        </View>
+        <View
+          style={{flex: 2, justifyContent: 'center'}}
+        >
+          <DefaultButton
+            name="Back to dashboard"
+            buttonColor={COLOR_ORANGE}
+            textColor="white"
+            onPress={() => onDashboardPress(this.props)}
+          />
+        </View>
 
-    </BaseScreen>
-  );
-};
+      </BaseScreen>
+    );
+  }
+}
 
 CompleteScreen.propTypes = {
   // programs: PropTypes.object,

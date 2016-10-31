@@ -103,6 +103,8 @@ const getActiveStateTitle = (exercise) => {
 };
 
 const saveExerciseSaveClose = (props) => {
+  props.setProgramSaveCloseAsync(props.exercise.repsCompleted);
+
   props.setActivitySaveCloseAsync(
     props.exercise.timeElapsed,
     props.exercise.rep,
@@ -169,21 +171,14 @@ export default class ActivityScreen extends Component {
   }
 
   componentDidUpdate() {
-    const {
-      exercise,
-      program,
-    } = this.props;
+    const { exercise } = this.props;
 
     if (exercise.mode === EXERCISE_COMPLETE) {
-      this.props.programComplete();
       saveStatisticsAsync(this.props);
 
-      if (program.exerciseComplete) {
-        this.props.removeSelectedProgramAsync();
-      } else {
-        const NEXT_DAY = exercise.day += 1;
-        this.props.setNextDayAsync(NEXT_DAY);
-      }
+      this.props.programDayComplete(exercise.repsCompleted);
+
+      this.props.setComplete(exercise.repsCompleted, exercise.calories, exercise.timeElapsed);
 
       this.props.navigateReset('CompleteContainer');
     }

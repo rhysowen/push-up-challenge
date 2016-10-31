@@ -32,8 +32,6 @@ const exerciseInitialState = {
   repsCompleted: 0,
   timeElapsed: 0,
   calories: 0,
-  day: 1,
-  progress: 0,
 };
 
 const getCalories = (state) => {
@@ -124,9 +122,8 @@ const getDecreaseTimerState = (state) => {
   };
 };
 
-
 export default createReducer(exerciseInitialState, {
-  [types.EXERCIE_GET_FETCH](state, action) {
+  [types.EXERCISE_GET_FETCH](state, action) {
     return Object.assign(
       {},
       exerciseInitialState,
@@ -145,7 +142,6 @@ export default createReducer(exerciseInitialState, {
         rep: exerciseObj.rep,
         repsCompleted: exerciseObj.repsCompleted,
         set: exerciseObj.set,
-        day: exerciseObj.day,
       };
     } else {
       ret = {
@@ -153,7 +149,6 @@ export default createReducer(exerciseInitialState, {
         rep: state.rep,
         repsCompleted: state.repsCompleted,
         set: state.set,
-        day: state.day,
       };
     }
 
@@ -167,7 +162,6 @@ export default createReducer(exerciseInitialState, {
         rep: ret.rep,
         repsCompleted: ret.repsCompleted,
         set: ret.set,
-        day: ret.day,
       }
     );
   },
@@ -183,13 +177,6 @@ export default createReducer(exerciseInitialState, {
       {},
       exerciseInitialState,
       { isViewRender: true },
-    );
-  },
-  [types.EXERCISE_RESET](state, action) {
-    return Object.assign(
-      {},
-      exerciseInitialState,
-      { day: state.day },
     );
   },
   [types.EXERCISE_SET_REP](state, action) {
@@ -300,6 +287,13 @@ export default createReducer(exerciseInitialState, {
         timeElapsed: state.timeElapsed + 1,
         sound: NOT_SET_SOUND,
       }
+    );
+  },
+  [types.EXERCISE_RESET](state, action) {
+    return Object.assign(
+      {},
+      exerciseInitialState,
+      { day: state.day },
     );
   },
 });

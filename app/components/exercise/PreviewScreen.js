@@ -44,11 +44,10 @@ const renderDaysJsx = selectedProgram => (
 const onPress = (props) => {
   const { previewProgram } = props;
 
+  props.resetExercise();
+
   props.setSets(previewProgram.selectedProgram.days[0].sets);
-
-  const FIRST_DAY = 1;
-  props.setProgramStateAsync(previewProgram.selectedProgram.name, FIRST_DAY);
-
+  props.setNewProgramStateAsync(previewProgram.selectedProgram.name);
   // Skip doing an async fetch
   props.setProgramByName(previewProgram.selectedProgram.name);
 

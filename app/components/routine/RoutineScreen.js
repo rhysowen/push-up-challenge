@@ -44,7 +44,7 @@ const getMapSets = (props) => {
     exercise,
   } = props;
 
-  return program.exercise.days[exercise.day - 1].sets.map((cur, index) => {
+  return program.exercise.days[program.day - 1].sets.map((cur, index) => {
     if (index === exercise.set) {
       return exercise.rep > 0 ? exercise.rep : cur;
     }
@@ -81,21 +81,18 @@ const abortTraining = (props) => {
   );
 };
 
-const getProgress = (props) => {
-  const {
-    program,
-    exercise,
-  } = props;
+/*const getProgress = (props) => {
+  const { program } = props;
 
   const totalReps = program.exercise.days
     .reduce((prev, cur) => prev + cur.sets
     .reduce((_prev, _cur) => _prev + _cur, 0), 0);
 
   const MAX_PERCENT = 100;
-  const ret = Math.ceil((exercise.repsCompleted / totalReps) * MAX_PERCENT);
+  const ret = Math.ceil((program.repsCompleted / totalReps) * MAX_PERCENT);
 
   return ret > MAX_PERCENT ? MAX_PERCENT : ret;
-};
+};*/
 
 export default class RoutineScreen extends Component {
 
@@ -146,18 +143,15 @@ export default class RoutineScreen extends Component {
   }
 
   render() {
-    const {
-      program,
-      exercise,
-    } = this.props;
+    const { program } = this.props;
 
     let ret;
 
-    if (program.isViewRender && exercise.isViewRender) {
+    if (program.isViewRender) {
       let progress = 0;
 
       if (program.isProgramFound) {
-        progress = getProgress(this.props);
+        progress = 0; //getProgress(this.props);
       }
 
       const progressFormat = String.raw`${progress}%`;
@@ -175,11 +169,11 @@ export default class RoutineScreen extends Component {
             />
             <Info
               title="Day"
-              value={exercise.day}
+              value={program.day}
             />
             <Info
               title="Reps Complete"
-              value={exercise.repsCompleted}
+              value={program.repsCompleted}
             />
             <Info
               title="Progress"

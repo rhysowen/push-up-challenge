@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-const SELECTED_PROGRAM_NAME = '@SELECTED_PROGRAM_NAME:key';
+const SELECTED_PROGRAM = '@SELECTED_PROGRAM:key';
 const EXERCISE_STATE = '@EXERCISE_STATE:key';
 const STATISTICS = '@STATISTICS:key';
 
@@ -37,7 +37,7 @@ const removeKey = async function removeKey(key) {
 };
 
 export {
-  SELECTED_PROGRAM_NAME,
+  SELECTED_PROGRAM,
   EXERCISE_STATE,
   STATISTICS,
   setKey,

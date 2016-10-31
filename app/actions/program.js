@@ -7,13 +7,7 @@ import {
   MERGE_KEY,
   storageAsync,
 } from '../lib/storageAsync';
-
-export function setPreviewExercise(name) {
-  return {
-    type: types.PROGRAM_SET_PREVIEW_EXERCISE,
-    payload: name,
-  };
-}
+import { PROGRAM_ACTIVE } from '../lib/constants';
 
 function saveProgramStateAsync(programState, mode) {
   const actionTypes = [
@@ -22,38 +16,59 @@ function saveProgramStateAsync(programState, mode) {
     types.PROGRAM_SAVE_FAILURE,
   ];
 
+  const programStateJson = JSON.stringify(programState);
+
   return storageAsync(
-    storage.SELECTED_PROGRAM_NAME,
+    storage.SELECTED_PROGRAM,
     actionTypes,
     mode,
-    programState
+    programStateJson
   );
 }
 
-export function setProgramStateAsync(name) {
-  const programState = name;
+export function setPreviewExercise(name) {
+  return {
+    type: types.PROGRAM_SET_PREVIEW_EXERCISE,
+    payload: name,
+  };
+}
+
+export function setProgramSaveCloseAsync(repsCompleted) {
+  const programState = { repsCompleted };
+
+  return saveProgramStateAsync(programState, MERGE_KEY);
+}
+
+export function setCompleteProgramStateAsync(day, repsCompleted, status) {
+  const programState = {
+    day,
+    repsCompleted,
+    status,
+  };
+
+  return saveProgramStateAsync(programState, MERGE_KEY);
+}
+
+export function programDayComplete(repsCompleted) {
+  return {
+    type: types.PROGRAM_DAY_COMPLETE,
+    payload: repsCompleted,
+  };
+}
+
+export function setNewProgramStateAsync(name) {
+  const day = 1;
+  const repsCompleted = 0;
+  const status = PROGRAM_ACTIVE;
+
+  const programState = {
+    name,
+    day,
+    repsCompleted,
+    status,
+  };
 
   return saveProgramStateAsync(programState, SET_KEY);
-}
-
-export function removeSelectedProgramAsync() {
-  const actionTypes = [
-    types.PROGRAM_REMOVE_SELECTED_ATTEMPT,
-    types.PROGRAM_REMOVE_SELECTED_SUCCESS,
-    types.PROGRAM_REMOVE_SELECTED_FAILURE,
-  ];
-
-  return storageAsync(storage.SELECTED_PROGRAM_NAME, actionTypes, REMOVE_KEY);
-}
-
-export function fetchSelectedProgramAsync() {
-  const actionTypes = [
-    types.PROGRAM_GET_FETCH,
-    types.PROGRAM_GET_SUCCESS,
-    types.PROGRAM_GET_FAILURE,
-  ];
-
-  return storageAsync(storage.SELECTED_PROGRAM_NAME, actionTypes, GET_KEY);
 }
 
 export function setProgramByName(name) {
@@ -63,6 +78,22 @@ export function setProgramByName(name) {
   };
 }
 
-export function programComplete() {
-  return { type: types.PROGRAM_EXERCISE_COMPLETE };
+export function removeSelectedProgramAsync() {
+  const actionTypes = [
+    types.PROGRAM_REMOVE_SELECTED_ATTEMPT,
+    types.PROGRAM_REMOVE_SELECTED_SUCCESS,
+    types.PROGRAM_REMOVE_SELECTED_FAILURE,
+  ];
+
+  return storageAsync(storage.SELECTED_PROGRAM, actionTypes, REMOVE_KEY);
+}
+
+export function fetchSelectedProgramAsync() {
+  const actionTypes = [
+    types.PROGRAM_GET_FETCH,
+    types.PROGRAM_GET_SUCCESS,
+    types.PROGRAM_GET_FAILURE,
+  ];
+
+  return storageAsync(storage.SELECTED_PROGRAM, actionTypes, GET_KEY);
 }
