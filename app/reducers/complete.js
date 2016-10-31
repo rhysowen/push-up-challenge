@@ -8,7 +8,7 @@ const completeInitialState = {
 };
 
 export default createReducer(completeInitialState, {
-  [types.COMPLETE_SET_PROPS](state, action) {
+  [types.COMPLETE_SET](state, action) {
     return Object.assign(
       {},
       {

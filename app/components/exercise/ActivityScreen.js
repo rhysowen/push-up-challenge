@@ -178,6 +178,7 @@ export default class ActivityScreen extends Component {
 
       this.props.programDayComplete(exercise.repsCompleted);
 
+      debugger;
       this.props.setComplete(exercise.repsCompleted, exercise.calories, exercise.timeElapsed);
 
       this.props.navigateReset('CompleteContainer');

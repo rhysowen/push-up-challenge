@@ -15,6 +15,10 @@ import {
 } from '../../theme/style';
 import DefaultButton from '../../theme/DefaultButton';
 import format from '../../lib/format';
+import {
+  PROGRAM_ACTIVE,
+  PROGRAM_COMPLETE,
+} from '../../lib/constants';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -42,6 +46,18 @@ const getTimeElapsed = (props) => {
   return format(complete.timeElapsed);
 };
 
+const getExerciseCompleteText = (props) => {
+  const { program } = props;
+  switch (program.status) {
+    case PROGRAM_ACTIVE:
+      return 'Day Complete!';
+    case PROGRAM_COMPLETE:
+      return 'Program Complete!';
+    default:
+      return 'Complete!';
+  }
+};
+
 export class CompleteScreen extends Component {
 
   componentDidMount() {
@@ -58,7 +74,9 @@ export class CompleteScreen extends Component {
 
   render() {
     const { complete } = this.props;
+
     const timeElapsed = getTimeElapsed(this.props);
+    const exerciseCompleteText = getExerciseCompleteText(this.props);
 
     return (
       <BaseScreen
@@ -70,7 +88,7 @@ export class CompleteScreen extends Component {
           <Text
             style={styles.exerciseCompleteText}
           >
-            Exercise Complete
+            {exerciseCompleteText}
           </Text>
         </View>
         <View
