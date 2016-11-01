@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { ListView } from 'react-native';
 
+import ListBaseScreen from '../../theme/ListBaseScreen';
 import Row from '../shared/Row';
 import {
   BEGINNER_LEVEL,
@@ -56,11 +57,13 @@ const ProgramScreen = (props) => {
   const dataSource = ds.cloneWithRows(programs.toArray());
 
   return (
-    <ListView
-      dataSource={dataSource}
-      renderRow={(rowData, sectionID, rowID, highlightRow) =>
-        renderRow(rowData, sectionID, rowID, highlightRow, props)}
-    />
+    <ListBaseScreen>
+      <ListView
+        dataSource={dataSource}
+        renderRow={(rowData, sectionID, rowID, highlightRow) =>
+          renderRow(rowData, sectionID, rowID, highlightRow, props)}
+      />
+    </ListBaseScreen>
   );
 };
 

@@ -10,6 +10,7 @@ import {
   BASE_PADDING_RIGHT,
   COLOR_ORANGE,
 } from '../../theme/style';
+import BaseScreen from '../../theme/BaseScreen';
 import DefaultButton from '../../theme/DefaultButton';
 
 import Info from '../shared/Info';
@@ -61,7 +62,7 @@ export default (props) => {
   const totalDays = previewProgram.selectedProgram.days.length;
 
   return (
-    <View
+    <BaseScreen
       style={styles.wrapper}  
     >
       <View
@@ -95,6 +96,6 @@ export default (props) => {
           {days}
         </ScrollView>
       </View>
-    </View>
+    </BaseScreen>
   );
 };

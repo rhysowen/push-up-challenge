@@ -20,6 +20,7 @@ import {
   PROGRAM_COMPLETE,
 } from '../../lib/constants';
 import navigateReset from '../../lib/navigator';
+import { displayInterstitial } from '../../lib/ads';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -60,6 +61,8 @@ const getExerciseCompleteText = (props) => {
 export class CompleteScreen extends Component {
 
   componentDidMount() {
+    displayInterstitial();
+
     const { program } = this.props;
 
     this.props.setCompleteProgramStateAsync(

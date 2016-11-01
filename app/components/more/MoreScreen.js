@@ -7,6 +7,7 @@ import {
   COLOR_ORANGE,
   ICON_SIZE,
 } from '../../theme/style';
+import ListBaseScreen from '../../theme/ListBaseScreen';
 
 const options = [
   {
@@ -68,9 +69,11 @@ const MoreScreen = () => {
   const optionsJsx = options.map((o, key) => renderRow(o, key));
 
   return (
-    <ScrollView>
-      {optionsJsx}
-    </ScrollView>
+    <ListBaseScreen>
+      <ScrollView>
+        {optionsJsx}
+      </ScrollView>
+    </ListBaseScreen>
   );
 };
 

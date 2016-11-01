@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ActionCreators from '../actions';
 import SceneContainer from './SceneContainer';
+
 import {
   BASE_FONT_FAMILY_IOS,
   BASE_PADDING_RIGHT,

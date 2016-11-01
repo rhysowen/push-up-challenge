@@ -204,6 +204,7 @@ export default class ActivityScreen extends Component {
     return (
       <BaseScreen
         style={styles.wrapper}
+        hideAdvert
       >
         <Text
           style={styles.activeState}
