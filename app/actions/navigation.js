@@ -41,3 +41,7 @@ export function navigateReset(key) {
     payload: key,
   };
 }
+
+export function toggleIcon() {
+  return { type: types.NAVIGATION_TOGGLE_ICON };
+}

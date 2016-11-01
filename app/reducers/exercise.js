@@ -10,6 +10,8 @@ import {
   REST_SOUND,
   EXERCISE_COMPLETE_SOUND,
   BEEP_SOUND,
+  ENABLE_SOUND,
+  DISABLE_SOUND,
 } from '../lib/constants';
 
 const TIMER_SECONDS = 5;
@@ -29,6 +31,7 @@ const exerciseInitialState = {
   timeElapsedIntervalId: 0,
   timeElapsedIntervalSet: false,
   sound: PERFORM_PUSH_UP_SOUND,
+  soundMode: ENABLE_SOUND,
   repsCompleted: 0,
   timeElapsed: 0,
   calories: 0,
@@ -294,6 +297,13 @@ export default createReducer(exerciseInitialState, {
       {},
       exerciseInitialState,
       { day: state.day },
+    );
+  },
+  [types.EXERCISE_TOGGLE_SOUND](state, action) {
+    return Object.assign(
+      {},
+      state,
+      { soundMode: state.soundMode === ENABLE_SOUND ? DISABLE_SOUND : ENABLE_SOUND },
     );
   },
 });

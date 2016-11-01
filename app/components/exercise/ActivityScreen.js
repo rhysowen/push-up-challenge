@@ -26,6 +26,8 @@ import {
   REST_SOUND,
   EXERCISE_COMPLETE_SOUND,
   BEEP_SOUND,
+  ENABLE_SOUND,
+  DISABLE_SOUND,
 } from '../../lib/constants';
 import navigateReset from '../../lib/navigator';
 
@@ -198,8 +200,10 @@ export default class ActivityScreen extends Component {
     const sets = exercise.sets;
     const activeState = getActiveStateTitle(exercise);
 
-    const activeSoundObj = getActiveSoundObj(this.props);
-    //playSound(activeSoundObj);
+    if (exercise.soundMode === ENABLE_SOUND) {
+      const activeSoundObj = getActiveSoundObj(this.props);
+      playSound(activeSoundObj);
+    }
 
     return (
       <BaseScreen

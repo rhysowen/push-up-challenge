@@ -10,14 +10,14 @@ import {
 // Takes in state & actions - will wrap any component we give it.
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ActionCreators from '../actions';
 import SceneContainer from './SceneContainer';
 
+import NavigationHeaderComponent from '../components/container/NavigationHeaderComponent';
+
 import {
   BASE_FONT_FAMILY_IOS,
-  BASE_PADDING_RIGHT,
   TAB_COLOR,
 } from '../theme/style';
 import { NOT_SET } from '../lib/constants';
@@ -41,12 +41,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginTop: NavigationHeader.HEIGHT,
   },
-  rightComponentWrapper: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingRight: BASE_PADDING_RIGHT,
-  },
 });
 
 const renderTitle = (props) => {
@@ -65,33 +59,26 @@ const renderTitle = (props) => {
   return selectedScreen.title;
 };
 
-const getIconJsx = (name, color = 'white', size = 30) => (
-  <Icon
-    name={name}
-    size={size}
-    color={color}
-  />
-);
+const LEFT_COMPONENT = 'LEFT_COMPONENT';
+const SCREEN_NAME = 'ActivityContainer';
 
-const renderRightComponent = (props) => {
-  const { navigationState } = props;
-
-  if (navigationState.routes[navigationState.index].key === 'ActivityContainer') {
-    const icon = getIconJsx('volume-up');
-
-    return (
-      <View
-        style={styles.rightComponentWrapper}
-      >
-        {icon}
-      </View>
-    );
-  }
+const renderComponent = (mode, props) => {
+  const callbacks = [
+    props.toggleVolume,
+    props.toggleIcon,
+  ];
 
   return (
-    <View />
+    <NavigationHeaderComponent
+      {...props}
+      isLeft={mode === LEFT_COMPONENT}
+      screenName={SCREEN_NAME}
+      callbacks={callbacks}
+    />
   );
 };
+
+const renderLeftComponent = (props) => renderComponent(LEFT_COMPONENT, props);
 
 const AppContainer = (props) => {
   const { navigationState } = props;
@@ -121,8 +108,7 @@ const AppContainer = (props) => {
               {...renderProps}
               onNavigateBack={() => props.navigateBack()}
               style={styles.navHeader}
-              // renderLeftComponent={prop => renderHeaderComponent(prop, LEFT_MODE)}
-              renderRightComponent={prop => renderRightComponent(prop)}
+              renderLeftComponent={() => renderLeftComponent(props)}
               renderTitleComponent={() => (
                 <NavigationHeader.Title>
                   <Text

@@ -43,6 +43,9 @@ export const tabs = createReducer({ key: 'home', index: 0, routes: allTabs }, {
   },
 });
 
+const ICON_VOLUME_UP = 'volume-up';
+const ICON_VOLUME_OFF = 'volume-off';
+
 const allPages = [
   {
     key: 'ApplicationTabs',
@@ -58,8 +61,7 @@ const allPages = [
     key: 'ActivityContainer',
     index: 2,
     title: 'Activity',
-    leftComponent: { icon: 'pause' },
-    rightComponent: { icon: 'volume-up' },
+    leftComponent: { icon: ICON_VOLUME_UP },
   },
   {
     key: 'CompleteContainer',
@@ -85,11 +87,24 @@ export const navigationState = createReducer({ index: 0, routes: allPages }, {
 
     return Object.assign(
       {},
+      allPages[indexByKey],
       {
         key: action.payload,
         index: 0,
         routes,
       }
+    );
+  },
+  [types.NAVIGATION_TOGGLE_ICON](state, action) {
+    return Object.assign(
+      {},
+      state,
+      { leftComponent: { icon:
+        state.leftComponent.icon ===
+          ICON_VOLUME_UP ?
+            ICON_VOLUME_OFF
+            : ICON_VOLUME_UP,
+        } }
     );
   },
 });
