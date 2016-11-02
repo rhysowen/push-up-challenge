@@ -306,4 +306,19 @@ export default createReducer(exerciseInitialState, {
       { soundMode: state.soundMode === ENABLE_SOUND ? DISABLE_SOUND : ENABLE_SOUND },
     );
   },
+  [types.EXERCISE_SET_PROXIMITY](state, action) {
+    let ret;
+
+    if (action.payload && state.mode === EXERCISE_ACTIVE) {
+      ret = getDecrementRepState(state);
+    } else {
+      ret = { sound: NOT_SET_SOUND };
+    }
+
+    return Object.assign(
+      {},
+      state,
+      ret
+    );
+  },
 });

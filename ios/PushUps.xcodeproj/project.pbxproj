@@ -38,6 +38,7 @@
 		98D028531DB69CC80033330B /* perform-push-ups.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D028521DB69CC80033330B /* perform-push-ups.mp3 */; };
 		98D028551DB6C6F60033330B /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D028541DB6C6F60033330B /* beep.mp3 */; };
 		AE0A14FC16971C09F9673317 /* libPods-PushUps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6A1F86CDB3322A5F40F9F6 /* libPods-PushUps.a */; };
+		DE309536CA2E4958BAFDB63E /* libRNProximity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C63696D9671945C6B5CE3518 /* libRNProximity.a */; };
 		DE89A98E2BFF4C79AA1C70D1 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2FA180C56054604A8309201 /* FontAwesome.ttf */; };
 		E0179F34CAF440D1A3832AC4 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71D67712C4BB44B7B15034FF /* libRNVectorIcons.a */; };
 /* End PBXBuildFile section */
@@ -120,6 +121,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		986A2B4B1DC95EEE0051CACF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7A0238DACD34FBF9A4FA62E /* RNProximity.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DE4E5251CB3E1190039D4F4;
+			remoteInfo = RNProximity;
+		};
 		986BF44A1DC80B070088845B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 41FEB2BFC9B34714A38BEC4D /* RNAdMobManager.xcodeproj */;
@@ -184,7 +192,9 @@
 		98D028541DB6C6F60033330B /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = beep.mp3; path = ../app/sounds/beep.mp3; sourceTree = "<group>"; };
 		A7B0340C4A624606A2B369FE /* libRNAdMobManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAdMobManager.a; sourceTree = "<group>"; };
 		A8B4226D403D4A8885E8C72B /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		C63696D9671945C6B5CE3518 /* libRNProximity.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNProximity.a; sourceTree = "<group>"; };
 		CD630BDB0C95A371513A906C /* Pods-PushUps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushUps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PushUps/Pods-PushUps.debug.xcconfig"; sourceTree = "<group>"; };
+		E7A0238DACD34FBF9A4FA62E /* RNProximity.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNProximity.xcodeproj; path = "../node_modules/react-native-proximity/RNProximity/RNProximity.xcodeproj"; sourceTree = "<group>"; };
 		EFB0829F765F75A2791FC772 /* Pods-PushUpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushUpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PushUpsTests/Pods-PushUpsTests.release.xcconfig"; sourceTree = "<group>"; };
 		F2FA180C56054604A8309201 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		F762E974DED64E549F3403D0 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
@@ -218,6 +228,7 @@
 				E0179F34CAF440D1A3832AC4 /* libRNVectorIcons.a in Frameworks */,
 				163B7FEE18444549A821C047 /* libRNAdMobManager.a in Frameworks */,
 				AE0A14FC16971C09F9673317 /* libPods-PushUps.a in Frameworks */,
+				DE309536CA2E4958BAFDB63E /* libRNProximity.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +382,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				7AE2FD6292F7447EBF314140 /* RNVectorIcons.xcodeproj */,
 				41FEB2BFC9B34714A38BEC4D /* RNAdMobManager.xcodeproj */,
+				E7A0238DACD34FBF9A4FA62E /* RNProximity.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -403,6 +415,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* PushUps.app */,
 				00E356EE1AD99517003FC87E /* PushUpsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		986A2B3D1DC95EEE0051CACF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				986A2B4C1DC95EEE0051CACF /* libRNProximity.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -493,7 +513,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 800;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -561,6 +581,10 @@
 				{
 					ProductGroup = 986BF43D1DC80B070088845B /* Products */;
 					ProjectRef = 41FEB2BFC9B34714A38BEC4D /* RNAdMobManager.xcodeproj */;
+				},
+				{
+					ProductGroup = 986A2B3D1DC95EEE0051CACF /* Products */;
+					ProjectRef = E7A0238DACD34FBF9A4FA62E /* RNProximity.xcodeproj */;
 				},
 				{
 					ProductGroup = 98D028461DB671080033330B /* Products */;
@@ -648,6 +672,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		986A2B4C1DC95EEE0051CACF /* libRNProximity.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNProximity.a;
+			remoteRef = 986A2B4B1DC95EEE0051CACF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		986BF44B1DC80B070088845B /* libRNAdMobManager.a */ = {
@@ -869,6 +900,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -893,6 +925,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -921,6 +954,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-admob/ios",
+					"$(SRCROOT)/../node_modules/react-native-proximity/RNProximity/RNProximity",
 				);
 				INFOPLIST_FILE = PushUps/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -949,6 +983,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-admob/ios",
+					"$(SRCROOT)/../node_modules/react-native-proximity/RNProximity/RNProximity",
 				);
 				INFOPLIST_FILE = PushUps/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -1008,6 +1043,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-admob/ios",
+					"$(SRCROOT)/../node_modules/react-native-proximity/RNProximity/RNProximity",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1053,6 +1089,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-admob/ios",
+					"$(SRCROOT)/../node_modules/react-native-proximity/RNProximity/RNProximity",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;

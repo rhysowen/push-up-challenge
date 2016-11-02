@@ -4,7 +4,9 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+
 import Sound from 'react-native-sound';
+import Proximity from 'react-native-proximity';
 
 import RepTimer from './RepTimer';
 import Reps from './Reps';
@@ -128,9 +130,9 @@ const getActiveSoundObj = (props) => {
     case PERFORM_PUSH_UP_SOUND:
       return peformPushUps;
     case REST_SOUND:
-      return rest;
+      return [beep, rest];
     case EXERCISE_COMPLETE_SOUND:
-      return exerciseComplete;
+      return [beep, exerciseComplete];
     case BEEP_SOUND:
       return beep;
     default:
@@ -169,10 +171,29 @@ const cleanUpTimers = (props) => {
   props.clearTimeElapsedIntervalId();
 };
 
+// Should probably re-think this as it's anti-Redux pattern?
+const initSound = (props) => {
+  const { exercise } = props;
+
+  if (exercise.soundMode === ENABLE_SOUND) {
+    const activeSoundObj = getActiveSoundObj(props);
+    const multipleSound = activeSoundObj instanceof Array;
+
+    if (multipleSound) {
+      for (let i = 0; i < activeSoundObj.length; i += 1) {
+        playSound(activeSoundObj[i]);
+      }
+    } else {
+      playSound(activeSoundObj);
+    }
+  }
+};
+
 export default class ActivityScreen extends Component {
 
   componentDidMount() {
     this.props.setTimeElapsedIntervalId(setInterval(this.props.timerElapsedTimeIncrease, 1000));
+    Proximity.addListener(this.props.setProximity);
   }
 
   componentDidUpdate() {
@@ -192,6 +213,8 @@ export default class ActivityScreen extends Component {
   componentWillUnmount() {
     // Consider using TimerMixin - no ES6 API so use react-mixin?
     cleanUpTimers(this.props);
+
+    Proximity.removeListener(this.props.setProximity);
   }
 
   render() {
@@ -200,10 +223,7 @@ export default class ActivityScreen extends Component {
     const sets = exercise.sets;
     const activeState = getActiveStateTitle(exercise);
 
-    if (exercise.soundMode === ENABLE_SOUND) {
-      const activeSoundObj = getActiveSoundObj(this.props);
-      playSound(activeSoundObj);
-    }
+    initSound(this.props);
 
     return (
       <BaseScreen
