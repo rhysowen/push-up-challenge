@@ -158,3 +158,10 @@ export function resetExercise() {
 export function toggleVolume() {
   return { type: types.EXERCISE_TOGGLE_SOUND };
 }
+
+export function setProximity(data) {
+  return {
+    type: types.EXERCISE_SET_PROXIMITY,
+    payload: data.proximity,
+  };
+}
