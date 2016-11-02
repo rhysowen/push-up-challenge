@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  touchableOpacityWrapper: { padding: 10 },
 });
 
 const isRouteValid = (props) => {
@@ -68,6 +69,7 @@ export default (props) => {
         style={[styles.wrapper, paddingComponentStyle]}
       >
         <TouchableOpacity
+          style={styles.touchableOpacityWrapper}
           onPress={() => onComponentPress(props)}
         >
           {icon}
