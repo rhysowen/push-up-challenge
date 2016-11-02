@@ -10,7 +10,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   COLOR_ORANGE,
   BASE_PADDING_LEFT,
-  BASE_PADDING_RIGHT,
 } from '../../theme/style';
 
 const styles = StyleSheet.create({
@@ -22,12 +21,6 @@ const styles = StyleSheet.create({
   touchableOpacityWrapper: { padding: 10 },
 });
 
-const isRouteValid = (props) => {
-  const { navigationState } = props;
-
-  return navigationState.routes[navigationState.index].key === props.screenName;
-};
-
 const getIconJsx = (name, color = COLOR_ORANGE, size = 20) => (
   <Icon
     name={name}
@@ -37,50 +30,36 @@ const getIconJsx = (name, color = COLOR_ORANGE, size = 20) => (
 );
 
 const onComponentPress = (props) => {
-  const callbacksValid = props.callbacks !== undefined;
+  const callbackValid = props.callback !== undefined;
 
-  if (callbacksValid) {
-    for (let i = 0; i < props.callbacks.length; i += 1) {
-      const func = props.callbacks[i];
-      const isFunction = typeof func === 'function';
+  if (callbackValid) {
+    const func = props.callback;
+    const isFunction = typeof func === 'function';
 
-      if (isFunction) {
-        func();
-      }
+    if (isFunction) {
+      props.callback();
     }
   }
 };
+
 
 const PADDING_LEFT_STYLE = { paddingLeft: BASE_PADDING_LEFT };
 const PADDING_RIGHT_STYLE = { paddingRight: BASE_PADDING_LEFT };
 
 export default (props) => {
-  const { navigationState } = props;
-
-  const routeValid = isRouteValid(props);
   const paddingComponentStyle = props.isLeft ? PADDING_LEFT_STYLE : PADDING_RIGHT_STYLE;
+  const icon = getIconJsx(props.icon);
 
-  let ret;
-
-  if (routeValid) {
-    const icon = getIconJsx(navigationState.leftComponent.icon);
-    ret = (
-      <View
-        style={[styles.wrapper, paddingComponentStyle]}
+  return (
+    <View
+      style={[styles.wrapper, paddingComponentStyle]}
+    >
+      <TouchableOpacity
+        style={styles.touchableOpacityWrapper}
+        onPress={() => onComponentPress(props)}
       >
-        <TouchableOpacity
-          style={styles.touchableOpacityWrapper}
-          onPress={() => onComponentPress(props)}
-        >
-          {icon}
-        </TouchableOpacity>
-      </View>
-    );
-  } else {
-    ret = (
-      <View />
-    );
-  }
-
-  return ret;
+        {icon}
+      </TouchableOpacity>
+    </View>
+  );
 };

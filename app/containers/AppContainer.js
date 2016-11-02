@@ -60,25 +60,55 @@ const renderTitle = (props) => {
 };
 
 const LEFT_COMPONENT = 'LEFT_COMPONENT';
-const SCREEN_NAME = 'ActivityContainer';
+const CHEVRON_LEFT = 'chevron-left';
+
+const getScreenName = (props) => {
+  const { navigationState } = props;
+
+  return navigationState.routes[navigationState.index].key;
+};
 
 const renderComponent = (mode, props) => {
-  const callbacks = [
-    props.toggleVolume,
-    props.toggleIcon,
-  ];
+  const { navigationState } = props;
+
+  // Is there a screen stacked?
+  const isStacked = navigationState.index > 0;
+
+  let icon;
+  let callback;
+
+  if (isStacked) {
+    icon = CHEVRON_LEFT;
+    callback = () => props.navigateBack();
+  } else {
+    const screenName = getScreenName(props);
+
+    if (screenName === 'ActivityContainer') {
+      icon = navigationState.leftComponent.icon;
+      callback = () => {
+        props.toggleVolume();
+        props.toggleIcon();
+      };
+    }
+  }
+
+  if (typeof icon !== 'undefined') {
+    return (
+      <NavigationHeaderComponent
+        {...props}
+        isLeft={mode === LEFT_COMPONENT}
+        callback={callback}
+        icon={icon}
+      />
+    );
+  }
 
   return (
-    <NavigationHeaderComponent
-      {...props}
-      isLeft={mode === LEFT_COMPONENT}
-      screenName={SCREEN_NAME}
-      callbacks={callbacks}
-    />
+    <View />
   );
 };
 
-const renderLeftComponent = (props) => renderComponent(LEFT_COMPONENT, props);
+const renderLeftComponent = props => renderComponent(LEFT_COMPONENT, props);
 
 const AppContainer = (props) => {
   const { navigationState } = props;
