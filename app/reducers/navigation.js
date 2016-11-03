@@ -46,27 +46,43 @@ export const tabs = createReducer({ key: 'home', index: 0, routes: allTabs }, {
 const ICON_VOLUME_UP = 'volume-up';
 const ICON_VOLUME_OFF = 'volume-off';
 
+const ApplicationTabRoute = {
+  key: 'ApplicationTabs',
+  title: NOT_SET,
+};
+
+const initialRoutes = [ApplicationTabRoute];
+
 const allPages = [
-  {
-    key: 'ApplicationTabs',
-    index: 0,
-    title: NOT_SET,
-  },
+  ApplicationTabRoute,
   {
     key: 'PreviewContainer',
-    index: 1,
     title: 'Preview',
   },
   {
     key: 'ActivityContainer',
-    index: 2,
     title: 'Activity',
     leftComponent: { icon: ICON_VOLUME_UP },
   },
   {
     key: 'CompleteContainer',
-    index: 3,
     title: 'Complete',
+  },
+  {
+    key: 'CreditContainer',
+    title: 'Credits',
+  },
+  {
+    key: 'MedicalInformationContainer',
+    title: 'Medical Information',
+  },
+  {
+    key: 'SoundContainer',
+    title: 'Sounds',
+  },
+  {
+    key: 'NotificationContainer',
+    title: 'Notifications',
   },
 ];
 
@@ -74,7 +90,17 @@ const getIndexByKey = key => (
   allPages.reduce((cur, val, index) => (val.key === key && cur === -1 ? index : cur), -1)
 );
 
-export const navigationState = createReducer({ index: 0, routes: allPages }, {
+export const navigationState = createReducer({ index: 0, routes: initialRoutes }, {
+  [types.NAVIGATION_JUMP_TO](state, action) {
+    return NavigationStateUtils.jumpTo(state, action.payload);
+  },
+  [types.NAVIGATION_PUSH](state, action) {
+    const indexByKey = getIndexByKey(action.payload);
+    return NavigationStateUtils.push(state, allPages[indexByKey]);
+  },
+  [types.NAVIGATION_POP](state, action) {
+    return NavigationStateUtils.pop(state);
+  },
   [types.NAVIGATION_FORWARD](state, action) {
     return NavigationStateUtils.forward(state);
   },
@@ -83,7 +109,7 @@ export const navigationState = createReducer({ index: 0, routes: allPages }, {
   },
   [types.NAVIGATION_RESET](state, action) {
     const indexByKey = getIndexByKey(action.payload);
-    const routes = swap(allPages, 0, indexByKey);
+    const routes = [allPages[indexByKey]];
 
     return Object.assign(
       {},

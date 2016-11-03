@@ -17,7 +17,7 @@ const expertLevel = require('../../theme/images/program/Expert.png');
 
 const pressRow = (rowData, props) => {
   props.setPreviewExercise(rowData.name);
-  props.navigate({ key: 'PreviewContainer' });
+  props.navigatePush('PreviewContainer');
 };
 
 const getImageLevelSource = (level) => {

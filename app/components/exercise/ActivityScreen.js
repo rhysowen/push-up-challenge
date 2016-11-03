@@ -215,6 +215,8 @@ export default class ActivityScreen extends Component {
     cleanUpTimers(this.props);
 
     Proximity.removeListener(this.props.setProximity);
+
+    this.props.navigatePop();
   }
 
   render() {

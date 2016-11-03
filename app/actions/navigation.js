@@ -17,6 +17,24 @@ export function setTab(tabIndex) {
   };
 }
 
+export function navigateJumpTo(key) {
+  return {
+    type: types.NAVIGATION_JUMP_TO,
+    payload: key,
+  };
+}
+
+export function navigatePop() {
+  return { type: types.NAVIGATION_POP };
+}
+
+export function navigatePush(key) {
+  return {
+    type: types.NAVIGATION_PUSH,
+    payload: key,
+  };
+}
+
 function navigateForward(state) {
   return {
     type: types.NAVIGATION_FORWARD,

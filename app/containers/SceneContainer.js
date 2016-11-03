@@ -11,6 +11,10 @@ import ApplicationTabs from './ApplicationTabs';
 import PreviewContainer from './exercise/PreviewContainer';
 import ActivityContainer from './exercise/ActivityContainer';
 import CompleteContainer from './exercise/CompleteContainer';
+import CreditContainer from './more/CreditContainer';
+import MedicalInformationContainer from './more/MedicalInformationContainer';
+import NotificationContainer from './more/NotificationContainer';
+import SoundContainer from './more/SoundContainer';
 
 const {
   Card: NavigationCard,
@@ -51,6 +55,18 @@ const SceneContainer = (props) => {
       break;
     case 'CompleteContainer':
       Scene = CompleteContainer;
+      break;
+    case 'CreditContainer':
+      Scene = CreditContainer;
+      break;
+    case 'MedicalInformationContainer':
+      Scene = MedicalInformationContainer;
+      break;
+    case 'NotificationContainer':
+      Scene = NotificationContainer;
+      break;
+    case 'SoundContainer':
+      Scene = SoundContainer;
       break;
     default:
       Scene = View;

@@ -17,15 +17,10 @@ import ActionCreators from '../actions';
 import RoutineContainer from './RoutineContainer';
 import ProgramContainer from './ProgramContainer';
 import StatisticContainer from './StatisticContainer';
-import MoreContainer from './MoreContainer';
-
-// Components
-import AdvertBanner from '../components/shared/AdvertBanner';
+import MoreContainer from './more/MoreContainer';
 
 // Styles
 import { TAB_COLOR } from '../theme/style';
-
-import { SMART_BANNER_HEIGHT } from '../lib/ads';
 
 const propTypes = {
   setTab: PropTypes.func,

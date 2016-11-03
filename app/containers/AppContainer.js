@@ -79,7 +79,7 @@ const renderComponent = (mode, props) => {
 
   if (isStacked) {
     icon = CHEVRON_LEFT;
-    callback = () => props.navigateBack();
+    callback = () => props.navigatePop();
   } else {
     const screenName = getScreenName(props);
 
@@ -129,14 +129,14 @@ const AppContainer = (props) => {
           <View style={styles.wrapper}>
             <NavigationCard
               {...renderProps}
-              onNavigateBack={() => props.navigateBack()}
+              onNavigateBack={() => props.navigatePop()}
               key={renderProps.scene.route.key}
               renderScene={() => (<SceneContainer {...renderProps} {...props} />)}
               style={styles.cardWrapper}
             />
             <NavigationHeader
               {...renderProps}
-              onNavigateBack={() => props.navigateBack()}
+              onNavigateBack={() => props.navigatePop()}
               style={styles.navHeader}
               renderLeftComponent={() => renderLeftComponent(props)}
               renderTitleComponent={() => (

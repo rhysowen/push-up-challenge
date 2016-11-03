@@ -1,14 +1,15 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ActionCreators from '../actions';
+import ActionCreators from '../../actions';
 
-import MoreScreen from '../components/more/MoreScreen';
+import SoundScreen from '../../components/more/SoundScreen';
 
 function mapStateToProps(state) {
   return {
+    sound: state.more.sound,
   };
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoreScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(SoundScreen);
