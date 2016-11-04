@@ -58,62 +58,57 @@ const getExerciseCompleteText = (props) => {
   }
 };
 
-export class CompleteScreen extends Component {
+const CompleteScreen = (props) => {
+  displayInterstitial();
 
-  componentDidMount() {
-    displayInterstitial();
-  }
+  const { complete } = props;
 
-  render() {
-    const { complete } = this.props;
+  const timeElapsed = getTimeElapsed(props);
+  const exerciseCompleteText = getExerciseCompleteText(props);
 
-    const timeElapsed = getTimeElapsed(this.props);
-    const exerciseCompleteText = getExerciseCompleteText(this.props);
-
-    return (
-      <BaseScreen
-        style={styles.wrapper}
+  return (
+    <BaseScreen
+      style={styles.wrapper}
+    >
+      <View
+        style={{flex: 1, alignItems: 'center'}}
       >
-        <View
-          style={{flex: 1, alignItems: 'center'}}
+        <Text
+          style={styles.exerciseCompleteText}
         >
-          <Text
-            style={styles.exerciseCompleteText}
-          >
-            {exerciseCompleteText}
-          </Text>
-        </View>
-        <View
-          style={{flex: 2, justifyContent: 'space-between'}}
-        >
-          <Info
-            title="Total Reps"
-            value={complete.repsCompleted}
-          />
-          <Info
-            title="Calories"
-            value={complete.calories}
-          />
-          <Info
-            title="Time Elapsed"
-            value={timeElapsed}
-          />
-        </View>
-        <View
-          style={{flex: 2, justifyContent: 'center'}}
-        >
-          <DefaultButton
-            name="Back to dashboard"
-            buttonColor={COLOR_ORANGE}
-            textColor="white"
-            onPress={() => onDashboardPress(this.props)}
-          />
-        </View>
+          {exerciseCompleteText}
+        </Text>
+      </View>
+      <View
+        style={{flex: 2, justifyContent: 'space-between'}}
+      >
+        <Info
+          title="Total Reps"
+          value={complete.repsCompleted}
+        />
+        <Info
+          title="Calories"
+          value={complete.calories}
+        />
+        <Info
+          title="Time Elapsed"
+          value={timeElapsed}
+        />
+      </View>
+      <View
+        style={{flex: 2, justifyContent: 'center'}}
+      >
+        <DefaultButton
+          name="Back to dashboard"
+          buttonColor={COLOR_ORANGE}
+          textColor="white"
+          onPress={() => onDashboardPress(props)}
+        />
+      </View>
 
-      </BaseScreen>
-    );
-  }
-}
+    </BaseScreen>
+  );
+};
 
 CompleteScreen.propTypes = {
   // programs: PropTypes.object,
