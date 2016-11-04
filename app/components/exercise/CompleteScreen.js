@@ -62,22 +62,6 @@ export class CompleteScreen extends Component {
 
   componentDidMount() {
     displayInterstitial();
-
-    const { program } = this.props;
-
-    this.props.setCompleteProgramState(
-      program.day,
-      program.repsCompleted,
-      program.status
-    );
-
-    this.props.setCompleteProgramStateAsync(
-      program.day,
-      program.repsCompleted,
-      program.status
-    );
-
-    this.props.removeExerciseStateAsync();
   }
 
   render() {

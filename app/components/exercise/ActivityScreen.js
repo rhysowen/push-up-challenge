@@ -29,7 +29,6 @@ import {
   EXERCISE_COMPLETE_SOUND,
   BEEP_SOUND,
   ENABLE_SOUND,
-  DISABLE_SOUND,
 } from '../../lib/constants';
 import navigateReset from '../../lib/navigator';
 
@@ -108,10 +107,7 @@ const getActiveStateTitle = (exercise) => {
 };
 
 const saveExerciseSaveClose = (props) => {
-  props.setProgramSaveClose(props.exercise.repsCompleted);
-  props.setProgramSaveCloseAsync(props.exercise.repsCompleted);
-
-  props.cleanExercise();
+  props.setProgramSaveCloseAsync(props.exercise.sessionRepsCompleted);
 
   props.setExerciseSaveCloseAsync(
     props.exercise.timeElapsed,
@@ -120,6 +116,8 @@ const saveExerciseSaveClose = (props) => {
     props.exercise.set,
     props.exercise.day,
   );
+
+  props.cleanExercise();
 
   navigateReset(props);
 };
@@ -144,23 +142,13 @@ const getActiveSoundObj = (props) => {
 };
 
 const saveStatisticsAsync = (props) => {
-  const {
-    exercise,
-    statistics,
-  } = props;
+  const { exercise } = props;
 
-  props.setStatistics(
+  props.setStatisticsAsync(
     exercise.repsCompleted,
     10, // Record
     exercise.calories,
     exercise.timeElapsed
-  );
-
-  props.setStatisticsAsync(
-    statistics.total,
-    statistics.record,
-    statistics.calories,
-    statistics.timeElapsed
   );
 };
 
@@ -192,6 +180,26 @@ const initSound = (props) => {
   }
 };
 
+const cleanUpState = (props) => {
+  const { exercise } = props;
+
+  // Save statistics
+  saveStatisticsAsync(props);
+
+  // Save program
+  debugger;
+  props.setCompleteProgramStateAsync(exercise.sessionRepsCompleted);
+
+  // Set complete props
+  props.setComplete(exercise.repsCompleted, exercise.calories, exercise.timeElapsed);
+
+  // Remove exercise from storage
+  props.removeExerciseStateAsync();
+
+  // Reset navigiation
+  props.navigateReset('CompleteContainer');
+};
+
 export default class ActivityScreen extends Component {
 
   componentDidMount() {
@@ -204,13 +212,7 @@ export default class ActivityScreen extends Component {
     const { exercise } = this.props;
 
     if (exercise.mode === EXERCISE_COMPLETE) {
-      saveStatisticsAsync(this.props);
-
-      this.props.programDayComplete(exercise.repsCompleted);
-
-      this.props.setComplete(exercise.repsCompleted, exercise.calories, exercise.timeElapsed);
-
-      this.props.navigateReset('CompleteContainer');
+      cleanUpState(this.props);
     }
   }
 

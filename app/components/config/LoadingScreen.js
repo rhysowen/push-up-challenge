@@ -39,6 +39,8 @@ export default class LoadingScreen extends Component {
 
   componentWillMount() {
     fetchAsync(this.props);
+
+    //this.props.removeSelectedProgramAsync();
   }
 
   componentDidUpdate() {

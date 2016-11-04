@@ -32,6 +32,7 @@ const exerciseInitialState = {
   timeElapsedIntervalSet: false,
   sound: PERFORM_PUSH_UP_SOUND,
   soundMode: ENABLE_SOUND,
+  sessionRepsCompleted: 0,
   repsCompleted: 0,
   timeElapsed: 0,
   calories: 0,
@@ -57,6 +58,7 @@ const getDecrementRepState = (state) => {
     set,
     mode,
     sound,
+    sessionRepsCompleted,
     repsCompleted,
     calories,
   } = state;
@@ -65,11 +67,13 @@ const getDecrementRepState = (state) => {
   let setReturn = set;
   let modeReturn = mode;
   let soundReturn = sound;
+  let sessionRepsCompletedReturn = sessionRepsCompleted;
   let repsCompletedReturn = repsCompleted;
   let caloriesReturn = calories;
 
   if (rep > 0) {
     repsCompletedReturn = repsCompletedReturn += 1;
+    sessionRepsCompletedReturn = sessionRepsCompletedReturn += 1;
   }
 
   if (rep > 1) {
@@ -100,6 +104,7 @@ const getDecrementRepState = (state) => {
     set: setReturn,
     mode: modeReturn,
     sound: soundReturn,
+    sessionRepsCompleted: sessionRepsCompletedReturn,
     repsCompleted: repsCompletedReturn,
     calories: caloriesReturn,
   };
@@ -328,6 +333,7 @@ export default createReducer(exerciseInitialState, {
       {
         mode: EXERCISE_ACTIVE,
         sound: PERFORM_PUSH_UP_SOUND,
+        sessionRepsCompleted: 0,
       }
     );
   },

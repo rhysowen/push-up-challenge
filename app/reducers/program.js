@@ -15,11 +15,11 @@ const programElements = Immutable.List([
     description: 'Under 5 pushups',
     level: BEGINNER_LEVEL,
     days: [
-      { sets: [2, 3, 2, 2, 3] },
-      { sets: [3, 4, 3, 3, 2] },
-      { sets: [4, 3, 3, 4, 2] },
-      { sets: [5, 4, 4, 5, 3] },
-      { sets: [5, 5, 4, 5, 4] },
+      { sets: [1, 1, 1, 1, 1] },
+      { sets: [1, 1, 1, 1, 1] },
+      { sets: [1, 1, 1, 1, 1] },
+      { sets: [1, 1, 1, 1, 1] },
+      { sets: [1, 1, 1, 1, 1] },
     ],
   },
   { name: 'Beginner Level 2',
@@ -206,13 +206,12 @@ export const program = createReducer(programInitialState, {
     const NEXT_DAY_INCREMENT = 1;
     const NEXT_DAY = state.day + NEXT_DAY_INCREMENT;
     const IS_PROGRAM_COMPLETE = NEXT_DAY > state.exercise.days.length;
-    const currentTotalReps = state.day === 1 ? 0 : state.repsCompleted;
 
     return Object.assign(
       {},
       state,
       {
-        repsCompleted: action.payload + currentTotalReps,
+        repsCompleted: action.payload + state.repsCompleted,
         day: IS_PROGRAM_COMPLETE ? state.day : NEXT_DAY,
         status: IS_PROGRAM_COMPLETE ? PROGRAM_COMPLETE : PROGRAM_ACTIVE,
       },
@@ -255,7 +254,7 @@ export const program = createReducer(programInitialState, {
       state,
       {
         isViewRender: true,
-        repsCompleted: action.payload,
+        repsCompleted: action.payload + state.repsCompleted,
       }
     );
   },

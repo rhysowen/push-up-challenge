@@ -33,7 +33,7 @@ export function setPreviewExercise(name) {
   };
 }
 
-export function setProgramSaveClose(repsCompleted) {
+function setProgramSaveClose(repsCompleted) {
   return {
     type: types.PROGRAM_SAVE_CLOSE,
     payload: repsCompleted,
@@ -41,12 +41,30 @@ export function setProgramSaveClose(repsCompleted) {
 }
 
 export function setProgramSaveCloseAsync(repsCompleted) {
-  const programState = { repsCompleted };
+  return (dispatch, getState) => {
+    dispatch(setProgramSaveClose(repsCompleted));
 
-  return saveProgramStateAsync(programState, MERGE_KEY);
+    const state = getState();
+    const program = state.program;
+    const programState = { repsCompleted: program.repsCompleted };
+    dispatch(saveProgramStateAsync(programState, MERGE_KEY));
+  };
 }
 
-export function setCompleteProgramState(day, repsCompleted, status) {
+function setProgramDayComplete(repsCompleted) {
+  return {
+    type: types.PROGRAM_DAY_COMPLETE,
+    payload: repsCompleted,
+  };
+}
+
+function setCompleteProgramState(programState) {
+  const {
+    day,
+    repsCompleted,
+    status,
+  } = programState;
+
   return {
     type: types.PROGRAM_SET_COMPLETE_PROGRAM,
     payload: {
@@ -57,20 +75,27 @@ export function setCompleteProgramState(day, repsCompleted, status) {
   };
 }
 
-export function setCompleteProgramStateAsync(day, repsCompleted, status) {
-  const programState = {
-    day,
-    repsCompleted,
-    status,
-  };
+export function setCompleteProgramStateAsync(repsCompleted) {
+  return (dispatch, getState) => {
+    dispatch(setProgramDayComplete(repsCompleted));
 
-  return saveProgramStateAsync(programState, MERGE_KEY);
-}
+    const programDayCompleteState = getState().program;
+    const programDayCompleteStateRet = {
+      day: programDayCompleteState.day,
+      repsCompleted: programDayCompleteState.repsCompleted,
+      status: programDayCompleteState.status,
+    };
 
-export function programDayComplete(repsCompleted) {
-  return {
-    type: types.PROGRAM_DAY_COMPLETE,
-    payload: repsCompleted,
+    dispatch(setCompleteProgramState(programDayCompleteStateRet));
+
+    const competeProgramState = getState().program;
+    const competeProgramStateReturn = {
+      day: competeProgramState.day,
+      repsCompleted: competeProgramState.repsCompleted,
+      status: competeProgramState.status,
+    };
+
+    dispatch(saveProgramStateAsync(competeProgramStateReturn, MERGE_KEY));
   };
 }
 

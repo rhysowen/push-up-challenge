@@ -17,23 +17,39 @@ export function fetchStatisticsAsync() {
   return storageAsync(storage.STATISTICS, actionTypes, GET_KEY);
 }
 
-export function setStatisticsAsync(total, record, calories, timeElapsed) {
-  const actionTypes = [
-    types.STATISTICS_SAVE_ATTEMPT,
-    types.STATISTICS_SAVE_SUCCESS,
-    types.STATISTICS_SAVE_FAILURE,
-  ];
-
-  const data = {
+const setStatistics = (total, record, calories, timeElapsed) => ({
+  type: types.STATISTICS_SET,
+  payload: {
     total,
     record,
     calories,
     timeElapsed,
+  },
+});
+
+export function setStatisticsAsync(total, record, calories, timeElapsed) {
+  return (dispatch, getState) => {
+    dispatch(setStatistics(total, record, calories, timeElapsed));
+
+    const actionTypes = [
+      types.STATISTICS_SAVE_ATTEMPT,
+      types.STATISTICS_SAVE_SUCCESS,
+      types.STATISTICS_SAVE_FAILURE,
+    ];
+
+    const state = getState();
+
+    const data = {
+      total: state.total,
+      record: state.record,
+      calories: state.calories,
+      timeElapsed: state.timeElapsed,
+    };
+
+    const dataJson = JSON.stringify(data);
+
+    dispatch(storageAsync(storage.STATISTICS, actionTypes, SET_KEY, dataJson));
   };
-
-  const dataJson = JSON.stringify(data);
-
-  return storageAsync(storage.STATISTICS, actionTypes, SET_KEY, dataJson);
 }
 
 export function removeStatisticsAsync() {
@@ -45,13 +61,3 @@ export function removeStatisticsAsync() {
 
   return storageAsync(storage.STATISTICS, actionTypes, REMOVE_KEY);
 }
-
-export const setStatistics = (total, record, calories, timeElapsed) => ({
-  type: types.STATISTICS_SET,
-  payload: {
-    total,
-    record,
-    calories,
-    timeElapsed,
-  },
-});
