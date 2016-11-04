@@ -108,9 +108,12 @@ const getActiveStateTitle = (exercise) => {
 };
 
 const saveExerciseSaveClose = (props) => {
+  props.setProgramSaveClose(props.exercise.repsCompleted);
   props.setProgramSaveCloseAsync(props.exercise.repsCompleted);
 
-  props.setActivitySaveCloseAsync(
+  props.cleanExercise();
+
+  props.setExerciseSaveCloseAsync(
     props.exercise.timeElapsed,
     props.exercise.rep,
     props.exercise.repsCompleted,
@@ -193,6 +196,7 @@ export default class ActivityScreen extends Component {
 
   componentDidMount() {
     this.props.setTimeElapsedIntervalId(setInterval(this.props.timerElapsedTimeIncrease, 1000));
+
     Proximity.addListener(this.props.setProximity);
   }
 
@@ -215,8 +219,6 @@ export default class ActivityScreen extends Component {
     cleanUpTimers(this.props);
 
     Proximity.removeListener(this.props.setProximity);
-
-    this.props.navigatePop();
   }
 
   render() {

@@ -46,14 +46,19 @@ export const tabs = createReducer({ key: 'home', index: 0, routes: allTabs }, {
 const ICON_VOLUME_UP = 'volume-up';
 const ICON_VOLUME_OFF = 'volume-off';
 
+const LoadingContainerRoute = {
+  key: 'LoadingContainer',
+  title: '',
+};
 const ApplicationTabRoute = {
   key: 'ApplicationTabs',
   title: NOT_SET,
 };
 
-const initialRoutes = [ApplicationTabRoute];
+const initialRoutes = [LoadingContainerRoute, ApplicationTabRoute];
 
 const allPages = [
+  LoadingContainerRoute,
   ApplicationTabRoute,
   {
     key: 'PreviewContainer',

@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 // Containers
+import LoadingContainer from './config/LoadingContainer';
 import ApplicationTabs from './ApplicationTabs';
 import PreviewContainer from './exercise/PreviewContainer';
 import ActivityContainer from './exercise/ActivityContainer';
@@ -44,6 +45,9 @@ const SceneContainer = (props) => {
   let Scene;
 
   switch (props.scene.route.key) {
+    case 'LoadingContainer':
+      Scene = LoadingContainer;
+      break;
     case 'ApplicationTabs':
       Scene = ApplicationTabs;
       break;

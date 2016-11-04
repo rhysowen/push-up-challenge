@@ -38,7 +38,11 @@ export function setNextDayAsync(day, repsCompleted) {
   return saveExerciseStateAsync(exerciseState, MERGE_KEY);
 }
 
-export function setActivitySaveCloseAsync(timeElapsed, rep, repsCompleted, set, day) {
+export function cleanExercise() {
+  return { type: types.EXERCISE_CLEAN };
+}
+
+export function setExerciseSaveCloseAsync(timeElapsed, rep, repsCompleted, set, day) {
   const exerciseState = {
     timeElapsed,
     rep,

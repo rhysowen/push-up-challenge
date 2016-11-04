@@ -37,11 +37,6 @@ const styles = StyleSheet.create({
 
 const NO_PROGRAM_SELECTED = 'No program selected';
 
-const fetchAsync = (props) => {
-  props.fetchSelectedProgramAsync();
-  props.fetchExerciseStateAsync();
-};
-
 const getMapSets = (props) => {
   const {
     program,
@@ -99,10 +94,6 @@ const getProgress = (props) => {
 };
 
 export default class RoutineScreen extends Component {
-
-  componentWillMount() {
-    fetchAsync(this.props);
-  }
 
   renderButtons() {
     const { program } = this.props;

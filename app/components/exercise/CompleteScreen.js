@@ -65,6 +65,12 @@ export class CompleteScreen extends Component {
 
     const { program } = this.props;
 
+    this.props.setCompleteProgramState(
+      program.day,
+      program.repsCompleted,
+      program.status
+    );
+
     this.props.setCompleteProgramStateAsync(
       program.day,
       program.repsCompleted,

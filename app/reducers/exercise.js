@@ -49,7 +49,7 @@ const getCalories = (state) => {
 
 const getDecrementRepState = (state) => {
   const nextRep = state.sets[state.set + 1];
-  const isLastRep = state.rep - 1 === 0;
+  const isLastRep = state.rep - 1 <= 0;
   const isExerciseComplete = isLastRep && state.set + 1 === state.sets.length;
 
   const {
@@ -319,6 +319,16 @@ export default createReducer(exerciseInitialState, {
       {},
       state,
       ret
+    );
+  },
+  [types.EXERCISE_CLEAN](state, action) {
+    return Object.assign(
+      {},
+      state,
+      {
+        mode: EXERCISE_ACTIVE,
+        sound: PERFORM_PUSH_UP_SOUND,
+      }
     );
   },
 });

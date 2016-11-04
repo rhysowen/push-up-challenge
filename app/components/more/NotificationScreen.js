@@ -8,6 +8,7 @@ import {
 import BaseScreen from '../../theme/BaseScreen';
 import Option from './Option';
 import { BASE_FONT_FAMILY_IOS } from '../../theme/style';
+import { NOTIFICATION_ENABLED } from '../../lib/constants';
 
 const styles = StyleSheet.create({
   timeItem: {
@@ -16,10 +17,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
+export default (props) => {
+  const { notification } = props;
+
+  const NOTIFICATION_VALUE = notification.mode === NOTIFICATION_ENABLED;
   const NOTIFICATION = 'Notification';
   const NOTIFICATION_ITEM = (
-    <Switch />
+    <Switch
+      onValueChange={() => props.removeMoreAsync()}
+      value={NOTIFICATION_VALUE}
+    />
   );
 
   const TIME = 'Time';

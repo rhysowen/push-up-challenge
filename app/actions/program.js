@@ -33,10 +33,28 @@ export function setPreviewExercise(name) {
   };
 }
 
+export function setProgramSaveClose(repsCompleted) {
+  return {
+    type: types.PROGRAM_SAVE_CLOSE,
+    payload: repsCompleted,
+  };
+}
+
 export function setProgramSaveCloseAsync(repsCompleted) {
   const programState = { repsCompleted };
 
   return saveProgramStateAsync(programState, MERGE_KEY);
+}
+
+export function setCompleteProgramState(day, repsCompleted, status) {
+  return {
+    type: types.PROGRAM_SET_COMPLETE_PROGRAM,
+    payload: {
+      day,
+      repsCompleted,
+      status,
+    },
+  };
 }
 
 export function setCompleteProgramStateAsync(day, repsCompleted, status) {

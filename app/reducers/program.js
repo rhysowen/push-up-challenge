@@ -169,7 +169,6 @@ export const program = createReducer(programInitialState, {
           day: programObj.day,
           repsCompleted: programObj.repsCompleted,
           status: programObj.status,
-          isFetched: true,
           isProgramFound: true,
         },
       );
@@ -180,7 +179,10 @@ export const program = createReducer(programInitialState, {
     return Object.assign(
       {},
       ret,
-      { isViewRender: true }
+      {
+        isViewRender: true,
+        isFetched: true,
+      }
     );
   },
   [types.PROGRAM_GET_FAILURE](state, action) {
@@ -204,12 +206,13 @@ export const program = createReducer(programInitialState, {
     const NEXT_DAY_INCREMENT = 1;
     const NEXT_DAY = state.day + NEXT_DAY_INCREMENT;
     const IS_PROGRAM_COMPLETE = NEXT_DAY > state.exercise.days.length;
+    const currentTotalReps = state.day === 1 ? 0 : state.repsCompleted;
 
     return Object.assign(
       {},
       state,
       {
-        repsCompleted: state.repsCompleted + action.payload,
+        repsCompleted: action.payload + currentTotalReps,
         day: IS_PROGRAM_COMPLETE ? state.day : NEXT_DAY,
         status: IS_PROGRAM_COMPLETE ? PROGRAM_COMPLETE : PROGRAM_ACTIVE,
       },
@@ -232,6 +235,28 @@ export const program = createReducer(programInitialState, {
     return Object.assign(
       {},
       programInitialState,
+    );
+  },
+  [types.PROGRAM_SET_COMPLETE_PROGRAM](state, action) {
+    return Object.assign(
+      {},
+      state,
+      {
+        isViewRender: true,
+        day: action.payload.day,
+        repsCompleted: action.payload.repsCompleted,
+        status: action.payload.status,
+      }
+    );
+  },
+  [types.PROGRAM_SAVE_CLOSE](state, action) {
+    return Object.assign(
+      {},
+      state,
+      {
+        isViewRender: true,
+        repsCompleted: action.payload,
+      }
     );
   },
 });
