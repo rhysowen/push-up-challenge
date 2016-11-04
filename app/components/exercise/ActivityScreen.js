@@ -187,7 +187,6 @@ const cleanUpState = (props) => {
   saveStatisticsAsync(props);
 
   // Save program
-  debugger;
   props.setCompleteProgramStateAsync(exercise.sessionRepsCompleted);
 
   // Set complete props
