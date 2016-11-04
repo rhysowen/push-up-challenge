@@ -1,11 +1,15 @@
 const numberToTimeElasped = (number) => {
-  let hours = Math.floor(number / 3600);
-  let minutes = Math.floor((number - (hours * 3600)) / 60);
-  let seconds = number - (hours * 3600) - (minutes * 60);
+  const secondsInAYear = 31536000;
+  const secondsInADay = 86400;
+  const secondsInAnHour = 3600;
+  const secondsInAMinute = 60;
 
-  hours = hours < 10 ? 0 : hours;
-  minutes = minutes < 10 ? 0 : minutes;
-  seconds = seconds < 10 ? 0 : seconds;
+  const hours = Math.floor((number % secondsInAYear) / secondsInAnHour);
+  const minutes = Math.floor(
+      (((number % secondsInAYear) % secondsInADay) % secondsInAnHour
+    ) / secondsInAMinute);
+  const seconds = (((number % secondsInAYear) % secondsInADay) % secondsInAnHour
+    ) % secondsInAMinute;
 
   return String.raw`${hours}h ${minutes}m ${seconds}s`;
 };
