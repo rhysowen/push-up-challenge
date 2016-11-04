@@ -33,28 +33,38 @@ export function setPreviewExercise(name) {
   };
 }
 
-function setProgramSaveClose(repsCompleted) {
+function setProgramSaveClose(repsCompleted, repsAdded) {
   return {
     type: types.PROGRAM_SAVE_CLOSE,
-    payload: repsCompleted,
+    payload:
+    {
+      repsCompleted,
+      repsAdded,
+    },
   };
 }
 
-export function setProgramSaveCloseAsync(repsCompleted) {
+export function setProgramSaveCloseAsync(repsCompleted, repsAdded) {
   return (dispatch, getState) => {
-    dispatch(setProgramSaveClose(repsCompleted));
+    dispatch(setProgramSaveClose(repsCompleted, repsAdded));
 
     const state = getState();
     const program = state.program;
-    const programState = { repsCompleted: program.repsCompleted };
+    const programState = {
+      repsCompleted: program.repsCompleted,
+      repsAdded: program.repsAdded,
+    };
     dispatch(saveProgramStateAsync(programState, MERGE_KEY));
   };
 }
 
-function setProgramDayComplete(repsCompleted) {
+function setProgramDayComplete(repsCompleted, repsAdded) {
   return {
     type: types.PROGRAM_DAY_COMPLETE,
-    payload: repsCompleted,
+    payload: {
+      repsCompleted,
+      repsAdded,
+    },
   };
 }
 
@@ -62,6 +72,7 @@ function setCompleteProgramState(programState) {
   const {
     day,
     repsCompleted,
+    repsAdded,
     status,
   } = programState;
 
@@ -70,19 +81,21 @@ function setCompleteProgramState(programState) {
     payload: {
       day,
       repsCompleted,
+      repsAdded,
       status,
     },
   };
 }
 
-export function setCompleteProgramStateAsync(repsCompleted) {
+export function setCompleteProgramStateAsync(repsCompleted, repsAdded) {
   return (dispatch, getState) => {
-    dispatch(setProgramDayComplete(repsCompleted));
+    dispatch(setProgramDayComplete(repsCompleted, repsAdded));
 
     const programDayCompleteState = getState().program;
     const programDayCompleteStateRet = {
       day: programDayCompleteState.day,
       repsCompleted: programDayCompleteState.repsCompleted,
+      repsAdded: programDayCompleteState.repsAdded,
       status: programDayCompleteState.status,
     };
 
@@ -92,6 +105,7 @@ export function setCompleteProgramStateAsync(repsCompleted) {
     const competeProgramStateReturn = {
       day: competeProgramState.day,
       repsCompleted: competeProgramState.repsCompleted,
+      repsAdded: programDayCompleteState.repsAdded,
       status: competeProgramState.status,
     };
 
@@ -102,12 +116,14 @@ export function setCompleteProgramStateAsync(repsCompleted) {
 export function setNewProgramStateAsync(name) {
   const day = 1;
   const repsCompleted = 0;
+  const repsAdded = 0;
   const status = PROGRAM_ACTIVE;
 
   const programState = {
     name,
     day,
     repsCompleted,
+    repsAdded,
     status,
   };
 

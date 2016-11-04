@@ -107,7 +107,10 @@ const getActiveStateTitle = (exercise) => {
 };
 
 const saveExerciseSaveClose = (props) => {
-  props.setProgramSaveCloseAsync(props.exercise.sessionRepsCompleted);
+  props.setProgramSaveCloseAsync(
+    props.exercise.sessionRepsCompleted,
+    props.exercise.repsAdded,
+  );
 
   props.setExerciseSaveCloseAsync(
     props.exercise.timeElapsed,
@@ -187,7 +190,7 @@ const cleanUpState = (props) => {
   saveStatisticsAsync(props);
 
   // Save program
-  props.setCompleteProgramStateAsync(exercise.sessionRepsCompleted);
+  props.setCompleteProgramStateAsync(exercise.sessionRepsCompleted, exercise.repsAdded);
 
   // Set complete props
   props.setComplete(exercise.repsCompleted, exercise.calories, exercise.timeElapsed);

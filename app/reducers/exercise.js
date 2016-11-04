@@ -34,6 +34,7 @@ const exerciseInitialState = {
   soundMode: ENABLE_SOUND,
   sessionRepsCompleted: 0,
   repsCompleted: 0,
+  repsAdded: 0,
   timeElapsed: 0,
   calories: 0,
 };
@@ -216,6 +217,7 @@ export default createReducer(exerciseInitialState, {
       {},
       state,
       {
+        repsAdded: state.repsAdded + 1,
         rep: state.rep + 1,
         sound: BEEP_SOUND,
       },
@@ -334,6 +336,7 @@ export default createReducer(exerciseInitialState, {
         mode: EXERCISE_ACTIVE,
         sound: PERFORM_PUSH_UP_SOUND,
         sessionRepsCompleted: 0,
+        repsAdded: 0,
       }
     );
   },

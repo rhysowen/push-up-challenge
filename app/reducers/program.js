@@ -141,6 +141,7 @@ const programInitialState = {
   exercise: {},
   day: 1,
   repsCompleted: 0,
+  repsAdded: 0,
   status: PROGRAM_ACTIVE,
 };
 
@@ -168,6 +169,7 @@ export const program = createReducer(programInitialState, {
           exercise,
           day: programObj.day,
           repsCompleted: programObj.repsCompleted,
+          repsAdded: programObj.repsAdded,
           status: programObj.status,
           isProgramFound: true,
         },
@@ -211,7 +213,8 @@ export const program = createReducer(programInitialState, {
       {},
       state,
       {
-        repsCompleted: action.payload + state.repsCompleted,
+        repsCompleted: action.payload.repsCompleted + state.repsCompleted,
+        repsAdded: action.payload.repsAdded + state.repsAdded,
         day: IS_PROGRAM_COMPLETE ? state.day : NEXT_DAY,
         status: IS_PROGRAM_COMPLETE ? PROGRAM_COMPLETE : PROGRAM_ACTIVE,
       },
@@ -244,6 +247,7 @@ export const program = createReducer(programInitialState, {
         isViewRender: true,
         day: action.payload.day,
         repsCompleted: action.payload.repsCompleted,
+        repsAdded: action.payload.repsAdded,
         status: action.payload.status,
       }
     );
@@ -254,7 +258,8 @@ export const program = createReducer(programInitialState, {
       state,
       {
         isViewRender: true,
-        repsCompleted: action.payload + state.repsCompleted,
+        repsCompleted: action.payload.repsCompleted + state.repsCompleted,
+        repsAdded: action.payload.repsAdded + state.repsAdded,
       }
     );
   },

@@ -53,11 +53,6 @@ const getMapSets = (props) => {
 };
 
 const continueTraining = (props) => {
-  const {
-    program,
-    exercise,
-  } = props;
-
   const mapSets = getMapSets(props);
   props.setSets(mapSets);
 
@@ -85,7 +80,7 @@ const getProgress = (props) => {
 
   const totalReps = program.exercise.days
     .reduce((prev, cur) => prev + cur.sets
-    .reduce((_prev, _cur) => _prev + _cur, 0), 0);
+    .reduce((_prev, _cur) => _prev + _cur, 0), program.repsAdded);
 
   const MAX_PERCENT = 100;
   const ret = Math.ceil((program.repsCompleted / totalReps) * MAX_PERCENT);
