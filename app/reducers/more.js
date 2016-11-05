@@ -4,6 +4,8 @@ import moreInitialState from '../lib/moreInitialState';
 import {
   NOTIFICATION_ENABLED,
   NOTIFICATION_DISABLED,
+  SOUND_ENABLED,
+  SOUND_DISABLED,
 } from '../lib/constants';
 
 const initialAsyncState = {
@@ -57,14 +59,14 @@ export default createReducer(initialState, {
   [types.MORE_SAVE_ATTEMPT](state, action) {
     return Object.assign(
       {},
-      initialState,
+      state,
       { isSaveAttempt: true }
     );
   },
   [types.MORE_SAVE_SUCCESS](state, action) {
     return Object.assign(
       {},
-      initialState,
+      state,
       {
         isMoreFound: true,
         isViewRender: true,
@@ -77,10 +79,34 @@ export default createReducer(initialState, {
       state,
       {
         notification: {
-          mode: state.notification.mode === NOTIFICATION_ENABLED ? NOTIFICATION_DISABLED : NOTIFICATION_ENABLED,
+          mode: state.notification.mode === NOTIFICATION_ENABLED
+            ? NOTIFICATION_DISABLED
+            : NOTIFICATION_ENABLED,
           date: state.notification.date,
         },
       },
+    );
+  },
+  [types.MORE_COACH_SOUND_TOGGLE](state, action) {
+    return Object.assign(
+      state,
+      {
+        sound: {
+          beepMode: state.sound.beepMode,
+          coachMode: state.sound.coachMode === SOUND_ENABLED ? SOUND_DISABLED : SOUND_ENABLED,
+        },
+      }
+    );
+  },
+  [types.MORE_BEEP_SOUND_TOGGLE](state, action) {
+    return Object.assign(
+      state,
+      {
+        sound: {
+          coachMode: state.sound.coachMode,
+          beepMode: state.sound.beepMode === SOUND_ENABLED ? SOUND_DISABLED : SOUND_ENABLED,
+        },
+      }
     );
   },
 });

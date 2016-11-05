@@ -53,24 +53,32 @@ export function removeMoreAsync() {
   return storageAsync(storage.MORE, actionTypes, REMOVE_KEY);
 }
 
+const dispatchMoreAsync = (dispatch, getState) => {
+  const state = getState().more;
+  dispatch(mergeMoreAsync(state));
+};
+
 
 export const toggleNotification = () => (
   (dispatch, getState) => {
     dispatch({ type: types.MORE_NOTIFICATION_TOGGLE });
 
-    const state = getState();
-    dispatch(mergeMoreAsync(state));
+    dispatchMoreAsync(dispatch, getState);
   }
 );
 
-export const toggleSound = () => (
-  { type: types.MORE_SOUND_TOGGLE }
-);
-
 export const toggleCoachSound = () => (
-  { type: types.MORE_COACH_SOUND_TOGGLE }
+  (dispatch, getState) => {
+    dispatch({ type: types.MORE_COACH_SOUND_TOGGLE });
+
+    dispatchMoreAsync(dispatch, getState);
+  }
 );
 
 export const toggleBeepSound = () => (
-  { type: types.MORE_BEEP_SOUND_TOGGLE }
+  (dispatch, getState) => {
+    dispatch({ type: types.MORE_BEEP_SOUND_TOGGLE });
+
+    dispatchMoreAsync(dispatch, getState);
+  }
 );

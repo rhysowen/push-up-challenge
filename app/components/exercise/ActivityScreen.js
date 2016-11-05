@@ -28,7 +28,7 @@ import {
   REST_SOUND,
   EXERCISE_COMPLETE_SOUND,
   BEEP_SOUND,
-  ENABLE_SOUND,
+  SOUND_ENABLED,
 } from '../../lib/constants';
 import navigateReset from '../../lib/navigator';
 
@@ -82,6 +82,28 @@ const exerciseComplete = loadSound('exercise-complete.mp3');
 const rest = loadSound('rest.mp3');
 const beep = loadSound('beep.mp3');
 
+// Sound categories
+const COACH_SOUND_CATEGORY = 'COACH_SOUND_CATEGORY';
+const BEEP_SOUND_CATEGORY = 'BEEP_SOUND_CATEGORY';
+
+// Sound objects
+const peformPushUpsSound = {
+  file: peformPushUps,
+  category: COACH_SOUND_CATEGORY,
+};
+const exerciseCompleteSound = {
+  file: exerciseComplete,
+  category: COACH_SOUND_CATEGORY,
+};
+const restSound = {
+  file: rest,
+  category: COACH_SOUND_CATEGORY,
+};
+const beepSound = {
+  file: beep,
+  category: BEEP_SOUND_CATEGORY,
+};
+
 // Todo: centralize such code?
 const programReps = (props) => {
   const { exercise } = props;
@@ -125,6 +147,24 @@ const saveExerciseSaveClose = (props) => {
   navigateReset(props);
 };
 
+
+
+const getSoundEnabled = (sounds, props) => {
+  const { sound } = props;
+
+  let coachFilter = [];
+  if (sound.coachMode === SOUND_ENABLED) {
+    coachFilter = sounds.filter(soundObj => soundObj.category === COACH_SOUND_CATEGORY);
+  }
+
+  let beepFilter = [];
+  if (sound.beepMode === SOUND_ENABLED) {
+    beepFilter = sounds.filter(soundObj => soundObj.category === BEEP_SOUND_CATEGORY);
+  }
+
+  return [...coachFilter, ...beepFilter];
+};
+
 const getActiveSoundObj = (props) => {
   const { exercise } = props;
 
@@ -132,13 +172,13 @@ const getActiveSoundObj = (props) => {
     case NOT_SET_SOUND:
       return null;
     case PERFORM_PUSH_UP_SOUND:
-      return peformPushUps;
+      return getSoundEnabled([peformPushUpsSound], props);
     case REST_SOUND:
-      return [beep, rest];
+      return getSoundEnabled([beepSound, restSound], props);
     case EXERCISE_COMPLETE_SOUND:
-      return [beep, exerciseComplete];
+      return getSoundEnabled([beepSound, exerciseCompleteSound], props);
     case BEEP_SOUND:
-      return beep;
+      return getSoundEnabled([beepSound], props);
     default:
       return null;
   }
@@ -167,18 +207,12 @@ const cleanUpTimers = (props) => {
 
 // Should probably re-think this as it's anti-Redux pattern?
 const initSound = (props) => {
-  const { exercise } = props;
+  const sounds = getActiveSoundObj(props);
+  const soundObjExist = sounds !== null && sounds instanceof Array;
 
-  if (exercise.soundMode === ENABLE_SOUND) {
-    const activeSoundObj = getActiveSoundObj(props);
-    const multipleSound = activeSoundObj instanceof Array;
-
-    if (multipleSound) {
-      for (let i = 0; i < activeSoundObj.length; i += 1) {
-        playSound(activeSoundObj[i]);
-      }
-    } else {
-      playSound(activeSoundObj);
+  if (soundObjExist) {
+    for (let i = 0; i < sounds.length; i += 1) {
+      playSound(sounds[i].file);
     }
   }
 };

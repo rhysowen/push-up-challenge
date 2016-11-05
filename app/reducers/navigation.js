@@ -67,7 +67,6 @@ const allPages = [
   {
     key: 'ActivityContainer',
     title: 'Activity',
-    leftComponent: { icon: ICON_VOLUME_UP },
   },
   {
     key: 'CompleteContainer',
@@ -124,18 +123,6 @@ export const navigationState = createReducer({ index: 0, routes: initialRoutes }
         index: 0,
         routes,
       }
-    );
-  },
-  [types.NAVIGATION_TOGGLE_ICON](state, action) {
-    return Object.assign(
-      {},
-      state,
-      { leftComponent: { icon:
-        state.leftComponent.icon ===
-          ICON_VOLUME_UP ?
-            ICON_VOLUME_OFF
-            : ICON_VOLUME_UP,
-        } }
     );
   },
 });

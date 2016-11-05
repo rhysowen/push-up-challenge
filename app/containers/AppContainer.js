@@ -80,16 +80,6 @@ const renderComponent = (mode, props) => {
   if (isStacked) {
     icon = CHEVRON_LEFT;
     callback = () => props.navigatePop();
-  } else {
-    const screenName = getScreenName(props);
-
-    if (screenName === 'ActivityContainer') {
-      icon = navigationState.leftComponent.icon;
-      callback = () => {
-        props.toggleVolume();
-        props.toggleIcon();
-      };
-    }
   }
 
   if (typeof icon !== 'undefined') {
@@ -148,7 +138,6 @@ const AppContainer = (props) => {
                   </Text>
                 </NavigationHeader.Title>
               )}
-              // When dealing with modals you may also want to override renderLeftComponent...
             />
           </View>
         )}

@@ -24,7 +24,7 @@ export default (props) => {
   const NOTIFICATION = 'Notification';
   const NOTIFICATION_ITEM = (
     <Switch
-      onValueChange={() => props.removeMoreAsync()}
+      onValueChange={() => props.toggleNotification()}
       value={NOTIFICATION_VALUE}
     />
   );

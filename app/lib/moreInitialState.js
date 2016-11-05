@@ -9,7 +9,6 @@ export default {
     date: new Date(),
   },
   sound: {
-    mode: SOUND_ENABLED,
     coachMode: SOUND_ENABLED,
     beepMode: SOUND_ENABLED,
   },

@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
   exercise: state.exercise,
   statistics: state.statistics,
   program: state.program,
+  sound: state.more.sound,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
