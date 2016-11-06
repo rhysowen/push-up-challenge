@@ -26,7 +26,7 @@ const purchaseProduct = (productIdentifier, props) => (
 export default (props) => {
   Alert.alert(
     'Upgrade to Pro',
-    'Unlock all programs & remove ads',
+    'Unlock all programs & remove advertisements',
     [
       {
         text: 'Cancel',
