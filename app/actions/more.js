@@ -82,3 +82,11 @@ export const toggleBeepSound = () => (
     dispatchMoreAsync(dispatch, getState);
   }
 );
+
+export const activateProMode = () => (
+  (dispatch, getState) => {
+    dispatch({ type: types.MORE_UTIL_ACTIVATE_PRO });
+
+    dispatchMoreAsync(dispatch, getState);
+  }
+);

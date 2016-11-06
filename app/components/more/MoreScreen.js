@@ -28,7 +28,7 @@ const onPress = (props, title, key) => {
   } else {
     switch (title) {
       case UPGRADE_TO_PRO:
-        upgrade();
+        upgrade(props);
 
         break;
       default:

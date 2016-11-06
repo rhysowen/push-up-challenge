@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     fontFamily: BASE_FONT_FAMILY_IOS,
   },
   value: {
-    fontSize: 23,
+    fontSize: 20,
     color: COLOR_ORANGE,
     fontFamily: BASE_FONT_FAMILY_IOS,
   },

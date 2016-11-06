@@ -1,22 +1,16 @@
 import createReducer from '../lib/createReducer';
 import * as types from '../actions/types';
-import moreInitialState from '../lib/moreInitialState';
+import {
+  moreInitialState,
+  initialAsyncState,
+} from '../lib/initialState';
 import {
   NOTIFICATION_ENABLED,
   NOTIFICATION_DISABLED,
   SOUND_ENABLED,
   SOUND_DISABLED,
+  PRO_ENABLED,
 } from '../lib/constants';
-
-const initialAsyncState = {
-  isFetching: false,
-  isFetched: false,
-  isError: false,
-  isMoreFound: false,
-  isViewRender: false,
-  isInitRequired: false,
-  isSaveAttempt: false,
-};
 
 const initialState = Object.assign(
   {},
@@ -42,7 +36,7 @@ export default createReducer(initialState, {
       ret = {
         notification: moreObj.notification,
         sound: moreObj.sound,
-        isMoreFound: true,
+        isObjFound: true,
         isViewRender: true,
       };
     } else {
@@ -68,7 +62,7 @@ export default createReducer(initialState, {
       {},
       state,
       {
-        isMoreFound: true,
+        isObjFound: true,
         isViewRender: true,
       }
     );
@@ -105,6 +99,16 @@ export default createReducer(initialState, {
         sound: {
           coachMode: state.sound.coachMode,
           beepMode: state.sound.beepMode === SOUND_ENABLED ? SOUND_DISABLED : SOUND_ENABLED,
+        },
+      }
+    );
+  },
+  [types.MORE_UTIL_ACTIVATE_PRO](state, action) {
+    return Object.assign(
+      state,
+      {
+        util: {
+          proMode: PRO_ENABLED,
         },
       }
     );
