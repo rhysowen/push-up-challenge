@@ -36,6 +36,7 @@ export default createReducer(initialState, {
       ret = {
         notification: moreObj.notification,
         sound: moreObj.sound,
+        util: moreObj.util,
         isObjFound: true,
         isViewRender: true,
       };

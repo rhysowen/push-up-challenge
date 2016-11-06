@@ -9,7 +9,10 @@ import {
   ICON_SIZE,
 } from '../../theme/style';
 import ListBaseScreen from '../../theme/ListBaseScreen';
-import upgrade from '../../lib/upgrade';
+import {
+  upgrade,
+  restorePurchases,
+} from '../../lib/util';
 
 const UPGRADE_TO_PRO = 'Upgrade to Pro';
 const RESTORE_PURCHASES = 'Restore Purchases';
@@ -22,6 +25,7 @@ const SHARE_APP = 'Share App';
 const RESET_APP = 'Reset App';
 
 const onPress = (props, title, key) => {
+  debugger;
   const isKeyValid = typeof key !== 'undefined';
   if (isKeyValid) {
     props.navigatePush(key);
@@ -29,6 +33,10 @@ const onPress = (props, title, key) => {
     switch (title) {
       case UPGRADE_TO_PRO:
         upgrade(props);
+
+        break;
+      case RESTORE_PURCHASES:
+        restorePurchases(props);
 
         break;
       default:

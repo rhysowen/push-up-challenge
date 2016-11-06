@@ -15,20 +15,24 @@ import ActionCreators from '../actions';
 import SceneContainer from './SceneContainer';
 
 import NavigationHeaderComponent from '../components/container/NavigationHeaderComponent';
+import AdvertBanner from '../components/shared/AdvertBanner';
 
 import {
   BASE_FONT_FAMILY_IOS,
+  BASE_BACKGROUND_COLOR,
   TAB_COLOR,
 } from '../theme/style';
-import { NOT_SET } from '../lib/constants';
+import {
+  NOT_SET,
+  PRO_ENABLED,
+} from '../lib/constants';
+import { SMART_BANNER_HEIGHT } from '../lib/ads';
 
 const {
   Card: NavigationCard,
   Transitioner: NavigationTransitioner,
   Header: NavigationHeader,
 } = NavigationExperimental;
-
-const { PagerStyleInterpolator: NavigationPagerStyleInterpolator } = NavigationCard;
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
@@ -37,11 +41,20 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: BASE_FONT_FAMILY_IOS,
   },
-  cardWrapper: {
-    backgroundColor: 'white',
-    marginTop: NavigationHeader.HEIGHT,
-  },
 });
+
+const getCardWrapperStyle = (proModeActive) => {
+  let marginTop = NavigationHeader.HEIGHT;
+
+  if (!proModeActive) {
+    marginTop += SMART_BANNER_HEIGHT;
+  }
+
+  return {
+    backgroundColor: BASE_BACKGROUND_COLOR,
+    marginTop,
+  };
+};
 
 const renderTitle = (props) => {
   const {
@@ -101,7 +114,13 @@ const renderComponent = (mode, props) => {
 const renderLeftComponent = props => renderComponent(LEFT_COMPONENT, props);
 
 const AppContainer = (props) => {
-  const { navigationState } = props;
+  const {
+    navigationState,
+    util,
+  } = props;
+
+  const isProEnabled = util.proMode === PRO_ENABLED;
+  const cardWrapper = getCardWrapperStyle(isProEnabled);
   const title = renderTitle(props);
 
   return (
@@ -122,7 +141,7 @@ const AppContainer = (props) => {
               onNavigateBack={() => props.navigatePop()}
               key={renderProps.scene.route.key}
               renderScene={() => (<SceneContainer {...renderProps} {...props} />)}
-              style={styles.cardWrapper}
+              style={cardWrapper}
             />
             <NavigationHeader
               {...renderProps}
@@ -139,6 +158,9 @@ const AppContainer = (props) => {
                 </NavigationHeader.Title>
               )}
             />
+            <AdvertBanner
+              hideBanner={isProEnabled}
+            />
           </View>
         )}
       />
@@ -149,6 +171,7 @@ const AppContainer = (props) => {
 const mapStateToProps = state => ({
   navigationState: state.navigationState,
   tabs: state.tabs,
+  util: state.more.util,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);

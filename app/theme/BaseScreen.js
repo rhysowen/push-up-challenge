@@ -19,33 +19,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const renderAdvertJsx = (props) => {
-  if (props.hideAdvert) {
-    return (
-      <View />
-    );
-  }
-
-  return (
-    <AdvertBanner />
-  );
-}
-
-const BaseScreen = (props) => {
-  const advertJsx = renderAdvertJsx(props);
-
-  return (
+const BaseScreen = props => (
+  <View
+    style={styles.wrapper}
+  >
     <View
-      style={styles.wrapper}
+      style={[styles.baseContainer, props.style]}
     >
-      {advertJsx}
-      <View
-        style={[styles.baseContainer, props.style]}
-      >
-        {props.children}
-      </View>
+      {props.children}
     </View>
-  );
-};
+  </View>
+);
 
 export default BaseScreen;

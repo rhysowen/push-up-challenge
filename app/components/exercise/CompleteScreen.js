@@ -18,6 +18,7 @@ import format from '../../lib/format';
 import {
   PROGRAM_ACTIVE,
   PROGRAM_COMPLETE,
+  PRO_DISABLED,
 } from '../../lib/constants';
 import navigateReset from '../../lib/navigator';
 import { displayInterstitial } from '../../lib/ads';
@@ -59,9 +60,14 @@ const getExerciseCompleteText = (props) => {
 };
 
 const CompleteScreen = (props) => {
-  displayInterstitial();
+  const {
+    complete,
+    util,
+  } = props;
 
-  const { complete } = props;
+  if (util.proMode === PRO_DISABLED) {
+    displayInterstitial();
+  }
 
   const timeElapsed = getTimeElapsed(props);
   const exerciseCompleteText = getExerciseCompleteText(props);
