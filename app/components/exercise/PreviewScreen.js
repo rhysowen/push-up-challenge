@@ -6,6 +6,12 @@ import {
 } from 'react-native';
 
 import {
+  isProEnabled,
+  upgrade,
+} from '../../lib/util';
+import { PRO_PROGRAM } from '../../lib/constants';
+
+import {
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   COLOR_ORANGE,
@@ -14,21 +20,21 @@ import BaseScreen from '../../theme/BaseScreen';
 import DefaultButton from '../../theme/DefaultButton';
 
 import Info from '../shared/Info';
+import InfoBadge from '../shared/InfoBadge';
 import Day from './Day';
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    justifyContent: 'space-between',
     paddingLeft: BASE_PADDING_LEFT,
     paddingRight: BASE_PADDING_RIGHT,
   },
-  buttonWrapper: { paddingTop: 10 },
-  infoWrapper: {
+  buttonWrapper: {
+    paddingTop: 10,
     flex: 1,
-    justifyContent: 'space-around',
   },
-  daysWrapper: { flex: 2 },
+  infoWrapper: { flex: 2 },
+  daysWrapper: { flex: 3 },
 });
 
 const renderDaysJsx = selectedProgram => (
@@ -42,28 +48,48 @@ const renderDaysJsx = selectedProgram => (
   ))
 );
 
-const onPress = (props) => {
-  const { previewProgram } = props;
-
+const cleanReset = (props) => {
   props.resetExercise();
   props.resetProgram();
-
-  props.setSets(previewProgram.selectedProgram.days[0].sets);
-  props.setNewProgramStateAsync(previewProgram.selectedProgram.name);
-  // Skip doing an async fetch
-  props.setProgramByName(previewProgram.selectedProgram.name);
-
-  props.navigateReset('ActivityContainer');
 };
 
-export default (props) => {
+const onPress = (props, proEnabled) => {
   const { previewProgram } = props;
-  const days = renderDaysJsx(previewProgram.selectedProgram);
-  const totalDays = previewProgram.selectedProgram.days.length;
+
+  const selectedProgram = previewProgram.selectedProgram;
+
+  if (!proEnabled && selectedProgram.mode === PRO_PROGRAM) {
+    upgrade(props);
+  } else {
+    cleanReset(props);
+
+    props.setSets(selectedProgram.days[0].sets);
+    props.setNewProgramStateAsync(selectedProgram.name);
+    // Skip doing an async fetch
+    props.setProgramByName(selectedProgram.name);
+
+    props.navigateReset('ActivityContainer');
+  }
+};
+
+
+export default (props) => {
+  const {
+    previewProgram,
+    util,
+  } = props;
+
+  const proEnabled = isProEnabled(util.proMode);
+
+  const selectedProgram = previewProgram.selectedProgram;
+  const isProMode = selectedProgram.mode === PRO_PROGRAM && !proEnabled;
+
+  const days = renderDaysJsx(selectedProgram);
+  const totalDays = selectedProgram.days.length;
 
   return (
     <BaseScreen
-      style={styles.wrapper}  
+      style={styles.wrapper}
     >
       <View
         style={styles.buttonWrapper}
@@ -72,16 +98,17 @@ export default (props) => {
           name="Start this program!"
           buttonColor={COLOR_ORANGE}
           textColor="white"
-          onPress={() => onPress(props)}
+          onPress={() => onPress(props, proEnabled)}
         />
       </View>
 
       <View
         style={styles.infoWrapper}
       >
-        <Info
+        <InfoBadge
           title="Program"
-          value={previewProgram.selectedProgram.name}
+          value={selectedProgram.name}
+          mode={isProMode}
         />
         <Info
           title="Total Days"

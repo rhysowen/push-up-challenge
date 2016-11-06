@@ -3,6 +3,8 @@ import {
   NativeModules,
 } from 'react-native';
 
+import { PRO_ENABLED } from '../lib/constants';
+
 const InAppUtils = NativeModules.InAppUtils;
 const PRO_IDENTIFIER = 'com.digitalcompile.pushups.pro';
 const PRODUCTS = [PRO_IDENTIFIER];
@@ -23,6 +25,8 @@ const purchaseProduct = (productIdentifier, props) => (
     })
   ))
 );
+
+export const isProEnabled = proMode => proMode === PRO_ENABLED;
 
 export const upgrade = (props) => {
   Alert.alert(

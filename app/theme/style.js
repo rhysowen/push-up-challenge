@@ -9,6 +9,19 @@ const BASE_FONT_FAMILY_IOS = 'Helvetica-Light';
 
 const ICON_SIZE = 30;
 
+const INFO_STYLE = {
+  title: {
+    color: 'black',
+    fontSize: 18,
+    fontFamily: BASE_FONT_FAMILY_IOS,
+  },
+  value: {
+    fontSize: 20,
+    color: COLOR_ORANGE,
+    fontFamily: BASE_FONT_FAMILY_IOS,
+  },
+};
+
 export {
   COLOR_ORANGE,
   COLOR_RED,
@@ -18,4 +31,5 @@ export {
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
   ICON_SIZE,
+  INFO_STYLE,
 };

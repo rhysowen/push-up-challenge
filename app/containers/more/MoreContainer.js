@@ -5,7 +5,7 @@ import ActionCreators from '../../actions';
 import MoreScreen from '../../components/more/MoreScreen';
 
 function mapStateToProps(state) {
-  return { };
+  return { util: state.more.util };
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);

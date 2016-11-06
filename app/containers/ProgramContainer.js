@@ -7,6 +7,7 @@ import ProgramScreen from '../components/program/ProgramScreen';
 function mapStateToProps(state) {
   return {
     programs: state.programs,
+    util: state.more.util,
   };
 }
 

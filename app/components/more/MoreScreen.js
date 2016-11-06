@@ -12,6 +12,7 @@ import ListBaseScreen from '../../theme/ListBaseScreen';
 import {
   upgrade,
   restorePurchases,
+  isProEnabled,
 } from '../../lib/util';
 
 const UPGRADE_TO_PRO = 'Upgrade to Pro';
@@ -25,7 +26,6 @@ const SHARE_APP = 'Share App';
 const RESET_APP = 'Reset App';
 
 const onPress = (props, title, key) => {
-  debugger;
   const isKeyValid = typeof key !== 'undefined';
   if (isKeyValid) {
     props.navigatePush(key);
@@ -114,7 +114,18 @@ const renderRow = (option, key, props) => {
 };
 
 const MoreScreen = (props) => {
-  const optionsJsx = options.map((o, key) => renderRow(o, key, props));
+  const { util } = props;
+
+  const proEnabled = isProEnabled(util.proMode);
+  const optionsJsx = options
+  .filter((option) => {
+    if (proEnabled) {
+      return option.title !== UPGRADE_TO_PRO;
+    }
+
+    return true;
+  })
+  .map((o, key) => renderRow(o, key, props));
 
   return (
     <ListBaseScreen>

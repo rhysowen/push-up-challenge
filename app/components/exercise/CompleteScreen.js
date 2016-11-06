@@ -18,10 +18,12 @@ import format from '../../lib/format';
 import {
   PROGRAM_ACTIVE,
   PROGRAM_COMPLETE,
-  PRO_DISABLED,
 } from '../../lib/constants';
 import navigateReset from '../../lib/navigator';
-import { displayInterstitial } from '../../lib/ads';
+import {
+  displayInterstitial,
+  isProEnabled,
+} from '../../lib/ads';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -65,7 +67,9 @@ const CompleteScreen = (props) => {
     util,
   } = props;
 
-  if (util.proMode === PRO_DISABLED) {
+  const proEnabled = isProEnabled(util.proMode);
+
+  if (!proEnabled) {
     displayInterstitial();
   }
 

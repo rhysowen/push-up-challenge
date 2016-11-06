@@ -8,6 +8,8 @@ import {
   EXPERT_LEVEL,
   PROGRAM_ACTIVE,
   PROGRAM_COMPLETE,
+  FREE_PROGRAM,
+  PRO_PROGRAM,
 } from '../lib/constants';
 
 const programElements = Immutable.List([
@@ -21,6 +23,7 @@ const programElements = Immutable.List([
       { sets: [1, 1, 1, 1, 1] },
       { sets: [1, 1, 1, 1, 1] },
     ],
+    mode: FREE_PROGRAM,
   },
   { name: 'Beginner Level 2',
     description: '6 - 10 pushups',
@@ -32,6 +35,7 @@ const programElements = Immutable.List([
       { sets: [9, 8, 7, 6, 8] },
       { sets: [10, 6, 8, 8, 10] },
     ],
+    mode: FREE_PROGRAM,
   },
   { name: 'Intermediate Level 1',
     description: '11 - 20 pushups',
@@ -54,6 +58,7 @@ const programElements = Immutable.List([
       { sets: [9, 8, 7, 6, 8] },
       { sets: [10, 6, 8, 8, 10] },
     ],
+    mode: FREE_PROGRAM,
   },
   { name: 'Advanced Level 1',
     description: '31 - 40 pushups',
@@ -65,6 +70,7 @@ const programElements = Immutable.List([
       { sets: [9, 8, 7, 6, 8] },
       { sets: [10, 6, 8, 8, 10] },
     ],
+    mode: FREE_PROGRAM,
   },
   { name: 'Advanced Level 2',
     description: '41 - 50 pushups',
@@ -76,6 +82,7 @@ const programElements = Immutable.List([
       { sets: [9, 8, 7, 6, 8] },
       { sets: [10, 6, 8, 8, 10] },
     ],
+    mode: FREE_PROGRAM,
   },
   { name: 'Advanced Level 3',
     description: '51 - 60 pushups',
@@ -87,6 +94,7 @@ const programElements = Immutable.List([
       { sets: [9, 8, 7, 6, 8] },
       { sets: [10, 6, 8, 8, 10] },
     ],
+    mode: PRO_PROGRAM,
   },
   { name: 'Expert Level 1',
     description: '61 - 70 pushups',
@@ -98,6 +106,7 @@ const programElements = Immutable.List([
       { sets: [9, 8, 7, 6, 8] },
       { sets: [10, 6, 8, 8, 10] },
     ],
+    mode: PRO_PROGRAM,
   },
   { name: 'Expert Level 2',
     description: '71 - 80 pushups',
@@ -109,6 +118,7 @@ const programElements = Immutable.List([
       { sets: [9, 8, 7, 6, 8] },
       { sets: [10, 6, 8, 8, 10] },
     ],
+    mode: PRO_PROGRAM,
   },
 ]);
 

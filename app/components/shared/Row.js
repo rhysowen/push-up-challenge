@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     color: '#777777',
   },
   rightWrapper: {
-    flex: 2,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
@@ -81,9 +81,20 @@ const getPrimaryIcon = (props) => {
   return props.vectorJsx !== 'undefined' ? props.vectorJsx : <View />;
 };
 
+const getAdditionalJsx = (props) => {
+  if (typeof props.additionalJsx !== 'undefined') {
+    return props.additionalJsx;
+  }
+
+  return (
+    <View />
+  );
+};
+
 const Row = (props) => {
   const primaryIcon = getPrimaryIcon(props);
   const descriptionText = getDescriptionText(props);
+  const additionalJsx = getAdditionalJsx(props);
   const arrowIcon = (
     <Icon
       name="keyboard-arrow-right"
@@ -116,6 +127,7 @@ const Row = (props) => {
           </Text>
           {descriptionText}
         </View>
+        {additionalJsx}
         <View
           style={styles.rightWrapper}
         >

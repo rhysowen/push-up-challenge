@@ -22,11 +22,9 @@ import {
   BASE_BACKGROUND_COLOR,
   TAB_COLOR,
 } from '../theme/style';
-import {
-  NOT_SET,
-  PRO_ENABLED,
-} from '../lib/constants';
+import { NOT_SET } from '../lib/constants';
 import { SMART_BANNER_HEIGHT } from '../lib/ads';
+import { isProEnabled } from '../lib/util';
 
 const {
   Card: NavigationCard,
@@ -43,10 +41,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const getCardWrapperStyle = (proModeActive) => {
+const getCardWrapperStyle = (proEnabled) => {
   let marginTop = NavigationHeader.HEIGHT;
 
-  if (!proModeActive) {
+  if (!proEnabled) {
     marginTop += SMART_BANNER_HEIGHT;
   }
 
@@ -74,12 +72,6 @@ const renderTitle = (props) => {
 
 const LEFT_COMPONENT = 'LEFT_COMPONENT';
 const CHEVRON_LEFT = 'chevron-left';
-
-const getScreenName = (props) => {
-  const { navigationState } = props;
-
-  return navigationState.routes[navigationState.index].key;
-};
 
 const renderComponent = (mode, props) => {
   const { navigationState } = props;
@@ -119,8 +111,8 @@ const AppContainer = (props) => {
     util,
   } = props;
 
-  const isProEnabled = util.proMode === PRO_ENABLED;
-  const cardWrapper = getCardWrapperStyle(isProEnabled);
+  const proEnabled = isProEnabled(util.proMode);
+  const cardWrapper = getCardWrapperStyle(proEnabled);
   const title = renderTitle(props);
 
   return (
@@ -159,7 +151,7 @@ const AppContainer = (props) => {
               )}
             />
             <AdvertBanner
-              hideBanner={isProEnabled}
+              hideBanner={proEnabled}
             />
           </View>
         )}
