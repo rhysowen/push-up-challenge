@@ -12,10 +12,6 @@ import {
 
 const styles = StyleSheet.create({
   section: { paddingBottom: 20 },
-  content: {
-    fontFamily: BASE_FONT_FAMILY_IOS,
-    fontSize: 16,
-  },
   header: {
     fontFamily: BASE_FONT_FAMILY_IOS,
     fontSize: 18,
@@ -33,10 +29,8 @@ export default props => (
     >
       {props.header}
     </Text>
-    <Text
-      style={styles.content}
-    >
+    <View>
       {props.content}
-    </Text>
+    </View>
   </View>
 );

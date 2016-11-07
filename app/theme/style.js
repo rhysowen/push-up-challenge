@@ -22,6 +22,11 @@ const INFO_STYLE = {
   },
 };
 
+const CONTEXT_TEXT_STYLE = {
+  fontFamily: BASE_FONT_FAMILY_IOS,
+  fontSize: 15,
+};
+
 export {
   COLOR_ORANGE,
   COLOR_RED,
@@ -32,4 +37,5 @@ export {
   BASE_FONT_FAMILY_IOS,
   ICON_SIZE,
   INFO_STYLE,
+  CONTEXT_TEXT_STYLE,
 };
