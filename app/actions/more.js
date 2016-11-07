@@ -29,9 +29,16 @@ function mergeMoreAsync(more) {
   return saveMoreAsync(more, MERGE_KEY);
 }
 
-export function setMoreAsync(more) {
-  return saveMoreAsync(more, SET_KEY);
-}
+export const setMoreAsync = more => (
+  (dispatch) => {
+    dispatch({
+      type: types.MORE_SET,
+      payload: more,
+    });
+
+    dispatch(saveMoreAsync(more, SET_KEY));
+  }
+);
 
 export function fetchMoreAsync() {
   const actionTypes = [

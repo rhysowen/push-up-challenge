@@ -1,9 +1,6 @@
 import createReducer from '../lib/createReducer';
 import * as types from '../actions/types';
-import {
-  moreInitialState,
-  initialAsyncState,
-} from '../lib/initialState';
+import moreAsyncInitialState from '../lib/initialState';
 import {
   NOTIFICATION_ENABLED,
   NOTIFICATION_DISABLED,
@@ -12,17 +9,14 @@ import {
   PRO_ENABLED,
 } from '../lib/constants';
 
-const initialState = Object.assign(
-  {},
-  initialAsyncState,
-  moreInitialState
-);
-
-export default createReducer(initialState, {
+export default createReducer(moreAsyncInitialState, {
+  [types.MORE_SET](state, action) {
+    return action.payload;
+  },
   [types.MORE_GET_FETCH](state, action) {
     return Object.assign(
       {},
-      initialState,
+      moreAsyncInitialState,
       { isFetching: true }
     );
   },
@@ -46,7 +40,7 @@ export default createReducer(initialState, {
 
     return Object.assign(
       {},
-      initialState,
+      moreAsyncInitialState,
       ret,
       { isFetched: true },
     );

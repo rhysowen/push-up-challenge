@@ -97,6 +97,8 @@ export const COMPLETE_RESET = 'COMPLETE_RESET';
 
 // More
 
+export const MORE_SET = 'MORE_SET';
+
 // Async
 export const MORE_SAVE_ATTEMPT = 'MORE_SAVE_ATTEMPT';
 export const MORE_SAVE_SUCCESS = 'MORE_SAVE_SUCCESS';

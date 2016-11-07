@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { moreInitialState } from '../../lib/initialState';
+import moreInitialState from '../../lib/initialState';
 import BaseScreen from '../../theme/BaseScreen';
 import { BASE_FONT_FAMILY_IOS } from '../../theme/style';
 

@@ -1,5 +1,8 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import {
+  ScrollView,
+  Alert,
+} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -14,6 +17,8 @@ import {
   restorePurchases,
   isProEnabled,
 } from '../../lib/util';
+import openUrl from '../../lib/linking';
+import moreAsyncInitialState from '../../lib/initialState';
 
 const UPGRADE_TO_PRO = 'Upgrade to Pro';
 const RESTORE_PURCHASES = 'Restore Purchases';
@@ -22,8 +27,36 @@ const SOUNDS = 'Sounds';
 const MEDICAL_INFORMATION = 'Medical Information';
 const CREDITS = 'Credits';
 const RATE_APP = 'Rate App';
-const SHARE_APP = 'Share App';
 const RESET_APP = 'Reset App';
+
+const APP_ID = '1173126612';
+const RATE_APP_URL = `http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=${APP_ID}&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8`;
+
+const onResetPress = (props) => {
+  props.removeSelectedProgramAsync();
+  props.removeExerciseStateAsync();
+
+  props.setMoreAsync(moreAsyncInitialState);
+  // props.setStatisticsAsync(moreAsyncInitialState);
+};
+
+const resetApp = (props) => {
+  Alert.alert(
+    'Reset App',
+    'This will delete all saved data & settings, returning them to factory defaults.',
+    [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Reset App',
+        onPress: () => onResetPress(props),
+        style: 'destructive',
+      },
+    ]
+  );
+};
 
 const onPress = (props, title, key) => {
   const isKeyValid = typeof key !== 'undefined';
@@ -37,6 +70,14 @@ const onPress = (props, title, key) => {
         break;
       case RESTORE_PURCHASES:
         restorePurchases(props);
+
+        break;
+      case RATE_APP:
+        openUrl(RATE_APP_URL);
+
+        break;
+      case RESET_APP:
+        resetApp(props);
 
         break;
       default:
@@ -77,10 +118,6 @@ const options = [
   {
     title: RATE_APP,
     icon: 'ios-star',
-  },
-  {
-    title: SHARE_APP,
-    icon: 'ios-share-alt',
   },
   {
     title: RESET_APP,

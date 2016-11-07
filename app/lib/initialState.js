@@ -4,7 +4,7 @@ import {
   PRO_DISABLED,
 } from '../lib/constants';
 
-export const initialAsyncState = {
+const initialAsyncState = {
   isFetching: false,
   isFetched: false,
   isError: false,
@@ -14,7 +14,7 @@ export const initialAsyncState = {
   isSaveAttempt: false,
 };
 
-export const moreInitialState = {
+const moreInitialState = {
   notification: {
     mode: NOTIFICATION_DISABLED,
     date: new Date(),
@@ -27,3 +27,9 @@ export const moreInitialState = {
     proMode: PRO_DISABLED,
   },
 };
+
+export default Object.assign(
+  {},
+  initialAsyncState,
+  moreInitialState
+);
