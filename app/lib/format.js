@@ -11,7 +11,7 @@ const numberToTimeElasped = (number) => {
   const seconds = (((number % secondsInAYear) % secondsInADay) % secondsInAnHour
     ) % secondsInAMinute;
 
-  return String.raw`${hours}h ${minutes}m ${seconds}s`;
+  return `${hours}h ${minutes}m ${seconds}s`;
 };
 
 export default numberToTimeElasped;

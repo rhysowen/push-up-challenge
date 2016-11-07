@@ -144,7 +144,7 @@ export default class RoutineScreen extends Component {
         progress = getProgress(this.props);
       }
 
-      const progressFormat = String.raw`${progress}%`;
+      const progressFormat = `${progress}%`;
 
       ret = (
         <BaseScreen
