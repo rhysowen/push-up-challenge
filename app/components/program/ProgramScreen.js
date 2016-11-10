@@ -1,13 +1,15 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import {
-  ListView,
+  ScrollView,
   View,
   StyleSheet,
 } from 'react-native';
 
-import ListBaseScreen from '../../theme/ListBaseScreen';
-import Row from '../shared/Row';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Pro from '../shared/Pro';
+import Button from '../shared/Button';
+import getIconJsx from '../../lib/icon';
+
 import {
   BEGINNER_LEVEL,
   INTERMEDIATE_LEVEL,
@@ -26,29 +28,26 @@ const styles = StyleSheet.create({
   },
 });
 
-const beginnerLevel = require('../../theme/images/program/Beginner.png');
-const intermediateLevel = require('../../theme/images/program/Intermediate.png');
-const advancedLevel = require('../../theme/images/program/Advanced.png');
-const expertLevel = require('../../theme/images/program/Expert.png');
-
-const pressRow = (rowData, props) => {
-  props.setPreviewExercise(rowData.name);
-  props.navigatePush('PreviewContainer');
-};
-
-const getImageLevelSource = (level) => {
+const getIconColour = (level) => {
   switch (level) {
     case BEGINNER_LEVEL:
-      return beginnerLevel;
+      return 'turquoise';
     case INTERMEDIATE_LEVEL:
-      return intermediateLevel;
+      return 'green';
     case ADVANCED_LEVEL:
-      return advancedLevel;
+      return 'orange';
     case EXPERT_LEVEL:
-      return expertLevel;
+      return 'red';
     default:
-      return beginnerLevel;
+      return 'turquoise';
   }
+};
+
+const onPressActions = {
+  row: (rowData, props) => {
+    props.setPreviewExercise(rowData.name);
+    props.navigatePush('PreviewContainer');
+  },
 };
 
 const getProViewJsx = (mode, proMode) => {
@@ -67,44 +66,52 @@ const getProViewJsx = (mode, proMode) => {
   );
 };
 
-const renderRow = (rowData, sectionID, rowID, highlightRow, props) => {
+const renderButton = (program, index, props, programsCount) => {
+  const {
+    name,
+    description,
+    mode,
+    level,
+  } = program;
+
   const { util } = props;
 
-  const iconSource = getImageLevelSource(rowData.level);
-  const proViewJsx = getProViewJsx(rowData.mode, util.proMode);
+  const { row } = onPressActions;
+
+  const proViewJsx = getProViewJsx(mode, util.proMode);
+
+  const iconColour = getIconColour(level);
+  const iconJsx = getIconJsx(Icon, 'certificate', 30, iconColour);
+
+  const lastItem = programsCount - 1 === index;
 
   return (
-    <Row
-      iconSource={iconSource}
-      titleText={rowData.name}
-      descriptionText={rowData.description}
-      additionalJsx={proViewJsx}
-      onPress={() => pressRow(rowData, props)}
+    <Button.Item
+      key={index}
+      text={name}
+      description={description}
+      iconJsx={iconJsx}
+      rightComponent={proViewJsx}
+      onPress={() => row(program, props)}
+      lastItem={lastItem}
     />
   );
 };
 
 const ProgramScreen = (props) => {
-  const ds = new ListView.DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
-  });
-
   const { programs } = props;
-  const dataSource = ds.cloneWithRows(programs.toArray());
+
+  const programsToArray = programs.toArray();
+  const programsCount = programsToArray.length;
+
+  const buttonsJsx = programsToArray
+    .map((program, index) => renderButton(program, index, props, programsCount));
 
   return (
-    <ListBaseScreen>
-      <ListView
-        dataSource={dataSource}
-        renderRow={(rowData, sectionID, rowID, highlightRow) =>
-          renderRow(rowData, sectionID, rowID, highlightRow, props)}
-      />
-    </ListBaseScreen>
+    <ScrollView>
+      {buttonsJsx}
+    </ScrollView>
   );
-};
-
-ProgramScreen.propTypes = {
-  programs: PropTypes.object,
 };
 
 export default ProgramScreen;

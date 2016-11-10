@@ -1,13 +1,9 @@
 import { NavigationExperimental } from 'react-native';
 import createReducer from '../lib/createReducer';
-import swap from '../lib/swap';
 import * as types from '../actions/types';
 import { NOT_SET } from '../lib/constants';
 
-const {
-  CardStack: NavigationCardStack,
-  StateUtils: NavigationStateUtils,
-} = NavigationExperimental;
+const { StateUtils: NavigationStateUtils } = NavigationExperimental;
 
 const allTabs = [
   {

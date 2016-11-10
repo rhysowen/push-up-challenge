@@ -12,12 +12,12 @@ import RepTimer from './RepTimer';
 import Reps from './Reps';
 import {
   COLOR_ORANGE,
+  COLOR_RED,
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
 } from '../../theme/style';
 import BaseScreen from '../../theme/BaseScreen';
-import DefaultButton from '../../theme/DefaultButton';
 import {
   EXERCISE_ACTIVE,
   EXERCISE_PAUSE,
@@ -46,10 +46,8 @@ const styles = StyleSheet.create({
   btnWapper: {
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    flex: 1,
+    //flex: 1,
     paddingBottom: 10,
-    paddingLeft: BASE_PADDING_LEFT,
-    paddingRight: BASE_PADDING_RIGHT,
     //maxHeight: 150,
   },
 });
@@ -272,25 +270,20 @@ export default class ActivityScreen extends Component {
         style={styles.wrapper}
         hideAdvert
       >
-        <Text
-          style={styles.activeState}
-        >
-          {activeState}
-        </Text>
-        <RepTimer
-          {...this.props}
-        />
-
-        <View
-          style={styles.btnWapper}
-        >
-
-          <DefaultButton
-            name="Save & Close"
-            buttonColor={COLOR_ORANGE}
-            textColor="white"
-            onPress={() => saveExerciseSaveClose(this.props)}
+        <View style={{paddingLeft: BASE_PADDING_LEFT, paddingRight: BASE_PADDING_RIGHT, flex: 1}}>
+          <Text
+            style={styles.activeState}
+          >
+            {activeState}
+          </Text>
+          <RepTimer
+            {...this.props}
           />
+
+          <View
+            style={styles.btnWapper}
+          >
+          </View>
         </View>
 
         <Reps

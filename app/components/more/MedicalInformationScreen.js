@@ -1,17 +1,9 @@
 import React from 'react';
-import { Text } from 'react-native';
 
 import Content from '../shared/Content';
-import { CONTEXT_TEXT_STYLE } from '../../theme/style';
 
 const DISCLAIMER_HEADER = 'Disclaimer';
-const DISCLAIMER_CONTENT = (
-  <Text
-    style={CONTEXT_TEXT_STYLE}
-  >
-    Before beginning any exercise program, you should consult your physician.
-  </Text>
-);
+const DISCLAIMER_CONTENT = 'Before beginning any exercise program, you should consult your physician.';
 
 export default () => (
   <Content>

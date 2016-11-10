@@ -1,41 +1,48 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   View,
+  ScrollView,
   StyleSheet,
   Alert,
+  Image,
 } from 'react-native';
 
-import DefaultButton from '../../theme/DefaultButton';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import Button from '../shared/Button';
+import StatisticItem from './StatisticItem';
+
+import getIconJsx from '../../lib/icon';
+
 import {
-  COLOR_ORANGE,
-  COLOR_RED,
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
 } from '../../theme/style';
-import BaseScreen from '../../theme/BaseScreen';
-import Info from '../shared/Info';
-import {
-  PROGRAM_ACTIVE,
-  PROGRAM_COMPLETE,
-} from '../../lib/constants';
+import { PROGRAM_ACTIVE } from '../../lib/constants';
 
 const styles = StyleSheet.create({
-  wrapper: {
+  wrapper: { flex: 1 },
+  topContainer: { flex: 1.5 },
+  bottomContainer: { flex: 1 },
+  muscleImage: {
+    flex: 1,
+    width: null,
+    height: null,
+    justifyContent: 'flex-end',
+  },
+  statsWrapper: {
+    flex: 1,
+    backgroundColor: 'rgba(48, 45, 48, 0.6)',
     paddingLeft: BASE_PADDING_LEFT,
     paddingRight: BASE_PADDING_RIGHT,
-  },
-  infoWapper: {
-    flexDirection: 'column',
+    paddingTop: 8,
+    paddingBottom: 8,
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    flex: 3,
-  },
-  defaultBtnWrapper: {
-    flex: 2,
-    justifyContent: 'center',
   },
 });
 
-const NO_PROGRAM_SELECTED = 'No program selected';
+const MUSCLE_IMAGE = require('../../theme/images/screen/routine/gym.jpg');
 
 const getMapSets = (props) => {
   const {
@@ -52,27 +59,35 @@ const getMapSets = (props) => {
   });
 };
 
-const continueTraining = (props) => {
-  const mapSets = getMapSets(props);
-  props.setSets(mapSets);
+const onPressActions = {
+  continueTraining: (props) => {
+    const mapSets = getMapSets(props);
+    props.setSets(mapSets);
 
-  props.navigateReset('ActivityContainer');
-};
+    props.navigateReset('ActivityContainer');
+  },
+  abortTraining: (props) => {
+    const onAbort = () => {
+      props.removeSelectedProgramAsync();
+      props.removeExerciseStateAsync();
+    };
 
-const onAbort = (props) => {
-  props.removeSelectedProgramAsync();
-  props.removeExerciseStateAsync();
-};
-
-const abortTraining = (props) => {
-  Alert.alert(
-    'Confirmation',
-    'Are you sure you want to abort training?',
-    [
-      { text: 'Cancel', style: 'cancel' },
-      { text: 'Abort', onPress: () => onAbort(props) },
-    ]
-  );
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to abort training?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Abort',
+          onPress: () => onAbort(props),
+          style: 'destructive',
+        },
+      ]
+    );
+  },
 };
 
 const getProgress = (props) => {
@@ -88,121 +103,77 @@ const getProgress = (props) => {
   return ret > MAX_PERCENT ? MAX_PERCENT : ret;
 };
 
-export default class RoutineScreen extends Component {
+export default (props) => {
+  const { program } = props;
 
-  renderButtons() {
-    const { program } = this.props;
+  const {
+    continueTraining,
+    abortTraining,
+  } = onPressActions;
 
-    let ret;
+  const continueTrainingIconJsx = getIconJsx(Icon, 'play-circle-filled');
+  const instructionsIconJsx = getIconJsx(Icon, 'assistant');
+  const abortTrainingIconJsx = getIconJsx(Icon, 'stop');
 
-    if (program.isProgramFound && program.status === PROGRAM_ACTIVE) {
-      ret = (
-        <View
-          style={styles.defaultBtnWrapper}
+  return (
+    <View
+      style={styles.wrapper}
+    >
+      <View
+        style={styles.topContainer}
+      >
+        <Image
+          source={MUSCLE_IMAGE}
+          style={styles.muscleImage}
+          resizeMode="cover"
         >
-          <DefaultButton
-            name="Continue Training"
-            buttonColor={COLOR_ORANGE}
-            textColor="white"
-            onPress={() => continueTraining(this.props)}
-          />
-          <DefaultButton
-            name="Abort Training"
-            buttonColor={COLOR_RED}
-            textColor="white"
-            onPress={() => abortTraining(this.props)}
-          />
-        </View>
-      );
-    } else {
-      ret = (
-        <View
-          style={styles.defaultBtnWrapper}
-        >
-          <DefaultButton
-            name="Select Program"
-            buttonColor={COLOR_ORANGE}
-            textColor="white"
-            onPress={() => this.props.setTab(1)}
-          />
-        </View>
-      );
-    }
-
-    return ret;
-  }
-
-  render() {
-    const { program } = this.props;
-
-    let ret;
-
-    if (program.isViewRender) {
-      let progress = 0;
-
-      if (program.isProgramFound) {
-        progress = getProgress(this.props);
-      }
-
-      const progressFormat = `${progress}%`;
-
-      ret = (
-        <BaseScreen
-          style={styles.wrapper}
-        >
-          <View
-            style={styles.infoWapper}
-          >
-            <Info
-              title="Program"
-              value={program.isProgramFound ? program.exercise.name : NO_PROGRAM_SELECTED}
-            />
-            <Info
-              title="Day"
-              value={program.day}
-            />
-            <Info
-              title="Reps Complete"
-              value={program.repsCompleted}
-            />
-            <Info
-              title="Progress"
-              value={progressFormat}
-            />
+          <View>
+            <View
+              style={styles.statsWrapper}
+            >
+              <StatisticItem
+                property="Program"
+                value="Expert Level 2"
+              />
+              <StatisticItem
+                property="Day"
+                value="2"
+              />
+              <StatisticItem
+                property="Reps"
+                value="12"
+              />
+              <StatisticItem
+                property="Progress"
+                value="88%"
+              />
+            </View>
           </View>
-          {this.renderButtons()}
-        </BaseScreen>
-      );
-    } else {
-      ret = (
-        <View />
-      );
-    }
+        </Image>
+      </View>
 
-    return ret;
-  }
-
-}
-
-RoutineScreen.propTypes = {
-  fetchSelectedProgramAsync: React.PropTypes.func.isRequired,
-  fetchStatisticsAsync: React.PropTypes.func.isRequired,
-  program: React.PropTypes.shape({
-    isViewRender: React.PropTypes.bool.isRequired,
-    isProgramFound: React.PropTypes.bool.isRequired,
-    exercise: React.PropTypes.shape({
-      name: React.PropTypes.string,
-      description: React.PropTypes.string,
-      days: React.PropTypes.arrayOf(
-        React.PropTypes.shape({
-          sets: React.PropTypes.arrayOf(React.PropTypes.number),
-        }),
-      ),
-    }),
-  }),
-  statistics: React.PropTypes.shape({
-    isViewRender: React.PropTypes.bool,
-    total: React.PropTypes.number,
-    record: React.PropTypes.number,
-  }),
+      <ScrollView
+        style={styles.bottomContainer}
+      >
+        <Button>
+          <Button.Item
+            text="Continue Training"
+            iconJsx={continueTrainingIconJsx}
+            onPress={() => continueTraining(props)}
+          />
+          <Button.Item
+            text="Instructions"
+            iconJsx={instructionsIconJsx}
+            onPress={() => continueTraining(props)}
+          />
+          <Button.Item
+            lastItem
+            text="Abort Training"
+            iconJsx={abortTrainingIconJsx}
+            onPress={() => abortTraining(props)}
+          />
+        </Button>
+      </ScrollView>
+    </View>
+  );
 };

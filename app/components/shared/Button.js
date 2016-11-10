@@ -4,11 +4,13 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import ButtonItem from './ButtonItem';
+
 const styles = StyleSheet.create({
-  wrapper: { alignItems: 'center', flex: 1 },
+  wrapper: { flex: 1 },
 });
 
-const Info = props => (
+const Button = props => (
   <View
     style={styles.wrapper}
   >
@@ -16,4 +18,6 @@ const Info = props => (
   </View>
 );
 
-export default Info;
+Button.Item = ButtonItem;
+
+export default Button;

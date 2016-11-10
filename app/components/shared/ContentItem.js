@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
     color: COLOR_ORANGE,
     paddingBottom: 10,
   },
+  content: {
+    fontFamily: BASE_FONT_FAMILY_IOS,
+    fontSize: 14,
+  },
 });
 
 export default props => (
@@ -29,8 +33,10 @@ export default props => (
     >
       {props.header}
     </Text>
-    <View>
+    <Text
+      style={styles.content}
+    >
       {props.content}
-    </View>
+    </Text>
   </View>
 );

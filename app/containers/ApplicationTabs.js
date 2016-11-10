@@ -10,32 +10,19 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import TabNavigator from 'react-native-tab-navigator';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ActionCreators from '../actions';
-
-// Screen containers
 import RoutineContainer from './RoutineContainer';
 import ProgramContainer from './ProgramContainer';
 import StatisticContainer from './StatisticContainer';
 import MoreContainer from './more/MoreContainer';
-
-// Styles
-import { TAB_COLOR } from '../theme/style';
-
-const propTypes = {
-  setTab: PropTypes.func,
-  tabs: PropTypes.object,
-  index: PropTypes.number,
-};
-
-const pushUpImage = require('../theme/images/tabs/PushUp.png');
-const pushUpSelectedImage = require('../theme/images/tabs/PushUpSelected.png');
-const programImage = require('../theme/images/tabs/Program.png');
-const programSelectedImage = require('../theme/images/tabs/ProgramSelected.png');
-const statsImage = require('../theme/images/tabs/Stats.png');
-const statsSelectedImage = require('../theme/images/tabs/StatsSelected.png');
-const moreImage = require('../theme/images/tabs/More.png');
-const moreSelectedImage = require('../theme/images/tabs/MoreSelected.png');
+import {
+  TAB_COLOR,
+  COLOR_ORANGE,
+  BASE_FONT_FAMILY_IOS,
+} from '../theme/style';
+import getIconJsx from '../lib/icon';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -44,74 +31,97 @@ const styles = StyleSheet.create({
   tabNavigator: {
     backgroundColor: TAB_COLOR,
   },
-  pushUpImage: {
-    width: 40,
-    height: 24,
+  tabStyleSelected: {
+    backgroundColor: COLOR_ORANGE,
   },
-  programImage: {
-    width: 35,
-    height: 25,
+  titleStyleSelected: {
+    color: 'white',
+    fontFamily: BASE_FONT_FAMILY_IOS,
   },
-  statsImage: {
-    width: 35,
-    height: 25,
-  },
-  moreImage: {
-    width: 35,
-    height: 25,
+  titleStyle: {
+    color: '#CCCCCC',
+    fontFamily: BASE_FONT_FAMILY_IOS,
   },
 });
 
-const CONTAIN_MODE = 'contain';
+const ApplicationTabs = props => {
+  const { tabs } = props;
 
-const imageJsxGen = (image, style, resizeMode = 'cover') => (
-  <Image source={image} style={style} resizeMode={resizeMode} />
-);
+  const tabIconStyle = [25, '#CCCCCC'];
+  const tabIconSelectedStyle = [25, 'white'];
 
-const ApplicationTabs = props => (
-  <View
-    style={styles.wrapper}
-  >
-    <TabNavigator
-      tabBarStyle={styles.tabNavigator}
+  const routineIconJsx = getIconJsx(Icon, 'user', ...tabIconStyle);
+  const routineSelectedIconJsx = getIconJsx(Icon, 'user', ...tabIconSelectedStyle);
+
+  const programIconJsx = getIconJsx(Icon, 'list-alt', ...tabIconStyle);
+  const programSelectedIconJsx = getIconJsx(Icon, 'list-alt', ...tabIconSelectedStyle);
+
+  const statisticIconJsx = getIconJsx(Icon, 'line-chart', ...tabIconStyle);
+  const statisticSelectedIconJsx = getIconJsx(Icon, 'line-chart', ...tabIconSelectedStyle);
+
+  const moreIconJsx = getIconJsx(Icon, 'ellipsis-h', ...tabIconStyle);
+  const moreSelectedIconJsx = getIconJsx(Icon, 'ellipsis-h', ...tabIconSelectedStyle);
+
+  const routineSelected = tabs.index === 0;
+  const programSelected = tabs.index === 1;
+  const statisticSelected = tabs.index === 2;
+  const moreSelected = tabs.index === 3;
+
+  return (
+    <View
+      style={styles.wrapper}
     >
-      <TabNavigator.Item
-        selected={props.tabs.index === 0}
-        onPress={() => props.setTab(0)}
-        renderIcon={() => imageJsxGen(pushUpImage, styles.pushUpImage, CONTAIN_MODE)}
-        renderSelectedIcon={() => imageJsxGen(pushUpSelectedImage, styles.pushUpImage, CONTAIN_MODE)}
+      <TabNavigator
+        tabBarStyle={styles.tabNavigator}
       >
-        {<RoutineContainer />}
-      </TabNavigator.Item>
-      <TabNavigator.Item
-        selected={props.tabs.index === 1}
-        onPress={() => props.setTab(1)}
-        renderIcon={() => imageJsxGen(programImage, styles.programImage, CONTAIN_MODE)}
-        renderSelectedIcon={() => imageJsxGen(programSelectedImage, styles.programImage, CONTAIN_MODE)}
-      >
-        {<ProgramContainer />}
-      </TabNavigator.Item>
-      <TabNavigator.Item
-        selected={props.tabs.index === 2}
-        onPress={() => props.setTab(2)}
-        renderIcon={() => imageJsxGen(statsImage, styles.statsImage, CONTAIN_MODE)}
-        renderSelectedIcon={() => imageJsxGen(statsSelectedImage, styles.statsImage, CONTAIN_MODE)}
-      >
-        {<StatisticContainer />}
-      </TabNavigator.Item>
-      <TabNavigator.Item
-        selected={props.tabs.index === 3}
-        onPress={() => props.setTab(3)}
-        renderIcon={() => imageJsxGen(moreImage, styles.moreImage, CONTAIN_MODE)}
-        renderSelectedIcon={() => imageJsxGen(moreSelectedImage, styles.moreImage, CONTAIN_MODE)}
-      >
-        {<MoreContainer />}
-      </TabNavigator.Item>
-    </TabNavigator>
-  </View>
-);
-
-ApplicationTabs.propTypes = propTypes;
+        <TabNavigator.Item
+          selected={routineSelected}
+          onPress={() => props.setTab(0)}
+          title="Routine"
+          titleStyle={routineSelected ? styles.titleStyleSelected : styles.titleStyle}
+          tabStyle={routineSelected ? styles.tabStyleSelected : null}
+          renderIcon={() => routineIconJsx}
+          renderSelectedIcon={() => routineSelectedIconJsx}
+        >
+          {<RoutineContainer />}
+        </TabNavigator.Item>
+        <TabNavigator.Item
+          selected={programSelected}
+          onPress={() => props.setTab(1)}
+          title="Program"
+          titleStyle={programSelected ? styles.titleStyleSelected : styles.titleStyle}
+          tabStyle={programSelected ? styles.tabStyleSelected : null}
+          renderIcon={() => programIconJsx}
+          renderSelectedIcon={() => programSelectedIconJsx}
+        >
+          {<ProgramContainer />}
+        </TabNavigator.Item>
+        <TabNavigator.Item
+          selected={statisticSelected}
+          onPress={() => props.setTab(2)}
+          title="Statistics"
+          titleStyle={statisticSelected ? styles.titleStyleSelected : styles.titleStyle}
+          tabStyle={statisticSelected ? styles.tabStyleSelected : null}
+          renderIcon={() => statisticIconJsx}
+          renderSelectedIcon={() => statisticSelectedIconJsx}
+        >
+          {<StatisticContainer />}
+        </TabNavigator.Item>
+        <TabNavigator.Item
+          selected={moreSelected}
+          onPress={() => props.setTab(3)}
+          title="More"
+          titleStyle={moreSelected ? styles.titleStyleSelected : styles.titleStyle}
+          tabStyle={moreSelected ? styles.tabStyleSelected : null}
+          renderIcon={() => moreIconJsx}
+          renderSelectedIcon={() => moreSelectedIconJsx}
+        >
+          {<MoreContainer />}
+        </TabNavigator.Item>
+      </TabNavigator>
+    </View>
+  );
+};
 
 function mapStateToProps(state) {
   return {

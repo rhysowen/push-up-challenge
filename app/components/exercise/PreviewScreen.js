@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   ScrollView,
+  Text,
 } from 'react-native';
 
 import {
@@ -10,20 +11,14 @@ import {
   upgrade,
 } from '../../lib/util';
 import { PRO_PROGRAM } from '../../lib/constants';
-
 import {
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
-  COLOR_ORANGE,
 } from '../../theme/style';
-import BaseScreen from '../../theme/BaseScreen';
-import DefaultButton from '../../theme/DefaultButton';
-
-import Info from '../shared/Info';
-import InfoBadge from '../shared/InfoBadge';
 import Day from './Day';
+import Instruction from '../shared/Instruction';
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     paddingLeft: BASE_PADDING_LEFT,
@@ -35,7 +30,7 @@ const styles = StyleSheet.create({
   },
   infoWrapper: { flex: 2 },
   daysWrapper: { flex: 3 },
-});
+});*/
 
 const renderDaysJsx = selectedProgram => (
   selectedProgram.days.map((day, index) => (
@@ -88,41 +83,20 @@ export default (props) => {
   const totalDays = selectedProgram.days.length;
 
   return (
-    <BaseScreen
-      style={styles.wrapper}
-    >
-      <View
-        style={styles.buttonWrapper}
-      >
-        <DefaultButton
-          name="Start this program!"
-          buttonColor={COLOR_ORANGE}
-          textColor="white"
-          onPress={() => onPress(props, proEnabled)}
-        />
+    <View style={{flex: 1}}>
+      <View style={{flexDirection: 'row', flex: 0.5, alignItems: 'center', justifyContent: 'center', backgroundColor: 'green'}}>
+        <View style={{padding: 5, alignItems: 'center'}}>
+          <Text>124</Text>
+          <Text>Reps</Text>
+        </View>
+        <View style={{padding: 5, alignItems: 'center'}}>
+          <Text>30</Text>
+          <Text>Days</Text>
+        </View>
       </View>
-
-      <View
-        style={styles.infoWrapper}
-      >
-        <InfoBadge
-          title="Program"
-          value={selectedProgram.name}
-          mode={isProMode}
-        />
-        <Info
-          title="Total Days"
-          value={totalDays}
-        />
+      <View style={{flex: 2}}>
+        <Instruction />
       </View>
-
-      <View
-        style={styles.daysWrapper}
-      >
-        <ScrollView>
-          {days}
-        </ScrollView>
-      </View>
-    </BaseScreen>
+    </View>
   );
 };

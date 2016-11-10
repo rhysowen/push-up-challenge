@@ -5,7 +5,6 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import Info from '../shared/Info';
 import BaseScreen from '../../theme/BaseScreen';
 import {
   COLOR_ORANGE,
@@ -13,7 +12,6 @@ import {
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
 } from '../../theme/style';
-import DefaultButton from '../../theme/DefaultButton';
 import format from '../../lib/format';
 import {
   PROGRAM_ACTIVE,
@@ -108,12 +106,6 @@ const CompleteScreen = (props) => {
       <View
         style={{flex: 2, justifyContent: 'center'}}
       >
-        <DefaultButton
-          name="Back to dashboard"
-          buttonColor={COLOR_ORANGE}
-          textColor="white"
-          onPress={() => onDashboardPress(props)}
-        />
       </View>
 
     </BaseScreen>

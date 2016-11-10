@@ -6,7 +6,7 @@ import {
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import Row from '../shared/Row';
+import Button from '../shared/Button';
 import {
   COLOR_ORANGE,
   ICON_SIZE,
@@ -19,6 +19,7 @@ import {
 } from '../../lib/util';
 import openUrl from '../../lib/linking';
 import moreAsyncInitialState from '../../lib/initialState';
+import getIconJsx from '../../lib/icon';
 
 const UPGRADE_TO_PRO = 'Upgrade to Pro';
 const RESTORE_PURCHASES = 'Restore Purchases';
@@ -125,27 +126,17 @@ const options = [
   },
 ];
 
-const ICON_PADDING = 5;
-const ICON_STYLE = { width: ICON_SIZE + ICON_PADDING };
-
-const renderVectorJsx = icon => (
-  <Icon
-    name={icon}
-    size={ICON_SIZE}
-    color={COLOR_ORANGE}
-    style={ICON_STYLE}
-  />
-);
-
 const renderRow = (option, key, props) => {
-  const vectorJsx = renderVectorJsx(option.icon);
+  const iconJsx = getIconJsx(Icon, option.icon);
+  const lastItem = option.title === RESET_APP;
 
   return (
-    <Row
+    <Button.Item
       key={key}
+      text={option.title}
+      iconJsx={iconJsx}
       onPress={() => onPress(props, option.title, option.key)}
-      titleText={option.title}
-      vectorJsx={vectorJsx}
+      lastItem={lastItem}
     />
   );
 };
@@ -167,7 +158,9 @@ const MoreScreen = (props) => {
   return (
     <ListBaseScreen>
       <ScrollView>
-        {optionsJsx}
+        <Button>
+          {optionsJsx}
+        </Button>
       </ScrollView>
     </ListBaseScreen>
   );

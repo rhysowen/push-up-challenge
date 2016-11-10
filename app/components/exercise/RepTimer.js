@@ -3,6 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 
 import {
@@ -11,7 +12,6 @@ import {
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
 } from '../../theme/style';
-import DefaultButton from '../../theme/DefaultButton';
 import {
   EXERCISE_ACTIVE,
   EXERCISE_PAUSE,
@@ -20,27 +20,20 @@ import {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 2,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   repsWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'transparent',
+    flex: 2,
   },
   repsRemaining: {
     color: COLOR_ORANGE,
-    fontSize: 140,
+    fontSize: 100,
     fontFamily: BASE_FONT_FAMILY_IOS,
-  },
-  timerBtnWrapper: {
-    flexDirection: 'row',
-    paddingLeft: BASE_PADDING_LEFT,
-    paddingRight: BASE_PADDING_RIGHT,
-  },
-  timerBtn: {
-    flex: 1,
+    textAlign: 'center',
   },
 });
 
@@ -99,41 +92,31 @@ export default class RepTimer extends Component {
       <View
         style={styles.wrapper}
       >
-
-        <View
-          style={styles.repsWrapper}
-        >
-          <Text
-            style={styles.repsRemaining}
-          >
-            {activeTimer}
-          </Text>
-        </View>
-
-        <View
-          style={styles.timerBtnWrapper}
-        >
-          <DefaultButton
-            name="-"
-            buttonColor="transparent"
-            textColor={COLOR_ORANGE}
-            textSize={50}
-            outerStyle={[styles.timerBtn]}
-            onPress={() => onButtonPress(this.props.decrementRep, true /**buttonsEnabled*/)}
-          />
+        <View style={{flexDirection: 'row'}}>
+          <View style={{justifyContent: 'center', flex: 0.4, alignItems: 'center'}}>
+            <TouchableOpacity
+              onPress={() =>  onButtonPress(this.props.decrementRep, true /**buttonsEnabled*/)}
+            >
+            <Text style={{fontSize: 50, color: COLOR_ORANGE}}>-</Text>
+            </TouchableOpacity>
+          </View>
           <View
-            style={styles.timerBtn}
-          />
-          <DefaultButton
-            name="+"
-            buttonColor="transparent"
-            textColor={COLOR_ORANGE}
-            textSize={50}
-            outerStyle={[styles.timerBtn]}
-            onPress={() => onButtonPress(this.props.incrementRep, true /**buttonsEnabled*/)}
-          />
+            style={styles.repsWrapper}
+          >
+            <Text
+              style={styles.repsRemaining}
+            >
+              {activeTimer}
+            </Text>
+          </View>
+          <View style={{justifyContent: 'center', flex: 0.4, alignItems: 'center'}}>
+            <TouchableOpacity
+              onPress={() =>  onButtonPress(this.props.incrementRep, true /**buttonsEnabled*/)}
+            >
+            <Text style={{fontSize: 50, color: COLOR_ORANGE}}>+</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-
       </View>
     );
   }
