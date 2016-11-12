@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Foundation';
 import Pro from '../shared/Pro';
 import Button from '../shared/Button';
 import getIconJsx from '../../lib/icon';
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 const getIconColour = (level) => {
   switch (level) {
     case BEGINNER_LEVEL:
-      return 'turquoise';
+      return 'lightskyblue';
     case INTERMEDIATE_LEVEL:
       return 'green';
     case ADVANCED_LEVEL:
@@ -81,7 +81,7 @@ const renderButton = (program, index, props, programsCount) => {
   const proViewJsx = getProViewJsx(mode, util.proMode);
 
   const iconColour = getIconColour(level);
-  const iconJsx = getIconJsx(Icon, 'certificate', 30, iconColour);
+  const iconJsx = getIconJsx(Icon, 'trophy', 30, iconColour);
 
   const lastItem = programsCount - 1 === index;
 

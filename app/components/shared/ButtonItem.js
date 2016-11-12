@@ -8,6 +8,7 @@ import {
 
 import {
   LINE_COLOR,
+  FADE_COLOR,
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 13,
     fontFamily: BASE_FONT_FAMILY_IOS,
-    color: '#333333',
+    color: FADE_COLOR,
   },
 });
 
