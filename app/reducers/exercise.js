@@ -36,6 +36,7 @@ const exerciseInitialState = {
   repsAdded: 0,
   timeElapsed: 0,
   calories: 0,
+  totalRepsRemaining: 0,
 };
 
 const getCalories = (state) => {
@@ -61,6 +62,7 @@ const getDecrementRepState = (state) => {
     sessionRepsCompleted,
     repsCompleted,
     calories,
+    totalRepsRemaining,
   } = state;
 
   let repReturn = rep;
@@ -70,8 +72,10 @@ const getDecrementRepState = (state) => {
   let sessionRepsCompletedReturn = sessionRepsCompleted;
   let repsCompletedReturn = repsCompleted;
   let caloriesReturn = calories;
+  let totalRepsRemainingReturn = totalRepsRemaining;
 
   if (rep > 0) {
+    totalRepsRemainingReturn = totalRepsRemaining - 1;
     repsCompletedReturn = repsCompletedReturn += 1;
     sessionRepsCompletedReturn = sessionRepsCompletedReturn += 1;
   }
@@ -107,6 +111,7 @@ const getDecrementRepState = (state) => {
     sessionRepsCompleted: sessionRepsCompletedReturn,
     repsCompleted: repsCompletedReturn,
     calories: caloriesReturn,
+    totalRepsRemaining: totalRepsRemainingReturn,
   };
 };
 
@@ -128,6 +133,14 @@ const getDecreaseTimerState = (state) => {
     sound,
     timer,
   };
+};
+
+const getTotalRemainingReps = (sets, currentSet) => {
+  if (sets.length > 0) {
+    return sets.slice(currentSet).reduce((prev, cur) => prev + cur, 0);
+  }
+
+  return 0;
 };
 
 export default createReducer(exerciseInitialState, {
@@ -201,6 +214,7 @@ export default createReducer(exerciseInitialState, {
       {
         sets: action.payload,
         rep: action.payload[state.set],
+        totalRepsRemaining: getTotalRemainingReps(action.payload, state.set),
       },
     );
   },
@@ -218,6 +232,7 @@ export default createReducer(exerciseInitialState, {
       {
         repsAdded: state.repsAdded + 1,
         rep: state.rep + 1,
+        totalRepsRemaining: state.totalRepsRemaining + 1,
         sound: BEEP_SOUND,
       },
     );

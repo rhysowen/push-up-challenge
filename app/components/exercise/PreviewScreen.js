@@ -101,6 +101,8 @@ const onPressActions = {
       cleanReset(props);
 
       props.setSets(selectedProgram.days[0].sets);
+
+      // TODO: Refactor this!
       props.setNewProgramStateAsync(selectedProgram.name);
       // Skip doing an async fetch
       props.setProgramByName(selectedProgram.name);
@@ -138,52 +140,50 @@ export default (props) => {
       <ScrollView
         style={styles.scrollWrapper}
       >
-        <View style={{flex: 1}}>
+        <View
+          style={styles.topWrapper}
+        >
           <View
-            style={styles.topWrapper}
+            style={styles.titleIconWrapper}
           >
-            <View
-              style={styles.titleIconWrapper}
+            <Text
+              style={styles.title}
             >
-              <Text
-                style={styles.title}
-              >
-                {title}
-              </Text>
-              <View
-                style={styles.iconWrapper}
-              >
-                <Pro />
-              </View>
+              {title}
+            </Text>
+            <View
+              style={styles.iconWrapper}
+            >
+              <Pro />
             </View>
           </View>
+        </View>
+        <View
+          style={styles.middleWrapper}
+        >
           <View
-            style={styles.middleWrapper}
+            style={styles.repsWrapper}
           >
-            <View
-              style={styles.repsWrapper}
-            >
-              <StatisticItem
-                value={totalReps}
-                property="Reps"
-                iconComponent={repsIconJsx}
-              />
-            </View>
-            <View
-              style={styles.daysWrapper}
-            >
-              <StatisticItem
-                value={totalDays}
-                property="Days"
-                iconComponent={daysIconJsx}
-              />
-            </View>
+            <StatisticItem
+              value={totalReps}
+              property="Reps"
+              iconComponent={repsIconJsx}
+            />
           </View>
           <View
-            style={styles.bottomWrapper}
+            style={styles.daysWrapper}
           >
-            <Instruction />
+            <StatisticItem
+              value={totalDays}
+              property="Days"
+              iconComponent={daysIconJsx}
+            />
           </View>
+        </View>
+        <View
+          style={styles.bottomWrapper}
+        >
+          <Instruction />
         </View>
       </ScrollView>
       <TouchableOpacity

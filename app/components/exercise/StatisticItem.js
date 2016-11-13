@@ -12,21 +12,24 @@ import {
 
 const styles = StyleSheet.create({
   wrapper: {
-    padding: 5,
-    alignItems: 'center',
+    flex: 1,
   },
   value: {
     fontSize: 18,
     fontFamily: BASE_FONT_FAMILY_IOS,
-  },
-  propertyWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    textAlign: 'center',
   },
   property: {
     paddingLeft: 3,
     fontFamily: BASE_FONT_FAMILY_IOS,
     color: FADE_COLOR,
+    flex: 1,
+    textAlign: 'center',
+  },
+  iconComponentWrapper: {
+    height: 14,
+    width: 14,
+    paddingTop: 2,
   },
 });
 
@@ -35,17 +38,25 @@ export default props => (
     style={styles.wrapper}
   >
     <Text
-      style={styles.value}
+      style={[
+        styles.value,
+        { color: props.valueColorStyle },
+      ]}
     >
       {props.value}
     </Text>
-    <View
-      style={styles.propertyWrapper}
-    >
-      {props.iconComponent}
+    <View style={{paddingTop: 3}}>
       <Text
-        style={styles.property}
+        style={[
+          styles.property,
+          { color: props.propertyColorStyle },
+        ]}
       >
+        <View
+          style={styles.iconComponentWrapper}
+        >
+          {props.iconComponent}
+        </View>
         {props.property}
       </Text>
     </View>

@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
 import {
   View,
+  ScrollView,
   Text,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Sound from 'react-native-sound';
 import Proximity from 'react-native-proximity';
 
-import RepTimer from './RepTimer';
-import Reps from './Reps';
+import StatisticItem from './StatisticItem';
+import RepItem from './RepItem';
+import Button from '../shared/Button';
 import {
   COLOR_ORANGE,
   COLOR_RED,
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
+  ACTIVITY_BACKGROUND_COLOR,
 } from '../../theme/style';
-import BaseScreen from '../../theme/BaseScreen';
 import {
   EXERCISE_ACTIVE,
   EXERCISE_PAUSE,
@@ -31,24 +35,60 @@ import {
   SOUND_ENABLED,
 } from '../../lib/constants';
 import navigateReset from '../../lib/navigator';
+import getIconJsx from '../../lib/icon';
+import format from '../../lib/format';
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    flexDirection: 'column',
+  wrapper: { flex: 1 },
+  topContainer: {
+    paddingTop: 10,
+    backgroundColor: ACTIVITY_BACKGROUND_COLOR,
+    paddingLeft: BASE_PADDING_LEFT,
+    paddingRight: BASE_PADDING_RIGHT,
   },
+  middleContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLOR_ORANGE,
+    borderTopColor: 'black',
+    borderTopWidth: 0.5,
+    borderBottomColor: 'black',
+    borderBottomWidth: 0.5,
+  },
+  bottomContainer: { flex: 1 },
   activeState: {
-    color: COLOR_ORANGE,
-    fontSize: 26,
+    color: 'white',
+    fontFamily: BASE_FONT_FAMILY_IOS,
+    fontSize: 22,
     textAlign: 'center',
+  },
+  statisticWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  statisticInnerWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  setWrapper: {
+    backgroundColor: '#CCCCCC',
+  },
+  setInnerWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingLeft: BASE_PADDING_LEFT,
+    paddingRight: BASE_PADDING_RIGHT,
+  },
+  digit: {
+    fontSize: 38,
     fontFamily: BASE_FONT_FAMILY_IOS,
   },
-  btnWapper: {
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    //flex: 1,
-    paddingBottom: 10,
-    //maxHeight: 150,
+  remaining: {
+    color: '#333333',
+    fontFamily: BASE_FONT_FAMILY_IOS,
   },
 });
 
@@ -126,27 +166,6 @@ const getActiveStateTitle = (exercise) => {
   }
 };
 
-const saveExerciseSaveClose = (props) => {
-  props.setProgramSaveCloseAsync(
-    props.exercise.sessionRepsCompleted,
-    props.exercise.repsAdded,
-  );
-
-  props.setExerciseSaveCloseAsync(
-    props.exercise.timeElapsed,
-    props.exercise.rep,
-    props.exercise.repsCompleted,
-    props.exercise.set,
-    props.exercise.day,
-  );
-
-  props.cleanExercise();
-
-  navigateReset(props);
-};
-
-
-
 const getSoundEnabled = (sounds, props) => {
   const { sound } = props;
 
@@ -181,6 +200,60 @@ const getActiveSoundObj = (props) => {
       return null;
   }
 };
+
+const getActiveDigit = (exercise) => {
+  const {
+    mode,
+    rep,
+    timer,
+  } = exercise;
+
+  switch (mode) {
+    case EXERCISE_ACTIVE:
+      return rep;
+    case EXERCISE_REST:
+      return timer;
+    default:
+      return 0;
+  }
+};
+
+const getRemainingJsx = (exercise) => {
+  const { mode } = exercise;
+
+  if (mode === EXERCISE_ACTIVE) {
+    return (
+      <Text
+        style={styles.remaining}
+      >
+        Remaining
+      </Text>
+    );
+  }
+
+  return (
+    <View />
+  );
+};
+
+const getElapsedFormat = exercise => format(exercise.timeElapsed);
+
+const getRepsJsx = exercise => exercise.sets.map((set, index) => {
+  const isRepActive = index === exercise.set;
+  const backgroundColor = isRepActive ? ACTIVITY_BACKGROUND_COLOR : '#CCCCCC';
+  const textColor = isRepActive ? COLOR_ORANGE : 'black';
+  const fontWeight = isRepActive ? 'bold' : 'normal';
+
+  return (
+    <RepItem
+      key={index}
+      backgroundColorStyle={backgroundColor}
+      textColorStyle={textColor}
+      fontWeightStyle={fontWeight}
+      value={set}
+    />
+  );
+});
 
 const saveStatisticsAsync = (props) => {
   const { exercise } = props;
@@ -234,6 +307,29 @@ const cleanUpState = (props) => {
   props.navigateReset('CompleteContainer');
 };
 
+const FADE_COLOR = '#CCCCCC';
+
+const onPressActions = {
+  saveExerciseSaveClose: (props) => {
+    props.setProgramSaveCloseAsync(
+      props.exercise.sessionRepsCompleted,
+      props.exercise.repsAdded,
+    );
+
+    props.setExerciseSaveCloseAsync(
+      props.exercise.timeElapsed,
+      props.exercise.rep,
+      props.exercise.repsCompleted,
+      props.exercise.set,
+      props.exercise.day,
+    );
+
+    props.cleanExercise();
+
+    navigateReset(props);
+  },
+};
+
 export default class ActivityScreen extends Component {
 
   componentDidMount() {
@@ -245,8 +341,18 @@ export default class ActivityScreen extends Component {
   componentDidUpdate() {
     const { exercise } = this.props;
 
+    const {
+      decIntervalSet,
+      mode,
+    } = exercise;
+
     if (exercise.mode === EXERCISE_COMPLETE) {
       cleanUpState(this.props);
+    } else if (mode === EXERCISE_REST && !decIntervalSet) {
+      this.props.setDecIntervalId(setInterval(this.props.timerDecrease, 1000));
+    } else if (decIntervalSet && mode !== EXERCISE_REST) {
+      clearInterval(this.props.exercise.decIntervalId);
+      this.props.clearDecIntervalId();
     }
   }
 
@@ -259,31 +365,127 @@ export default class ActivityScreen extends Component {
 
   render() {
     const { exercise } = this.props;
+    const {
+      sets,
+      totalRepsRemaining,
+    } = exercise;
+    const { saveExerciseSaveClose } = onPressActions;
 
-    const sets = exercise.sets;
     const activeState = getActiveStateTitle(exercise);
+    const activeDigit = getActiveDigit(exercise);
+    const elapsedFormat = getElapsedFormat(exercise);
+
+    const remainingJsx = getRemainingJsx(exercise);
+    const repsJsx = getRepsJsx(exercise);
+
+    const statIconStyle = [14, FADE_COLOR];
+    const elapsedIconJsx = getIconJsx(Icon, 'timelapse', ...statIconStyle);
+    const remainingIconJsx = getIconJsx(Icon, 'info', ...statIconStyle);
+    const personalRecordIconJsx = getIconJsx(Icon, 'favorite', ...statIconStyle);
+
+    const addRepIconJsx = getIconJsx(Icon, 'add');
+    const nextSetIconJsx = getIconJsx(Icon, 'queue-play-next');
+    const saveCloseIconJsx = getIconJsx(Icon, 'save');
+    const abortIconJsx = getIconJsx(Icon, 'close');
 
     initSound(this.props);
 
     return (
-      <View style={{flex: 1}}>
-        <View>
-          <Text>Perform Push-Ups</Text>
-        </View>
-        <View>
-          <View style={{flexDirection: 'row'}}>
-            <View>
-              <Text>34</Text>
-              <Text>Complete</Text>
-            </View>
-            <View>
-              <Text>66</Text>
-              <Text>Remaining</Text>
+      <View
+        style={styles.wrapper}
+      >
+        <View style={styles.topContainer}>
+
+          <View>
+            <Text
+              style={styles.activeState}
+            >
+              {activeState}
+            </Text>
+          </View>
+
+          <View
+            style={styles.statisticWrapper}
+          >
+            <View
+              style={styles.statisticInnerWrapper}
+            >
+              <StatisticItem
+                value={elapsedFormat}
+                property="Elapsed"
+                iconComponent={elapsedIconJsx}
+                valueColorStyle="white"
+                propertyColorStyle={FADE_COLOR}
+              />
+              <StatisticItem
+                value={totalRepsRemaining}
+                property="Remaining"
+                iconComponent={remainingIconJsx}
+                valueColorStyle="white"
+                propertyColorStyle={FADE_COLOR}
+              />
+              <StatisticItem
+                value="29"
+                property="Record"
+                iconComponent={personalRecordIconJsx}
+                valueColorStyle="white"
+                propertyColorStyle={FADE_COLOR}
+              />
             </View>
           </View>
         </View>
-        <View style={{flex: 1}}>
+
+        <View
+          style={styles.setWrapper}
+        >
+          <View
+            style={styles.setInnerWrapper}
+          >
+            {repsJsx}
+          </View>
         </View>
+        <TouchableOpacity
+          style={styles.wrapper}
+          onPress={() => this.props.decrementRep()}
+        >
+          <View
+            style={styles.middleContainer}
+          >
+            <Text
+              style={styles.digit}
+            >
+              {activeDigit}
+            </Text>
+            {remainingJsx}
+          </View>
+        </TouchableOpacity>
+        <ScrollView
+          style={styles.bottomContainer}
+        >
+          <Button>
+            <Button.Item
+              text="Add Rep"
+              iconJsx={addRepIconJsx}
+              onPress={() => this.props.incrementRep()}
+            />
+            <Button.Item
+              text="Next Set"
+              iconJsx={nextSetIconJsx}
+              //onPress={() => continueTraining(props)}
+            />
+            <Button.Item
+              text="Save & Close"
+              iconJsx={saveCloseIconJsx}
+              onPress={() => saveExerciseSaveClose(this.props)}
+            />
+            <Button.Item
+              lastItem
+              text="Abort Training"
+              iconJsx={abortIconJsx}
+              //onPress={() => abortTraining(props)}
+            />
+          </Button>
+        </ScrollView>
       </View>
     );
   }
