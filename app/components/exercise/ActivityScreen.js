@@ -266,31 +266,25 @@ export default class ActivityScreen extends Component {
     initSound(this.props);
 
     return (
-      <BaseScreen
-        style={styles.wrapper}
-        hideAdvert
-      >
-        <View style={{paddingLeft: BASE_PADDING_LEFT, paddingRight: BASE_PADDING_RIGHT, flex: 1}}>
-          <Text
-            style={styles.activeState}
-          >
-            {activeState}
-          </Text>
-          <RepTimer
-            {...this.props}
-          />
-
-          <View
-            style={styles.btnWapper}
-          >
+      <View style={{flex: 1}}>
+        <View>
+          <Text>Perform Push-Ups</Text>
+        </View>
+        <View>
+          <View style={{flexDirection: 'row'}}>
+            <View>
+              <Text>34</Text>
+              <Text>Complete</Text>
+            </View>
+            <View>
+              <Text>66</Text>
+              <Text>Remaining</Text>
+            </View>
           </View>
         </View>
-
-        <Reps
-          {...this.props}
-          sets={sets}
-        />
-      </BaseScreen>
+        <View style={{flex: 1}}>
+        </View>
+      </View>
     );
   }
 }

@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -26,32 +27,11 @@ import Instruction from '../shared/Instruction';
 import Pro from '../shared/Pro';
 import getIconJsx from '../../lib/icon';
 
-const cleanReset = (props) => {
-  props.resetExercise();
-  props.resetProgram();
-};
-
-const onPress = (props, proEnabled) => {
-  const { previewProgram } = props;
-
-  const selectedProgram = previewProgram.selectedProgram;
-
-  if (!proEnabled && selectedProgram.mode === PRO_PROGRAM) {
-    upgrade(props);
-  } else {
-    cleanReset(props);
-
-    props.setSets(selectedProgram.days[0].sets);
-    props.setNewProgramStateAsync(selectedProgram.name);
-    // Skip doing an async fetch
-    props.setProgramByName(selectedProgram.name);
-
-    props.navigateReset('ActivityContainer');
-  }
-};
-
 const styles = StyleSheet.create({
   wrapper: {
+    flex: 1,
+  },
+  scrollWrapper: {
     flex: 1,
     paddingLeft: BASE_PADDING_LEFT,
     paddingRight: BASE_PADDING_RIGHT,
@@ -93,8 +73,8 @@ const styles = StyleSheet.create({
   daysWrapper: { flex: 1 },
   buttonWrapper: {
     backgroundColor: COLOR_ORANGE,
-    padding: 5,
-    marginTop: 5,
+    padding: 10,
+    marginTop: 10,
     alignItems: 'center',
   },
   button: {
@@ -104,11 +84,39 @@ const styles = StyleSheet.create({
   },
 });
 
+const cleanReset = (props) => {
+  props.resetExercise();
+  props.resetProgram();
+};
+
+const onPressActions = {
+  startProgram: (props, proEnabled) => {
+    const { previewProgram } = props;
+
+    const selectedProgram = previewProgram.selectedProgram;
+
+    if (!proEnabled && selectedProgram.mode === PRO_PROGRAM) {
+      upgrade(props);
+    } else {
+      cleanReset(props);
+
+      props.setSets(selectedProgram.days[0].sets);
+      props.setNewProgramStateAsync(selectedProgram.name);
+      // Skip doing an async fetch
+      props.setProgramByName(selectedProgram.name);
+
+      props.navigateReset('ActivityContainer');
+    }
+  },
+};
+
 export default (props) => {
   const {
     previewProgram,
     util,
   } = props;
+
+  const { startProgram } = onPressActions;
 
   const proEnabled = isProEnabled(util.proMode);
 
@@ -127,50 +135,60 @@ export default (props) => {
     <View
       style={styles.wrapper}
     >
-      <View
-        style={styles.topWrapper}
+      <ScrollView
+        style={styles.scrollWrapper}
       >
-        <View
-          style={styles.titleIconWrapper}
-        >
-          <Text
-            style={styles.title}
-          >
-            {title}
-          </Text>
+        <View style={{flex: 1}}>
           <View
-            style={styles.iconWrapper}
+            style={styles.topWrapper}
           >
-            <Pro />
+            <View
+              style={styles.titleIconWrapper}
+            >
+              <Text
+                style={styles.title}
+              >
+                {title}
+              </Text>
+              <View
+                style={styles.iconWrapper}
+              >
+                <Pro />
+              </View>
+            </View>
+          </View>
+          <View
+            style={styles.middleWrapper}
+          >
+            <View
+              style={styles.repsWrapper}
+            >
+              <StatisticItem
+                value={totalReps}
+                property="Reps"
+                iconComponent={repsIconJsx}
+              />
+            </View>
+            <View
+              style={styles.daysWrapper}
+            >
+              <StatisticItem
+                value={totalDays}
+                property="Days"
+                iconComponent={daysIconJsx}
+              />
+            </View>
+          </View>
+          <View
+            style={styles.bottomWrapper}
+          >
+            <Instruction />
           </View>
         </View>
-      </View>
-      <View
-        style={styles.middleWrapper}
+      </ScrollView>
+      <TouchableOpacity
+        onPress={() => startProgram(props, isProMode)}
       >
-        <View
-          style={styles.repsWrapper}
-        >
-          <StatisticItem
-            value={totalReps}
-            property="Reps"
-            iconComponent={repsIconJsx}
-          />
-        </View>
-        <View
-          style={styles.daysWrapper}
-        >
-          <StatisticItem
-            value={totalDays}
-            property="Days"
-            iconComponent={daysIconJsx}
-          />
-        </View>
-      </View>
-      <View
-        style={styles.bottomWrapper}
-      >
-        <Instruction />
         <View
           style={styles.buttonWrapper}
         >
@@ -180,7 +198,7 @@ export default (props) => {
             Start Program {'\u003E'}
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
