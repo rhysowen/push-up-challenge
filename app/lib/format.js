@@ -4,14 +4,12 @@ const numberToTimeElasped = (number) => {
   const secondsInAnHour = 3600;
   const secondsInAMinute = 60;
 
-  const hours = Math.floor((number % secondsInAYear) / secondsInAnHour);
   const minutes = Math.floor(
-      (((number % secondsInAYear) % secondsInADay) % secondsInAnHour
-    ) / secondsInAMinute);
+      (((number % secondsInAYear) % secondsInADay)) / secondsInAMinute);
   const seconds = (((number % secondsInAYear) % secondsInADay) % secondsInAnHour
     ) % secondsInAMinute;
 
-  return `${hours}h ${minutes}m ${seconds}s`;
+  return `${minutes}m ${seconds}s`;
 };
 
 export default numberToTimeElasped;
