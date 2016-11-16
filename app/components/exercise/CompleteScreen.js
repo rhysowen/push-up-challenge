@@ -90,18 +90,6 @@ const CompleteScreen = (props) => {
       <View
         style={{flex: 2, justifyContent: 'space-between'}}
       >
-        <Info
-          title="Total Reps"
-          value={complete.repsCompleted}
-        />
-        <Info
-          title="Calories"
-          value={complete.calories}
-        />
-        <Info
-          title="Time Elapsed"
-          value={timeElapsed}
-        />
       </View>
       <View
         style={{flex: 2, justifyContent: 'center'}}
@@ -110,10 +98,6 @@ const CompleteScreen = (props) => {
 
     </BaseScreen>
   );
-};
-
-CompleteScreen.propTypes = {
-  // programs: PropTypes.object,
 };
 
 export default CompleteScreen;
