@@ -50,6 +50,16 @@ const styles = StyleSheet.create({
   chartWrapper: {
     flex: 1,
   },
+  chartTextWrapper: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  chartText: {
+    fontSize: 18,
+    fontFamily: BASE_FONT_FAMILY_IOS,
+    color: FADE_COLOR,
+  },
   chart: {
     flex: 1,
     backgroundColor: 'transparent',
@@ -131,7 +141,15 @@ const getRenderJsx = (props) => {
   }
 
   return (
-    <Text>No data... yet :-(</Text>
+    <View
+      style={styles.chartTextWrapper}
+    >
+      <Text
+        style={styles.chartText}
+      >
+        No data available for this year
+      </Text>
+    </View>
   );
 };
 
