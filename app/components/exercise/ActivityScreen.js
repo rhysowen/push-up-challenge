@@ -11,12 +11,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Sound from 'react-native-sound';
 import Proximity from 'react-native-proximity';
 
-import StatisticItem from './StatisticItem';
+import StatisticItem from '../shared/StatisticItem';
 import RepItem from './RepItem';
 import Button from '../shared/Button';
 import {
   COLOR_ORANGE,
-  COLOR_RED,
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
@@ -378,11 +377,6 @@ export default class ActivityScreen extends Component {
     const remainingJsx = getRemainingJsx(exercise);
     const repsJsx = getRepsJsx(exercise);
 
-    const statIconStyle = [14, FADE_COLOR];
-    const elapsedIconJsx = getIconJsx(Icon, 'timelapse', ...statIconStyle);
-    const remainingIconJsx = getIconJsx(Icon, 'info', ...statIconStyle);
-    const personalRecordIconJsx = getIconJsx(Icon, 'favorite', ...statIconStyle);
-
     const addRepIconJsx = getIconJsx(Icon, 'add');
     const nextSetIconJsx = getIconJsx(Icon, 'queue-play-next');
     const saveCloseIconJsx = getIconJsx(Icon, 'save');
@@ -413,21 +407,18 @@ export default class ActivityScreen extends Component {
               <StatisticItem
                 value={elapsedFormat}
                 property="Elapsed"
-                iconComponent={elapsedIconJsx}
                 valueColorStyle="white"
                 propertyColorStyle={FADE_COLOR}
               />
               <StatisticItem
                 value={totalRepsRemaining}
                 property="Remaining"
-                iconComponent={remainingIconJsx}
                 valueColorStyle="white"
                 propertyColorStyle={FADE_COLOR}
               />
               <StatisticItem
                 value="29"
                 property="Record"
-                iconComponent={personalRecordIconJsx}
                 valueColorStyle="white"
                 propertyColorStyle={FADE_COLOR}
               />

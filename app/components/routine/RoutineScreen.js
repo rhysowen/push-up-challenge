@@ -10,7 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Button from '../shared/Button';
-import StatisticItem from './StatisticItem';
+import ProgramInfoItem from './ProgramInfoItem';
 
 import getIconJsx from '../../lib/icon';
 
@@ -131,19 +131,19 @@ export default (props) => {
             <View
               style={styles.statsWrapper}
             >
-              <StatisticItem
+              <ProgramInfoItem
                 property="Program"
                 value="Expert Level 2"
               />
-              <StatisticItem
+              <ProgramInfoItem
                 property="Day"
                 value="2"
               />
-              <StatisticItem
+              <ProgramInfoItem
                 property="Reps"
                 value="12"
               />
-              <StatisticItem
+              <ProgramInfoItem
                 property="Progress"
                 value="88%"
               />

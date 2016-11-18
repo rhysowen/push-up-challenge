@@ -18,7 +18,7 @@ import {
   isProEnabled,
 } from '../../lib/util';
 import openUrl from '../../lib/linking';
-import moreAsyncInitialState from '../../lib/initialState';
+import { combinedMoreInitialState } from '../../lib/initialState';
 import getIconJsx from '../../lib/icon';
 
 const UPGRADE_TO_PRO = 'Upgrade to Pro';
@@ -36,9 +36,9 @@ const RATE_APP_URL = `http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewCont
 const onResetPress = (props) => {
   props.removeSelectedProgramAsync();
   props.removeExerciseStateAsync();
+  props.removeStatisticsAsync();
 
-  props.setMoreAsync(moreAsyncInitialState);
-  // props.setStatisticsAsync(moreAsyncInitialState);
+  props.setMoreAsync(combinedMoreInitialState);
 };
 
 const resetApp = (props) => {

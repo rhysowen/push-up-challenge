@@ -28,8 +28,25 @@ const moreInitialState = {
   },
 };
 
-export default Object.assign(
+const statisticInitialState = {
+  total: 0,
+  record: 0,
+  calories: 0,
+  timeElapsed: 0,
+  selectedYear: new Date(),
+  selectedYearChartData: [],
+  chartData: [],
+  completed: {},
+};
+
+export const combinedMoreInitialState = Object.assign(
   {},
   initialAsyncState,
   moreInitialState
+);
+
+export const combinedStatisticInitialState = Object.assign(
+  {},
+  initialAsyncState,
+  statisticInitialState
 );

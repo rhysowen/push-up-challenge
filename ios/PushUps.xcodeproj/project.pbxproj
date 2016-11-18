@@ -25,20 +25,52 @@
 		2431882F8FDC4B2FB4CF0F77 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98BFD35B2453492EB4FB7138 /* Octicons.ttf */; };
 		252E6FBE0B2B426BAC6A6388 /* libInAppUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F53533A38A452D8B2E503F /* libInAppUtils.a */; };
 		425DEC3E49F847F7A05F8F23 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8B4226D403D4A8885E8C72B /* Entypo.ttf */; };
-		684BBD4E1585E8E71065AE24 /* libPods-PushUpsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3BF708523D68767240C7F1 /* libPods-PushUpsTests.a */; };
+		666986E0566E39B6CAA888A6 /* Pods_PushUps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAD523ABA3227D389BE54D84 /* Pods_PushUps.framework */; };
 		6C6525D234A7492582334F02 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43F0C77D02664EF7ACBDC16D /* EvilIcons.ttf */; };
 		6FD8C46E98524CA09EBD3901 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CA68A0F37A04FC4A5B4915F /* MaterialIcons.ttf */; };
 		704A3E413CD34F528AE14E80 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A85FCDF83A74124B5A93F57 /* Foundation.ttf */; };
 		71C3C45190CB4379B05AFAF2 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60A2C3E9FE9A4405A9364732 /* Zocial.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		95F064F57B564048B05E0DE3 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F762E974DED64E549F3403D0 /* Ionicons.ttf */; };
+		984885EA1DDE5EA8002F7D73 /* ABNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885C01DDE5EA7002F7D73 /* ABNumberFormatter.swift */; };
+		984885EB1DDE5EA8002F7D73 /* BarLineChartViewBaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885C11DDE5EA7002F7D73 /* BarLineChartViewBaseExtension.swift */; };
+		984885EC1DDE5EA8002F7D73 /* chartDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885C21DDE5EA7002F7D73 /* chartDataHelpers.swift */; };
+		984885ED1DDE5EA8002F7D73 /* ChartViewBaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885C31DDE5EA7002F7D73 /* ChartViewBaseExtension.swift */; };
+		984885EE1DDE5EA8002F7D73 /* PieRadarChartViewBaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885C41DDE5EA7002F7D73 /* PieRadarChartViewBaseExtension.swift */; };
+		984885EF1DDE5EA8002F7D73 /* RNBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 984885C71DDE5EA7002F7D73 /* RNBarChart.m */; };
+		984885F01DDE5EA8002F7D73 /* RNBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885C81DDE5EA7002F7D73 /* RNBarChart.swift */; };
+		984885F11DDE5EA8002F7D73 /* RNBarChartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885C91DDE5EA7002F7D73 /* RNBarChartManager.swift */; };
+		984885F21DDE5EA8002F7D73 /* RNBubbleChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 984885CB1DDE5EA7002F7D73 /* RNBubbleChart.m */; };
+		984885F31DDE5EA8002F7D73 /* RNBubbleChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885CC1DDE5EA7002F7D73 /* RNBubbleChart.swift */; };
+		984885F41DDE5EA8002F7D73 /* RNBubbleChartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885CD1DDE5EA7002F7D73 /* RNBubbleChartManager.swift */; };
+		984885F51DDE5EA8002F7D73 /* RNCandleChartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885CE1DDE5EA7002F7D73 /* RNCandleChartManager.swift */; };
+		984885F61DDE5EA8002F7D73 /* RNCandleStickChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 984885D01DDE5EA8002F7D73 /* RNCandleStickChart.m */; };
+		984885F71DDE5EA8002F7D73 /* RNCandleStickChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885D11DDE5EA8002F7D73 /* RNCandleStickChart.swift */; };
+		984885F81DDE5EA8002F7D73 /* RNCombinedChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 984885D31DDE5EA8002F7D73 /* RNCombinedChart.m */; };
+		984885F91DDE5EA8002F7D73 /* RNCombinedChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885D41DDE5EA8002F7D73 /* RNCombinedChart.swift */; };
+		984885FA1DDE5EA8002F7D73 /* RNCombinedChartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885D51DDE5EA8002F7D73 /* RNCombinedChartManager.swift */; };
+		984885FB1DDE5EA8002F7D73 /* RNHorizontalBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 984885D71DDE5EA8002F7D73 /* RNHorizontalBarChart.m */; };
+		984885FC1DDE5EA8002F7D73 /* RNHorizontalBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885D81DDE5EA8002F7D73 /* RNHorizontalBarChart.swift */; };
+		984885FD1DDE5EA8002F7D73 /* RNHorizontalBarChartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885D91DDE5EA8002F7D73 /* RNHorizontalBarChartManager.swift */; };
+		984885FE1DDE5EA8002F7D73 /* RNLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 984885DB1DDE5EA8002F7D73 /* RNLineChart.m */; };
+		984885FF1DDE5EA8002F7D73 /* RNLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885DC1DDE5EA8002F7D73 /* RNLineChart.swift */; };
+		984886001DDE5EA8002F7D73 /* RNLineChartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885DD1DDE5EA8002F7D73 /* RNLineChartManager.swift */; };
+		984886011DDE5EA8002F7D73 /* RNPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 984885DF1DDE5EA8002F7D73 /* RNPieChart.m */; };
+		984886021DDE5EA8002F7D73 /* RNPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885E01DDE5EA8002F7D73 /* RNPieChart.swift */; };
+		984886031DDE5EA8002F7D73 /* RNPieChartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885E11DDE5EA8002F7D73 /* RNPieChartManager.swift */; };
+		984886041DDE5EA8002F7D73 /* RNRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 984885E31DDE5EA8002F7D73 /* RNRadarChart.m */; };
+		984886051DDE5EA8002F7D73 /* RNRadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885E41DDE5EA8002F7D73 /* RNRadarChart.swift */; };
+		984886061DDE5EA8002F7D73 /* RNRadarChartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885E51DDE5EA8002F7D73 /* RNRadarChartManager.swift */; };
+		984886071DDE5EA8002F7D73 /* RNScatterChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 984885E71DDE5EA8002F7D73 /* RNScatterChart.m */; };
+		984886081DDE5EA8002F7D73 /* RNScatterChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885E81DDE5EA8002F7D73 /* RNScatterChart.swift */; };
+		984886091DDE5EA8002F7D73 /* RNScatterChartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885E91DDE5EA8002F7D73 /* RNScatterChartManager.swift */; };
 		9884A5331DC8134C00CC1F37 /* PushUpsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* PushUpsTests.m */; };
 		98D0284B1DB671400033330B /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D0284A1DB671080033330B /* libRNSound.a */; };
 		98D0284F1DB686370033330B /* rest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D0284E1DB686370033330B /* rest.mp3 */; };
 		98D028511DB6863F0033330B /* exercise-complete.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D028501DB6863F0033330B /* exercise-complete.mp3 */; };
 		98D028531DB69CC80033330B /* perform-push-ups.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D028521DB69CC80033330B /* perform-push-ups.mp3 */; };
 		98D028551DB6C6F60033330B /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D028541DB6C6F60033330B /* beep.mp3 */; };
-		AE0A14FC16971C09F9673317 /* libPods-PushUps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6A1F86CDB3322A5F40F9F6 /* libPods-PushUps.a */; };
+		A2F897D090758F671191991B /* Pods_PushUpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1478C4E8690711CAF58D1046 /* Pods_PushUpsTests.framework */; };
 		DE309536CA2E4958BAFDB63E /* libRNProximity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C63696D9671945C6B5CE3518 /* libRNProximity.a */; };
 		DE89A98E2BFF4C79AA1C70D1 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2FA180C56054604A8309201 /* FontAwesome.ttf */; };
 		E0179F34CAF440D1A3832AC4 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71D67712C4BB44B7B15034FF /* libRNVectorIcons.a */; };
@@ -176,7 +208,6 @@
 		00E356EE1AD99517003FC87E /* PushUpsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushUpsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* PushUpsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushUpsTests.m; sourceTree = "<group>"; };
-		0A3BF708523D68767240C7F1 /* libPods-PushUpsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PushUpsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* PushUps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushUps.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,7 +218,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PushUps/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PushUps/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		1B6A1F86CDB3322A5F40F9F6 /* libPods-PushUps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PushUps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1478C4E8690711CAF58D1046 /* Pods_PushUpsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PushUpsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34CA814DC4CDEAB325772D97 /* Pods-PushUpsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushUpsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PushUpsTests/Pods-PushUpsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		41FEB2BFC9B34714A38BEC4D /* RNAdMobManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNAdMobManager.xcodeproj; path = "../node_modules/react-native-admob/ios/RNAdMobManager.xcodeproj"; sourceTree = "<group>"; };
 		43F0C77D02664EF7ACBDC16D /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -199,6 +230,49 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7AE2FD6292F7447EBF314140 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		98021B5D1DDE348E008CA703 /* PushUps-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushUps-Bridging-Header.h"; sourceTree = "<group>"; };
+		984885C01DDE5EA7002F7D73 /* ABNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ABNumberFormatter.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/ABNumberFormatter.swift"; sourceTree = "<group>"; };
+		984885C11DDE5EA7002F7D73 /* BarLineChartViewBaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BarLineChartViewBaseExtension.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/BarLineChartViewBaseExtension.swift"; sourceTree = "<group>"; };
+		984885C21DDE5EA7002F7D73 /* chartDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = chartDataHelpers.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/chartDataHelpers.swift"; sourceTree = "<group>"; };
+		984885C31DDE5EA7002F7D73 /* ChartViewBaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartViewBaseExtension.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/ChartViewBaseExtension.swift"; sourceTree = "<group>"; };
+		984885C41DDE5EA7002F7D73 /* PieRadarChartViewBaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieRadarChartViewBaseExtension.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/PieRadarChartViewBaseExtension.swift"; sourceTree = "<group>"; };
+		984885C51DDE5EA7002F7D73 /* RCTIOSCharts-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RCTIOSCharts-Bridging-Header.h"; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RCTIOSCharts-Bridging-Header.h"; sourceTree = "<group>"; };
+		984885C61DDE5EA7002F7D73 /* RNBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNBarChart.h; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNBarChart.h"; sourceTree = "<group>"; };
+		984885C71DDE5EA7002F7D73 /* RNBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNBarChart.m; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNBarChart.m"; sourceTree = "<group>"; };
+		984885C81DDE5EA7002F7D73 /* RNBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNBarChart.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNBarChart.swift"; sourceTree = "<group>"; };
+		984885C91DDE5EA7002F7D73 /* RNBarChartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNBarChartManager.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNBarChartManager.swift"; sourceTree = "<group>"; };
+		984885CA1DDE5EA7002F7D73 /* RNBubbleChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNBubbleChart.h; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNBubbleChart.h"; sourceTree = "<group>"; };
+		984885CB1DDE5EA7002F7D73 /* RNBubbleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNBubbleChart.m; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNBubbleChart.m"; sourceTree = "<group>"; };
+		984885CC1DDE5EA7002F7D73 /* RNBubbleChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNBubbleChart.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNBubbleChart.swift"; sourceTree = "<group>"; };
+		984885CD1DDE5EA7002F7D73 /* RNBubbleChartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNBubbleChartManager.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNBubbleChartManager.swift"; sourceTree = "<group>"; };
+		984885CE1DDE5EA7002F7D73 /* RNCandleChartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNCandleChartManager.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNCandleChartManager.swift"; sourceTree = "<group>"; };
+		984885CF1DDE5EA8002F7D73 /* RNCandleStickChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNCandleStickChart.h; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNCandleStickChart.h"; sourceTree = "<group>"; };
+		984885D01DDE5EA8002F7D73 /* RNCandleStickChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNCandleStickChart.m; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNCandleStickChart.m"; sourceTree = "<group>"; };
+		984885D11DDE5EA8002F7D73 /* RNCandleStickChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNCandleStickChart.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNCandleStickChart.swift"; sourceTree = "<group>"; };
+		984885D21DDE5EA8002F7D73 /* RNCombinedChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNCombinedChart.h; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNCombinedChart.h"; sourceTree = "<group>"; };
+		984885D31DDE5EA8002F7D73 /* RNCombinedChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNCombinedChart.m; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNCombinedChart.m"; sourceTree = "<group>"; };
+		984885D41DDE5EA8002F7D73 /* RNCombinedChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNCombinedChart.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNCombinedChart.swift"; sourceTree = "<group>"; };
+		984885D51DDE5EA8002F7D73 /* RNCombinedChartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNCombinedChartManager.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNCombinedChartManager.swift"; sourceTree = "<group>"; };
+		984885D61DDE5EA8002F7D73 /* RNHorizontalBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNHorizontalBarChart.h; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNHorizontalBarChart.h"; sourceTree = "<group>"; };
+		984885D71DDE5EA8002F7D73 /* RNHorizontalBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNHorizontalBarChart.m; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNHorizontalBarChart.m"; sourceTree = "<group>"; };
+		984885D81DDE5EA8002F7D73 /* RNHorizontalBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNHorizontalBarChart.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNHorizontalBarChart.swift"; sourceTree = "<group>"; };
+		984885D91DDE5EA8002F7D73 /* RNHorizontalBarChartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNHorizontalBarChartManager.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNHorizontalBarChartManager.swift"; sourceTree = "<group>"; };
+		984885DA1DDE5EA8002F7D73 /* RNLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNLineChart.h; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNLineChart.h"; sourceTree = "<group>"; };
+		984885DB1DDE5EA8002F7D73 /* RNLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNLineChart.m; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNLineChart.m"; sourceTree = "<group>"; };
+		984885DC1DDE5EA8002F7D73 /* RNLineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNLineChart.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNLineChart.swift"; sourceTree = "<group>"; };
+		984885DD1DDE5EA8002F7D73 /* RNLineChartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNLineChartManager.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNLineChartManager.swift"; sourceTree = "<group>"; };
+		984885DE1DDE5EA8002F7D73 /* RNPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNPieChart.h; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNPieChart.h"; sourceTree = "<group>"; };
+		984885DF1DDE5EA8002F7D73 /* RNPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNPieChart.m; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNPieChart.m"; sourceTree = "<group>"; };
+		984885E01DDE5EA8002F7D73 /* RNPieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNPieChart.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNPieChart.swift"; sourceTree = "<group>"; };
+		984885E11DDE5EA8002F7D73 /* RNPieChartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNPieChartManager.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNPieChartManager.swift"; sourceTree = "<group>"; };
+		984885E21DDE5EA8002F7D73 /* RNRadarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNRadarChart.h; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNRadarChart.h"; sourceTree = "<group>"; };
+		984885E31DDE5EA8002F7D73 /* RNRadarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNRadarChart.m; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNRadarChart.m"; sourceTree = "<group>"; };
+		984885E41DDE5EA8002F7D73 /* RNRadarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNRadarChart.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNRadarChart.swift"; sourceTree = "<group>"; };
+		984885E51DDE5EA8002F7D73 /* RNRadarChartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNRadarChartManager.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNRadarChartManager.swift"; sourceTree = "<group>"; };
+		984885E61DDE5EA8002F7D73 /* RNScatterChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNScatterChart.h; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNScatterChart.h"; sourceTree = "<group>"; };
+		984885E71DDE5EA8002F7D73 /* RNScatterChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNScatterChart.m; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNScatterChart.m"; sourceTree = "<group>"; };
+		984885E81DDE5EA8002F7D73 /* RNScatterChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNScatterChart.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNScatterChart.swift"; sourceTree = "<group>"; };
+		984885E91DDE5EA8002F7D73 /* RNScatterChartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNScatterChartManager.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/RNScatterChartManager.swift"; sourceTree = "<group>"; };
 		98BFD35B2453492EB4FB7138 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		98D028451DB671080033330B /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
 		98D0284E1DB686370033330B /* rest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = rest.mp3; path = ../app/sounds/rest.mp3; sourceTree = "<group>"; };
@@ -210,6 +284,7 @@
 		ABC575A1011D4BF3813EF277 /* InAppUtils.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = InAppUtils.xcodeproj; path = "../node_modules/react-native-in-app-utils/InAppUtils.xcodeproj"; sourceTree = "<group>"; };
 		C63696D9671945C6B5CE3518 /* libRNProximity.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNProximity.a; sourceTree = "<group>"; };
 		CD630BDB0C95A371513A906C /* Pods-PushUps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushUps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PushUps/Pods-PushUps.debug.xcconfig"; sourceTree = "<group>"; };
+		DAD523ABA3227D389BE54D84 /* Pods_PushUps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PushUps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A0238DACD34FBF9A4FA62E /* RNProximity.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNProximity.xcodeproj; path = "../node_modules/react-native-proximity/RNProximity/RNProximity.xcodeproj"; sourceTree = "<group>"; };
 		E9F53533A38A452D8B2E503F /* libInAppUtils.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInAppUtils.a; sourceTree = "<group>"; };
 		EFB0829F765F75A2791FC772 /* Pods-PushUpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushUpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PushUpsTests/Pods-PushUpsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -223,7 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
-				684BBD4E1585E8E71065AE24 /* libPods-PushUpsTests.a in Frameworks */,
+				A2F897D090758F671191991B /* Pods_PushUpsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,9 +319,9 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				E0179F34CAF440D1A3832AC4 /* libRNVectorIcons.a in Frameworks */,
 				163B7FEE18444549A821C047 /* libRNAdMobManager.a in Frameworks */,
-				AE0A14FC16971C09F9673317 /* libPods-PushUps.a in Frameworks */,
 				DE309536CA2E4958BAFDB63E /* libRNProximity.a in Frameworks */,
 				252E6FBE0B2B426BAC6A6388 /* libInAppUtils.a in Frameworks */,
+				666986E0566E39B6CAA888A6 /* Pods_PushUps.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +415,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				98021B5D1DDE348E008CA703 /* PushUps-Bridging-Header.h */,
 			);
 			name = PushUps;
 			sourceTree = "<group>";
@@ -355,8 +431,8 @@
 		31F38B9B9249CED35F32BA31 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1B6A1F86CDB3322A5F40F9F6 /* libPods-PushUps.a */,
-				0A3BF708523D68767240C7F1 /* libPods-PushUpsTests.a */,
+				DAD523ABA3227D389BE54D84 /* Pods_PushUps.framework */,
+				1478C4E8690711CAF58D1046 /* Pods_PushUpsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -387,6 +463,48 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				984885C01DDE5EA7002F7D73 /* ABNumberFormatter.swift */,
+				984885C11DDE5EA7002F7D73 /* BarLineChartViewBaseExtension.swift */,
+				984885C21DDE5EA7002F7D73 /* chartDataHelpers.swift */,
+				984885C31DDE5EA7002F7D73 /* ChartViewBaseExtension.swift */,
+				984885C41DDE5EA7002F7D73 /* PieRadarChartViewBaseExtension.swift */,
+				984885C51DDE5EA7002F7D73 /* RCTIOSCharts-Bridging-Header.h */,
+				984885C61DDE5EA7002F7D73 /* RNBarChart.h */,
+				984885C71DDE5EA7002F7D73 /* RNBarChart.m */,
+				984885C81DDE5EA7002F7D73 /* RNBarChart.swift */,
+				984885C91DDE5EA7002F7D73 /* RNBarChartManager.swift */,
+				984885CA1DDE5EA7002F7D73 /* RNBubbleChart.h */,
+				984885CB1DDE5EA7002F7D73 /* RNBubbleChart.m */,
+				984885CC1DDE5EA7002F7D73 /* RNBubbleChart.swift */,
+				984885CD1DDE5EA7002F7D73 /* RNBubbleChartManager.swift */,
+				984885CE1DDE5EA7002F7D73 /* RNCandleChartManager.swift */,
+				984885CF1DDE5EA8002F7D73 /* RNCandleStickChart.h */,
+				984885D01DDE5EA8002F7D73 /* RNCandleStickChart.m */,
+				984885D11DDE5EA8002F7D73 /* RNCandleStickChart.swift */,
+				984885D21DDE5EA8002F7D73 /* RNCombinedChart.h */,
+				984885D31DDE5EA8002F7D73 /* RNCombinedChart.m */,
+				984885D41DDE5EA8002F7D73 /* RNCombinedChart.swift */,
+				984885D51DDE5EA8002F7D73 /* RNCombinedChartManager.swift */,
+				984885D61DDE5EA8002F7D73 /* RNHorizontalBarChart.h */,
+				984885D71DDE5EA8002F7D73 /* RNHorizontalBarChart.m */,
+				984885D81DDE5EA8002F7D73 /* RNHorizontalBarChart.swift */,
+				984885D91DDE5EA8002F7D73 /* RNHorizontalBarChartManager.swift */,
+				984885DA1DDE5EA8002F7D73 /* RNLineChart.h */,
+				984885DB1DDE5EA8002F7D73 /* RNLineChart.m */,
+				984885DC1DDE5EA8002F7D73 /* RNLineChart.swift */,
+				984885DD1DDE5EA8002F7D73 /* RNLineChartManager.swift */,
+				984885DE1DDE5EA8002F7D73 /* RNPieChart.h */,
+				984885DF1DDE5EA8002F7D73 /* RNPieChart.m */,
+				984885E01DDE5EA8002F7D73 /* RNPieChart.swift */,
+				984885E11DDE5EA8002F7D73 /* RNPieChartManager.swift */,
+				984885E21DDE5EA8002F7D73 /* RNRadarChart.h */,
+				984885E31DDE5EA8002F7D73 /* RNRadarChart.m */,
+				984885E41DDE5EA8002F7D73 /* RNRadarChart.swift */,
+				984885E51DDE5EA8002F7D73 /* RNRadarChartManager.swift */,
+				984885E61DDE5EA8002F7D73 /* RNScatterChart.h */,
+				984885E71DDE5EA8002F7D73 /* RNScatterChart.m */,
+				984885E81DDE5EA8002F7D73 /* RNScatterChart.swift */,
+				984885E91DDE5EA8002F7D73 /* RNScatterChartManager.swift */,
 				98D028451DB671080033330B /* RNSound.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -551,6 +669,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = BL8K474E8E;
+						LastSwiftMigration = 810;
 					};
 				};
 			};
@@ -901,7 +1020,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				984885F31DDE5EA8002F7D73 /* RNBubbleChart.swift in Sources */,
+				984885F81DDE5EA8002F7D73 /* RNCombinedChart.m in Sources */,
+				984885F61DDE5EA8002F7D73 /* RNCandleStickChart.m in Sources */,
+				984885F91DDE5EA8002F7D73 /* RNCombinedChart.swift in Sources */,
+				984885EB1DDE5EA8002F7D73 /* BarLineChartViewBaseExtension.swift in Sources */,
+				984885F21DDE5EA8002F7D73 /* RNBubbleChart.m in Sources */,
+				984885FE1DDE5EA8002F7D73 /* RNLineChart.m in Sources */,
+				984886011DDE5EA8002F7D73 /* RNPieChart.m in Sources */,
+				984885EE1DDE5EA8002F7D73 /* PieRadarChartViewBaseExtension.swift in Sources */,
+				984885F11DDE5EA8002F7D73 /* RNBarChartManager.swift in Sources */,
+				984885FD1DDE5EA8002F7D73 /* RNHorizontalBarChartManager.swift in Sources */,
+				984885F41DDE5EA8002F7D73 /* RNBubbleChartManager.swift in Sources */,
+				984885F01DDE5EA8002F7D73 /* RNBarChart.swift in Sources */,
+				984886091DDE5EA8002F7D73 /* RNScatterChartManager.swift in Sources */,
+				984886061DDE5EA8002F7D73 /* RNRadarChartManager.swift in Sources */,
+				984886081DDE5EA8002F7D73 /* RNScatterChart.swift in Sources */,
+				984885F51DDE5EA8002F7D73 /* RNCandleChartManager.swift in Sources */,
+				984885EC1DDE5EA8002F7D73 /* chartDataHelpers.swift in Sources */,
+				984885FF1DDE5EA8002F7D73 /* RNLineChart.swift in Sources */,
+				984885F71DDE5EA8002F7D73 /* RNCandleStickChart.swift in Sources */,
+				984886041DDE5EA8002F7D73 /* RNRadarChart.m in Sources */,
+				984886071DDE5EA8002F7D73 /* RNScatterChart.m in Sources */,
+				984886021DDE5EA8002F7D73 /* RNPieChart.swift in Sources */,
+				984885ED1DDE5EA8002F7D73 /* ChartViewBaseExtension.swift in Sources */,
+				984885FB1DDE5EA8002F7D73 /* RNHorizontalBarChart.m in Sources */,
+				984885EA1DDE5EA8002F7D73 /* ABNumberFormatter.swift in Sources */,
+				984886031DDE5EA8002F7D73 /* RNPieChartManager.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				984885EF1DDE5EA8002F7D73 /* RNBarChart.m in Sources */,
+				984886001DDE5EA8002F7D73 /* RNLineChartManager.swift in Sources */,
+				984885FA1DDE5EA8002F7D73 /* RNCombinedChartManager.swift in Sources */,
+				984886051DDE5EA8002F7D73 /* RNRadarChart.swift in Sources */,
+				984885FC1DDE5EA8002F7D73 /* RNHorizontalBarChart.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -933,6 +1084,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 34CA814DC4CDEAB325772D97 /* Pods-PushUpsTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = BL8K474E8E;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -944,6 +1096,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -964,6 +1119,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EFB0829F765F75A2791FC772 /* Pods-PushUpsTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = BL8K474E8E;
@@ -972,6 +1128,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -993,6 +1152,7 @@
 			baseConfigurationReference = CD630BDB0C95A371513A906C /* Pods-PushUps.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = BL8K474E8E;
@@ -1004,6 +1164,9 @@
 					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 					"$(SRCROOT)/../node_modules/react-native-proximity/RNProximity/RNProximity",
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 				INFOPLIST_FILE = PushUps/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -1015,6 +1178,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.digitalcompile.pushup;
 				PRODUCT_NAME = PushUps;
+				SWIFT_OBJC_BRIDGING_HEADER = "PushUps-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1024,6 +1190,7 @@
 			baseConfigurationReference = 4DCA1D8E45E9110EC9ED54EE /* Pods-PushUps.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BL8K474E8E;
 				HEADER_SEARCH_PATHS = (
@@ -1034,6 +1201,9 @@
 					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 					"$(SRCROOT)/../node_modules/react-native-proximity/RNProximity/RNProximity",
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 				INFOPLIST_FILE = PushUps/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -1045,6 +1215,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.digitalcompile.pushup;
 				PRODUCT_NAME = PushUps;
+				SWIFT_OBJC_BRIDGING_HEADER = "PushUps-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1096,11 +1268,15 @@
 					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 					"$(SRCROOT)/../node_modules/react-native-proximity/RNProximity/RNProximity",
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -1144,10 +1320,14 @@
 					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 					"$(SRCROOT)/../node_modules/react-native-proximity/RNProximity/RNProximity",
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

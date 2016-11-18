@@ -4,8 +4,30 @@ import {
   SET_KEY,
   GET_KEY,
   REMOVE_KEY,
+  MERGE_KEY,
   storageAsync,
 } from '../lib/storageAsync';
+
+function saveStatisticsAsync(statistics, mode) {
+  const actionTypes = [
+    types.STATISTICS_SAVE_ATTEMPT,
+    types.STATISTICS_SAVE_SUCCESS,
+    types.STATISTICS_SAVE_FAILURE,
+  ];
+
+  const statisticsJson = JSON.stringify(statistics);
+
+  return storageAsync(
+    storage.STATISTICS,
+    actionTypes,
+    mode,
+    statisticsJson
+  );
+}
+
+function mergeStatisticsAsync(more) {
+  return saveStatisticsAsync(more, MERGE_KEY);
+}
 
 export function fetchStatisticsAsync() {
   const actionTypes = [
@@ -31,24 +53,19 @@ export function setStatisticsAsync(total, record, calories, timeElapsed) {
   return (dispatch, getState) => {
     dispatch(setStatistics(total, record, calories, timeElapsed));
 
-    const actionTypes = [
-      types.STATISTICS_SAVE_ATTEMPT,
-      types.STATISTICS_SAVE_SUCCESS,
-      types.STATISTICS_SAVE_FAILURE,
-    ];
+    debugger;
 
     const state = getState();
 
     const data = {
-      total: state.total,
-      record: state.record,
-      calories: state.calories,
-      timeElapsed: state.timeElapsed,
+      total: state.statistics.total,
+      record: state.statistics.record,
+      calories: state.statistics.calories,
+      timeElapsed: state.statistics.timeElapsed,
+      chartData: state.statistics.chartData,
     };
 
-    const dataJson = JSON.stringify(data);
-
-    dispatch(storageAsync(storage.STATISTICS, actionTypes, SET_KEY, dataJson));
+    dispatch(saveStatisticsAsync(data, SET_KEY));
   };
 }
 
@@ -61,3 +78,11 @@ export function removeStatisticsAsync() {
 
   return storageAsync(storage.STATISTICS, actionTypes, REMOVE_KEY);
 }
+
+const dispatchStatisticsAsync = (dispatch, getState) => {
+  const state = getState().more;
+  dispatch(mergeStatisticsAsync(state));
+};
+
+export const previousYear = () => ({ type: types.STATISTICS_PREVIOUS_YEAR });
+export const nextYear = () => ({ type: types.STATISTICS_NEXT_YEAR });

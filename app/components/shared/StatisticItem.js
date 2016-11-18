@@ -8,6 +8,7 @@ import {
 import {
   BASE_FONT_FAMILY_IOS,
   FADE_COLOR,
+  LINE_COLOR,
 } from '../../theme/style';
 
 const styles = StyleSheet.create({
@@ -26,16 +27,18 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
   },
-  iconComponentWrapper: {
-    height: 14,
-    width: 14,
-    paddingTop: 2,
+  rightBorder: {
+    borderRightColor: LINE_COLOR,
+    borderRightWidth: 1,
   },
 });
 
 export default props => (
   <View
-    style={styles.wrapper}
+    style={[
+      styles.wrapper,
+      typeof props.displayRightBorder !== 'undefined' ? styles.rightBorder : {},
+    ]}
   >
     <Text
       style={[
@@ -52,11 +55,6 @@ export default props => (
           { color: props.propertyColorStyle },
         ]}
       >
-        <View
-          style={styles.iconComponentWrapper}
-        >
-          {props.iconComponent}
-        </View>
         {props.property}
       </Text>
     </View>

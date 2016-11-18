@@ -7,9 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import StatisticItem from './StatisticItem';
+import StatisticItem from '../shared/StatisticItem';
 import {
   isProEnabled,
   upgrade,
@@ -25,7 +23,6 @@ import {
 } from '../../theme/style';
 import Instruction from '../shared/Instruction';
 import Pro from '../shared/Pro';
-import getIconJsx from '../../lib/icon';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -129,10 +126,6 @@ export default (props) => {
   const totalReps = 124;
   const totalDays = selectedProgram.days.length;
 
-  const iconStyle = [14, FADE_COLOR];
-  const repsIconJsx = getIconJsx(Icon, 'repeat', ...iconStyle);
-  const daysIconJsx = getIconJsx(Icon, 'today', ...iconStyle);
-
   return (
     <View
       style={styles.wrapper}
@@ -161,24 +154,17 @@ export default (props) => {
         <View
           style={styles.middleWrapper}
         >
-          <View
-            style={styles.repsWrapper}
-          >
-            <StatisticItem
-              value={totalReps}
-              property="Reps"
-              iconComponent={repsIconJsx}
-            />
-          </View>
-          <View
-            style={styles.daysWrapper}
-          >
-            <StatisticItem
-              value={totalDays}
-              property="Days"
-              iconComponent={daysIconJsx}
-            />
-          </View>
+          <StatisticItem
+            value={totalReps}
+            property="Reps"
+            propertyColorStyle={FADE_COLOR}
+            displayRightBorder
+          />
+          <StatisticItem
+            value={totalDays}
+            propertyColorStyle={FADE_COLOR}
+            property="Days"
+          />
         </View>
         <View
           style={styles.bottomWrapper}

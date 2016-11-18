@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import moreInitialState from '../../lib/initialState';
+import { combinedMoreInitialState } from '../../lib/initialState';
 import BaseScreen from '../../theme/BaseScreen';
 import { BASE_FONT_FAMILY_IOS } from '../../theme/style';
 
@@ -28,11 +28,12 @@ const styles = StyleSheet.create({
 const fetchAsync = (props) => {
   props.fetchSelectedProgramAsync();
   props.fetchExerciseStateAsync();
+  props.fetchStatisticsAsync();
   props.fetchMoreAsync();
 };
 
 const setAsync = (props) => {
-  props.setMoreAsync(moreInitialState);
+  props.setMoreAsync(combinedMoreInitialState);
 };
 
 export default class LoadingScreen extends Component {
