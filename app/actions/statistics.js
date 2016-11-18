@@ -53,8 +53,6 @@ export function setStatisticsAsync(total, record, calories, timeElapsed) {
   return (dispatch, getState) => {
     dispatch(setStatistics(total, record, calories, timeElapsed));
 
-    debugger;
-
     const state = getState();
 
     const data = {
@@ -63,6 +61,7 @@ export function setStatisticsAsync(total, record, calories, timeElapsed) {
       calories: state.statistics.calories,
       timeElapsed: state.statistics.timeElapsed,
       chartData: state.statistics.chartData,
+      selectedYearChartData: state.statistics.selectedYearChartData,
     };
 
     dispatch(saveStatisticsAsync(data, SET_KEY));

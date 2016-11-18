@@ -36,6 +36,7 @@ import {
 import navigateReset from '../../lib/navigator';
 import getIconJsx from '../../lib/icon';
 import format from '../../lib/format';
+import abortTraining from '../../lib/abortTraining';
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
@@ -254,11 +255,17 @@ const getRepsJsx = exercise => exercise.sets.map((set, index) => {
   );
 });
 
-const saveStatisticsAsync = (props) => {
+const SESSION_REPS_COMPLETED = 'SESSION_REPS_COMPLETED';
+const REPS_COMPLETED = 'REPS_COMPLETED';
+
+const saveStatisticsAsync = (props, mode) => {
   const { exercise } = props;
 
+  const repsCompleted = mode === SESSION_REPS_COMPLETED ?
+    exercise.sessionRepsCompleted : exercise.repsCompleted;
+
   props.setStatisticsAsync(
-    exercise.repsCompleted,
+    repsCompleted,
     10, // Record
     exercise.calories,
     exercise.timeElapsed
@@ -288,10 +295,11 @@ const initSound = (props) => {
 };
 
 const cleanUpState = (props) => {
+  debugger;
   const { exercise } = props;
 
   // Save statistics
-  saveStatisticsAsync(props);
+  saveStatisticsAsync(props, REPS_COMPLETED);
 
   // Save program
   props.setCompleteProgramStateAsync(exercise.sessionRepsCompleted, exercise.repsAdded);
@@ -310,6 +318,8 @@ const FADE_COLOR = '#CCCCCC';
 
 const onPressActions = {
   saveExerciseSaveClose: (props) => {
+    saveStatisticsAsync(props, SESSION_REPS_COMPLETED);
+
     props.setProgramSaveCloseAsync(
       props.exercise.sessionRepsCompleted,
       props.exercise.repsAdded,
@@ -473,7 +483,7 @@ export default class ActivityScreen extends Component {
               lastItem
               text="Abort Training"
               iconJsx={abortIconJsx}
-              //onPress={() => abortTraining(props)}
+              onPress={() => abortTraining(this.props, () => navigateReset(this.props))}
             />
           </Button>
         </ScrollView>

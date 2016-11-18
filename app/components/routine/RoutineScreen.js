@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Alert,
+  Text,
   Image,
 } from 'react-native';
 
@@ -12,13 +13,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Button from '../shared/Button';
 import ProgramInfoItem from './ProgramInfoItem';
 
+import abortTraining from '../../lib/abortTraining';
 import getIconJsx from '../../lib/icon';
 
 import {
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
+  BASE_FONT_FAMILY_IOS,
 } from '../../theme/style';
-import { PROGRAM_ACTIVE } from '../../lib/constants';
+import { PROGRAM_COMPLETE } from '../../lib/constants';
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
@@ -37,8 +40,17 @@ const styles = StyleSheet.create({
     paddingRight: BASE_PADDING_RIGHT,
     paddingTop: 8,
     paddingBottom: 8,
+  },
+  programInfoWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  noProgramWrapper: { alignItems: 'center' },
+  noProgramText: {
+    color: 'white',
+    fontSize: 12,
+    fontFamily: BASE_FONT_FAMILY_IOS,
+    fontWeight: 'bold',
   },
 });
 
@@ -66,28 +78,6 @@ const onPressActions = {
 
     props.navigateReset('ActivityContainer');
   },
-  abortTraining: (props) => {
-    const onAbort = () => {
-      props.removeSelectedProgramAsync();
-      props.removeExerciseStateAsync();
-    };
-
-    Alert.alert(
-      'Confirmation',
-      'Are you sure you want to abort training?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Abort',
-          onPress: () => onAbort(props),
-          style: 'destructive',
-        },
-      ]
-    );
-  },
 };
 
 const getProgress = (props) => {
@@ -103,17 +93,129 @@ const getProgress = (props) => {
   return ret > MAX_PERCENT ? MAX_PERCENT : ret;
 };
 
-export default (props) => {
+const getButtonJsx = (props) => {
   const { program } = props;
 
-  const {
-    continueTraining,
-    abortTraining,
-  } = onPressActions;
+  if (program.status === PROGRAM_COMPLETE || !program.isProgramFound) {
+    const selectProgramIconJsx = getIconJsx(Icon, 'play-circle-filled');
+
+    return (
+      <Button>
+        <Button.Item
+          text="Select Program"
+          iconJsx={selectProgramIconJsx}
+          onPress={() => props.setTab(1)}
+        />
+      </Button>
+    );
+  }
 
   const continueTrainingIconJsx = getIconJsx(Icon, 'play-circle-filled');
   const instructionsIconJsx = getIconJsx(Icon, 'assistant');
   const abortTrainingIconJsx = getIconJsx(Icon, 'stop');
+
+  const { continueTraining } = onPressActions;
+
+  return (
+    <Button>
+      <Button.Item
+        text="Continue Training"
+        iconJsx={continueTrainingIconJsx}
+        onPress={() => continueTraining(props)}
+      />
+      <Button.Item
+        text="Instructions"
+        iconJsx={instructionsIconJsx}
+        //onPress={() => continueTraining(props)}
+      />
+      <Button.Item
+        lastItem
+        text="Abort Training"
+        iconJsx={abortTrainingIconJsx}
+        onPress={() => abortTraining(props)}
+      />
+    </Button>
+  );
+};
+
+const getRenderJsx = (props) => {
+  const { program } = props;
+
+  if (program.isProgramFound) {
+    const { name } = program.exercise;
+    const {
+      day,
+      repsCompleted,
+    } = program;
+
+    const progress = getProgress(props);
+    const progressFormat = `${progress}%`;
+
+    return {
+      statsJsx:
+      (
+        <View
+          style={styles.programInfoWrapper}
+        >
+          <ProgramInfoItem
+            property="Program"
+            value={name}
+          />
+          <ProgramInfoItem
+            property="Day"
+            value={day}
+          />
+          <ProgramInfoItem
+            property="Reps"
+            value={repsCompleted}
+          />
+          <ProgramInfoItem
+            property="Progress"
+            value={progressFormat}
+          />
+        </View>
+      ),
+      buttonsJsx: getButtonJsx(props),
+    };
+  } else if (!program.isViewRender) {
+    return {
+      statsJsx:
+      (
+        <View />
+      ),
+      buttonsJsx:
+      (
+        <View />
+      ),
+    };
+  }
+
+  return {
+    statsJsx:
+    (
+      <View
+        style={styles.noProgramWrapper}
+      >
+        <Text
+          style={styles.noProgramText}
+        >
+          No program selected
+        </Text>
+      </View>
+    ),
+    buttonsJsx: getButtonJsx(props),
+  };
+};
+
+export default (props) => {
+  const { program } = props;
+
+  const renderJsx = getRenderJsx(props);
+
+  const {
+    statsJsx,
+    buttonsJsx,
+  } = renderJsx;
 
   return (
     <View
@@ -131,22 +233,7 @@ export default (props) => {
             <View
               style={styles.statsWrapper}
             >
-              <ProgramInfoItem
-                property="Program"
-                value="Expert Level 2"
-              />
-              <ProgramInfoItem
-                property="Day"
-                value="2"
-              />
-              <ProgramInfoItem
-                property="Reps"
-                value="12"
-              />
-              <ProgramInfoItem
-                property="Progress"
-                value="88%"
-              />
+              {statsJsx}
             </View>
           </View>
         </Image>
@@ -155,24 +242,7 @@ export default (props) => {
       <ScrollView
         style={styles.bottomContainer}
       >
-        <Button>
-          <Button.Item
-            text="Continue Training"
-            iconJsx={continueTrainingIconJsx}
-            onPress={() => continueTraining(props)}
-          />
-          <Button.Item
-            text="Instructions"
-            iconJsx={instructionsIconJsx}
-            onPress={() => continueTraining(props)}
-          />
-          <Button.Item
-            lastItem
-            text="Abort Training"
-            iconJsx={abortTrainingIconJsx}
-            onPress={() => abortTraining(props)}
-          />
-        </Button>
+        {buttonsJsx}
       </ScrollView>
     </View>
   );

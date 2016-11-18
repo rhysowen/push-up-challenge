@@ -124,6 +124,7 @@ export default createReducer(combinedStatisticInitialState, {
   },
   [types.STATISTICS_SET](state, action) {
     const chartData = getChartData(state, action.payload.total);
+    const selectedYearChartData = getSelectedYearChartData(state.selectedYear, chartData);
 
     return Object.assign(
       {},
@@ -134,7 +135,7 @@ export default createReducer(combinedStatisticInitialState, {
         calories: state.calories + action.payload.calories,
         timeElapsed: state.timeElapsed + action.payload.timeElapsed,
         chartData,
-        selectedChartData: getSelectedYearChartData(state.selectedYear, chartData),
+        selectedYearChartData,
       }
     );
   },

@@ -2,7 +2,6 @@ import { Linking } from 'react-native';
 
 export default url => (
   Linking.canOpenURL(url).then((supported) => {
-    debugger;
     if (supported) {
       return Linking.openURL(url);
     }
