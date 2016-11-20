@@ -30,6 +30,7 @@
 		6FD8C46E98524CA09EBD3901 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CA68A0F37A04FC4A5B4915F /* MaterialIcons.ttf */; };
 		704A3E413CD34F528AE14E80 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A85FCDF83A74124B5A93F57 /* Foundation.ttf */; };
 		71C3C45190CB4379B05AFAF2 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60A2C3E9FE9A4405A9364732 /* Zocial.ttf */; };
+		82C4D85C16CB43028BE81456 /* libKCKeepAwake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B35A20AF212A4B21B0A99DB2 /* libKCKeepAwake.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		95F064F57B564048B05E0DE3 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F762E974DED64E549F3403D0 /* Ionicons.ttf */; };
 		984885EA1DDE5EA8002F7D73 /* ABNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885C01DDE5EA7002F7D73 /* ABNumberFormatter.swift */; };
@@ -153,6 +154,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
+		};
+		983385501DE21D7400242F23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC69B72EF2134256BE5740BB /* KCKeepAwake.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = KCKeepAwake;
 		};
 		986A2B4B1DC95EEE0051CACF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -282,11 +290,13 @@
 		A7B0340C4A624606A2B369FE /* libRNAdMobManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAdMobManager.a; sourceTree = "<group>"; };
 		A8B4226D403D4A8885E8C72B /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		ABC575A1011D4BF3813EF277 /* InAppUtils.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = InAppUtils.xcodeproj; path = "../node_modules/react-native-in-app-utils/InAppUtils.xcodeproj"; sourceTree = "<group>"; };
+		B35A20AF212A4B21B0A99DB2 /* libKCKeepAwake.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libKCKeepAwake.a; sourceTree = "<group>"; };
 		C63696D9671945C6B5CE3518 /* libRNProximity.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNProximity.a; sourceTree = "<group>"; };
 		CD630BDB0C95A371513A906C /* Pods-PushUps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushUps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PushUps/Pods-PushUps.debug.xcconfig"; sourceTree = "<group>"; };
 		DAD523ABA3227D389BE54D84 /* Pods_PushUps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PushUps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A0238DACD34FBF9A4FA62E /* RNProximity.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNProximity.xcodeproj; path = "../node_modules/react-native-proximity/RNProximity/RNProximity.xcodeproj"; sourceTree = "<group>"; };
 		E9F53533A38A452D8B2E503F /* libInAppUtils.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInAppUtils.a; sourceTree = "<group>"; };
+		EC69B72EF2134256BE5740BB /* KCKeepAwake.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = KCKeepAwake.xcodeproj; path = "../node_modules/react-native-keep-awake/ios/KCKeepAwake.xcodeproj"; sourceTree = "<group>"; };
 		EFB0829F765F75A2791FC772 /* Pods-PushUpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushUpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PushUpsTests/Pods-PushUpsTests.release.xcconfig"; sourceTree = "<group>"; };
 		F2FA180C56054604A8309201 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		F762E974DED64E549F3403D0 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
@@ -322,6 +332,7 @@
 				DE309536CA2E4958BAFDB63E /* libRNProximity.a in Frameworks */,
 				252E6FBE0B2B426BAC6A6388 /* libInAppUtils.a in Frameworks */,
 				666986E0566E39B6CAA888A6 /* Pods_PushUps.framework in Frameworks */,
+				82C4D85C16CB43028BE81456 /* libKCKeepAwake.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +531,7 @@
 				41FEB2BFC9B34714A38BEC4D /* RNAdMobManager.xcodeproj */,
 				E7A0238DACD34FBF9A4FA62E /* RNProximity.xcodeproj */,
 				ABC575A1011D4BF3813EF277 /* InAppUtils.xcodeproj */,
+				EC69B72EF2134256BE5740BB /* KCKeepAwake.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -552,6 +564,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* PushUps.app */,
 				00E356EE1AD99517003FC87E /* PushUpsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9833854B1DE21D7400242F23 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				983385511DE21D7400242F23 /* libKCKeepAwake.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -659,7 +679,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -688,6 +708,10 @@
 				{
 					ProductGroup = 986A2B781DCD82070051CACF /* Products */;
 					ProjectRef = ABC575A1011D4BF3813EF277 /* InAppUtils.xcodeproj */;
+				},
+				{
+					ProductGroup = 9833854B1DE21D7400242F23 /* Products */;
+					ProjectRef = EC69B72EF2134256BE5740BB /* KCKeepAwake.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -823,6 +847,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		983385511DE21D7400242F23 /* libKCKeepAwake.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKCKeepAwake.a;
+			remoteRef = 983385501DE21D7400242F23 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		986A2B4C1DC95EEE0051CACF /* libRNProximity.a */ = {
@@ -1103,6 +1134,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1135,6 +1167,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1151,6 +1184,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD630BDB0C95A371513A906C /* Pods-PushUps.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1167,6 +1201,7 @@
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-keep-awake/ios",
 				);
 				INFOPLIST_FILE = PushUps/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -1189,6 +1224,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4DCA1D8E45E9110EC9ED54EE /* Pods-PushUps.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1204,6 +1240,7 @@
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-keep-awake/ios",
 				);
 				INFOPLIST_FILE = PushUps/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -1271,6 +1308,7 @@
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-keep-awake/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1323,11 +1361,13 @@
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-keep-awake/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

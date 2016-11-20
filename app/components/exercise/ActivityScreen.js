@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import KeepAwake from 'react-native-keep-awake';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Sound from 'react-native-sound';
 import Proximity from 'react-native-proximity';
@@ -295,7 +296,6 @@ const initSound = (props) => {
 };
 
 const cleanUpState = (props) => {
-  debugger;
   const { exercise } = props;
 
   // Save statistics
@@ -337,14 +337,18 @@ const onPressActions = {
 
     navigateReset(props);
   },
+  nextSet: (props) => {
+    props.nextSet();
+  },
 };
 
 export default class ActivityScreen extends Component {
 
   componentDidMount() {
     this.props.setTimeElapsedIntervalId(setInterval(this.props.timerElapsedTimeIncrease, 1000));
-
     Proximity.addListener(this.props.setProximity);
+
+    KeepAwake.activate();
   }
 
   componentDidUpdate() {
@@ -370,6 +374,8 @@ export default class ActivityScreen extends Component {
     cleanUpTimers(this.props);
 
     Proximity.removeListener(this.props.setProximity);
+
+    KeepAwake.deactivate();
   }
 
   render() {
@@ -378,7 +384,10 @@ export default class ActivityScreen extends Component {
       sets,
       totalRepsRemaining,
     } = exercise;
-    const { saveExerciseSaveClose } = onPressActions;
+    const {
+      saveExerciseSaveClose,
+      nextSet,
+    } = onPressActions;
 
     const activeState = getActiveStateTitle(exercise);
     const activeDigit = getActiveDigit(exercise);
@@ -472,7 +481,7 @@ export default class ActivityScreen extends Component {
             <Button.Item
               text="Next Set"
               iconJsx={nextSetIconJsx}
-              //onPress={() => continueTraining(props)}
+              onPress={() => nextSet(this.props)}
             />
             <Button.Item
               text="Save & Close"

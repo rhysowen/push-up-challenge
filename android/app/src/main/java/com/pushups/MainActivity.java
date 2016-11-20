@@ -1,6 +1,7 @@
 package com.pushups;
 
 import com.facebook.react.ReactActivity;
+import com.corbt.keepawake.KCKeepAwakePackage;
 import com.horcrux.svg.RNSvgPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.sbugert.rnadmob.RNAdMobPackage;
