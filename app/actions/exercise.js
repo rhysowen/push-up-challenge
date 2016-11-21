@@ -51,7 +51,8 @@ export function setExerciseSaveCloseAsync(
     repsCompleted,
     set,
     day,
-    record
+    record,
+    repCountSet
   ) {
   const exerciseState = {
     timeElapsed,
@@ -60,6 +61,7 @@ export function setExerciseSaveCloseAsync(
     set,
     day,
     record,
+    repCountSet,
   };
 
   return saveExerciseStateAsync(exerciseState, SET_KEY);

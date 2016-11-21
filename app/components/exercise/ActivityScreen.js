@@ -121,6 +121,7 @@ const onPressActions = {
       props.exercise.set,
       props.exercise.day,
       props.exercise.record,
+      props.exercise.repCountSet,
     );
 
     props.cleanExercise();

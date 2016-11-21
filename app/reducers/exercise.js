@@ -206,6 +206,7 @@ export default createReducer(exerciseInitialState, {
         repsCompleted: exerciseObj.repsCompleted,
         set: exerciseObj.set,
         record: exerciseObj.record,
+        repCountSet: exerciseObj.repCountSet,
       };
     } else {
       ret = {
@@ -214,6 +215,7 @@ export default createReducer(exerciseInitialState, {
         repsCompleted: state.repsCompleted,
         set: state.set,
         record: state.record,
+        repCountSet: state.repCountSet,
       };
     }
 
@@ -228,6 +230,7 @@ export default createReducer(exerciseInitialState, {
         repsCompleted: ret.repsCompleted,
         set: ret.set,
         record: ret.record,
+        repCountSet: ret.repCountSet,
       }
     );
   },
@@ -275,7 +278,6 @@ export default createReducer(exerciseInitialState, {
     const repsCompleted = state.repsCompleted + state.rep;
     const sessionRepsCompleted = state.sessionRepsCompleted + state.rep;
 
-    debugger;
     const totalReps = state.rep + state.repCountSet;
     const record = getRecord(totalReps, state.record);
     const repCountSet = 0;
