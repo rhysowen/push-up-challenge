@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Content = (props) => (
+const Content = props => (
   <BaseScreen>
     <ScrollView
       style={styles.scrollWrapper}
