@@ -8,6 +8,7 @@ import {
 
 import { HorizontalBarChart } from 'react-native-ios-charts';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import _ from 'lodash';
 
 import {
   BASE_PADDING_LEFT,
@@ -20,6 +21,7 @@ import {
 import BaseScreen from '../../theme/BaseScreen';
 import StatisticItem from '../shared/StatisticItem';
 import getIconJsx from '../../lib/icon';
+import { DEFAULT_MONTHS_ARRAY } from '../../lib/constants';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -128,8 +130,12 @@ const getRenderJsx = (props) => {
   const { statistics } = props;
 
   const chartConfig = getChartConfig(props);
+  const isDefaultMonthEqualDataMonth =
+    _.isEqual(DEFAULT_MONTHS_ARRAY, statistics.selectedYearChartData);
 
-  const isChartShow = statistics.isViewRender && statistics.selectedYearChartData.length > 0;
+  const isChartShow = statistics.isViewRender &&
+    statistics.selectedYearChartData.length > 0 &&
+    !isDefaultMonthEqualDataMonth;
 
   if (isChartShow) {
     return (

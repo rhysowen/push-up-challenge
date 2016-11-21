@@ -1,6 +1,7 @@
 import createReducer from '../lib/createReducer';
-import * as types from '../actions/types';
+import { DEFAULT_MONTHS_ARRAY } from '../lib/constants';
 import { combinedStatisticInitialState } from '../lib/initialState';
+import * as types from '../actions/types';
 
 const getSelectedYearChartData = (selectedYear, chartData) => {
   const selectedYearDate = selectedYear.getFullYear();
@@ -56,7 +57,7 @@ const getChartData = (state, totalReps) => {
 
     ret.push(currentYearObj);
   } else {
-    const monthArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const monthArray = DEFAULT_MONTHS_ARRAY.slice();
     monthArray[currentMonth] = totalReps;
 
     ret.push({
