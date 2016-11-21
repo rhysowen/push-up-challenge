@@ -1,5 +1,8 @@
 import * as types from './types';
-import { EXERCISE_ABORT } from '../lib/constants';
+import {
+  EXERCISE_ACTIVE,
+  EXERCISE_ABORT,
+} from '../lib/constants';
 import * as storage from '../lib/storage';
 import {
   SET_KEY,
@@ -42,13 +45,21 @@ export function cleanExercise() {
   return { type: types.EXERCISE_CLEAN };
 }
 
-export function setExerciseSaveCloseAsync(timeElapsed, rep, repsCompleted, set, day) {
+export function setExerciseSaveCloseAsync(
+    timeElapsed,
+    rep,
+    repsCompleted,
+    set,
+    day,
+    record
+  ) {
   const exerciseState = {
     timeElapsed,
     rep,
     repsCompleted,
     set,
     day,
+    record,
   };
 
   return saveExerciseStateAsync(exerciseState, SET_KEY);
@@ -89,9 +100,7 @@ export function setSets(sets) {
 }
 
 export function nextSet() {
-  return {
-    type: types.EXERCISE_NEXT_SET,
-  };
+  return { type: types.EXERCISE_NEXT_SET };
 }
 
 export function incrementRep() {
@@ -153,6 +162,10 @@ export function timerElapsedTimeIncrease() {
 
 export function abort() {
   return setMode(EXERCISE_ABORT);
+}
+
+export function skipRestMode() {
+  return setMode(EXERCISE_ACTIVE);
 }
 
 export function resetExercise() {

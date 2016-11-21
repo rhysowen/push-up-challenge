@@ -17,6 +17,7 @@ import RepItem from './RepItem';
 import Button from '../shared/Button';
 import {
   COLOR_ORANGE,
+  DISABLED_COLOR,
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
@@ -87,11 +88,64 @@ const styles = StyleSheet.create({
     fontSize: 38,
     fontFamily: BASE_FONT_FAMILY_IOS,
   },
-  remaining: {
+  activeText: {
     color: '#333333',
     fontFamily: BASE_FONT_FAMILY_IOS,
   },
 });
+
+const saveStatisticsAsync = (props) => {
+  const { exercise } = props;
+
+  props.setStatisticsAsync(
+    exercise.sessionRepsCompleted,
+    exercise.record,
+    exercise.calories,
+    exercise.timeElapsed
+  );
+};
+
+const onPressActions = {
+  saveExerciseSaveClose: (props) => {
+    saveStatisticsAsync(props);
+
+    props.setProgramSaveCloseAsync(
+      props.exercise.sessionRepsCompleted,
+      props.exercise.repsAdded,
+    );
+
+    props.setExerciseSaveCloseAsync(
+      props.exercise.timeElapsed,
+      props.exercise.rep,
+      props.exercise.repsCompleted,
+      props.exercise.set,
+      props.exercise.day,
+      props.exercise.record,
+    );
+
+    props.cleanExercise();
+
+    navigateReset(props);
+  },
+  setComplete: (props) => {
+    props.nextSet();
+  },
+  addRep: (props) => {
+    props.incrementRep();
+  },
+  activeMode: (props) => {
+    const { exercise } = props;
+
+    switch (exercise.mode) {
+      case EXERCISE_ACTIVE:
+        return props.decrementRep();
+      case EXERCISE_REST:
+        return props.skipRestMode();
+      default:
+        return {};
+    }
+  },
+};
 
 const loadSound = fileName => (
   new Sound(fileName, Sound.MAIN_BUNDLE, (error) => {
@@ -141,15 +195,6 @@ const restSound = {
 const beepSound = {
   file: beep,
   category: BEEP_SOUND_CATEGORY,
-};
-
-// Todo: centralize such code?
-const programReps = (props) => {
-  const { exercise } = props;
-
-  const currentDay = exercise.day;
-
-  return exercise.days[currentDay].sets;
 };
 
 const getActiveStateTitle = (exercise) => {
@@ -219,22 +264,17 @@ const getActiveDigit = (exercise) => {
   }
 };
 
-const getRemainingJsx = (exercise) => {
+const getActiveText = (exercise) => {
   const { mode } = exercise;
 
-  if (mode === EXERCISE_ACTIVE) {
-    return (
-      <Text
-        style={styles.remaining}
-      >
-        Remaining
-      </Text>
-    );
+  switch (mode) {
+    case EXERCISE_ACTIVE:
+      return 'Remaining';
+    case EXERCISE_REST:
+      return 'Tap to Skip';
+    default:
+      return '';
   }
-
-  return (
-    <View />
-  );
 };
 
 const getElapsedFormat = exercise => format(exercise.timeElapsed);
@@ -255,23 +295,6 @@ const getRepsJsx = exercise => exercise.sets.map((set, index) => {
     />
   );
 });
-
-const SESSION_REPS_COMPLETED = 'SESSION_REPS_COMPLETED';
-const REPS_COMPLETED = 'REPS_COMPLETED';
-
-const saveStatisticsAsync = (props, mode) => {
-  const { exercise } = props;
-
-  const repsCompleted = mode === SESSION_REPS_COMPLETED ?
-    exercise.sessionRepsCompleted : exercise.repsCompleted;
-
-  props.setStatisticsAsync(
-    repsCompleted,
-    10, // Record
-    exercise.calories,
-    exercise.timeElapsed
-  );
-};
 
 const cleanUpTimers = (props) => {
   const { exercise } = props;
@@ -299,7 +322,7 @@ const cleanUpState = (props) => {
   const { exercise } = props;
 
   // Save statistics
-  saveStatisticsAsync(props, REPS_COMPLETED);
+  saveStatisticsAsync(props);
 
   // Save program
   props.setCompleteProgramStateAsync(exercise.sessionRepsCompleted, exercise.repsAdded);
@@ -315,32 +338,6 @@ const cleanUpState = (props) => {
 };
 
 const FADE_COLOR = '#CCCCCC';
-
-const onPressActions = {
-  saveExerciseSaveClose: (props) => {
-    saveStatisticsAsync(props, SESSION_REPS_COMPLETED);
-
-    props.setProgramSaveCloseAsync(
-      props.exercise.sessionRepsCompleted,
-      props.exercise.repsAdded,
-    );
-
-    props.setExerciseSaveCloseAsync(
-      props.exercise.timeElapsed,
-      props.exercise.rep,
-      props.exercise.repsCompleted,
-      props.exercise.set,
-      props.exercise.day,
-    );
-
-    props.cleanExercise();
-
-    navigateReset(props);
-  },
-  nextSet: (props) => {
-    props.nextSet();
-  },
-};
 
 export default class ActivityScreen extends Component {
 
@@ -379,25 +376,40 @@ export default class ActivityScreen extends Component {
   }
 
   render() {
-    const { exercise } = this.props;
+    const {
+      exercise,
+      statistics,
+    } = this.props;
+
     const {
       sets,
       totalRepsRemaining,
+      record,
     } = exercise;
+
     const {
       saveExerciseSaveClose,
-      nextSet,
+      addRep,
+      setComplete,
+      activeMode,
     } = onPressActions;
+
+    const recordFormat = record > statistics.record ? record : statistics.record;
 
     const activeState = getActiveStateTitle(exercise);
     const activeDigit = getActiveDigit(exercise);
     const elapsedFormat = getElapsedFormat(exercise);
 
-    const remainingJsx = getRemainingJsx(exercise);
+    const activeText = getActiveText(exercise);
+    const saveCloseText = `Save ${'\u0026'} Close`;
     const repsJsx = getRepsJsx(exercise);
 
-    const addRepIconJsx = getIconJsx(Icon, 'add');
-    const nextSetIconJsx = getIconJsx(Icon, 'queue-play-next');
+    const buttonDisabled = exercise.mode === EXERCISE_REST;
+    const buttonColor = buttonDisabled ? DISABLED_COLOR : COLOR_ORANGE;
+    const iconStyle = [30, buttonColor];
+
+    const addRepIconJsx = getIconJsx(Icon, 'add', ...iconStyle);
+    const setCompleteIconJsx = getIconJsx(Icon, 'done', ...iconStyle);
     const saveCloseIconJsx = getIconJsx(Icon, 'save');
     const abortIconJsx = getIconJsx(Icon, 'close');
 
@@ -436,7 +448,7 @@ export default class ActivityScreen extends Component {
                 propertyColorStyle={FADE_COLOR}
               />
               <StatisticItem
-                value="29"
+                value={recordFormat}
                 property="Record"
                 valueColorStyle="white"
                 propertyColorStyle={FADE_COLOR}
@@ -456,7 +468,7 @@ export default class ActivityScreen extends Component {
         </View>
         <TouchableOpacity
           style={styles.wrapper}
-          onPress={() => this.props.decrementRep()}
+          onPress={() => activeMode(this.props)}
         >
           <View
             style={styles.middleContainer}
@@ -466,7 +478,11 @@ export default class ActivityScreen extends Component {
             >
               {activeDigit}
             </Text>
-            {remainingJsx}
+            <Text
+              style={styles.activeText}
+            >
+              {activeText}
+            </Text>
           </View>
         </TouchableOpacity>
         <ScrollView
@@ -476,15 +492,17 @@ export default class ActivityScreen extends Component {
             <Button.Item
               text="Add Rep"
               iconJsx={addRepIconJsx}
-              onPress={() => this.props.incrementRep()}
+              onPress={() => addRep(this.props)}
+              buttonDisabled={buttonDisabled}
             />
             <Button.Item
-              text="Next Set"
-              iconJsx={nextSetIconJsx}
-              onPress={() => nextSet(this.props)}
+              text="Set Complete"
+              iconJsx={setCompleteIconJsx}
+              onPress={() => setComplete(this.props)}
+              buttonDisabled={buttonDisabled}
             />
             <Button.Item
-              text="Save & Close"
+              text={saveCloseText}
               iconJsx={saveCloseIconJsx}
               onPress={() => saveExerciseSaveClose(this.props)}
             />

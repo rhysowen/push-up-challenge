@@ -9,6 +9,7 @@ import {
 import {
   LINE_COLOR,
   FADE_COLOR,
+  DISABLED_COLOR,
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
     fontFamily: BASE_FONT_FAMILY_IOS,
     color: FADE_COLOR,
   },
+  disabledText: { color: DISABLED_COLOR },
 });
 
 const getWrapperStyle = (lastItem) => {
@@ -50,11 +52,14 @@ const getWrapperStyle = (lastItem) => {
   return wrapper;
 };
 
-const getDescriptionText = (description) => {
+const getDescriptionText = (description, isButtonEnabled) => {
   if (description) {
     return (
       <Text
-        style={styles.description}
+        style={[
+          styles.description,
+          isButtonEnabled ? {} : styles.disabledText,
+        ]}
       >
         {description}
       </Text>
@@ -76,47 +81,68 @@ const getRightJsx = (rightComponent) => {
   );
 };
 
+const getMainJsx = (props, buttonJsx, isButtonEnabled) => {
+  if (isButtonEnabled) {
+    return (
+      <TouchableOpacity
+        onPress={() => props.onPress()}
+      >
+        {buttonJsx}
+      </TouchableOpacity>
+    );
+  }
+
+  return buttonJsx;
+};
+
 export default (props) => {
   const {
     lastItem,
     description,
     rightComponent,
+    buttonDisabled,
   } = props;
 
+  const isButtonEnabled = typeof buttonDisabled === 'undefined' || !buttonDisabled;
   const wrapperStyle = getWrapperStyle(lastItem);
-  const descriptionTextJsx = getDescriptionText(description);
+  const descriptionTextJsx = getDescriptionText(description, isButtonEnabled);
   const rightJsx = getRightJsx(rightComponent);
+
+  const buttonJsx = (
+    <View
+      style={styles.padding}
+    >
+      <View
+        style={styles.itemWrapper}
+      >
+        <View
+          style={styles.iconWrapper}
+        >
+          {props.iconJsx}
+        </View>
+        <View>
+          <Text
+            style={[
+              styles.text,
+              isButtonEnabled ? {} : styles.disabledText,
+            ]}
+          >
+            {props.text}
+          </Text>
+          {descriptionTextJsx}
+        </View>
+        {rightJsx}
+      </View>
+    </View>
+  );
+
+  const mainJsx = getMainJsx(props, buttonJsx, isButtonEnabled);
 
   return (
     <View
       style={wrapperStyle}
     >
-      <TouchableOpacity
-        onPress={() => props.onPress()}
-      >
-        <View
-          style={styles.padding}
-        >
-          <View
-            style={styles.itemWrapper}
-          >
-            <View
-              style={styles.iconWrapper}
-            >
-              {props.iconJsx}
-            </View>
-            <View>
-              <Text
-                style={styles.text}
-              >
-                {props.text}
-              </Text>
-              {descriptionTextJsx}
-            </View>
-            {rightJsx}
-          </View>
-        </View>
-      </TouchableOpacity>
+      {mainJsx}
     </View>
   );
 };

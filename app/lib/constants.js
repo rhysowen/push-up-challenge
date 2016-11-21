@@ -39,6 +39,8 @@ const PRO_DISABLED = 'PRO_DISABLED';
 const PRO_PROGRAM = 'PRO_PROGRAM';
 const FREE_PROGRAM = 'FREE_PROGRAM';
 
+const DEFAULT_MONTHS_ARRAY = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 export {
   APP_NAME,
   APP_VERSION,
@@ -70,4 +72,5 @@ export {
   PRO_DISABLED,
   PRO_PROGRAM,
   FREE_PROGRAM,
+  DEFAULT_MONTHS_ARRAY,
 };

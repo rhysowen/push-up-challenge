@@ -14,7 +14,7 @@ import {
   DISABLE_SOUND,
 } from '../lib/constants';
 
-const TIMER_SECONDS = 5;
+const TIMER_SECONDS = 50;
 
 const exerciseInitialState = {
   isFetching: false,
@@ -37,6 +37,8 @@ const exerciseInitialState = {
   timeElapsed: 0,
   calories: 0,
   totalRepsRemaining: 0,
+  record: 0,
+  repCountSet: 0,
 };
 
 const getCalories = (state) => {
@@ -49,10 +51,52 @@ const getCalories = (state) => {
   return CALORIES_BURNT;
 };
 
+const getModeSoundState = (rep, set, sets, mode) => {
+  const isLastRep = rep - 1 <= 0;
+  const isExerciseComplete = isLastRep && set + 1 === sets.length;
+
+  if (isExerciseComplete) {
+    return {
+      mode: EXERCISE_COMPLETE,
+      sound: EXERCISE_COMPLETE_SOUND,
+    };
+  } else if (isLastRep) {
+    return {
+      mode: EXERCISE_REST,
+      sound: REST_SOUND,
+    };
+  }
+
+  return {
+    mode,
+    sound: BEEP_SOUND,
+  };
+};
+
+const getSoundMode = (mode) => {
+  switch (mode) {
+    case EXERCISE_ACTIVE:
+      return PERFORM_PUSH_UP_SOUND;
+    case EXERCISE_REST:
+      return REST_SOUND;
+    default:
+      return NOT_SET_SOUND;
+  }
+};
+
+const getNextRep = (state) => {
+  const nextSet = state.set + 1;
+  const nextRep = state.sets[nextSet];
+
+  return typeof nextRep !== 'undefined' ? nextRep : 0;
+};
+
+const getRecord = (repCountSet, record) => (
+  record > repCountSet ? record : repCountSet
+);
+
 const getDecrementRepState = (state) => {
-  const nextRep = state.sets[state.set + 1];
-  const isLastRep = state.rep - 1 <= 0;
-  const isExerciseComplete = isLastRep && state.set + 1 === state.sets.length;
+  const nextRep = getNextRep(state);
 
   const {
     rep,
@@ -61,8 +105,9 @@ const getDecrementRepState = (state) => {
     sound,
     sessionRepsCompleted,
     repsCompleted,
-    calories,
     totalRepsRemaining,
+    repCountSet,
+    record,
   } = state;
 
   let repReturn = rep;
@@ -71,37 +116,33 @@ const getDecrementRepState = (state) => {
   let soundReturn = sound;
   let sessionRepsCompletedReturn = sessionRepsCompleted;
   let repsCompletedReturn = repsCompleted;
-  let caloriesReturn = calories;
   let totalRepsRemainingReturn = totalRepsRemaining;
+  let repCountSetReturn = repCountSet;
+  let recordReturn = record;
 
   if (rep > 0) {
     totalRepsRemainingReturn = totalRepsRemaining - 1;
     repsCompletedReturn = repsCompletedReturn += 1;
     sessionRepsCompletedReturn = sessionRepsCompletedReturn += 1;
+
+    repCountSetReturn += 1;
+    recordReturn = getRecord(repCountSetReturn, recordReturn);
   }
 
   if (rep > 1) {
     repReturn = rep - 1;
-  } else if (nextRep !== undefined) {
-    repReturn = nextRep;
   } else {
-    repReturn = 0;
+    repCountSetReturn = 0;
+    repReturn = nextRep;
   }
 
-  if (rep === 1 && nextRep !== undefined) {
+  if (rep === 1 && nextRep > 0) {
     setReturn = set + 1;
   }
 
-  if (isExerciseComplete) {
-    modeReturn = EXERCISE_COMPLETE;
-    soundReturn = EXERCISE_COMPLETE_SOUND;
-    caloriesReturn = getCalories(state);
-  } else if (isLastRep) {
-    modeReturn = EXERCISE_REST;
-    soundReturn = REST_SOUND;
-  } else {
-    soundReturn = BEEP_SOUND;
-  }
+  const modeSoundState = getModeSoundState(state.rep, state.set, state.sets, state.mode);
+  modeReturn = modeSoundState.mode;
+  soundReturn = modeSoundState.sound;
 
   return {
     rep: repReturn,
@@ -110,8 +151,9 @@ const getDecrementRepState = (state) => {
     sound: soundReturn,
     sessionRepsCompleted: sessionRepsCompletedReturn,
     repsCompleted: repsCompletedReturn,
-    calories: caloriesReturn,
     totalRepsRemaining: totalRepsRemainingReturn,
+    repCountSet: repCountSetReturn,
+    record: recordReturn,
   };
 };
 
@@ -163,6 +205,7 @@ export default createReducer(exerciseInitialState, {
         rep: exerciseObj.rep,
         repsCompleted: exerciseObj.repsCompleted,
         set: exerciseObj.set,
+        record: exerciseObj.record,
       };
     } else {
       ret = {
@@ -170,6 +213,7 @@ export default createReducer(exerciseInitialState, {
         rep: state.rep,
         repsCompleted: state.repsCompleted,
         set: state.set,
+        record: state.record,
       };
     }
 
@@ -183,6 +227,7 @@ export default createReducer(exerciseInitialState, {
         rep: ret.rep,
         repsCompleted: ret.repsCompleted,
         set: ret.set,
+        record: ret.record,
       }
     );
   },
@@ -219,10 +264,36 @@ export default createReducer(exerciseInitialState, {
     );
   },
   [types.EXERCISE_NEXT_SET](state, action) {
+    const nextRep = getNextRep(state);
+    const nextSet = nextRep > 0 ? state.set + 1 : 0;
+
+    const modeSoundState = getModeSoundState(0, state.set, state.sets, state.mode);
+    const mode = modeSoundState.mode;
+    const sound = modeSoundState.sound;
+
+    const totalRepsRemaining = state.totalRepsRemaining - state.rep;
+    const repsCompleted = state.repsCompleted + state.rep;
+    const sessionRepsCompleted = state.sessionRepsCompleted + state.rep;
+
+    debugger;
+    const totalReps = state.rep + state.repCountSet;
+    const record = getRecord(totalReps, state.record);
+    const repCountSet = 0;
+
     return Object.assign(
       {},
       state,
-      { set: state.set + 1 }
+      {
+        set: nextSet,
+        rep: nextRep,
+        mode,
+        sound,
+        totalRepsRemaining,
+        repsCompleted,
+        sessionRepsCompleted,
+        record,
+        repCountSet,
+      }
     );
   },
   [types.EXERCISE_INCREMENT_REP](state, action) {
@@ -233,7 +304,7 @@ export default createReducer(exerciseInitialState, {
         repsAdded: state.repsAdded + 1,
         rep: state.rep + 1,
         totalRepsRemaining: state.totalRepsRemaining + 1,
-        sound: BEEP_SOUND,
+        sound: NOT_SET_SOUND,
       },
     );
   },
@@ -247,10 +318,15 @@ export default createReducer(exerciseInitialState, {
     );
   },
   [types.EXERCISE_SET_MODE](state, action) {
+    const sound = getSoundMode(action.payload);
+
     return Object.assign(
       {},
       state,
-      { mode: action.payload },
+      {
+        mode: action.payload,
+        sound,
+      },
     );
   },
   [types.EXERCISE_SET_DEC_INTERVAL_ID](state, action) {
