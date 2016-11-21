@@ -9,14 +9,13 @@ import Icon from 'react-native-vector-icons/Foundation';
 import Pro from '../shared/Pro';
 import Button from '../shared/Button';
 import getIconJsx from '../../lib/icon';
+import { getProEnabled } from '../../lib/program';
 
 import {
   BEGINNER_LEVEL,
   INTERMEDIATE_LEVEL,
   ADVANCED_LEVEL,
   EXPERT_LEVEL,
-  PRO_PROGRAM,
-  PRO_DISABLED,
 } from '../../lib/constants';
 
 const styles = StyleSheet.create({
@@ -50,8 +49,10 @@ const onPressActions = {
   },
 };
 
-const getProViewJsx = (mode, proMode) => {
-  if (mode === PRO_PROGRAM && proMode === PRO_DISABLED) {
+const getProViewJsx = (programMode, proMode) => {
+  const proEnabled = getProEnabled(programMode, proMode);
+
+  if (proEnabled) {
     return (
       <View
         style={styles.proWrapper}

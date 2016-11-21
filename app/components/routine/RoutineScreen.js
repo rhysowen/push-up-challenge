@@ -3,7 +3,6 @@ import {
   View,
   ScrollView,
   StyleSheet,
-  Alert,
   Text,
   Image,
 } from 'react-native';
@@ -15,6 +14,7 @@ import ProgramInfoItem from './ProgramInfoItem';
 
 import abortTraining from '../../lib/abortTraining';
 import getIconJsx from '../../lib/icon';
+import { getTotalReps } from '../../lib/program';
 
 import {
   BASE_PADDING_LEFT,
@@ -83,9 +83,7 @@ const onPressActions = {
 const getProgress = (props) => {
   const { program } = props;
 
-  const totalReps = program.exercise.days
-    .reduce((prev, cur) => prev + cur.sets
-    .reduce((_prev, _cur) => _prev + _cur, 0), program.repsAdded);
+  const totalReps = getTotalReps(program.exercise, program.repsAdded);
 
   const MAX_PERCENT = 100;
   const ret = Math.ceil((program.repsCompleted / totalReps) * MAX_PERCENT);

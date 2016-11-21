@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 
 import StatisticItem from '../shared/StatisticItem';
+import { upgrade } from '../../lib/util';
 import {
-  isProEnabled,
-  upgrade,
-} from '../../lib/util';
-import { PRO_PROGRAM } from '../../lib/constants';
+  getProEnabled,
+  getTotalReps,
+} from '../../lib/program';
 import {
   COLOR_ORANGE,
   LINE_COLOR,
@@ -92,7 +92,7 @@ const onPressActions = {
 
     const selectedProgram = previewProgram.selectedProgram;
 
-    if (!proEnabled && selectedProgram.mode === PRO_PROGRAM) {
+    if (proEnabled) {
       upgrade(props);
     } else {
       cleanReset(props);
@@ -109,6 +109,22 @@ const onPressActions = {
   },
 };
 
+const getProIconJsx = (props, proEnabled) => {
+  if (proEnabled) {
+    return (
+      <View
+        style={styles.iconWrapper}
+      >
+        <Pro />
+      </View>
+    );
+  }
+
+  return (
+    <View />
+  );
+};
+
 export default (props) => {
   const {
     previewProgram,
@@ -117,14 +133,14 @@ export default (props) => {
 
   const { startProgram } = onPressActions;
 
-  const proEnabled = isProEnabled(util.proMode);
-
   const selectedProgram = previewProgram.selectedProgram;
 
-  const isProMode = selectedProgram.mode === PRO_PROGRAM && !proEnabled;
+  const proEnabled = getProEnabled(selectedProgram.mode, util.proMode);
+
   const title = selectedProgram.name;
-  const totalReps = 124;
+  const totalReps = getTotalReps(selectedProgram);
   const totalDays = selectedProgram.days.length;
+  const proIconJsx = getProIconJsx(props, proEnabled);
 
   return (
     <View
@@ -144,11 +160,7 @@ export default (props) => {
             >
               {title}
             </Text>
-            <View
-              style={styles.iconWrapper}
-            >
-              <Pro />
-            </View>
+            {proIconJsx}
           </View>
         </View>
         <View
@@ -173,7 +185,7 @@ export default (props) => {
         </View>
       </ScrollView>
       <TouchableOpacity
-        onPress={() => startProgram(props, isProMode)}
+        onPress={() => startProgram(props, proEnabled)}
       >
         <View
           style={styles.buttonWrapper}
