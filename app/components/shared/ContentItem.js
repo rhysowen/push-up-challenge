@@ -11,7 +11,7 @@ import {
 } from '../../theme/style';
 
 const styles = StyleSheet.create({
-  section: { paddingBottom: 20 },
+  section: { paddingBottom: 10 },
   header: {
     fontFamily: BASE_FONT_FAMILY_IOS,
     fontSize: 18,
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   content: {
     fontFamily: BASE_FONT_FAMILY_IOS,
     fontSize: 14,
+    lineHeight: 20,
   },
 });
 
