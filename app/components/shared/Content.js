@@ -10,7 +10,7 @@ import {
   BASE_PADDING_RIGHT,
 } from '../../theme/style';
 import ContentItem from './ContentItem';
-import BaseScreen from '../../theme/BaseScreen';
+import BaseScreen from '../shared/BaseScreen';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 });
 
 const getMainJsx = (props) => {
-  const isDisableScrollView = typeof props.disableScrollView !== 'undefined' && disableScrollView;
+  const isDisableScrollView = typeof props.disableScrollView !== 'undefined' && props.disableScrollView;
   const Component = isDisableScrollView ? View : ScrollView;
 
   return (

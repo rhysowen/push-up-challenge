@@ -7,11 +7,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Button from '../shared/Button';
-import {
-  COLOR_ORANGE,
-  ICON_SIZE,
-} from '../../theme/style';
-import ListBaseScreen from '../../theme/ListBaseScreen';
+import ScrollBaseScreen from '../shared/ScrollBaseScreen';
 import {
   upgrade,
   restorePurchases,
@@ -156,13 +152,13 @@ const MoreScreen = (props) => {
   .map((o, key) => renderRow(o, key, props));
 
   return (
-    <ListBaseScreen>
+    <ScrollBaseScreen>
       <ScrollView>
         <Button>
           {optionsJsx}
         </Button>
       </ScrollView>
-    </ListBaseScreen>
+    </ScrollBaseScreen>
   );
 };
 

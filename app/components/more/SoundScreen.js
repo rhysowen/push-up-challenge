@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-native';
 
-import BaseScreen from '../../theme/BaseScreen';
+import BaseScreen from '../shared/BaseScreen';
 import Option from './Option';
 import { SOUND_ENABLED } from '../../lib/constants';
 

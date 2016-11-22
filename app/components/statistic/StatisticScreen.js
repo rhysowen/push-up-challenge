@@ -18,7 +18,7 @@ import {
   FADE_COLOR,
   LINE_COLOR,
 } from '../../theme/style';
-import BaseScreen from '../../theme/BaseScreen';
+import BaseScreen from '../shared/BaseScreen';
 import StatisticItem from '../shared/StatisticItem';
 import getIconJsx from '../../lib/icon';
 import { DEFAULT_MONTHS_ARRAY } from '../../lib/constants';

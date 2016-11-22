@@ -17,10 +17,12 @@ import {
   COLOR_ORANGE,
   LINE_COLOR,
   FADE_COLOR,
+  BASE_PADDING_TOP,
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
 } from '../../theme/style';
+import ScrollBaseScreen from '../shared/ScrollBaseScreen';
 import Instruction from '../shared/Instruction';
 import Pro from '../shared/Pro';
 
@@ -44,13 +46,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomColor: LINE_COLOR,
     borderBottomWidth: 1,
-    paddingTop: 10,
+    paddingTop: BASE_PADDING_TOP,
     paddingBottom: 10,
   },
   bottomWrapper: {
     flex: 2,
     justifyContent: 'flex-start',
-    paddingTop: 10,
+    paddingTop: BASE_PADDING_TOP,
   },
   titleIconWrapper: {
     flexDirection: 'row',
@@ -143,7 +145,7 @@ export default (props) => {
   const proIconJsx = getProIconJsx(props, proEnabled);
 
   return (
-    <View
+    <ScrollBaseScreen
       style={styles.wrapper}
     >
       <ScrollView
@@ -197,6 +199,6 @@ export default (props) => {
           </Text>
         </View>
       </TouchableOpacity>
-    </View>
+    </ScrollBaseScreen>
   );
 };

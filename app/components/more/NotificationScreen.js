@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import BaseScreen from '../../theme/BaseScreen';
+import BaseScreen from '../shared/BaseScreen';
 import Option from './Option';
 import { BASE_FONT_FAMILY_IOS } from '../../theme/style';
 import { NOTIFICATION_ENABLED } from '../../lib/constants';

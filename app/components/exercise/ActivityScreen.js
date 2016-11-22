@@ -12,12 +12,14 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Sound from 'react-native-sound';
 import Proximity from 'react-native-proximity';
 
+import BaseScreen from '../shared/BaseScreen';
 import StatisticItem from '../shared/StatisticItem';
 import RepItem from './RepItem';
 import Button from '../shared/Button';
 import {
   COLOR_ORANGE,
   DISABLED_COLOR,
+  BASE_PADDING_TOP,
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
@@ -41,9 +43,12 @@ import format from '../../lib/format';
 import abortTraining from '../../lib/abortTraining';
 
 const styles = StyleSheet.create({
-  wrapper: { flex: 1 },
+  wrapper: {
+    flex: 1,
+    paddingTop: 0,
+  },
   topContainer: {
-    paddingTop: 10,
+    paddingTop: BASE_PADDING_TOP,
     backgroundColor: ACTIVITY_BACKGROUND_COLOR,
     paddingLeft: BASE_PADDING_LEFT,
     paddingRight: BASE_PADDING_RIGHT,
@@ -68,7 +73,7 @@ const styles = StyleSheet.create({
   statisticWrapper: {
     flex: 1,
     justifyContent: 'center',
-    paddingTop: 10,
+    paddingTop: BASE_PADDING_TOP,
     paddingBottom: 10,
   },
   statisticInnerWrapper: {
@@ -417,7 +422,7 @@ export default class ActivityScreen extends Component {
     initSound(this.props);
 
     return (
-      <View
+      <BaseScreen
         style={styles.wrapper}
       >
         <View style={styles.topContainer}>
@@ -515,7 +520,7 @@ export default class ActivityScreen extends Component {
             />
           </Button>
         </ScrollView>
-      </View>
+      </BaseScreen>
     );
   }
 }

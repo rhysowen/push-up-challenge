@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import {
+  BASE_PADDING_TOP,
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     paddingRight: BASE_PADDING_RIGHT,
     alignItems: 'center',
     minHeight: 50,
-    paddingTop: 10,
+    paddingTop: BASE_PADDING_TOP,
     paddingBottom: 10,
   },
   textWrapper: {

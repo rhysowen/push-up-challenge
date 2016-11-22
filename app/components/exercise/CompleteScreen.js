@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import BaseScreen from '../../theme/BaseScreen';
+import BaseScreen from '../shared/BaseScreen';
 import {
   COLOR_ORANGE,
   BASE_PADDING_LEFT,

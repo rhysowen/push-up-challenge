@@ -9,6 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
+  BASE_PADDING_TOP,
   COLOR_ORANGE,
   BASE_FONT_FAMILY_IOS,
 } from '../../theme/style';
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   },
   instructionsWrapper: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: BASE_PADDING_TOP,
     paddingBottom: 10,
   },
   contentStyle: {
@@ -83,7 +84,7 @@ export default () => {
         style={styles.instructionsWrapper}
       >
         <Content
-          disableScrollBar
+          disableScrollView
           contentStyle={styles.contentStyle}
           innerContentStyle={styles.innerContentStyle}
         >

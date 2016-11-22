@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  ScrollView,
   View,
   StyleSheet,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Foundation';
+import ScrollBaseScreen from '../shared/ScrollBaseScreen';
 import Pro from '../shared/Pro';
 import Button from '../shared/Button';
 import getIconJsx from '../../lib/icon';
@@ -109,9 +109,9 @@ const ProgramScreen = (props) => {
     .map((program, index) => renderButton(program, index, props, programsCount));
 
   return (
-    <ScrollView>
+    <ScrollBaseScreen>
       {buttonsJsx}
-    </ScrollView>
+    </ScrollBaseScreen>
   );
 };
 

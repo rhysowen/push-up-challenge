@@ -9,6 +9,7 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import BaseScreen from '../shared/BaseScreen';
 import Button from '../shared/Button';
 import ProgramInfoItem from './ProgramInfoItem';
 
@@ -24,7 +25,10 @@ import {
 import { PROGRAM_COMPLETE } from '../../lib/constants';
 
 const styles = StyleSheet.create({
-  wrapper: { flex: 1 },
+  wrapper: {
+    flex: 1,
+    paddingTop: 0,
+  },
   topContainer: { flex: 1.5 },
   bottomContainer: { flex: 1 },
   muscleImage: {
@@ -78,6 +82,9 @@ const onPressActions = {
 
     props.navigateReset('ActivityContainer');
   },
+  instructions: (props) => {
+    props.navigatePush('InstructionContainer');
+  },
 };
 
 const getProgress = (props) => {
@@ -112,7 +119,10 @@ const getButtonJsx = (props) => {
   const instructionsIconJsx = getIconJsx(Icon, 'assistant');
   const abortTrainingIconJsx = getIconJsx(Icon, 'stop');
 
-  const { continueTraining } = onPressActions;
+  const {
+    continueTraining,
+    instructions,
+  } = onPressActions;
 
   return (
     <Button>
@@ -124,7 +134,7 @@ const getButtonJsx = (props) => {
       <Button.Item
         text="Instructions"
         iconJsx={instructionsIconJsx}
-        //onPress={() => continueTraining(props)}
+        onPress={() => instructions(props)}
       />
       <Button.Item
         lastItem
@@ -216,7 +226,7 @@ export default (props) => {
   } = renderJsx;
 
   return (
-    <View
+    <BaseScreen
       style={styles.wrapper}
     >
       <View
@@ -242,6 +252,6 @@ export default (props) => {
       >
         {buttonsJsx}
       </ScrollView>
-    </View>
+    </BaseScreen>
   );
 };
