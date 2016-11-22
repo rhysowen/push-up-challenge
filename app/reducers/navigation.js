@@ -84,6 +84,10 @@ const allPages = [
     key: 'NotificationContainer',
     title: 'Notifications',
   },
+  {
+    key: 'InstructionContainer',
+    title: 'Instructions',
+  },
 ];
 
 const getIndexByKey = key => (

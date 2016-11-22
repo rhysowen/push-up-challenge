@@ -12,6 +12,7 @@ import ApplicationTabs from './ApplicationTabs';
 import PreviewContainer from './exercise/PreviewContainer';
 import ActivityContainer from './exercise/ActivityContainer';
 import CompleteContainer from './exercise/CompleteContainer';
+import InstructionContainer from './exercise/InstructionContainer';
 import CreditContainer from './more/CreditContainer';
 import MedicalInformationContainer from './more/MedicalInformationContainer';
 import NotificationContainer from './more/NotificationContainer';
@@ -71,6 +72,9 @@ const SceneContainer = (props) => {
       break;
     case 'SoundContainer':
       Scene = SoundContainer;
+      break;
+    case 'InstructionContainer':
+      Scene = InstructionContainer;
       break;
     default:
       Scene = View;
