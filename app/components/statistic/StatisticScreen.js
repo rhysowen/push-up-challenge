@@ -168,7 +168,9 @@ export default (props) => {
     record,
     calories,
   } = statistics;
+
   const selectedYearFormat = selectedYear.getFullYear().toString();
+  const caloriesFormat = Math.floor(calories);
 
   const previousYearIconJsx = getYearIconJsx(() => props.previousYear(), LEFT);
   const nextYearIconJsx = getYearIconJsx(() => props.nextYear(), RIGHT);
@@ -194,7 +196,7 @@ export default (props) => {
           displayRightBorder
         />
         <StatisticItem
-          value={calories}
+          value={caloriesFormat}
           property="Calories"
           propertyColorStyle={FADE_COLOR}
         />

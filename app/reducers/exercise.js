@@ -2,7 +2,6 @@ import createReducer from '../lib/createReducer';
 import * as types from '../actions/types';
 import {
   EXERCISE_ACTIVE,
-  EXERCISE_PAUSE,
   EXERCISE_REST,
   EXERCISE_COMPLETE,
   NOT_SET_SOUND,
@@ -10,8 +9,6 @@ import {
   REST_SOUND,
   EXERCISE_COMPLETE_SOUND,
   BEEP_SOUND,
-  ENABLE_SOUND,
-  DISABLE_SOUND,
 } from '../lib/constants';
 
 const TIMER_SECONDS = 50;
@@ -41,12 +38,10 @@ const exerciseInitialState = {
   repCountSet: 0,
 };
 
-const getCalories = (state) => {
-  const { repsCompleted } = state;
-
-  // Assumption is that 3 push ups burn a single calorie
-  const PUSH_UP_CALORIE_BURNT = 3;
-  const CALORIES_BURNT = Math.floor(repsCompleted / PUSH_UP_CALORIE_BURNT);
+const getCalories = (repsCompleted) => {
+  // Assumption is that around 4 push ups burn a single calorie
+  const PUSH_UP_CALORIE_BURNT = 4;
+  const CALORIES_BURNT = repsCompleted / PUSH_UP_CALORIE_BURNT;
 
   return CALORIES_BURNT;
 };
@@ -108,6 +103,7 @@ const getDecrementRepState = (state) => {
     totalRepsRemaining,
     repCountSet,
     record,
+    calories,
   } = state;
 
   let repReturn = rep;
@@ -119,6 +115,7 @@ const getDecrementRepState = (state) => {
   let totalRepsRemainingReturn = totalRepsRemaining;
   let repCountSetReturn = repCountSet;
   let recordReturn = record;
+  let caloriesReturn = calories;
 
   if (rep > 0) {
     totalRepsRemainingReturn = totalRepsRemaining - 1;
@@ -127,6 +124,8 @@ const getDecrementRepState = (state) => {
 
     repCountSetReturn += 1;
     recordReturn = getRecord(repCountSetReturn, recordReturn);
+    debugger;
+    caloriesReturn = getCalories(sessionRepsCompletedReturn);
   }
 
   if (rep > 1) {
@@ -154,6 +153,7 @@ const getDecrementRepState = (state) => {
     totalRepsRemaining: totalRepsRemainingReturn,
     repCountSet: repCountSetReturn,
     record: recordReturn,
+    calories: caloriesReturn,
   };
 };
 
@@ -282,6 +282,9 @@ export default createReducer(exerciseInitialState, {
     const record = getRecord(totalReps, state.record);
     const repCountSet = 0;
 
+    debugger;
+    const calories = getCalories(sessionRepsCompleted);
+
     return Object.assign(
       {},
       state,
@@ -295,6 +298,7 @@ export default createReducer(exerciseInitialState, {
         sessionRepsCompleted,
         record,
         repCountSet,
+        calories,
       }
     );
   },
@@ -422,6 +426,7 @@ export default createReducer(exerciseInitialState, {
         sound: PERFORM_PUSH_UP_SOUND,
         sessionRepsCompleted: 0,
         repsAdded: 0,
+        calories: 0,
       }
     );
   },
