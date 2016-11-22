@@ -32,7 +32,6 @@ export default createReducer(combinedMoreInitialState, {
         sound: moreObj.sound,
         util: moreObj.util,
         isObjFound: true,
-        isViewRender: true,
       };
     } else {
       ret = { isInitRequired: true };
@@ -42,7 +41,10 @@ export default createReducer(combinedMoreInitialState, {
       {},
       combinedMoreInitialState,
       ret,
-      { isFetched: true },
+      {
+        isFetched: true,
+        isViewRender: true,
+      },
     );
   },
   [types.MORE_SAVE_ATTEMPT](state, action) {

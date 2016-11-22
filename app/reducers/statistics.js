@@ -85,7 +85,6 @@ export default createReducer(combinedStatisticInitialState, {
     if (statisticsObjExist) {
       ret = {
         isFetched: true,
-        isViewRender: true,
         isObjFound: true,
         total: statisticsObj.total,
         record: statisticsObj.record,
@@ -104,6 +103,7 @@ export default createReducer(combinedStatisticInitialState, {
       {},
       combinedStatisticInitialState,
       ret,
+      { isViewRender: true },
     );
   },
   [types.STATISTICS_GET_FAILURE](state, action) {
