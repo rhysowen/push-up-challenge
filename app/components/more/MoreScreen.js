@@ -19,6 +19,7 @@ import getIconJsx from '../../lib/icon';
 
 const UPGRADE_TO_PRO = 'Upgrade to Pro';
 const RESTORE_PURCHASES = 'Restore Purchases';
+const NOTIFICATIONS = 'Notifications';
 const SOUNDS = 'Sounds';
 const MEDICAL_INFORMATION = 'Medical Information';
 const CREDITS = 'Credits';
@@ -90,6 +91,11 @@ const options = [
   {
     title: RESTORE_PURCHASES,
     icon: 'ios-cloud-download',
+  },
+  {
+    title: NOTIFICATIONS,
+    icon: 'ios-notifications',
+    key: 'NotificationContainer',
   },
   {
     title: SOUNDS,

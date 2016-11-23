@@ -65,6 +65,15 @@ const dispatchMoreAsync = (dispatch, getState) => {
   dispatch(mergeMoreAsync(state));
 };
 
+
+export const toggleNotification = () => (
+  (dispatch, getState) => {
+    dispatch({ type: types.MORE_NOTIFICATION_TOGGLE });
+
+    dispatchMoreAsync(dispatch, getState);
+  }
+);
+
 export const toggleCoachSound = () => (
   (dispatch, getState) => {
     dispatch({ type: types.MORE_COACH_SOUND_TOGGLE });
