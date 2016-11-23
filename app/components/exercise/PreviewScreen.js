@@ -22,7 +22,7 @@ import {
   BASE_PADDING_RIGHT,
   BASE_FONT_FAMILY_IOS,
 } from '../../theme/style';
-import ScrollBaseScreen from '../shared/ScrollBaseScreen';
+import BaseScreen from '../shared/BaseScreen';
 import Instruction from '../shared/Instruction';
 import Pro from '../shared/Pro';
 
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   titleIconWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
+    paddingBottom: BASE_PADDING_TOP,
   },
   title: {
     fontSize: 18,
@@ -144,8 +144,13 @@ export default (props) => {
   const totalDays = selectedProgram.days.length;
   const proIconJsx = getProIconJsx(props, proEnabled);
 
+  const rightBorderStyle = {
+    borderRightColor: LINE_COLOR,
+    borderRightWidth: 1,
+  };
+
   return (
-    <ScrollBaseScreen
+    <BaseScreen
       style={styles.wrapper}
     >
       <ScrollView
@@ -172,7 +177,7 @@ export default (props) => {
             value={totalReps}
             property="Reps"
             propertyColorStyle={FADE_COLOR}
-            displayRightBorder
+            rightBorderStyle={rightBorderStyle}
           />
           <StatisticItem
             value={totalDays}
@@ -199,6 +204,6 @@ export default (props) => {
           </Text>
         </View>
       </TouchableOpacity>
-    </ScrollBaseScreen>
+    </BaseScreen>
   );
 };

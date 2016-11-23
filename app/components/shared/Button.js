@@ -1,19 +1,10 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { View } from 'react-native';
 
 import ButtonItem from './ButtonItem';
 
-const styles = StyleSheet.create({
-  wrapper: { flex: 1 },
-});
-
 const Button = props => (
-  <View
-    style={styles.wrapper}
-  >
+  <View>
     {props.children}
   </View>
 );
