@@ -39,7 +39,7 @@ import {
 } from '../../lib/constants';
 import navigateReset from '../../lib/navigator';
 import getIconJsx from '../../lib/icon';
-import format from '../../lib/format';
+import { formatTimeElapsed } from '../../lib/format';
 import abortTraining from '../../lib/abortTraining';
 
 const styles = StyleSheet.create({
@@ -283,8 +283,6 @@ const getActiveText = (exercise) => {
   }
 };
 
-const getElapsedFormat = exercise => format(exercise.timeElapsed);
-
 const getRepsJsx = exercise => exercise.sets.map((set, index) => {
   const isRepActive = index === exercise.set;
   const backgroundColor = isRepActive ? ACTIVITY_BACKGROUND_COLOR : '#CCCCCC';
@@ -391,6 +389,7 @@ export default class ActivityScreen extends Component {
       sets,
       totalRepsRemaining,
       record,
+      timeElapsed,
     } = exercise;
 
     const {
@@ -404,7 +403,7 @@ export default class ActivityScreen extends Component {
 
     const activeState = getActiveStateTitle(exercise);
     const activeDigit = getActiveDigit(exercise);
-    const elapsedFormat = getElapsedFormat(exercise);
+    const elapsedFormat = formatTimeElapsed(timeElapsed);
 
     const activeText = getActiveText(exercise);
     const saveCloseText = `Save ${'\u0026'} Close`;

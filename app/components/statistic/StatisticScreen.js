@@ -176,6 +176,11 @@ export default (props) => {
   const nextYearIconJsx = getYearIconJsx(() => props.nextYear(), RIGHT);
   const renderJsx = getRenderJsx(props);
 
+  const rightBorderStyle = {
+    borderRightColor: LINE_COLOR,
+    borderRightWidth: 1,
+  };
+
   return (
     <BaseScreen
       style={styles.wrapper}
@@ -187,13 +192,13 @@ export default (props) => {
           value={total}
           property="Reps"
           propertyColorStyle={FADE_COLOR}
-          displayRightBorder
+          rightBorderStyle={rightBorderStyle}
         />
         <StatisticItem
           value={record}
           property="Record"
           propertyColorStyle={FADE_COLOR}
-          displayRightBorder
+          rightBorderStyle={rightBorderStyle}
         />
         <StatisticItem
           value={caloriesFormat}

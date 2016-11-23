@@ -21,15 +21,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   property: {
-    paddingLeft: 3,
     fontFamily: BASE_FONT_FAMILY_IOS,
     color: FADE_COLOR,
     flex: 1,
     textAlign: 'center',
-  },
-  rightBorder: {
-    borderRightColor: LINE_COLOR,
-    borderRightWidth: 1,
   },
 });
 
@@ -37,7 +32,7 @@ export default props => (
   <View
     style={[
       styles.wrapper,
-      typeof props.displayRightBorder !== 'undefined' ? styles.rightBorder : {},
+      typeof props.rightBorderStyle !== 'undefined' ? props.rightBorderStyle : {},
     ]}
   >
     <Text
