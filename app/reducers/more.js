@@ -2,8 +2,6 @@ import createReducer from '../lib/createReducer';
 import * as types from '../actions/types';
 import { combinedMoreInitialState } from '../lib/initialState';
 import {
-  NOTIFICATION_ENABLED,
-  NOTIFICATION_DISABLED,
   SOUND_ENABLED,
   SOUND_DISABLED,
   PRO_ENABLED,
@@ -28,7 +26,6 @@ export default createReducer(combinedMoreInitialState, {
 
     if (moreObjExist) {
       ret = {
-        notification: moreObj.notification,
         sound: moreObj.sound,
         util: moreObj.util,
         isObjFound: true,
@@ -62,20 +59,6 @@ export default createReducer(combinedMoreInitialState, {
         isObjFound: true,
         isViewRender: true,
       }
-    );
-  },
-  [types.MORE_NOTIFICATION_TOGGLE](state, action) {
-    return Object.assign(
-      {},
-      state,
-      {
-        notification: {
-          mode: state.notification.mode === NOTIFICATION_ENABLED
-            ? NOTIFICATION_DISABLED
-            : NOTIFICATION_ENABLED,
-          date: state.notification.date,
-        },
-      },
     );
   },
   [types.MORE_COACH_SOUND_TOGGLE](state, action) {

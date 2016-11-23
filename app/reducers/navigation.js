@@ -81,10 +81,6 @@ const allPages = [
     title: 'Sounds',
   },
   {
-    key: 'NotificationContainer',
-    title: 'Notifications',
-  },
-  {
     key: 'InstructionContainer',
     title: 'Instructions',
   },

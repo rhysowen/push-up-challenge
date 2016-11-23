@@ -1,5 +1,4 @@
 import {
-  NOTIFICATION_DISABLED,
   SOUND_ENABLED,
   PRO_DISABLED,
 } from '../lib/constants';
@@ -15,10 +14,6 @@ const initialAsyncState = {
 };
 
 const moreInitialState = {
-  notification: {
-    mode: NOTIFICATION_DISABLED,
-    date: new Date(),
-  },
   sound: {
     coachMode: SOUND_ENABLED,
     beepMode: SOUND_ENABLED,
