@@ -124,7 +124,6 @@ const getDecrementRepState = (state) => {
 
     repCountSetReturn += 1;
     recordReturn = getRecord(repCountSetReturn, recordReturn);
-    debugger;
     caloriesReturn = getCalories(sessionRepsCompletedReturn);
   }
 
@@ -282,7 +281,6 @@ export default createReducer(exerciseInitialState, {
     const record = getRecord(totalReps, state.record);
     const repCountSet = 0;
 
-    debugger;
     const calories = getCalories(sessionRepsCompleted);
 
     return Object.assign(
