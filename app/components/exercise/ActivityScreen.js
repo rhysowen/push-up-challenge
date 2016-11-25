@@ -317,8 +317,6 @@ const initSound = (props) => {
 const cleanUpState = (props) => {
   const { exercise } = props;
 
-  debugger;
-
   // Save statistics
   saveStatisticsAsync(props);
 

@@ -57,6 +57,7 @@ const exerciseInitialState = {
 // Reminder
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const BASE_DATE = new Date();
+BASE_DATE.setHours(0, 0, 0, 0);
 
 const DAY_OBJECT = {
   mode: REMINDER_DISABLED,
