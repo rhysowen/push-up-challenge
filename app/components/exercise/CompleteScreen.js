@@ -127,7 +127,7 @@ const CompleteScreen = (props) => {
   const settingsIconJsx = getIconJsx(Icon, 'more-horiz');
 
   const rightBorderStyle = {
-    borderRightColor: FADE_COLOR,
+    borderRightColor: '#B29034',
     borderRightWidth: 1,
   };
 

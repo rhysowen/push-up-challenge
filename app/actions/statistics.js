@@ -4,7 +4,6 @@ import {
   SET_KEY,
   GET_KEY,
   REMOVE_KEY,
-  MERGE_KEY,
   storageAsync,
 } from '../lib/storageAsync';
 
@@ -25,15 +24,11 @@ function saveStatisticsAsync(statistics, mode) {
   );
 }
 
-function mergeStatisticsAsync(more) {
-  return saveStatisticsAsync(more, MERGE_KEY);
-}
-
 export function fetchStatisticsAsync() {
   const actionTypes = [
-    types.STATISTICS_GET_FETCH,
-    types.STATISTICS_GET_SUCCESS,
-    types.STATISTICS_GET_FAILURE,
+    types.STATISTICS_FETCH_ATTEMPT,
+    types.STATISTICS_FETCH_SUCCESS,
+    types.STATISTICS_FETCH_FAILURE,
   ];
 
   return storageAsync(storage.STATISTICS, actionTypes, GET_KEY);
@@ -77,11 +72,6 @@ export function removeStatisticsAsync() {
 
   return storageAsync(storage.STATISTICS, actionTypes, REMOVE_KEY);
 }
-
-const dispatchStatisticsAsync = (dispatch, getState) => {
-  const state = getState().more;
-  dispatch(mergeStatisticsAsync(state));
-};
 
 export const previousYear = () => ({ type: types.STATISTICS_PREVIOUS_YEAR });
 export const nextYear = () => ({ type: types.STATISTICS_NEXT_YEAR });

@@ -9,7 +9,10 @@ import ScrollBaseScreen from '../shared/ScrollBaseScreen';
 import Pro from '../shared/Pro';
 import Button from '../shared/Button';
 import getIconJsx from '../../lib/icon';
-import { getProEnabled } from '../../lib/program';
+import {
+  getProEnabled,
+  getPrograms,
+} from '../../lib/program';
 
 import {
   BEGINNER_LEVEL,
@@ -44,7 +47,7 @@ const getIconColour = (level) => {
 
 const onPressActions = {
   row: (rowData, props) => {
-    props.setPreviewExercise(rowData.name);
+    props.setProgramPreviewByName(rowData.name);
     props.navigatePush('PreviewContainer');
   },
 };
@@ -102,10 +105,10 @@ const renderButton = (program, index, props, programsCount) => {
 const ProgramScreen = (props) => {
   const { programs } = props;
 
-  const programsToArray = programs.toArray();
-  const programsCount = programsToArray.length;
+  const programsList = getPrograms();
+  const programsCount = programsList.length;
 
-  const buttonsJsx = programsToArray
+  const buttonsJsx = programsList
     .map((program, index) => renderButton(program, index, props, programsCount));
 
   return (

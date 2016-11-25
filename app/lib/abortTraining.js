@@ -2,8 +2,8 @@ import { Alert } from 'react-native';
 
 export default (props, callback) => {
   const onAbort = () => {
-    props.removeSelectedProgramAsync();
-    props.removeExerciseStateAsync();
+    props.removeProgramAsync();
+    props.removeExerciseAsync();
 
     if (typeof callback === 'function') {
       callback();

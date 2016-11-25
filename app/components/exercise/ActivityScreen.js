@@ -119,15 +119,7 @@ const onPressActions = {
       props.exercise.repsAdded,
     );
 
-    props.setExerciseSaveCloseAsync(
-      props.exercise.timeElapsed,
-      props.exercise.rep,
-      props.exercise.repsCompleted,
-      props.exercise.set,
-      props.exercise.day,
-      props.exercise.record,
-      props.exercise.repCountSet,
-    );
+    props.setExerciseAsync(props.exercise);
 
     props.cleanExercise();
 
@@ -325,17 +317,19 @@ const initSound = (props) => {
 const cleanUpState = (props) => {
   const { exercise } = props;
 
+  debugger;
+
   // Save statistics
   saveStatisticsAsync(props);
 
   // Save program
-  props.setCompleteProgramStateAsync(exercise.sessionRepsCompleted, exercise.repsAdded);
+  props.setProgramCompleteAsync(exercise.sessionRepsCompleted, exercise.repsAdded);
 
   // Set complete props
   props.setComplete(exercise.repsCompleted, exercise.calories, exercise.timeElapsed);
 
   // Remove exercise from storage
-  props.removeExerciseStateAsync();
+  props.removeExerciseAsync();
 
   // Reset navigiation
   props.navigateReset('CompleteContainer');

@@ -3,6 +3,8 @@ import {
   View,
   StyleSheet,
   Text,
+  Switch,
+  TouchableOpacity,
 } from 'react-native';
 
 import {
@@ -25,7 +27,6 @@ const styles = StyleSheet.create({
     paddingLeft: BASE_PADDING_LEFT,
     paddingRight: BASE_PADDING_RIGHT,
     alignItems: 'center',
-    minHeight: 50,
     paddingTop: BASE_PADDING_TOP,
     paddingBottom: 10,
   },
@@ -43,27 +44,65 @@ const styles = StyleSheet.create({
   },
 });
 
-export default props => (
-  <View
-    style={styles.wrapper}
-  >
+const getSecondaryText = (props) => {
+  if (typeof props.secondaryText !== 'undefined') {
+    return (
+      <Text
+        style={styles.text}
+      >
+        {props.secondaryText}
+      </Text>
+    );
+  }
+
+  return (
+    <View />
+  );
+};
+
+const getMainJsx = (props) => {
+  const secondaryText = getSecondaryText(props);
+
+  const mainView = (
     <View
-      style={styles.contentWrapper}
+      style={styles.wrapper}
     >
       <View
-        style={styles.textWrapper}
+        style={styles.contentWrapper}
       >
-        <Text
-          style={styles.text}
+        <View
+          style={styles.textWrapper}
         >
-          {props.text}
-        </Text>
-      </View>
-      <View
-        style={styles.itemWrapper}
-      >
-        {props.item}
+          <Text
+            style={styles.text}
+          >
+            {props.primaryText}
+          </Text>
+          {secondaryText}
+        </View>
+        <View
+          style={styles.itemWrapper}
+        >
+          <Switch
+            onValueChange={() => props.onValueChanged()}
+            value={props.value}
+          />
+        </View>
       </View>
     </View>
-  </View>
-);
+  );
+
+  if (typeof props.onPress !== 'undefined') {
+    return (
+      <TouchableOpacity
+        onPress={() => props.onPress()}
+      >
+        {mainView}
+      </TouchableOpacity>
+    );
+  }
+
+  return mainView;
+};
+
+export default props => getMainJsx(props);

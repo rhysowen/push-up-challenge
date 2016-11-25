@@ -5,9 +5,7 @@ import ActionCreators from '../../actions';
 import SoundScreen from '../../components/more/SoundScreen';
 
 function mapStateToProps(state) {
-  return {
-    sound: state.more.sound,
-  };
+  return { sound: state.sound };
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);

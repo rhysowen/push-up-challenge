@@ -101,7 +101,7 @@ const getProgress = (props) => {
 const getButtonJsx = (props) => {
   const { program } = props;
 
-  if (program.status === PROGRAM_COMPLETE || !program.isProgramFound) {
+  if (program.status === PROGRAM_COMPLETE || !program.isObjFound) {
     const selectProgramIconJsx = getIconJsx(Icon, 'play-circle-filled');
 
     return (
@@ -149,7 +149,7 @@ const getButtonJsx = (props) => {
 const getRenderJsx = (props) => {
   const { program } = props;
 
-  if (program.isProgramFound) {
+  if (program.isObjFound) {
     const { name } = program.exercise;
     const {
       day,

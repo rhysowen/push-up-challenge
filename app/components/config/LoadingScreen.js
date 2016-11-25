@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { combinedMoreInitialState } from '../../lib/initialState';
+import { onCreateAsyncActions } from '../../lib/initialState';
 import BaseScreen from '../shared/BaseScreen';
 import { BASE_FONT_FAMILY_IOS } from '../../theme/style';
 
@@ -25,35 +25,48 @@ const styles = StyleSheet.create({
   },
 });
 
-const fetchAsync = (props) => {
-  props.fetchSelectedProgramAsync();
-  props.fetchExerciseStateAsync();
+const getAsync = (props) => {
+  props.fetchProgramAsync();
+  props.fetchExerciseAsync();
   props.fetchStatisticsAsync();
-  props.fetchMoreAsync();
+  props.fetchUtilAsync();
+  props.fetchReminderAsync();
+  props.fetchSoundAsync();
 };
 
-const setAsync = (props) => {
-  props.setMoreAsync(combinedMoreInitialState);
-};
+const setAsync = props => onCreateAsyncActions(props);
+
 
 export default class LoadingScreen extends Component {
 
   componentWillMount() {
-    fetchAsync(this.props);
+    getAsync(this.props);
   }
 
   componentDidUpdate() {
     const {
       program,
       exercise,
-      more,
+      util,
+      reminder,
+      sound,
     } = this.props;
 
-    if (more.isInitRequired && !more.isSaveAttempt) {
+    const isSetRequired = (util.isInitRequired && !util.isSaveAttempt) &&
+      (reminder.isInitRequired && !reminder.isSaveAttempt) &&
+      (sound.isInitRequired && !sound.isSaveAttempt);
+
+    if (isSetRequired) {
       setAsync(this.props);
     }
 
-    if (program.isViewRender && exercise.isViewRender && more.isViewRender) {
+    const isViewRender = program.isViewRender &&
+      exercise.isViewRender &&
+      util.isViewRender &&
+      reminder.isViewRender &&
+      sound.isViewRender;
+
+    if (isViewRender) {
       this.props.navigateReset('ApplicationTabs');
     }
   }
@@ -62,26 +75,30 @@ export default class LoadingScreen extends Component {
     const {
       program,
       exercise,
-      more,
+      util,
+      reminder,
+      sound,
     } = this.props;
 
     const isProgramViewRender = program.isViewRender;
     const isExerciseViewRender = exercise.isViewRender;
-    const isMoreViewRender = more.isViewRender;
+    const isUtilViewRender = util.isViewRender;
+    const isReminderViewRender = reminder.isViewRender;
+    const isSoundViewRender = sound.isViewRender;
 
     const viewRenders = [
       isProgramViewRender,
       isExerciseViewRender,
-      isMoreViewRender,
+      isUtilViewRender,
+      isReminderViewRender,
+      isSoundViewRender,
     ];
 
     const progressSum = viewRenders.reduce((prev, current) => prev + current);
     const total = viewRenders.length;
 
     return (
-      <BaseScreen
-        hideAdvert
-      >
+      <BaseScreen>
         <View
           style={styles.wrapper}
         >

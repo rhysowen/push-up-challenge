@@ -90,21 +90,18 @@ const cleanReset = (props) => {
 
 const onPressActions = {
   startProgram: (props, proEnabled) => {
-    const { previewProgram } = props;
+    const { program } = props;
 
-    const selectedProgram = previewProgram.selectedProgram;
+    const { preview } = program;
 
     if (proEnabled) {
       upgrade(props);
     } else {
       cleanReset(props);
 
-      props.setSets(selectedProgram.days[0].sets);
-
-      // TODO: Refactor this!
-      props.setNewProgramStateAsync(selectedProgram.name);
-      // Skip doing an async fetch
-      props.setProgramByName(selectedProgram.name);
+      // No need to explicitly call setSets!
+      props.setSets(preview.days[0].sets);
+      props.setProgramByNameAsync(preview.name);
 
       props.navigateReset('ActivityContainer');
     }
@@ -129,19 +126,19 @@ const getProIconJsx = (props, proEnabled) => {
 
 export default (props) => {
   const {
-    previewProgram,
+    program,
     util,
   } = props;
 
   const { startProgram } = onPressActions;
 
-  const selectedProgram = previewProgram.selectedProgram;
+  const { preview } = program;
 
-  const proEnabled = getProEnabled(selectedProgram.mode, util.proMode);
+  const proEnabled = getProEnabled(preview.mode, util.proMode);
 
-  const title = selectedProgram.name;
-  const totalReps = getTotalReps(selectedProgram);
-  const totalDays = selectedProgram.days.length;
+  const title = preview.name;
+  const totalReps = getTotalReps(preview);
+  const totalDays = preview.days.length;
   const proIconJsx = getProIconJsx(props, proEnabled);
 
   const rightBorderStyle = {

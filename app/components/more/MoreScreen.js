@@ -14,12 +14,12 @@ import {
   isProEnabled,
 } from '../../lib/util';
 import openUrl from '../../lib/linking';
-import { combinedMoreInitialState } from '../../lib/initialState';
+import { onCreateAsyncActions } from '../../lib/initialState';
 import getIconJsx from '../../lib/icon';
 
 const UPGRADE_TO_PRO = 'Upgrade to Pro';
 const RESTORE_PURCHASES = 'Restore Purchases';
-const NOTIFICATIONS = 'Notifications';
+const REMINDERS = 'Reminders';
 const SOUNDS = 'Sounds';
 const MEDICAL_INFORMATION = 'Medical Information';
 const CREDITS = 'Credits';
@@ -30,11 +30,14 @@ const APP_ID = '1173126612';
 const RATE_APP_URL = `http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=${APP_ID}&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8`;
 
 const onResetPress = (props) => {
-  props.removeSelectedProgramAsync();
-  props.removeExerciseStateAsync();
+  props.removeUtilAsync();
+  props.removeProgramAsync();
+  props.removeExerciseAsync();
   props.removeStatisticsAsync();
+  props.removeSoundAsync();
+  props.removeReminderAsync();
 
-  props.setMoreAsync(combinedMoreInitialState);
+  onCreateAsyncActions(props);
 };
 
 const resetApp = (props) => {
@@ -93,9 +96,9 @@ const options = [
     icon: 'ios-cloud-download',
   },
   {
-    title: NOTIFICATIONS,
-    icon: 'ios-notifications',
-    key: 'NotificationContainer',
+    title: REMINDERS,
+    icon: 'ios-alarm',
+    key: 'ReminderContainer',
   },
   {
     title: SOUNDS,

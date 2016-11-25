@@ -2,6 +2,8 @@ import createReducer from '../lib/createReducer';
 import { DEFAULT_MONTHS_ARRAY } from '../lib/constants';
 import { combinedStatisticInitialState } from '../lib/initialState';
 import * as types from '../actions/types';
+import parseJson from '../lib/parseJson';
+import * as assigns from '../lib/assignReducer';
 
 const getSelectedYearChartData = (selectedYear, chartData) => {
   const selectedYearDate = selectedYear.getFullYear();
@@ -70,58 +72,47 @@ const getChartData = (state, totalReps) => {
 };
 
 export default createReducer(combinedStatisticInitialState, {
-  [types.STATISTICS_GET_FETCH](state, action) {
-    return Object.assign(
-      {},
-      combinedStatisticInitialState,
-      { isFetching: true }
-    );
+  [types.STATISTICS_FETCH_ATTEMPT](state, action) {
+    return assigns.fetchAttempt(combinedStatisticInitialState);
   },
-  [types.STATISTICS_GET_SUCCESS](state, action) {
-    const statisticsObj = JSON.parse(action.payload);
-    const statisticsObjExist = statisticsObj !== null;
+  [types.STATISTICS_FETCH_SUCCESS](state, action) {
+    const result = parseJson(action.payload);
 
     let ret = {};
-    if (statisticsObjExist) {
+
+    if (result.exist) {
+      const selectedYearChartData =
+        getSelectedYearChartData(state.selectedYear, result.obj.chartData);
+
       ret = {
-        isFetched: true,
-        isObjFound: true,
-        total: statisticsObj.total,
-        record: statisticsObj.record,
-        calories: statisticsObj.calories,
-        timeElapsed: statisticsObj.timeElapsed,
-        chartData: statisticsObj.chartData,
-        selectedYearChartData:
-          getSelectedYearChartData(
-            state.selectedYear,
-            statisticsObj.chartData
-          ),
+        total: result.obj.total,
+        record: result.obj.record,
+        calories: result.obj.calories,
+        timeElapsed: result.obj.timeElapsed,
+        chartData: result.obj.chartData,
+        selectedYearChartData,
       };
     }
 
-    return Object.assign(
-      {},
-      combinedStatisticInitialState,
-      ret,
-      { isViewRender: true },
-    );
+    return assigns.fetchSuccess(combinedStatisticInitialState, ret, result);
   },
-  [types.STATISTICS_GET_FAILURE](state, action) {
-    return Object.assign(
-      {},
-      combinedStatisticInitialState,
-      { isError: true }
-    );
+  [types.STATISTICS_FETCH_FAILURE](state, action) {
+    return assigns.fetchFailure(state);
+  },
+  [types.STATISTICS_SAVE_ATTEMPT](state, action) {
+    return assigns.saveAttempt(state);
+  },
+  [types.STATISTICS_SAVE_SUCCESS](state, action) {
+    return assigns.saveSuccess(state);
+  },
+  [types.STATISTICS_REMOVE_ATTEMPT](state, action) {
+    return assigns.removeAttempt(state);
   },
   [types.STATISTICS_REMOVE_SUCCESS](state, action) {
-    return Object.assign(
-      {},
-      combinedStatisticInitialState,
-      { isViewRender: true }
-    );
+    return assigns.removeSuccess(combinedStatisticInitialState);
   },
   [types.STATISTICS_REMOVE_FAILURE](state, action) {
-    return {}; // Todo
+    return assigns.removeFailure(combinedStatisticInitialState);
   },
   [types.STATISTICS_SET](state, action) {
     const chartData = getChartData(state, action.payload.total);

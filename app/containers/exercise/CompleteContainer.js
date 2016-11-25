@@ -8,7 +8,7 @@ const mapStateToProps = state => (
   {
     complete: state.complete,
     program: state.program,
-    util: state.more.util,
+    util: state.util,
   }
 );
 

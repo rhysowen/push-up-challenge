@@ -8,7 +8,9 @@ function mapStateToProps(state) {
   return {
     program: state.program,
     exercise: state.exercise,
-    more: state.more,
+    util: state.util,
+    sound: state.sound,
+    reminder: state.reminder,
   };
 }
 

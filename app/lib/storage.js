@@ -1,9 +1,11 @@
 import { AsyncStorage } from 'react-native';
 
-const SELECTED_PROGRAM = '@SELECTED_PROGRAM:key';
-const EXERCISE_STATE = '@EXERCISE_STATE:key';
+const PROGRAM = '@PROGRAM:key';
+const EXERCISE = '@EXERCISE:key';
 const STATISTICS = '@STATISTICS:key';
-const MORE = '@MORE:key';
+const REMINDER = '@REMINDER:key';
+const SOUND = '@SOUND:key';
+const UTIL = '@UTIL:key';
 
 const setKey = async function setKey(key, data) {
   try {
@@ -38,10 +40,12 @@ const removeKey = async function removeKey(key) {
 };
 
 export {
-  SELECTED_PROGRAM,
-  EXERCISE_STATE,
+  PROGRAM,
+  EXERCISE,
   STATISTICS,
-  MORE,
+  REMINDER,
+  SOUND,
+  UTIL,
   setKey,
   getKey,
   removeKey,

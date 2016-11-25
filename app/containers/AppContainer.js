@@ -56,12 +56,12 @@ const getCardWrapperStyle = (proEnabled) => {
 
 const renderTitle = (props) => {
   const {
-    navigationState,
+    navigation,
     tabs,
   } = props;
 
   const selectedTab = tabs.routes[tabs.index];
-  const selectedScreen = navigationState.routes[navigationState.index];
+  const selectedScreen = navigation.routes[navigation.index];
 
   if (selectedScreen.title === NOT_SET) {
     return selectedTab.title;
@@ -74,10 +74,10 @@ const LEFT_COMPONENT = 'LEFT_COMPONENT';
 const CHEVRON_LEFT = 'chevron-left';
 
 const renderComponent = (mode, props) => {
-  const { navigationState } = props;
+  const { navigation } = props;
 
   // Is there a screen stacked?
-  const isStacked = navigationState.index > 0;
+  const isStacked = navigation.index > 0;
 
   let icon;
   let callback;
@@ -107,7 +107,7 @@ const renderLeftComponent = props => renderComponent(LEFT_COMPONENT, props);
 
 const AppContainer = (props) => {
   const {
-    navigationState,
+    navigation,
     util,
   } = props;
 
@@ -124,7 +124,7 @@ const AppContainer = (props) => {
         backgroundColor={TAB_COLOR}
       />
       <NavigationTransitioner
-        navigationState={navigationState}
+        navigationState={navigation}
         style={styles.wrapper}
         render={renderProps => (
           <View style={styles.wrapper}>
@@ -161,9 +161,9 @@ const AppContainer = (props) => {
 };
 
 const mapStateToProps = state => ({
-  navigationState: state.navigationState,
+  navigation: state.navigation,
   tabs: state.tabs,
-  util: state.more.util,
+  util: state.util,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);

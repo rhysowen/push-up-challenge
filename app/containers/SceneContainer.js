@@ -15,7 +15,7 @@ import CompleteContainer from './exercise/CompleteContainer';
 import InstructionContainer from './exercise/InstructionContainer';
 import CreditContainer from './more/CreditContainer';
 import MedicalInformationContainer from './more/MedicalInformationContainer';
-import NotificationContainer from './more/NotificationContainer';
+import ReminderContainer from './more/ReminderContainer';
 import SoundContainer from './more/SoundContainer';
 
 const {
@@ -67,8 +67,8 @@ const SceneContainer = (props) => {
     case 'MedicalInformationContainer':
       Scene = MedicalInformationContainer;
       break;
-    case 'NotificationContainer':
-      Scene = NotificationContainer;
+    case 'ReminderContainer':
+      Scene = ReminderContainer;
       break;
     case 'SoundContainer':
       Scene = SoundContainer;

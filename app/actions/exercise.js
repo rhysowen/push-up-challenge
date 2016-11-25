@@ -8,175 +8,152 @@ import {
   SET_KEY,
   GET_KEY,
   REMOVE_KEY,
-  MERGE_KEY,
   storageAsync,
 } from '../lib/storageAsync';
 
-function saveExerciseStateAsync(exerciseState, mode) {
+const saveAsync = (data, mode) => {
   const actionTypes = [
     types.EXERCISE_SAVE_ATTEMPT,
     types.EXERCISE_SAVE_SUCCESS,
     types.EXERCISE_SAVE_FAILURE,
   ];
 
-  const exerciseStateJson = JSON.stringify(exerciseState);
+  const dataJson = JSON.stringify(data);
 
   return storageAsync(
-    storage.EXERCISE_STATE,
+    storage.EXERCISE,
     actionTypes,
     mode,
-    exerciseStateJson
+    dataJson
   );
-}
+};
 
-export function setNextDayAsync(day, repsCompleted) {
-  const exerciseState = {
-    day,
-    repsCompleted,
-    timeElapsed: 0,
-    rep: 0,
-    set: 0,
-  };
+export const setExerciseAsync = data => (
+  (dispatch) => {
+    const dataStore = {
+      timeElapsed: data.timeElapsed,
+      rep: data.rep,
+      repsCompleted: data.repsCompleted,
+      set: data.set,
+      day: data.day,
+      record: data.record,
+      repCountSet: data.repCountSet,
+    };
 
-  return saveExerciseStateAsync(exerciseState, MERGE_KEY);
-}
+    dispatch(saveAsync(dataStore, SET_KEY));
+  }
+);
 
-export function cleanExercise() {
-  return { type: types.EXERCISE_CLEAN };
-}
+export const fetchExerciseAsync = () => {
+  const actionTypes = [
+    types.EXERCISE_FETCH_ATTEMPT,
+    types.EXERCISE_FETCH_SUCCESS,
+    types.EXERCISE_FETCH_FAILURE,
+  ];
 
-export function setExerciseSaveCloseAsync(
-    timeElapsed,
-    rep,
-    repsCompleted,
-    set,
-    day,
-    record,
-    repCountSet
-  ) {
-  const exerciseState = {
-    timeElapsed,
-    rep,
-    repsCompleted,
-    set,
-    day,
-    record,
-    repCountSet,
-  };
+  return storageAsync(storage.EXERCISE, actionTypes, GET_KEY);
+};
 
-  return saveExerciseStateAsync(exerciseState, SET_KEY);
-}
-
-export function removeExerciseStateAsync() {
+export const removeExerciseAsync = () => {
   const actionTypes = [
     types.EXERCISE_REMOVE_ATTEMPT,
     types.EXERCISE_REMOVE_SUCCESS,
     types.EXERCISE_REMOVE_FAILURE,
   ];
 
-  return storageAsync(storage.EXERCISE_STATE, actionTypes, REMOVE_KEY);
-}
+  return storageAsync(storage.EXERCISE, actionTypes, REMOVE_KEY);
+};
 
-export function fetchExerciseStateAsync() {
-  const actionTypes = [
-    types.EXERCISE_GET_FETCH,
-    types.EXERCISE_GET_SUCCESS,
-    types.EXERCISE_GET_FAILURE,
-  ];
+export const cleanExercise = () => (
+  { type: types.EXERCISE_CLEAN }
+);
 
-  return storageAsync(storage.EXERCISE_STATE, actionTypes, GET_KEY);
-}
-
-export function setRep(rep) {
-  return {
+export const setRep = rep => (
+  {
     type: types.EXERCISE_SET_REP,
     payload: rep,
-  };
-}
+  }
+);
 
-export function setSets(sets) {
-  return {
+export const setSets = sets => (
+  {
     type: types.EXERCISE_SET_SETS,
     payload: sets,
-  };
-}
+  }
+);
 
-export function nextSet() {
-  return { type: types.EXERCISE_NEXT_SET };
-}
+export const nextSet = () => (
+  { type: types.EXERCISE_NEXT_SET }
+);
 
-export function incrementRep() {
-  return {
+export const incrementRep = () => (
+  {
     type: types.EXERCISE_INCREMENT_REP,
-  };
-}
+  }
+);
 
-export function decrementRep() {
-  return {
+export const decrementRep = () => (
+  {
     type: types.EXERCISE_DECREMENT_REP,
-  };
-}
+  }
+);
 
-function setMode(mode) {
-  return {
+export const setMode = mode => (
+  {
     type: types.EXERCISE_SET_MODE,
     payload: mode,
-  };
-}
+  }
+);
 
-export function setDecIntervalId(decIntervalId) {
-  return {
+export const setDecIntervalId = decIntervalId => (
+  {
     type: types.EXERCISE_SET_DEC_INTERVAL_ID,
     payload: decIntervalId,
-  };
-}
+  }
+);
 
-export function clearDecIntervalId() {
-  return {
+export const clearDecIntervalId = () => (
+  {
     type: types.EXERCISE_CLEAR_DEC_INTERVAL_ID,
-  };
-}
+  }
+);
 
-export function setTimeElapsedIntervalId(timeElapsedIntervalId) {
-  return {
+export const setTimeElapsedIntervalId = (timeElapsedIntervalId) => (
+  {
     type: types.EXERCISE_SET_TIME_ELAPSED_INTERVAL_ID,
     payload: timeElapsedIntervalId,
-  };
-}
+  }
+);
 
-export function clearTimeElapsedIntervalId() {
-  return {
+export const clearTimeElapsedIntervalId = () => (
+  {
     type: types.EXERCISE_CLEAR_TIME_ELAPSED_INTERVAL_ID,
-  };
-}
+  }
+);
 
-export function timerDecrease() {
-  return {
+export const timerDecrease = () => (
+  {
     type: types.EXERCISE_DECREASE_TIMER,
-  };
-}
+  }
+);
 
-export function timerElapsedTimeIncrease() {
-  return {
+export const timerElapsedTimeIncrease = () => (
+  {
     type: types.EXERCISE_ELAPSED_TIME_INCREASE,
-  };
-}
+  }
+);
 
-export function abort() {
-  return setMode(EXERCISE_ABORT);
-}
+export const abort = () => setMode(EXERCISE_ABORT);
 
-export function skipRestMode() {
-  return setMode(EXERCISE_ACTIVE);
-}
+export const skipRestMode = () => setMode(EXERCISE_ACTIVE);
 
-export function resetExercise() {
-  return { type: types.EXERCISE_RESET };
-}
+export const resetExercise = () => (
+  { type: types.EXERCISE_RESET }
+);
 
-export function setProximity(data) {
-  return {
+export const setProximity = data => (
+  {
     type: types.EXERCISE_SET_PROXIMITY,
     payload: data.proximity,
-  };
-}
+  }
+);

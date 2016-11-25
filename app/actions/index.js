@@ -3,7 +3,9 @@ import * as ProgramActions from './program';
 import * as StatisticsActions from './statistics';
 import * as ExerciseActions from './exercise';
 import * as CompleteActions from './complete';
-import * as MoreActions from './more';
+import * as ReminderActions from './reminder';
+import * as SoundActions from './sound';
+import * as UtilActions from './util';
 
 export default Object.assign(
   NavigationActions,
@@ -11,6 +13,8 @@ export default Object.assign(
   StatisticsActions,
   ExerciseActions,
   CompleteActions,
-  MoreActions,
+  ReminderActions,
+  SoundActions,
+  UtilActions
 );
 

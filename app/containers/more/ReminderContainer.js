@@ -2,14 +2,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ActionCreators from '../../actions';
 
-import NotificationScreen from '../../components/more/NotificationScreen';
+import ReminderScreen from '../../components/more/ReminderScreen';
 
 function mapStateToProps(state) {
-  return {
-    notification: state.more.notification,
-  };
+  return { reminder: state.reminder };
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotificationScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ReminderScreen);

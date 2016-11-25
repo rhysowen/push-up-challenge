@@ -10,33 +10,11 @@ import {
   EXERCISE_COMPLETE_SOUND,
   BEEP_SOUND,
 } from '../lib/constants';
+import { combinedExerciseInitialState } from '../lib/initialState';
+import parseJson from '../lib/parseJson';
+import * as assigns from '../lib/assignReducer';
 
 const TIMER_SECONDS = 50;
-
-const exerciseInitialState = {
-  isFetching: false,
-  isFetched: false,
-  isError: false,
-  isViewRender: false,
-  set: 0,
-  rep: 0,
-  mode: EXERCISE_ACTIVE,
-  sets: [],
-  timer: TIMER_SECONDS,
-  decIntervalId: 0,
-  decIntervalSet: false,
-  timeElapsedIntervalId: 0,
-  timeElapsedIntervalSet: false,
-  sound: PERFORM_PUSH_UP_SOUND,
-  sessionRepsCompleted: 0,
-  repsCompleted: 0,
-  repsAdded: 0,
-  timeElapsed: 0,
-  calories: 0,
-  totalRepsRemaining: 0,
-  record: 0,
-  repCountSet: 0,
-};
 
 const getCalories = (repsCompleted) => {
   // Assumption is that around 4 push ups burn a single calorie
@@ -184,68 +162,45 @@ const getTotalRemainingReps = (sets, currentSet) => {
   return 0;
 };
 
-export default createReducer(exerciseInitialState, {
-  [types.EXERCISE_GET_FETCH](state, action) {
-    return Object.assign(
-      {},
-      exerciseInitialState,
-      { isFetching: true }
-    );
+export default createReducer(combinedExerciseInitialState, {
+  [types.EXERCISE_FETCH_ATTEMPT](state, action) {
+    return assigns.fetchAttempt(combinedExerciseInitialState);
   },
-  [types.EXERCISE_GET_SUCCESS](state, action) {
-    const exerciseObj = JSON.parse(action.payload);
-    const exerciseExist = exerciseObj !== null;
+  [types.EXERCISE_FETCH_SUCCESS](state, action) {
+    const result = parseJson(action.payload);
 
-    let ret;
+    let ret = {};
 
-    if (exerciseExist) {
+    if (result.exist) {
       ret = {
-        timeElapsed: exerciseObj.timeElapsed,
-        rep: exerciseObj.rep,
-        repsCompleted: exerciseObj.repsCompleted,
-        set: exerciseObj.set,
-        record: exerciseObj.record,
-        repCountSet: exerciseObj.repCountSet,
-      };
-    } else {
-      ret = {
-        timeElapsed: state.timeElapsed,
-        rep: state.rep,
-        repsCompleted: state.repsCompleted,
-        set: state.set,
-        record: state.record,
-        repCountSet: state.repCountSet,
+        timeElapsed: result.obj.timeElapsed,
+        rep: result.obj.rep,
+        repsCompleted: result.obj.repsCompleted,
+        set: result.obj.set,
+        record: result.obj.record,
+        repCountSet: result.obj.repCountSet,
       };
     }
 
-    return Object.assign(
-      {},
-      exerciseInitialState,
-      {
-        isFetched: true,
-        isViewRender: true,
-        timeElapsed: ret.timeElapsed,
-        rep: ret.rep,
-        repsCompleted: ret.repsCompleted,
-        set: ret.set,
-        record: ret.record,
-        repCountSet: ret.repCountSet,
-      }
-    );
+    return assigns.fetchSuccess(combinedExerciseInitialState, ret, result);
   },
-  [types.EXERCISE_GET_FAILURE](state, action) {
-    return Object.assign(
-      {},
-      exerciseInitialState,
-      { isError: true }
-    );
+  [types.EXERCISE_FETCH_FAILURE](state, action) {
+    return assigns.fetchFailure(state);
+  },
+  [types.EXERCISE_SAVE_ATTEMPT](state, action) {
+    return assigns.saveAttempt(state);
+  },
+  [types.EXERCISE_SAVE_SUCCESS](state, action) {
+    return assigns.saveSuccess(state);
+  },
+  [types.EXERCISE_REMOVE_ATTEMPT](state, action) {
+    return assigns.removeAttempt(state);
   },
   [types.EXERCISE_REMOVE_SUCCESS](state, action) {
-    return Object.assign(
-      {},
-      exerciseInitialState,
-      { isViewRender: true },
-    );
+    return assigns.removeSuccess(combinedExerciseInitialState);
+  },
+  [types.EXERCISE_REMOVE_FAILURE](state, action) {
+    return assigns.removeFailure(combinedExerciseInitialState);
   },
   [types.EXERCISE_SET_REP](state, action) {
     return Object.assign(
@@ -396,7 +351,7 @@ export default createReducer(exerciseInitialState, {
   [types.EXERCISE_RESET](state, action) {
     return Object.assign(
       {},
-      exerciseInitialState,
+      combinedExerciseInitialState,
       { day: state.day },
     );
   },

@@ -15,3 +15,16 @@ export const formatTimeElapsed = (number) => {
 export const formatCalories = number => Math.floor(number);
 
 export const formatReps = number => number;
+
+export const formatDate = (date) => {
+  const dateHours = date.getHours();
+  const dateMinutes = date.getMinutes();
+  const mode = dateHours >= 12 ? 'PM' : 'AM';
+
+  const MOD_HOURS = dateHours % 12; // E.g. 13 % 12 === 1
+
+  const hours = MOD_HOURS || 12; // Use 12 instead of 0
+  const minutes = dateMinutes < 10 ? `0${dateMinutes}` : dateMinutes;
+
+  return `${hours}:${minutes} ${mode}`;
+};

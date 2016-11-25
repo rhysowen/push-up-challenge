@@ -5,8 +5,8 @@ import ActionCreators from '../../actions';
 import PreviewScreen from '../../components/exercise/PreviewScreen';
 
 const mapStateToProps = state => ({
-  previewProgram: state.previewProgram,
-  util: state.more.util,
+  program: state.program,
+  util: state.util,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);

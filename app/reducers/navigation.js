@@ -81,8 +81,8 @@ const allPages = [
     title: 'Sounds',
   },
   {
-    key: 'NotificationContainer',
-    title: 'Notifications',
+    key: 'ReminderContainer',
+    title: 'Reminders',
   },
   {
     key: 'InstructionContainer',
@@ -94,7 +94,7 @@ const getIndexByKey = key => (
   allPages.reduce((cur, val, index) => (val.key === key && cur === -1 ? index : cur), -1)
 );
 
-export const navigationState = createReducer({ index: 0, routes: initialRoutes }, {
+export const navigation = createReducer({ index: 0, routes: initialRoutes }, {
   [types.NAVIGATION_JUMP_TO](state, action) {
     return NavigationStateUtils.jumpTo(state, action.payload);
   },
