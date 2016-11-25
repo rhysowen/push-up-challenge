@@ -4,6 +4,19 @@ import { combinedReminderInitialState } from '../lib/initialState';
 import parseJson from '../lib/parseJson';
 import * as assigns from '../lib/assignReducer';
 
+const getDays = (days, modalSelectedDay, modalDatePickerDate) => (
+  days.map((val) => {
+    if (val.day === modalSelectedDay) {
+      return Object.assign(
+        {},
+        val,
+        { date: modalDatePickerDate }
+      );
+    }
+    return val;
+  })
+);
+
 export default createReducer(combinedReminderInitialState, {
   [types.REMINDER_FETCH_ATTEMPT](state, action) {
     return assigns.fetchAttempt(combinedReminderInitialState);
@@ -54,6 +67,13 @@ export default createReducer(combinedReminderInitialState, {
       { modalVisible: !state.modalVisible }
     );
   },
+  // TODO
+  [types.REMINDER_SWITCH_TOGGLE](state, action) {
+    return Object.assign(
+      {},
+      state
+    );
+  },
   [types.REMINDER_SET_DATE](state, action) {
     return Object.assign(
       {},
@@ -68,11 +88,20 @@ export default createReducer(combinedReminderInitialState, {
       { modalOldDatePickerDate: action.payload }
     );
   },
-  [types.REMINDER_SET_SELECTED_DATE_ID](state, action) {
+  [types.REMINDER_SET_SELECTED_DAY](state, action) {
     return Object.assign(
       {},
       state,
-      { modalSelectedDateId: action.payload }
+      { modalSelectedDay: action.payload }
+    );
+  },
+  [types.REMINDER_SET_SELECTED_DAY_TIME](state, action) {
+    const days = getDays(state.days, state.modalSelectedDay, state.modalDatePickerDate);
+
+    return Object.assign(
+      {},
+      state,
+      { days },
     );
   },
 });

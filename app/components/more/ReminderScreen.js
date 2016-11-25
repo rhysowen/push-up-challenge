@@ -28,21 +28,21 @@ const onPressActions = {
     props.toggleReminderModal();
   },
   acceptModal: (props) => {
-    props.saveReminderDayAsync();
+    props.setSelectedDateIdTimeAsync();
     props.toggleReminderModal();
   },
-  optionItem: (props, reminder, index) => {
-    const { date } = reminder;
+  optionItem: (props, reminder) => {
+    const {
+      date,
+      day,
+    } = reminder;
 
     props.setModalDate(date);
     props.setModalOldDate(date);
-    props.setModalSelectedDateId(index);
+    props.setModalSelectedDay(day);
     props.toggleReminderModal();
   },
   dateChange: (props, date) => {
-    const { modalDatePickerDate } = props;
-
-    props.setModalOldDate(modalDatePickerDate);
     props.setModalDate(date);
   },
 };

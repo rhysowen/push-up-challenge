@@ -71,22 +71,22 @@ export const setModalOldDate = date => (
   }
 );
 
-export const setModalSelectedDateId = dateId => (
+export const setModalSelectedDay = day => (
   {
-    type: types.REMINDER_SET_SELECTED_DATE_ID,
-    payload: dateId,
+    type: types.REMINDER_SET_SELECTED_DAY,
+    payload: day,
   }
 );
 
 export const setSelectedDateIdTimeAsync = () => (
   (dispatch, getState) => {
-    dispatch({ type: types.REMINDER_SET_SELECTED_DATE_ID_TIME });
+    dispatch({ type: types.REMINDER_SET_SELECTED_DAY_TIME });
 
-    const data = getState().util;
+    const data = getState().reminder;
     const saveData = {
       days: data.days,
     };
 
-    return saveAsync(saveData, MERGE_KEY);
+    dispatch(saveAsync(saveData, MERGE_KEY));
   }
 );
