@@ -47,11 +47,11 @@ export default createReducer(combinedReminderInitialState, {
   [types.REMINDER_REMOVE_FAILURE](state, action) {
     return assigns.removeFailure(combinedReminderInitialState);
   },
-  [types.REMINDER_REMINDER_MODAL_TOGGLE](state, action) {
+  [types.REMINDER_MODAL_TOGGLE](state, action) {
     return Object.assign(
       {},
       state,
-      { modalVisible: !state.reminder.modalVisible }
+      { modalVisible: !state.modalVisible }
     );
   },
   [types.REMINDER_SET_DATE](state, action) {
