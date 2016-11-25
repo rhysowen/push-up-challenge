@@ -57,28 +57,28 @@ export const toggleReminderModal = () => (
   { type: types.REMINDER_MODAL_TOGGLE }
 );
 
-export const setModalDate = date => (
+export const setReminderModalDate = date => (
   {
     type: types.REMINDER_SET_DATE,
     payload: date,
   }
 );
 
-export const setModalOldDate = date => (
+export const setReminderModalOldDate = date => (
   {
     type: types.REMINDER_SET_OLD_DATE,
     payload: date,
   }
 );
 
-export const setModalSelectedDay = day => (
+export const setReminderModalSelectedDay = day => (
   {
     type: types.REMINDER_SET_SELECTED_DAY,
     payload: day,
   }
 );
 
-export const setSelectedDateIdTimeAsync = () => (
+export const setReminderSelectedDateIdTimeAsync = () => (
   (dispatch, getState) => {
     dispatch({ type: types.REMINDER_SET_SELECTED_DAY_TIME });
 
@@ -90,3 +90,5 @@ export const setSelectedDateIdTimeAsync = () => (
     dispatch(saveAsync(saveData, MERGE_KEY));
   }
 );
+
+//REMINDER_SWITCH_TOGGLE

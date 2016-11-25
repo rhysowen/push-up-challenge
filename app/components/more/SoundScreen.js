@@ -19,12 +19,12 @@ export default (props) => {
         <Option.Item
           primaryText={COACH_SOUND}
           value={IS_COACH_SOUND_ENABLED}
-          onValueChanged={() => props.toggleCoachSound()}
+          onValueChanged={() => props.toggleSoundCoach()}
         />
         <Option.Item
           primaryText={BEEP_SOUND}
           value={IS_BEEP_SOUND_ENABLED}
-          onValueChanged={() => props.toggleBeepSound()}
+          onValueChanged={() => props.toggleSoundBeep()}
         />
       </Option>
     </ScrollBaseScreen>

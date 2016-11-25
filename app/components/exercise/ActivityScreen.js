@@ -126,19 +126,19 @@ const onPressActions = {
     navigateReset(props);
   },
   setComplete: (props) => {
-    props.nextSet();
+    props.nextExerciseSet();
   },
   addRep: (props) => {
-    props.incrementRep();
+    props.incrementExerciseRep();
   },
   activeMode: (props) => {
     const { exercise } = props;
 
     switch (exercise.mode) {
       case EXERCISE_ACTIVE:
-        return props.decrementRep();
+        return props.decrementExerciseRep();
       case EXERCISE_REST:
-        return props.skipRestMode();
+        return props.skipExerciseRestMode();
       default:
         return {};
     }
@@ -296,10 +296,10 @@ const cleanUpTimers = (props) => {
   const { exercise } = props;
 
   clearInterval(exercise.decIntervalId);
-  props.clearDecIntervalId();
+  props.clearExerciseDecIntervalId();
 
   clearInterval(exercise.timeElapsedIntervalId);
-  props.clearTimeElapsedIntervalId();
+  props.clearExerciseTimeElapsedIntervalId();
 };
 
 // Should probably re-think this as it's anti-Redux pattern?
@@ -338,8 +338,10 @@ const FADE_COLOR = '#CCCCCC';
 export default class ActivityScreen extends Component {
 
   componentDidMount() {
-    this.props.setTimeElapsedIntervalId(setInterval(this.props.timerElapsedTimeIncrease, 1000));
-    Proximity.addListener(this.props.setProximity);
+    this.props.setExerciseTimeElapsedIntervalId(
+      setInterval(this.props.timerExerciseElapsedTimeIncrease, 1000)
+    );
+    Proximity.addListener(this.props.setExerciseProximity);
 
     KeepAwake.activate();
   }
@@ -355,10 +357,10 @@ export default class ActivityScreen extends Component {
     if (exercise.mode === EXERCISE_COMPLETE) {
       cleanUpState(this.props);
     } else if (mode === EXERCISE_REST && !decIntervalSet) {
-      this.props.setDecIntervalId(setInterval(this.props.timerDecrease, 1000));
+      this.props.setExerciseDecIntervalId(setInterval(this.props.timerExerciseDecrease, 1000));
     } else if (decIntervalSet && mode !== EXERCISE_REST) {
       clearInterval(this.props.exercise.decIntervalId);
-      this.props.clearDecIntervalId();
+      this.props.clearExerciseDecIntervalId();
     }
   }
 
@@ -366,7 +368,7 @@ export default class ActivityScreen extends Component {
     // Consider using TimerMixin - no ES6 API so use react-mixin?
     cleanUpTimers(this.props);
 
-    Proximity.removeListener(this.props.setProximity);
+    Proximity.removeListener(this.props.setExerciseProximity);
 
     KeepAwake.deactivate();
   }

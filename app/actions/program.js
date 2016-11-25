@@ -59,13 +59,6 @@ export const removeProgramAsync = () => {
   return storageAsync(storage.PROGRAM, actionTypes, REMOVE_KEY);
 };
 
-export const setPreviewByName = name => (
-  {
-    type: types.PROGRAM_SET_PREVIEW,
-    payload: name,
-  }
-);
-
 const setProgramReps = (repsCompleted, repsAdded, type) => (
   {
     type,

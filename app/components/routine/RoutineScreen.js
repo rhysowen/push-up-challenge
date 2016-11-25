@@ -78,7 +78,7 @@ const getMapSets = (props) => {
 const onPressActions = {
   continueTraining: (props) => {
     const mapSets = getMapSets(props);
-    props.setSets(mapSets);
+    props.setExerciseSets(mapSets);
 
     props.navigateReset('ActivityContainer');
   },

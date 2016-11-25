@@ -100,7 +100,7 @@ const onPressActions = {
       cleanReset(props);
 
       // No need to explicitly call setSets!
-      props.setSets(preview.days[0].sets);
+      props.setExerciseSets(preview.days[0].sets);
       props.setProgramByNameAsync(preview.name);
 
       props.navigateReset('ActivityContainer');

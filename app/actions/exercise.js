@@ -68,90 +68,90 @@ export const cleanExercise = () => (
   { type: types.EXERCISE_CLEAN }
 );
 
-export const setRep = rep => (
+export const setExerciseRep = rep => (
   {
     type: types.EXERCISE_SET_REP,
     payload: rep,
   }
 );
 
-export const setSets = sets => (
+export const setExerciseSets = sets => (
   {
     type: types.EXERCISE_SET_SETS,
     payload: sets,
   }
 );
 
-export const nextSet = () => (
+export const nextExerciseSet = () => (
   { type: types.EXERCISE_NEXT_SET }
 );
 
-export const incrementRep = () => (
+export const incrementExerciseRep = () => (
   {
     type: types.EXERCISE_INCREMENT_REP,
   }
 );
 
-export const decrementRep = () => (
+export const decrementExerciseRep = () => (
   {
     type: types.EXERCISE_DECREMENT_REP,
   }
 );
 
-export const setMode = mode => (
-  {
-    type: types.EXERCISE_SET_MODE,
-    payload: mode,
-  }
-);
-
-export const setDecIntervalId = decIntervalId => (
+export const setExerciseDecIntervalId = decIntervalId => (
   {
     type: types.EXERCISE_SET_DEC_INTERVAL_ID,
     payload: decIntervalId,
   }
 );
 
-export const clearDecIntervalId = () => (
+export const clearExerciseDecIntervalId = () => (
   {
     type: types.EXERCISE_CLEAR_DEC_INTERVAL_ID,
   }
 );
 
-export const setTimeElapsedIntervalId = (timeElapsedIntervalId) => (
+export const setExerciseTimeElapsedIntervalId = timeElapsedIntervalId => (
   {
     type: types.EXERCISE_SET_TIME_ELAPSED_INTERVAL_ID,
     payload: timeElapsedIntervalId,
   }
 );
 
-export const clearTimeElapsedIntervalId = () => (
+export const clearExerciseTimeElapsedIntervalId = () => (
   {
     type: types.EXERCISE_CLEAR_TIME_ELAPSED_INTERVAL_ID,
   }
 );
 
-export const timerDecrease = () => (
+export const timerExerciseDecrease = () => (
   {
     type: types.EXERCISE_DECREASE_TIMER,
   }
 );
 
-export const timerElapsedTimeIncrease = () => (
+export const timerExerciseElapsedTimeIncrease = () => (
   {
     type: types.EXERCISE_ELAPSED_TIME_INCREASE,
   }
 );
 
-export const abort = () => setMode(EXERCISE_ABORT);
+const setExerciseMode = mode => (
+  {
+    type: types.EXERCISE_SET_MODE,
+    payload: mode,
+  }
+);
 
-export const skipRestMode = () => setMode(EXERCISE_ACTIVE);
+export const abortExercise = () => setExerciseMode(EXERCISE_ABORT);
+
+export const skipExerciseRestMode = () => setExerciseMode(EXERCISE_ACTIVE);
 
 export const resetExercise = () => (
   { type: types.EXERCISE_RESET }
 );
 
-export const setProximity = data => (
+export const setExerciseProximity = data => (
   {
     type: types.EXERCISE_SET_PROXIMITY,
     payload: data.proximity,

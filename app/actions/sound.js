@@ -56,7 +56,7 @@ export const removeSoundAsync = () => {
   return storageAsync(storage.SOUND, actionTypes, REMOVE_KEY);
 };
 
-export const toggleCoachSound = () => (
+export const toggleSoundCoach = () => (
   (dispatch, getState) => {
     dispatch({ type: types.SOUND_COACH_TOGGLE });
 
@@ -69,7 +69,7 @@ export const toggleCoachSound = () => (
   }
 );
 
-export const toggleBeepSound = () => (
+export const toggleSoundBeep = () => (
   (dispatch, getState) => {
     dispatch({ type: types.SOUND_BEEP_TOGGLE });
 
