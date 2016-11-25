@@ -62,6 +62,6 @@ export const activateProMode = () => (
       proMode: data.proMode,
     };
 
-    return saveAsync(saveData, MERGE_KEY);
+    dispatch(saveAsync(saveData, MERGE_KEY));
   }
 );
