@@ -8,22 +8,19 @@ import {
 import {
   BASE_FONT_FAMILY_IOS,
   FADE_COLOR,
-  LINE_COLOR,
 } from '../../theme/style';
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
+  wrapper: { flex: 1 },
   value: {
     fontSize: 18,
     fontFamily: BASE_FONT_FAMILY_IOS,
     textAlign: 'center',
   },
+  propertyWrapper: { paddingTop: 3 },
   property: {
     fontFamily: BASE_FONT_FAMILY_IOS,
     color: FADE_COLOR,
-    flex: 1,
     textAlign: 'center',
   },
 });
@@ -43,7 +40,9 @@ export default props => (
     >
       {props.value}
     </Text>
-    <View style={{paddingTop: 3}}>
+    <View
+      style={styles.propertyWrapper}
+    >
       <Text
         style={[
           styles.property,

@@ -65,7 +65,7 @@ export const toggleSoundCoach = () => (
       coachMode: data.coachMode,
     };
 
-    saveAsync(saveData, MERGE_KEY);
+    dispatch(saveAsync(saveData, MERGE_KEY));
   }
 );
 
@@ -78,6 +78,6 @@ export const toggleSoundBeep = () => (
       beepMode: data.beepMode,
     };
 
-    saveAsync(saveData, MERGE_KEY);
+    dispatch(saveAsync(saveData, MERGE_KEY));
   }
 );

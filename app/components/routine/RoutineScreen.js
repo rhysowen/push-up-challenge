@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   statsWrapper: {
-    flex: 1,
     backgroundColor: 'rgba(48, 45, 48, 0.6)',
     paddingLeft: BASE_PADDING_LEFT,
     paddingRight: BASE_PADDING_RIGHT,

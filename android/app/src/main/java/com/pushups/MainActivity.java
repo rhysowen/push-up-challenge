@@ -1,11 +1,11 @@
 package com.pushups;
 
 import com.facebook.react.ReactActivity;
-import com.corbt.keepawake.KCKeepAwakePackage;
-import com.horcrux.svg.RNSvgPackage;
-import com.zmxv.RNSound.RNSoundPackage;
-import com.sbugert.rnadmob.RNAdMobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.zmxv.RNSound.RNSoundPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.corbt.keepawake.KCKeepAwakePackage;
+import com.sbugert.rnadmob.RNAdMobPackage;
 
 public class MainActivity extends ReactActivity {
 

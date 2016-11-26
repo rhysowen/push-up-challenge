@@ -191,7 +191,7 @@ export default (props) => {
         <StatisticItem
           value={total}
           property="Reps"
-          propertyColorStyle={FADE_COLOR}
+          //propertyColorStyle={FADE_COLOR}
           rightBorderStyle={rightBorderStyle}
         />
         <StatisticItem

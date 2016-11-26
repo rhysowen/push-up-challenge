@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   StyleSheet,
+  Text,
 } from 'react-native';
 
 import { AdMobBanner } from 'react-native-admob';
@@ -17,8 +18,8 @@ import {
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: BASE_BACKGROUND_COLOR,
-    alignItems: 'center',
     minHeight: SMART_BANNER_HEIGHT,
+    alignItems: 'center',
   },
 });
 
@@ -39,7 +40,8 @@ export default (props) => {
         bannerSize={BANNER_SIZE}
         adUnitID={BANNER_AD_UNIT_ID}
         testDeviceID={TEST_DEVICE_ID}
-      />
+        style={{width: 320, height: 50}}
+    />
     </View>
   );
 };

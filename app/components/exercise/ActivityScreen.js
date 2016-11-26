@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   statisticWrapper: {
-    flex: 1,
     justifyContent: 'center',
     paddingTop: BASE_PADDING_TOP,
     paddingBottom: 10,
