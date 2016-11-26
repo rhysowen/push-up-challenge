@@ -91,4 +91,22 @@ export const setReminderSelectedDateIdTimeAsync = () => (
   }
 );
 
-//REMINDER_SWITCH_TOGGLE
+const toggleReminderSwitch = day => (
+  {
+    type: types.REMINDER_SWITCH_TOGGLE,
+    payload: day,
+  }
+);
+
+export const toggleReminderSwitchAsync = day => (
+  (dispatch, getState) => {
+    dispatch(toggleReminderSwitch(day));
+
+    const data = getState().reminder;
+    const saveData = {
+      days: data.days,
+    };
+
+    dispatch(saveAsync(saveData, MERGE_KEY));
+  }
+);

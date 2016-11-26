@@ -8,12 +8,15 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import PushNotification from 'react-native-push-notification';
 
 import ScrollBaseScreen from '../shared/ScrollBaseScreen';
 import Option from './Option';
 import {
   TAB_COLOR,
   BASE_BACKGROUND_COLOR,
+  BASE_PADDING_LEFT,
+  BASE_PADDING_RIGHT,
 } from '../../theme/style';
 import { REMINDER_ENABLED } from '../../lib/constants';
 import getIconJsx from '../../lib/icon';
@@ -21,6 +24,27 @@ import { formatDate } from '../../lib/format';
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
+  modalWrapper: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  modalTopWrapper: { backgroundColor: TAB_COLOR },
+  modalTopOptions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: BASE_PADDING_LEFT,
+    paddingRight: BASE_PADDING_RIGHT,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  modalContentWrapper: {
+    backgroundColor: BASE_BACKGROUND_COLOR,
+    paddingLeft: BASE_PADDING_LEFT,
+    paddingRight: BASE_PADDING_RIGHT,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
 });
 
 const onPressActions = {
@@ -82,19 +106,19 @@ const getModalJsx = (props) => {
       visible={modalVisible}
     >
       <View
-        style={{flex: 1, justifyContent: 'flex-end'}}
+        style={styles.modalWrapper}
       >
         <View
-          style={{ backgroundColor: TAB_COLOR }}
+          style={styles.modalTopWrapper}
         >
           <View
-            style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingLeft: 25, paddingRight: 25,}}
+            style={styles.modalTopOptions}
           >
             {cancelTouchableIconJsx}
             {acceptTouchableIconJsx}
           </View>
           <View
-            style={{backgroundColor: BASE_BACKGROUND_COLOR, paddingLeft: 25, paddingRight: 25, paddingTop: 5, paddingBottom: 5}}
+            style={styles.modalContentWrapper}
           >
             <DatePickerIOS
               date={modalDatePickerDate}
@@ -127,7 +151,7 @@ const getOptionsJsx = (props) => {
         primaryText={val.day}
         secondaryText={time}
         value={value}
-        onValueChanged={() => console.log('todo')}
+        onValueChanged={() => props.toggleReminderSwitchAsync(val.day)}
       />
     );
   });
