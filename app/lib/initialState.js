@@ -34,7 +34,7 @@ const programInitialState = {
   status: PROGRAM_ACTIVE,
 };
 
-const TIMER_SECONDS = 50;
+const TIMER_SECONDS = 60;
 
 // Exercise
 const exerciseInitialState = {
