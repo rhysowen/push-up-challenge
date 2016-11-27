@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   statisticWrapper: {
     flexDirection: 'row',
   },
-  wellDoneText: {
+  praiseText: {
     color: 'white',
     fontFamily: BASE_FONT_FAMILY_IOS,
     fontSize: 22,
@@ -64,32 +64,33 @@ const styles = StyleSheet.create({
   },
 });
 
-const returnDashboard = props => props.navigateReset('ApplicationTabs');
+const navigateResetAppTabs = props => props.navigateReset('ApplicationTabs');
 
 const onPressActions = {
   returnDashboard: (props) => {
-    returnDashboard(props);
+    navigateResetAppTabs(props);
     props.setTab(0);
   },
   viewStatistics: (props) => {
-    returnDashboard(props);
+    navigateResetAppTabs(props);
     props.setTab(2);
   },
   manageSettings: (props) => {
-    returnDashboard(props);
+    navigateResetAppTabs(props);
     props.setTab(3);
   },
 };
 
 const getExerciseCompleteText = (props) => {
   const { program } = props;
+
   switch (program.status) {
     case PROGRAM_ACTIVE:
-      return 'You\'re nearly there!';
+      return 'Day Complete';
     case PROGRAM_COMPLETE:
-      return 'You\'ve completed the program!';
+      return 'Program Complete';
     default:
-      return 'Well Done!';
+      return '';
   }
 };
 
@@ -103,6 +104,7 @@ const CompleteScreen = (props) => {
     repsCompleted,
     timeElapsed,
     calories,
+    praise,
   } = complete;
 
   const {
@@ -139,9 +141,9 @@ const CompleteScreen = (props) => {
         style={styles.topWrapper}
       >
         <Text
-          style={styles.wellDoneText}
+          style={styles.praiseText}
         >
-          Well Done!
+          {praise}
         </Text>
         <Text
           style={styles.exerciseCompleteText}
