@@ -47,6 +47,12 @@ const styles = StyleSheet.create({
   },
 });
 
+PushNotification.configure({
+  onNotification: (notification) => {
+    console.log('NOTIFICATION:', notification);
+  },
+});
+
 const onPressActions = {
   cancelModal: (props) => {
     props.toggleReminderModal();

@@ -6,6 +6,10 @@ import {
   EXERCISE_ACTIVE,
   PERFORM_PUSH_UP_SOUND,
 } from '../lib/constants';
+import {
+  DAYS,
+  BASE_DATE,
+} from '../lib/reminder';
 
 const initialAsyncState = {
   isFetching: false,
@@ -55,10 +59,6 @@ const exerciseInitialState = {
 };
 
 // Reminder
-const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-const BASE_DATE = new Date();
-BASE_DATE.setHours(0, 0, 0, 0);
-
 const DAY_OBJECT = {
   mode: REMINDER_DISABLED,
   date: BASE_DATE,
