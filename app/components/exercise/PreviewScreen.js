@@ -25,6 +25,7 @@ import {
 import BaseScreen from '../shared/BaseScreen';
 import Instruction from '../shared/Instruction';
 import Pro from '../shared/Pro';
+import Days from './Days';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -50,9 +51,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   bottomWrapper: {
-    flex: 2,
     justifyContent: 'flex-start',
-    paddingTop: BASE_PADDING_TOP,
+    paddingTop: 5,
   },
   titleIconWrapper: {
     flexDirection: 'row',
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     borderRightColor: LINE_COLOR,
     borderRightWidth: 1,
   },
-  daysWrapper: { flex: 1 },
   buttonWrapper: {
     backgroundColor: COLOR_ORANGE,
     padding: 10,
@@ -124,6 +123,22 @@ const getProIconJsx = (props, proEnabled) => {
   );
 };
 
+const getDaysItemJsx = (preview, daysLength) => (
+  preview.days.map((val, index) => {
+    const day = index + 1;
+    const lastItem = day === daysLength;
+
+    return (
+      <Days.Item
+        key={index}
+        day={day}
+        sets={val.sets}
+        lastItem={lastItem}
+      />
+    );
+  })
+);
+
 export default (props) => {
   const {
     program,
@@ -145,6 +160,9 @@ export default (props) => {
     borderRightColor: LINE_COLOR,
     borderRightWidth: 1,
   };
+
+  const daysLength = preview.days.length;
+  const daysItemJsx = getDaysItemJsx(preview, daysLength);
 
   return (
     <BaseScreen
@@ -182,6 +200,9 @@ export default (props) => {
             property="Days"
           />
         </View>
+        <Days>
+          {daysItemJsx}
+        </Days>
         <View
           style={styles.bottomWrapper}
         >
