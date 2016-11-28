@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { onCreateAsyncActions } from '../../lib/initialState';
+import { onLoadCreateAsyncActions } from '../../lib/initialState';
 import BaseScreen from '../shared/BaseScreen';
 import { BASE_FONT_FAMILY_IOS } from '../../theme/style';
 
@@ -32,9 +32,10 @@ const getAsync = (props) => {
   props.fetchUtilAsync();
   props.fetchReminderAsync();
   props.fetchSoundAsync();
+  props.fetchAnalyticsAsync();
 };
 
-const setAsync = props => onCreateAsyncActions(props);
+const setAsync = props => onLoadCreateAsyncActions(props);
 
 
 export default class LoadingScreen extends Component {
@@ -50,11 +51,13 @@ export default class LoadingScreen extends Component {
       util,
       reminder,
       sound,
+      analytics,
     } = this.props;
 
     const isSetRequired = (util.isInitRequired && !util.isSaveAttempt) &&
       (reminder.isInitRequired && !reminder.isSaveAttempt) &&
-      (sound.isInitRequired && !sound.isSaveAttempt);
+      (sound.isInitRequired && !sound.isSaveAttempt) &&
+      (analytics.isInitRequired && !analytics.isSaveAttempt);
 
     if (isSetRequired) {
       setAsync(this.props);
@@ -78,6 +81,7 @@ export default class LoadingScreen extends Component {
       util,
       reminder,
       sound,
+      analytics,
     } = this.props;
 
     const isProgramViewRender = program.isViewRender;
@@ -85,6 +89,7 @@ export default class LoadingScreen extends Component {
     const isUtilViewRender = util.isViewRender;
     const isReminderViewRender = reminder.isViewRender;
     const isSoundViewRender = sound.isViewRender;
+    const isAnalyticsViewRender = analytics.isViewRender;
 
     const viewRenders = [
       isProgramViewRender,
@@ -92,6 +97,7 @@ export default class LoadingScreen extends Component {
       isUtilViewRender,
       isReminderViewRender,
       isSoundViewRender,
+      isAnalyticsViewRender,
     ];
 
     const progressSum = viewRenders.reduce((prev, current) => prev + current);

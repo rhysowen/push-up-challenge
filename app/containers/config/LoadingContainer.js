@@ -11,6 +11,7 @@ function mapStateToProps(state) {
     util: state.util,
     sound: state.sound,
     reminder: state.reminder,
+    analytics: state.analytics,
   };
 }
 

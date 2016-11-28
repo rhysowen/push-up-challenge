@@ -14,8 +14,9 @@ import {
   isProEnabled,
 } from '../../lib/util';
 import openUrl from '../../lib/linking';
-import { onCreateAsyncActions } from '../../lib/initialState';
+import { onResetCreateAsyncActions } from '../../lib/initialState';
 import getIconJsx from '../../lib/icon';
+import { RATE_APP_URL } from '../../lib/constants';
 
 const UPGRADE_TO_PRO = 'Upgrade to Pro';
 const RESTORE_PURCHASES = 'Restore Purchases';
@@ -26,9 +27,6 @@ const CREDITS = 'Credits';
 const RATE_APP = 'Rate App';
 const RESET_APP = 'Reset App';
 
-const APP_ID = '1173126612';
-const RATE_APP_URL = `http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=${APP_ID}&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8`;
-
 const onResetPress = (props) => {
   props.removeUtilAsync();
   props.removeProgramAsync();
@@ -37,7 +35,7 @@ const onResetPress = (props) => {
   props.removeSoundAsync();
   props.removeReminderAsync();
 
-  onCreateAsyncActions(props);
+  onResetCreateAsyncActions(props);
 };
 
 const resetApp = (props) => {

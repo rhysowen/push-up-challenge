@@ -7,6 +7,7 @@ import Complete from './complete';
 import Util from './util';
 import Sound from './sound';
 import Reminder from './reminder';
+import Analytics from './analytics';
 
 export default combineReducers(Object.assign(
   navigationReducer,
@@ -17,4 +18,5 @@ export default combineReducers(Object.assign(
   { util: Util },
   { sound: Sound },
   { reminder: Reminder },
+  { analytics: Analytics },
 ));

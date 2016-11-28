@@ -6,6 +6,7 @@ const STATISTICS = '@STATISTICS:key';
 const REMINDER = '@REMINDER:key';
 const SOUND = '@SOUND:key';
 const UTIL = '@UTIL:key';
+const ANALYTICS = '@ANALYTICS:key';
 
 const setKey = async function setKey(key, data) {
   try {
@@ -46,6 +47,7 @@ export {
   REMINDER,
   SOUND,
   UTIL,
+  ANALYTICS,
   setKey,
   getKey,
   removeKey,

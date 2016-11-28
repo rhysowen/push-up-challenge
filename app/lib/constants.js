@@ -41,6 +41,14 @@ const FREE_PROGRAM = 'FREE_PROGRAM';
 
 const DEFAULT_MONTHS_ARRAY = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
+const MAX_POSITIVE_COUNT = 8;
+const RATE_APP = 'RATE_APP';
+const REMIND_LATER = 'REMIND_LATER';
+const NO_THANKS = 'NO_THANKS';
+
+const APP_ID = '1173126612';
+const RATE_APP_URL = `http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=${APP_ID}&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8`;
+
 export {
   APP_NAME,
   APP_VERSION,
@@ -73,4 +81,9 @@ export {
   PRO_PROGRAM,
   FREE_PROGRAM,
   DEFAULT_MONTHS_ARRAY,
+  MAX_POSITIVE_COUNT,
+  RATE_APP,
+  REMIND_LATER,
+  NO_THANKS,
+  RATE_APP_URL,
 };

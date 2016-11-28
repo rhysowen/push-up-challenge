@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import {
   View,
-  Image,
   StyleSheet,
 } from 'react-native';
 
@@ -43,6 +42,11 @@ const styles = StyleSheet.create({
     fontFamily: BASE_FONT_FAMILY_IOS,
   },
 });
+
+const selectTab = (props, tabIndex) => {
+  props.incrementPositiveAnalytics();
+  props.setTab(tabIndex);
+};
 
 const ApplicationTabs = props => {
   const { tabs } = props;
@@ -109,7 +113,7 @@ const ApplicationTabs = props => {
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={moreSelected}
-          onPress={() => props.setTab(3)}
+          onPress={() => selectTab(props, 3)}
           title="More"
           titleStyle={moreSelected ? styles.titleStyleSelected : styles.titleStyle}
           tabStyle={moreSelected ? styles.tabStyleSelected : null}

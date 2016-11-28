@@ -103,6 +103,11 @@ const statisticInitialState = {
   completed: {},
 };
 
+const analyticsInitialState = {
+  positiveCount: 0,
+  showRateDialog: true,
+};
+
 export const combinedProgramInitialState = Object.assign(
   {},
   initialAsyncState,
@@ -139,7 +144,20 @@ export const combinedStatisticInitialState = Object.assign(
   statisticInitialState
 );
 
-export const onCreateAsyncActions = (props) => {
+export const combinedAnalyticsInitialState = Object.assign(
+  {},
+  initialAsyncState,
+  analyticsInitialState
+);
+
+export const onLoadCreateAsyncActions = (props) => {
+  props.setUtilAsync(combinedUtilInitialState);
+  props.setReminderAsync(combinedReminderInitialState);
+  props.setSoundAsync(combinedSoundInitialState);
+  props.setAnalyticsAsync(combinedAnalyticsInitialState);
+};
+
+export const onResetCreateAsyncActions = (props) => {
   props.setUtilAsync(combinedUtilInitialState);
   props.setReminderAsync(combinedReminderInitialState);
   props.setSoundAsync(combinedSoundInitialState);

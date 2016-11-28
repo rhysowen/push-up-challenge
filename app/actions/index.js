@@ -6,6 +6,7 @@ import * as CompleteActions from './complete';
 import * as ReminderActions from './reminder';
 import * as SoundActions from './sound';
 import * as UtilActions from './util';
+import * as AnalyticsActions from './analytics';
 
 export default Object.assign(
   NavigationActions,
@@ -15,6 +16,7 @@ export default Object.assign(
   CompleteActions,
   ReminderActions,
   SoundActions,
-  UtilActions
+  UtilActions,
+  AnalyticsActions
 );
 
