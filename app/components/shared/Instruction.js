@@ -1,20 +1,15 @@
 import React from 'react';
 import {
   View,
-  Text,
   Image,
   StyleSheet,
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import {
   BASE_PADDING_TOP,
-  COLOR_ORANGE,
-  BASE_FONT_FAMILY_IOS,
 } from '../../theme/style';
 import Content from './Content';
-import getIconJsx from '../../lib/icon';
+import Information from './Information';
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
@@ -22,20 +17,7 @@ const styles = StyleSheet.create({
     width: null,
     height: 200,
   },
-  infoWrapper: {
-    backgroundColor: COLOR_ORANGE,
-    flexDirection: 'row',
-    marginTop: 10,
-    padding: 10,
-    alignItems: 'center',
-  },
-  infoText: {
-    fontFamily: BASE_FONT_FAMILY_IOS,
-    fontSize: 14,
-    color: 'white',
-    paddingLeft: 10,
-    flex: 1,
-  },
+  infoWrapper: { paddingTop: 10 },
   instructionsWrapper: {
     flex: 1,
     paddingTop: BASE_PADDING_TOP,
@@ -59,49 +41,42 @@ const STEP_3_CONTENT = 'Push away from the floor and bring your body back up to 
 
 const exerciseGif = require('../../theme/images/screen/shared/exercise.gif');
 
-export default () => {
-  const iconJsx = getIconJsx(Icon, 'info', 30, 'white');
-
-  return (
+export default () => (
+  <View
+    style={styles.wrapper}
+  >
+    <Image
+      source={exerciseGif}
+      style={styles.exercise}
+    />
     <View
-      style={styles.wrapper}
+      style={styles.infoWrapper}
     >
-      <Image
-        source={exerciseGif}
-        style={styles.exercise}
+      <Information
+        infoText={infoText}
       />
-      <View
-        style={styles.infoWrapper}
-      >
-        {iconJsx}
-        <Text
-          style={styles.infoText}
-        >
-          {infoText}
-        </Text>
-      </View>
-      <View
-        style={styles.instructionsWrapper}
-      >
-        <Content
-          disableScrollView
-          contentStyle={styles.contentStyle}
-          innerContentStyle={styles.innerContentStyle}
-        >
-          <Content.Item
-            header={STEP_1_HEADER}
-            content={STEP_1_CONTENT}
-          />
-          <Content.Item
-            header={STEP_2_HEADER}
-            content={STEP_2_CONTENT}
-          />
-          <Content.Item
-            header={STEP_3_HEADER}
-            content={STEP_3_CONTENT}
-          />
-        </Content>
-      </View>
     </View>
-  );
-};
+    <View
+      style={styles.instructionsWrapper}
+    >
+      <Content
+        disableScrollView
+        contentStyle={styles.contentStyle}
+        innerContentStyle={styles.innerContentStyle}
+      >
+        <Content.Item
+          header={STEP_1_HEADER}
+          content={STEP_1_CONTENT}
+        />
+        <Content.Item
+          header={STEP_2_HEADER}
+          content={STEP_2_CONTENT}
+        />
+        <Content.Item
+          header={STEP_3_HEADER}
+          content={STEP_3_CONTENT}
+        />
+      </Content>
+    </View>
+  </View>
+);

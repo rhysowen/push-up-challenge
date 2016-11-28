@@ -11,9 +11,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Button from '../shared/Button';
 import BaseScreen from '../shared/BaseScreen';
 import StatisticItem from '../shared/StatisticItem';
+import Information from '../shared/Information';
 import {
   COLOR_ORANGE,
   BASE_FONT_FAMILY_IOS,
+  BASE_PADDING_LEFT,
+  BASE_PADDING_RIGHT,
   ACTIVITY_BACKGROUND_COLOR,
   FADE_COLOR,
 } from '../../theme/style';
@@ -44,9 +47,12 @@ const styles = StyleSheet.create({
   },
   middleWrapper: {
     padding: 20,
-    borderBottomColor: 'black',
-    borderBottomWidth: 0.5,
     backgroundColor: COLOR_ORANGE,
+  },
+  infoWrapper: {
+    paddingTop: 10,
+    paddingLeft: BASE_PADDING_LEFT,
+    paddingRight: BASE_PADDING_RIGHT,
   },
   bottomWrapper: { flex: 1 },
   statisticWrapper: {
@@ -123,6 +129,7 @@ const CompleteScreen = (props) => {
   const caloriesFormat = formatCalories(calories);
 
   const exerciseCompleteText = getExerciseCompleteText(props);
+  const infoText = 'For best results, train a minimum of 3 times a week (e.g. Monday, Wednesday and Friday). You can enable reminders via the Settings page.';
 
   const dashboardIconJsx = getIconJsx(Icon, 'dashboard');
   const statisticsIconJsx = getIconJsx(Icon, 'insert-chart');
@@ -175,6 +182,13 @@ const CompleteScreen = (props) => {
             propertyColorStyle={FADE_COLOR}
           />
         </View>
+      </View>
+      <View
+        style={styles.infoWrapper}
+      >
+        <Information
+          infoText={infoText}
+        />
       </View>
       <View
         style={styles.bottomWrapper}
