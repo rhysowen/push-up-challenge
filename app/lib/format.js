@@ -22,3 +22,5 @@ export const formatDate = date => date.toLocaleTimeString([],
     minute: '2-digit',
   }
 );
+
+export const formatToLocale = value => value.toLocaleString();

@@ -9,6 +9,7 @@ import {
   BASE_FONT_FAMILY_IOS,
   FADE_COLOR,
 } from '../../theme/style';
+import { formatToLocale } from '../../lib/format';
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
@@ -25,32 +26,42 @@ const styles = StyleSheet.create({
   },
 });
 
-export default props => (
-  <View
-    style={[
-      styles.wrapper,
-      typeof props.rightBorderStyle !== 'undefined' ? props.rightBorderStyle : {},
-    ]}
-  >
-    <Text
-      style={[
-        styles.value,
-        { color: props.valueColorStyle },
-      ]}
-    >
-      {props.value}
-    </Text>
+export default (props) => {
+  const wrapperStyle = [
+    styles.wrapper,
+    typeof props.rightBorderStyle !== 'undefined' ? props.rightBorderStyle : {},
+  ];
+
+  const valueTextStyle = [
+    styles.value,
+    { color: props.valueColorStyle },
+  ];
+
+  const propertyTextStyle = [
+    styles.property,
+    { color: props.propertyColorStyle },
+  ];
+
+  const valueFormat = formatToLocale(props.value);
+
+  return (
     <View
-      style={styles.propertyWrapper}
+      style={wrapperStyle}
     >
       <Text
-        style={[
-          styles.property,
-          { color: props.propertyColorStyle },
-        ]}
+        style={valueTextStyle}
       >
-        {props.property}
+        {valueFormat}
       </Text>
+      <View
+        style={styles.propertyWrapper}
+      >
+        <Text
+          style={propertyTextStyle}
+        >
+          {props.property}
+        </Text>
+      </View>
     </View>
-  </View>
-);
+  );
+};

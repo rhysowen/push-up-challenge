@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import { BASE_FONT_FAMILY_IOS } from '../../theme/style';
+import { formatToLocale } from '../../lib/format';
 
 const styles = StyleSheet.create({
   wrapper: { alignItems: 'center' },
@@ -22,19 +23,23 @@ const styles = StyleSheet.create({
   },
 });
 
-export default props => (
-  <View
-    style={styles.wrapper}
-  >
-    <Text
-      style={styles.property}
+export default (props) => {
+  const valueFormat = formatToLocale(props.value);
+
+  return (
+    <View
+      style={styles.wrapper}
     >
-      {props.property}
-    </Text>
-    <Text
-      style={styles.value}
-    >
-      {props.value}
-    </Text>
-  </View>
-);
+      <Text
+        style={styles.property}
+      >
+        {props.property}
+      </Text>
+      <Text
+        style={styles.value}
+      >
+        {valueFormat}
+      </Text>
+    </View>
+  );
+};
