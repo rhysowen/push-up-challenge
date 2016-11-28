@@ -14,7 +14,7 @@ import { combinedExerciseInitialState } from '../lib/initialState';
 import parseJson from '../lib/parseJson';
 import * as assigns from '../lib/assignReducer';
 
-const TIMER_SECONDS = 50;
+const TIMER_SECONDS = 60;
 
 const getCalories = (repsCompleted) => {
   // Assumption is that around 4 push ups burn a single calorie
