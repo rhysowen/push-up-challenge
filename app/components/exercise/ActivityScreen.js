@@ -41,6 +41,10 @@ import navigateReset from '../../lib/navigator';
 import getIconJsx from '../../lib/icon';
 import { formatTimeElapsed } from '../../lib/format';
 import abortTraining from '../../lib/abortTraining';
+import {
+  combinedExerciseProps,
+  combinedStatisticsProps,
+} from '../../lib/commonProps';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -105,7 +109,7 @@ const saveStatisticsAsync = (props) => {
     exercise.sessionRepsCompleted,
     exercise.record,
     exercise.calories,
-    exercise.timeElapsed
+    exercise.timeElapsed,
   );
 };
 
@@ -338,7 +342,7 @@ export default class ActivityScreen extends Component {
 
   componentDidMount() {
     this.props.setExerciseTimeElapsedIntervalId(
-      setInterval(this.props.timerExerciseElapsedTimeIncrease, 1000)
+      setInterval(this.props.timerExerciseElapsedTimeIncrease, 1000),
     );
     Proximity.addListener(this.props.setExerciseProximity);
 
@@ -379,7 +383,6 @@ export default class ActivityScreen extends Component {
     } = this.props;
 
     const {
-      sets,
       totalRepsRemaining,
       record,
       timeElapsed,
@@ -516,3 +519,14 @@ export default class ActivityScreen extends Component {
     );
   }
 }
+
+ActivityScreen.propTypes = {
+  exercise: combinedExerciseProps,
+  statistics: combinedStatisticsProps,
+  setExerciseTimeElapsedIntervalId: React.PropTypes.func,
+  timerExerciseElapsedTimeIncrease: React.PropTypes.func,
+  setExerciseProximity: React.PropTypes.func,
+  setExerciseDecIntervalId: React.PropTypes.func,
+  timerExerciseDecrease: React.PropTypes.func,
+  clearExerciseDecIntervalId: React.PropTypes.func,
+};

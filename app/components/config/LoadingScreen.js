@@ -6,6 +6,15 @@ import {
 } from 'react-native';
 
 import { onLoadCreateAsyncActions } from '../../lib/initialState';
+import {
+  combinedProgramProps,
+  combinedExerciseProps,
+  combinedUtilProps,
+  combinedReminderProps,
+  combinedSoundProps,
+  combinedAnalyticsProps,
+  navigateResetProps,
+} from '../../lib/commonProps';
 import BaseScreen from '../shared/BaseScreen';
 import { BASE_FONT_FAMILY_IOS } from '../../theme/style';
 
@@ -124,3 +133,12 @@ export default class LoadingScreen extends Component {
   }
 }
 
+LoadingScreen.propTypes = {
+  program: combinedProgramProps,
+  exercise: combinedExerciseProps,
+  util: combinedUtilProps,
+  reminder: combinedReminderProps,
+  sound: combinedSoundProps,
+  analytics: combinedAnalyticsProps,
+  navigateReset: navigateResetProps,
+};

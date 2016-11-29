@@ -32,7 +32,7 @@ const saveAsync = (data, mode) => {
     storage.ANALYTICS,
     actionTypes,
     mode,
-    dataJson
+    dataJson,
   );
 };
 
@@ -105,7 +105,7 @@ const initDialog = (positiveCount, dispatch) => {
           style: 'cancel',
           onPress: () => rateApp(dialogResponseAnalytics, dispatch),
         },
-      ]
+      ],
     );
   }
 };

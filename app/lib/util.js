@@ -11,7 +11,7 @@ const PRODUCTS = [PRO_IDENTIFIER];
 const PRO_MESSAAGE = 'Adverts have been removed & all programs are now available.';
 
 const purchaseProduct = (productIdentifier, props) => (
-  InAppUtils.loadProducts(PRODUCTS, (loadError, loadProduct) => (
+  InAppUtils.loadProducts(PRODUCTS, () => (
     InAppUtils.purchaseProduct(productIdentifier, (purchaseError, purchaseResponse) => {
       if (purchaseResponse && purchaseResponse.productIdentifier) {
         props.activateProMode();
@@ -19,7 +19,7 @@ const purchaseProduct = (productIdentifier, props) => (
         Alert.alert(
           'Pro Unlocked!',
           PRO_MESSAAGE,
-          { text: 'OK' }
+          { text: 'OK' },
         );
       }
     })
@@ -41,7 +41,7 @@ export const upgrade = (props) => {
         text: 'Upgrade',
         onPress: () => purchaseProduct(PRO_IDENTIFIER, props),
       },
-    ]
+    ],
   );
 };
 

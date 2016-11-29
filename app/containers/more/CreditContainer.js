@@ -4,9 +4,7 @@ import ActionCreators from '../../actions';
 
 import CreditScreen from '../../components/more/CreditScreen';
 
-function mapStateToProps(state) {
-  return { };
-}
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
 

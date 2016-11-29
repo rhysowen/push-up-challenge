@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   StyleSheet,
-  Text,
 } from 'react-native';
 
 import { AdMobBanner } from 'react-native-admob';
@@ -21,11 +20,15 @@ const styles = StyleSheet.create({
     minHeight: SMART_BANNER_HEIGHT,
     alignItems: 'center',
   },
+  bannerStyle: {
+    width: 320,
+    height: 50,
+  },
 });
 
 const BANNER_SIZE = 'banner';
 
-export default (props) => {
+const AdvertBanner = (props) => {
   if (props.hideBanner) {
     return (
       <View />
@@ -40,8 +43,12 @@ export default (props) => {
         bannerSize={BANNER_SIZE}
         adUnitID={BANNER_AD_UNIT_ID}
         testDeviceID={TEST_DEVICE_ID}
-        style={{width: 320, height: 50}}
-    />
+        style={styles.bannerStyle}
+      />
     </View>
   );
 };
+
+AdvertBanner.propTypes = { hideBanner: React.PropTypes.bool };
+
+export default AdvertBanner;

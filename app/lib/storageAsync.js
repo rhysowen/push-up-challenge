@@ -6,7 +6,7 @@ const MERGE_KEY = 'MERGE_KEY';
 const REMOVE_KEY = 'REMOVE_KEY';
 
 const storageAsync = (key, actionTypes, mode, data = null) => (
-  (dispatch, getState) => {
+  (dispatch) => {
     let storageKey;
 
     switch (mode) {
@@ -42,7 +42,7 @@ const storageAsync = (key, actionTypes, mode, data = null) => (
             type: actionTypes[2],
             payload: error,
           });
-        }
+        },
       );
     }
   }

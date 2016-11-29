@@ -34,6 +34,7 @@ import {
   isProEnabled,
 } from '../../lib/ads';
 import getIconJsx from '../../lib/icon';
+import { combinedUtilProps } from '../../lib/commonProps';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -216,6 +217,17 @@ const CompleteScreen = (props) => {
       </View>
     </BaseScreen>
   );
+};
+
+CompleteScreen.propTypes = {
+  complete: React.PropTypes.shape(
+    {
+      repsCompleted: React.PropTypes.number,
+      timeElapsed: React.PropTypes.number,
+      calories: React.PropTypes.number,
+    },
+  ),
+  util: combinedUtilProps,
 };
 
 export default CompleteScreen;

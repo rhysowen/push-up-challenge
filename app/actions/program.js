@@ -21,7 +21,7 @@ const saveAsync = (programState, mode) => {
     storage.PROGRAM,
     actionTypes,
     mode,
-    programStateJson
+    programStateJson,
   );
 };
 

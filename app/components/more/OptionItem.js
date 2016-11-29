@@ -105,4 +105,19 @@ const getMainJsx = (props) => {
   return mainView;
 };
 
-export default props => getMainJsx(props);
+const OptionItem = props => getMainJsx(props);
+
+OptionItem.propTypes = {
+  secondaryText: React.PropTypes.string,
+  primaryText: React.PropTypes.string,
+  value: React.PropTypes.bool,
+};
+
+getSecondaryText.propTypes = { secondaryText: React.PropTypes.string };
+getMainJsx.propTypes = {
+  primaryText: React.PropTypes.string,
+  value: React.PropTypes.bool,
+  onPress: React.PropTypes.func,
+};
+
+export default OptionItem;

@@ -13,10 +13,8 @@ import { bindActionCreators } from 'redux';
 
 import ActionCreators from '../actions';
 import SceneContainer from './SceneContainer';
-
 import NavigationHeaderComponent from '../components/container/NavigationHeaderComponent';
 import AdvertBanner from '../components/shared/AdvertBanner';
-
 import {
   BASE_FONT_FAMILY_IOS,
   BASE_BACKGROUND_COLOR,
@@ -25,6 +23,10 @@ import {
 import { NOT_SET } from '../lib/constants';
 import { SMART_BANNER_HEIGHT } from '../lib/ads';
 import { isProEnabled } from '../lib/util';
+import {
+  combinedUtilProps,
+  navigationProps,
+} from '../lib/commonProps';
 
 const {
   Card: NavigationCard,
@@ -167,5 +169,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
+
+AppContainer.propTypes = {
+  util: combinedUtilProps,
+  navigation: navigationProps,
+};
+
+renderComponent.propTypes = {
+  navigation: navigationProps,
+  navigatePop: React.PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

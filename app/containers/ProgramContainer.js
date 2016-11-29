@@ -4,12 +4,10 @@ import ActionCreators from '../actions';
 
 import ProgramScreen from '../components/program/ProgramScreen';
 
-function mapStateToProps(state) {
-  return {
-    program: state.program,
-    util: state.util,
-  };
-}
+const mapStateToProps = state => ({
+  program: state.program,
+  util: state.util,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
 

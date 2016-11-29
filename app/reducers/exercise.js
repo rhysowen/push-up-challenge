@@ -163,7 +163,7 @@ const getTotalRemainingReps = (sets, currentSet) => {
 };
 
 export default createReducer(combinedExerciseInitialState, {
-  [types.EXERCISE_FETCH_ATTEMPT](state, action) {
+  [types.EXERCISE_FETCH_ATTEMPT]() {
     return assigns.fetchAttempt(combinedExerciseInitialState);
   },
   [types.EXERCISE_FETCH_SUCCESS](state, action) {
@@ -184,29 +184,29 @@ export default createReducer(combinedExerciseInitialState, {
 
     return assigns.fetchSuccess(combinedExerciseInitialState, ret, result);
   },
-  [types.EXERCISE_FETCH_FAILURE](state, action) {
+  [types.EXERCISE_FETCH_FAILURE](state) {
     return assigns.fetchFailure(state);
   },
-  [types.EXERCISE_SAVE_ATTEMPT](state, action) {
+  [types.EXERCISE_SAVE_ATTEMPT](state) {
     return assigns.saveAttempt(state);
   },
-  [types.EXERCISE_SAVE_SUCCESS](state, action) {
+  [types.EXERCISE_SAVE_SUCCESS](state) {
     return assigns.saveSuccess(state);
   },
-  [types.EXERCISE_REMOVE_ATTEMPT](state, action) {
+  [types.EXERCISE_REMOVE_ATTEMPT](state) {
     return assigns.removeAttempt(state);
   },
-  [types.EXERCISE_REMOVE_SUCCESS](state, action) {
+  [types.EXERCISE_REMOVE_SUCCESS]() {
     return assigns.removeSuccess(combinedExerciseInitialState);
   },
-  [types.EXERCISE_REMOVE_FAILURE](state, action) {
+  [types.EXERCISE_REMOVE_FAILURE]() {
     return assigns.removeFailure(combinedExerciseInitialState);
   },
   [types.EXERCISE_SET_REP](state, action) {
     return Object.assign(
       {},
       state,
-      { rep: action.payload }
+      { rep: action.payload },
     );
   },
   [types.EXERCISE_SET_SETS](state, action) {
@@ -220,7 +220,7 @@ export default createReducer(combinedExerciseInitialState, {
       },
     );
   },
-  [types.EXERCISE_NEXT_SET](state, action) {
+  [types.EXERCISE_NEXT_SET](state) {
     const nextRep = getNextRep(state);
     const nextSet = nextRep > 0 ? state.set + 1 : 0;
 
@@ -252,10 +252,10 @@ export default createReducer(combinedExerciseInitialState, {
         record,
         repCountSet,
         calories,
-      }
+      },
     );
   },
-  [types.EXERCISE_INCREMENT_REP](state, action) {
+  [types.EXERCISE_INCREMENT_REP](state) {
     return Object.assign(
       {},
       state,
@@ -267,13 +267,13 @@ export default createReducer(combinedExerciseInitialState, {
       },
     );
   },
-  [types.EXERCISE_DECREMENT_REP](state, action) {
+  [types.EXERCISE_DECREMENT_REP](state) {
     const decrementRepState = getDecrementRepState(state);
 
     return Object.assign(
       {},
       state,
-      decrementRepState
+      decrementRepState,
     );
   },
   [types.EXERCISE_SET_MODE](state, action) {
@@ -298,7 +298,7 @@ export default createReducer(combinedExerciseInitialState, {
       },
     );
   },
-  [types.EXERCISE_CLEAR_DEC_INTERVAL_ID](state, action) {
+  [types.EXERCISE_CLEAR_DEC_INTERVAL_ID](state) {
     return Object.assign(
       {},
       state,
@@ -309,7 +309,7 @@ export default createReducer(combinedExerciseInitialState, {
       },
     );
   },
-  [types.EXERCISE_DECREASE_TIMER](state, action) {
+  [types.EXERCISE_DECREASE_TIMER](state) {
     const decreaseTimerState = getDecreaseTimerState(state);
 
     return Object.assign(
@@ -328,7 +328,7 @@ export default createReducer(combinedExerciseInitialState, {
       },
     );
   },
-  [types.EXERCISE_CLEAR_TIME_ELAPSED_INTERVAL_ID](state, action) {
+  [types.EXERCISE_CLEAR_TIME_ELAPSED_INTERVAL_ID](state) {
     return Object.assign(
       {},
       state,
@@ -338,17 +338,17 @@ export default createReducer(combinedExerciseInitialState, {
       },
     );
   },
-  [types.EXERCISE_ELAPSED_TIME_INCREASE](state, action) {
+  [types.EXERCISE_ELAPSED_TIME_INCREASE](state) {
     return Object.assign(
       {},
       state,
       {
         timeElapsed: state.timeElapsed + 1,
         sound: NOT_SET_SOUND,
-      }
+      },
     );
   },
-  [types.EXERCISE_RESET](state, action) {
+  [types.EXERCISE_RESET](state) {
     return Object.assign(
       {},
       combinedExerciseInitialState,
@@ -367,10 +367,10 @@ export default createReducer(combinedExerciseInitialState, {
     return Object.assign(
       {},
       state,
-      ret
+      ret,
     );
   },
-  [types.EXERCISE_CLEAN](state, action) {
+  [types.EXERCISE_CLEAN](state) {
     return Object.assign(
       {},
       state,
@@ -380,7 +380,7 @@ export default createReducer(combinedExerciseInitialState, {
         sessionRepsCompleted: 0,
         repsAdded: 0,
         calories: 0,
-      }
+      },
     );
   },
 });

@@ -4,9 +4,7 @@ import ActionCreators from '../../actions';
 
 import ReminderScreen from '../../components/more/ReminderScreen';
 
-function mapStateToProps(state) {
-  return { reminder: state.reminder };
-}
+const mapStateToProps = state => ({ reminder: state.reminder });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
 

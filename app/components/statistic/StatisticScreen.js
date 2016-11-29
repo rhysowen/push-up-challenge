@@ -22,6 +22,7 @@ import BaseScreen from '../shared/BaseScreen';
 import StatisticItem from '../shared/StatisticItem';
 import getIconJsx from '../../lib/icon';
 import { DEFAULT_MONTHS_ARRAY } from '../../lib/constants';
+import { combinedStatisticsProps } from '../../lib/commonProps';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -159,7 +160,7 @@ const getRenderJsx = (props) => {
   );
 };
 
-export default (props) => {
+const StatisticScreen = (props) => {
   const { statistics } = props;
 
   const {
@@ -225,3 +226,12 @@ export default (props) => {
     </BaseScreen>
   );
 };
+
+StatisticScreen.propTypes = {
+  statistics: combinedStatisticsProps,
+  nextYear: React.PropTypes.func,
+};
+
+getRenderJsx.propTypes = { statistics: combinedStatisticsProps };
+
+export default StatisticScreen;

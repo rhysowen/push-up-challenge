@@ -11,18 +11,18 @@ import reducer from './reducers';
 import AppContainer from './containers/AppContainer';
 
 // Only log when node constant __DEV__ is active.
-const loggerMiddleware = createLogger({predicate: (getState, action) => __DEV__});
+const loggerMiddleware = createLogger({ predicate: () => __DEV__ });
 
-function configureStore(initialState) {
+const configureStore = (initialState) => {
   const enhancer = compose(
     applyMiddleware(
       thunkMiddleMiddleware,
-      loggerMiddleware
-    )
+      loggerMiddleware,
+    ),
   );
 
   return createStore(reducer, initialState, enhancer);
-}
+};
 
 const store = configureStore({});
 

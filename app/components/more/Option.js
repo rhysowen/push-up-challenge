@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 
 import OptionItem from './OptionItem';
+import { childrenProps } from '../../lib/commonProps';
 
 const styles = StyleSheet.create({
   wrapper: {},
@@ -18,6 +19,8 @@ const Option = props => (
   </View>
 );
 
-export default Option;
-
 Option.Item = OptionItem;
+
+Option.propTypes = { children: childrenProps };
+
+export default Option;

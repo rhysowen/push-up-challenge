@@ -5,26 +5,41 @@ import {
 } from 'react-native';
 
 import BaseScreen from './BaseScreen';
+import { childrenProps } from '../../lib/commonProps';
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
   baseScreenWrapper: { paddingTop: 0 },
 });
 
-export default props => (
-  <ScrollView
-    style={[
-      styles.wrapper,
-      props.scrollStyle,
-    ]}
-  >
-    <BaseScreen
-      style={[
-        styles.baseScreenWrapper,
-        props.baseStyle,
-      ]}
+const ScrollBaseScreen = (props) => {
+  const wrapperStyle = [
+    styles.wrapper,
+    props.scrollStyle,
+  ];
+
+  const baseScreenWrapper = [
+    styles.baseScreenWrapper,
+    props.baseStyle,
+  ];
+
+  return (
+    <ScrollView
+      style={wrapperStyle}
     >
-      {props.children}
-    </BaseScreen>
-  </ScrollView>
-);
+      <BaseScreen
+        style={baseScreenWrapper}
+      >
+        {props.children}
+      </BaseScreen>
+    </ScrollView>
+  );
+};
+
+ScrollBaseScreen.propTypes = {
+  scrollStyle: React.PropTypes.number,
+  baseStyle: React.PropTypes.number,
+  children: childrenProps,
+};
+
+export default ScrollBaseScreen;

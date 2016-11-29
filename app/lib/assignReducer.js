@@ -1,9 +1,7 @@
-import * as types from '../actions/types';
-
 export const fetchAttempt = initialState => Object.assign(
   {},
   initialState,
-  { isFetching: true }
+  { isFetching: true },
 );
 
 export const fetchSuccess = (initialState, returnState, result) => Object.assign(
@@ -14,19 +12,19 @@ export const fetchSuccess = (initialState, returnState, result) => Object.assign
     isFetched: true,
     isViewRender: true,
     isObjFound: result.exist,
-  }
+  },
 );
 
 export const fetchFailure = state => Object.assign(
   {},
   state,
-  { isError: true }
+  { isError: true },
 );
 
 export const saveAttempt = state => Object.assign(
   {},
   state,
-  { isSaveAttempt: true }
+  { isSaveAttempt: true },
 );
 
 export const saveSuccess = state => Object.assign(
@@ -36,13 +34,13 @@ export const saveSuccess = state => Object.assign(
     isSaveAttempt: false,
     isSaveSuccess: true,
     isViewRender: true,
-  }
+  },
 );
 
 export const saveFailure = state => Object.assign(
   {},
   state,
-  { isError: true }
+  { isError: true },
 );
 
 export const removeAttempt = state => Object.assign(
@@ -63,5 +61,5 @@ export const removeSuccess = initialState => Object.assign(
 export const removeFailure = state => Object.assign(
   {},
   state,
-  { isError: true }
+  { isError: true },
 );

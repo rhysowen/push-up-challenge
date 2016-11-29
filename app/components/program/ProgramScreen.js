@@ -13,13 +13,13 @@ import {
   getProEnabled,
   getPrograms,
 } from '../../lib/program';
-
 import {
   BEGINNER_LEVEL,
   INTERMEDIATE_LEVEL,
   ADVANCED_LEVEL,
   EXPERT_LEVEL,
 } from '../../lib/constants';
+import { combinedUtilProps } from '../../lib/commonProps';
 
 const styles = StyleSheet.create({
   proWrapper: {
@@ -102,9 +102,7 @@ const renderButton = (program, index, props, programsCount) => {
   );
 };
 
-const ProgramScreen = (props) => {
-  const { programs } = props;
-
+export default (props) => {
   const programsList = getPrograms();
   const programsCount = programsList.length;
 
@@ -118,4 +116,4 @@ const ProgramScreen = (props) => {
   );
 };
 
-export default ProgramScreen;
+renderButton.propTypes = { util: combinedUtilProps };

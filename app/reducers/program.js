@@ -10,7 +10,7 @@ import {
 } from '../lib/constants';
 
 export default createReducer(combinedProgramInitialState, {
-  [types.PROGRAM_FETCH_ATTEMPT](state, action) {
+  [types.PROGRAM_FETCH_ATTEMPT]() {
     return assigns.fetchAttempt(combinedProgramInitialState);
   },
   [types.PROGRAM_FETCH_SUCCESS](state, action) {
@@ -32,16 +32,16 @@ export default createReducer(combinedProgramInitialState, {
 
     return assigns.fetchSuccess(combinedProgramInitialState, ret, result);
   },
-  [types.PROGRAM_FETCH_FAILURE](state, action) {
+  [types.PROGRAM_FETCH_FAILURE](state) {
     return assigns.fetchFailure(state);
   },
-  [types.PROGRAM_REMOVE_ATTEMPT](state, action) {
+  [types.PROGRAM_REMOVE_ATTEMPT](state) {
     return assigns.removeAttempt(state);
   },
-  [types.PROGRAM_REMOVE_SUCCESS](state, action) {
+  [types.PROGRAM_REMOVE_SUCCESS]() {
     return assigns.removeSuccess(combinedProgramInitialState);
   },
-  [types.PROGRAM_REMOVE_FAILURE](state, action) {
+  [types.PROGRAM_REMOVE_FAILURE]() {
     return assigns.removeFailure(combinedProgramInitialState);
   },
   [types.PROGRAM_SET_BY_NAME](state, action) {
@@ -58,7 +58,7 @@ export default createReducer(combinedProgramInitialState, {
       },
     );
   },
-  [types.PROGRAM_RESET](state, action) {
+  [types.PROGRAM_RESET]() {
     return Object.assign(
       {},
       combinedProgramInitialState,
@@ -85,10 +85,9 @@ export default createReducer(combinedProgramInitialState, {
       {},
       state,
       {
-        //isViewRender: true,
         repsCompleted: action.payload.repsCompleted + state.repsCompleted,
         repsAdded: action.payload.repsAdded + state.repsAdded,
-      }
+      },
     );
   },
   [types.PROGRAM_SET_PREVIEW_BY_NAME](state, action) {
@@ -97,7 +96,7 @@ export default createReducer(combinedProgramInitialState, {
     return Object.assign(
       {},
       state,
-      { preview }
+      { preview },
     );
   },
 });

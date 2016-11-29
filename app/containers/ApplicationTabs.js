@@ -1,6 +1,4 @@
-import React, {
-  PropTypes,
-} from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -22,6 +20,7 @@ import {
   BASE_FONT_FAMILY_IOS,
 } from '../theme/style';
 import getIconJsx from '../lib/icon';
+import { tabProps } from '../lib/commonProps';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -48,7 +47,7 @@ const selectTab = (props, tabIndex) => {
   props.setTab(tabIndex);
 };
 
-const ApplicationTabs = props => {
+const ApplicationTabs = (props) => {
   const { tabs } = props;
 
   const tabIconStyle = [25, '#CCCCCC'];
@@ -127,12 +126,10 @@ const ApplicationTabs = props => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    tabs: state.tabs,
-  };
-}
+const mapStateToProps = state => ({ tabs: state.tabs });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
+
+ApplicationTabs.propTypes = { tabs: tabProps };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplicationTabs);

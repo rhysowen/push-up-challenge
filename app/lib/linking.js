@@ -7,5 +7,5 @@ export default url => (
     }
 
     return -1;
-  }).catch(err => console.error('An error occurred', err))
+  }).catch(() => {})
 );

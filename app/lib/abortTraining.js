@@ -23,6 +23,6 @@ export default (props, callback) => {
         onPress: () => onAbort(props),
         style: 'destructive',
       },
-    ]
+    ],
   );
 };

@@ -12,11 +12,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import BaseScreen from '../shared/BaseScreen';
 import Button from '../shared/Button';
 import ProgramInfoItem from './ProgramInfoItem';
-
 import abortTraining from '../../lib/abortTraining';
 import getIconJsx from '../../lib/icon';
 import { getTotalReps } from '../../lib/program';
-
+import { combinedProgramProps } from '../../lib/commonProps';
 import {
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
@@ -215,8 +214,6 @@ const getRenderJsx = (props) => {
 };
 
 export default (props) => {
-  const { program } = props;
-
   const renderJsx = getRenderJsx(props);
 
   const {
@@ -254,3 +251,5 @@ export default (props) => {
     </BaseScreen>
   );
 };
+
+getButtonJsx.propTypes = { program: combinedProgramProps };

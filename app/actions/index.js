@@ -17,6 +17,6 @@ export default Object.assign(
   ReminderActions,
   SoundActions,
   UtilActions,
-  AnalyticsActions
+  AnalyticsActions,
 );
 

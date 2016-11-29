@@ -8,7 +8,7 @@ const SOUND = '@SOUND:key';
 const UTIL = '@UTIL:key';
 const ANALYTICS = '@ANALYTICS:key';
 
-const setKey = async function setKey(key, data) {
+const setKey = async (key, data) => {
   try {
     return await AsyncStorage.setItem(key, data);
   } catch (error) {
@@ -16,7 +16,7 @@ const setKey = async function setKey(key, data) {
   }
 };
 
-const getKey = async function getKey(key) {
+const getKey = async (key) => {
   try {
     return await AsyncStorage.getItem(key);
   } catch (error) {
@@ -24,7 +24,7 @@ const getKey = async function getKey(key) {
   }
 };
 
-const mergeKey = async function mergeKey(key, data) {
+const mergeKey = async (key, data) => {
   try {
     return await AsyncStorage.mergeItem(key, data);
   } catch (error) {
@@ -32,7 +32,7 @@ const mergeKey = async function mergeKey(key, data) {
   }
 };
 
-const removeKey = async function removeKey(key) {
+const removeKey = async (key) => {
   try {
     return await AsyncStorage.removeItem(key);
   } catch (error) {

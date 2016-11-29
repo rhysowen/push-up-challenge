@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default (props) => {
+const ProgramInfoItem = (props) => {
   const valueFormat = formatToLocale(props.value);
 
   return (
@@ -43,3 +43,13 @@ export default (props) => {
     </View>
   );
 };
+
+ProgramInfoItem.propTypes = {
+  property: React.PropTypes.string,
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number,
+  ]),
+};
+
+export default ProgramInfoItem;

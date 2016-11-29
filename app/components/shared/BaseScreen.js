@@ -8,6 +8,7 @@ import {
   BASE_PADDING_TOP,
   BASE_BACKGROUND_COLOR,
 } from '../../theme/style';
+import { childrenProps } from '../../lib/commonProps';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -17,15 +18,27 @@ const styles = StyleSheet.create({
   },
 });
 
-const BaseScreen = props => (
-  <View
-    style={[
-      styles.wrapper,
-      props.style,
-    ]}
-  >
-    {props.children}
-  </View>
-);
+const BaseScreen = (props) => {
+  const wrapperStyle = [
+    styles.wrapper,
+    props.style,
+  ];
+
+  return (
+    <View
+      style={wrapperStyle}
+    >
+      {props.children}
+    </View>
+  );
+};
+
+BaseScreen.propTypes = {
+  children: childrenProps,
+  style: React.PropTypes.oneOfType([
+    React.PropTypes.number,
+    React.PropTypes.arrayOf(React.PropTypes.number),
+  ]),
+};
 
 export default BaseScreen;

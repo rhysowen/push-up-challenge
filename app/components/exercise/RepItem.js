@@ -26,23 +26,38 @@ const styles = StyleSheet.create({
   },
 });
 
-export default props => (
-  <View
-    style={[
-      styles.wrapper,
-      { backgroundColor: props.backgroundColorStyle },
-    ]}
-  >
-    <Text
-      style={[
-        styles.text,
-        {
-          color: props.textColorStyle,
-          fontWeight: props.fontWeightStyle,
-        },
-      ]}
+const RepItem = (props) => {
+  const wrapperStyle = [
+    styles.wrapper,
+    { backgroundColor: props.backgroundColorStyle },
+  ];
+
+  const textStyle = [
+    styles.text,
+    {
+      color: props.textColorStyle,
+      fontWeight: props.fontWeightStyle,
+    },
+  ];
+
+  return (
+    <View
+      style={wrapperStyle}
     >
-      {props.value}
-    </Text>
-  </View>
-);
+      <Text
+        style={textStyle}
+      >
+        {props.value}
+      </Text>
+    </View>
+  );
+};
+
+RepItem.propTypes = {
+  backgroundColorStyle: React.PropTypes.string,
+  textColorStyle: React.PropTypes.string,
+  fontWeightStyle: React.PropTypes.string,
+  value: React.PropTypes.number,
+};
+
+export default RepItem;

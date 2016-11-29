@@ -23,12 +23,14 @@ const getMainJsx = (props) => {
   const isDisableScrollView = typeof props.disableScrollView !== 'undefined' && props.disableScrollView;
   const Component = isDisableScrollView ? View : ScrollView;
 
+  const wrapperStyle = [
+    styles.wrapper,
+    props.contentStyle,
+  ];
+
   return (
     <Component
-      style={[
-        styles.wrapper,
-        props.contentStyle,
-      ]}
+      style={wrapperStyle}
     >
       <BaseScreen
         style={props.innerContentStyle}
@@ -41,6 +43,13 @@ const getMainJsx = (props) => {
 
 const Content = props => getMainJsx(props);
 
-export default Content;
-
 Content.Item = ContentItem;
+
+getMainJsx.propTypes = {
+  contentStyle: React.PropTypes.number,
+  disableScrollView: React.PropTypes.bool,
+  innerContentStyle: React.PropTypes.number,
+  children: React.PropTypes.element,
+};
+
+export default Content;

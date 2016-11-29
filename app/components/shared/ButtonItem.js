@@ -96,7 +96,7 @@ const getMainJsx = (props, buttonJsx, isButtonEnabled) => {
   return buttonJsx;
 };
 
-export default (props) => {
+const ButtonItem = (props) => {
   const {
     lastItem,
     description,
@@ -147,3 +147,16 @@ export default (props) => {
     </View>
   );
 };
+
+ButtonItem.propTypes = {
+  lastItem: React.PropTypes.bool,
+  description: React.PropTypes.string,
+  rightComponent: React.PropTypes.element,
+  buttonDisabled: React.PropTypes.bool,
+  iconJsx: React.PropTypes.element,
+  text: React.PropTypes.string,
+};
+
+getMainJsx.propTypes = { onPress: React.PropTypes.func };
+
+export default ButtonItem;

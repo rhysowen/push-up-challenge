@@ -21,7 +21,7 @@ const saveAsync = (data, mode) => {
     storage.SOUND,
     actionTypes,
     mode,
-    dataJson
+    dataJson,
   );
 };
 

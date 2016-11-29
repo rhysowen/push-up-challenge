@@ -6,7 +6,7 @@ import parseJson from '../lib/parseJson';
 import * as assigns from '../lib/assignReducer';
 
 export default createReducer(combinedUtilInitialState, {
-  [types.UTIL_FETCH_ATTEMPT](state, action) {
+  [types.UTIL_FETCH_ATTEMPT]() {
     return assigns.fetchAttempt(combinedUtilInitialState);
   },
   [types.UTIL_FETCH_SUCCESS](state, action) {
@@ -22,28 +22,28 @@ export default createReducer(combinedUtilInitialState, {
 
     return assigns.fetchSuccess(combinedUtilInitialState, ret, result);
   },
-  [types.UTIL_FETCH_FAILURE](state, action) {
+  [types.UTIL_FETCH_FAILURE](state) {
     return assigns.fetchFailure(state);
   },
-  [types.UTIL_SAVE_ATTEMPT](state, action) {
+  [types.UTIL_SAVE_ATTEMPT](state) {
     return assigns.saveAttempt(state);
   },
-  [types.UTIL_SAVE_SUCCESS](state, action) {
+  [types.UTIL_SAVE_SUCCESS](state) {
     return assigns.saveSuccess(state);
   },
-  [types.UTIL_SAVE_FAILURE](state, action) {
+  [types.UTIL_SAVE_FAILURE](state) {
     return assigns.saveFailure(state);
   },
-  [types.UTIL_REMOVE_ATTEMPT](state, action) {
+  [types.UTIL_REMOVE_ATTEMPT](state) {
     return assigns.removeAttempt(state);
   },
-  [types.UTIL_REMOVE_SUCCESS](state, action) {
+  [types.UTIL_REMOVE_SUCCESS]() {
     return assigns.removeSuccess(combinedUtilInitialState);
   },
-  [types.UTIL_REMOVE_FAILURE](state, action) {
+  [types.UTIL_REMOVE_FAILURE](state) {
     return assigns.removeFailure(state);
   },
-  [types.UTIL_ACTIVATE_PRO](state, action) {
+  [types.UTIL_ACTIVATE_PRO](state) {
     return Object.assign(
       {},
       state,

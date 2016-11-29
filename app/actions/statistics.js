@@ -7,32 +7,22 @@ import {
   storageAsync,
 } from '../lib/storageAsync';
 
-function saveStatisticsAsync(statistics, mode) {
+const saveAsync = (data, mode) => {
   const actionTypes = [
     types.STATISTICS_SAVE_ATTEMPT,
     types.STATISTICS_SAVE_SUCCESS,
     types.STATISTICS_SAVE_FAILURE,
   ];
 
-  const statisticsJson = JSON.stringify(statistics);
+  const dataJson = JSON.stringify(data);
 
   return storageAsync(
     storage.STATISTICS,
     actionTypes,
     mode,
-    statisticsJson
+    dataJson,
   );
-}
-
-export function fetchStatisticsAsync() {
-  const actionTypes = [
-    types.STATISTICS_FETCH_ATTEMPT,
-    types.STATISTICS_FETCH_SUCCESS,
-    types.STATISTICS_FETCH_FAILURE,
-  ];
-
-  return storageAsync(storage.STATISTICS, actionTypes, GET_KEY);
-}
+};
 
 const setStatistics = (total, record, calories, timeElapsed) => ({
   type: types.STATISTICS_SET,
@@ -44,8 +34,8 @@ const setStatistics = (total, record, calories, timeElapsed) => ({
   },
 });
 
-export function setStatisticsAsync(total, record, calories, timeElapsed) {
-  return (dispatch, getState) => {
+export const setStatisticsAsync = (total, record, calories, timeElapsed) => (
+  (dispatch, getState) => {
     dispatch(setStatistics(total, record, calories, timeElapsed));
 
     const state = getState();
@@ -59,11 +49,21 @@ export function setStatisticsAsync(total, record, calories, timeElapsed) {
       selectedYearChartData: state.statistics.selectedYearChartData,
     };
 
-    dispatch(saveStatisticsAsync(data, SET_KEY));
-  };
-}
+    dispatch(saveAsync(data, SET_KEY));
+  }
+);
 
-export function removeStatisticsAsync() {
+export const fetchStatisticsAsync = () => {
+  const actionTypes = [
+    types.STATISTICS_FETCH_ATTEMPT,
+    types.STATISTICS_FETCH_SUCCESS,
+    types.STATISTICS_FETCH_FAILURE,
+  ];
+
+  return storageAsync(storage.STATISTICS, actionTypes, GET_KEY);
+};
+
+export const removeStatisticsAsync = () => {
   const actionTypes = [
     types.STATISTICS_REMOVE_ATTEMPT,
     types.STATISTICS_REMOVE_SUCCESS,
@@ -71,7 +71,7 @@ export function removeStatisticsAsync() {
   ];
 
   return storageAsync(storage.STATISTICS, actionTypes, REMOVE_KEY);
-}
+};
 
 export const previousYear = () => ({ type: types.STATISTICS_PREVIOUS_YEAR });
 export const nextYear = () => ({ type: types.STATISTICS_NEXT_YEAR });

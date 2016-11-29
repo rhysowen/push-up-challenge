@@ -34,13 +34,10 @@ export const tabs = createReducer({ key: 'home', index: 0, routes: allTabs }, {
     return Object.assign(
       {},
       state,
-      allTabs[action.index]
+      allTabs[action.index],
     );
   },
 });
-
-const ICON_VOLUME_UP = 'volume-up';
-const ICON_VOLUME_OFF = 'volume-off';
 
 const LoadingContainerRoute = {
   key: 'LoadingContainer',
@@ -102,13 +99,13 @@ export const navigation = createReducer({ index: 0, routes: initialRoutes }, {
     const indexByKey = getIndexByKey(action.payload);
     return NavigationStateUtils.push(state, allPages[indexByKey]);
   },
-  [types.NAVIGATION_POP](state, action) {
+  [types.NAVIGATION_POP](state) {
     return NavigationStateUtils.pop(state);
   },
-  [types.NAVIGATION_FORWARD](state, action) {
+  [types.NAVIGATION_FORWARD](state) {
     return NavigationStateUtils.forward(state);
   },
-  [types.NAVIGATION_BACK](state, action) {
+  [types.NAVIGATION_BACK](state) {
     return NavigationStateUtils.back(state);
   },
   [types.NAVIGATION_RESET](state, action) {
@@ -122,7 +119,7 @@ export const navigation = createReducer({ index: 0, routes: initialRoutes }, {
         key: action.payload,
         index: 0,
         routes,
-      }
+      },
     );
   },
 });

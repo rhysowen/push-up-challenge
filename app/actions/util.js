@@ -21,7 +21,7 @@ const saveAsync = (data, mode) => {
     storage.UTIL,
     actionTypes,
     mode,
-    dataJson
+    dataJson,
   );
 };
 

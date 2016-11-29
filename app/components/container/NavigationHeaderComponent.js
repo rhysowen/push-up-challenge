@@ -42,11 +42,10 @@ const onComponentPress = (props) => {
   }
 };
 
-
 const PADDING_LEFT_STYLE = { paddingLeft: BASE_PADDING_LEFT };
 const PADDING_RIGHT_STYLE = { paddingRight: BASE_PADDING_LEFT };
 
-export default (props) => {
+const NavigationHeaderComponent = (props) => {
   const paddingComponentStyle = props.isLeft ? PADDING_LEFT_STYLE : PADDING_RIGHT_STYLE;
   const icon = getIconJsx(props.icon);
 
@@ -63,3 +62,10 @@ export default (props) => {
     </View>
   );
 };
+
+NavigationHeaderComponent.propTypes = {
+  isLeft: React.PropTypes.bool,
+  icon: React.PropTypes.string,
+};
+
+export default NavigationHeaderComponent;

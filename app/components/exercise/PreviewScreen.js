@@ -14,6 +14,10 @@ import {
   getTotalReps,
 } from '../../lib/program';
 import {
+  combinedProgramProps,
+  combinedUtilProps,
+} from '../../lib/commonProps';
+import {
   COLOR_ORANGE,
   LINE_COLOR,
   FADE_COLOR,
@@ -139,7 +143,7 @@ const getDaysItemJsx = (preview, daysLength) => (
   })
 );
 
-export default (props) => {
+const PreviewScreen = (props) => {
   const {
     program,
     util,
@@ -225,3 +229,10 @@ export default (props) => {
     </BaseScreen>
   );
 };
+
+PreviewScreen.propTypes = {
+  program: combinedProgramProps,
+  util: combinedUtilProps,
+};
+
+export default PreviewScreen;

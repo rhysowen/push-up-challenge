@@ -17,6 +17,7 @@ import openUrl from '../../lib/linking';
 import { onResetCreateAsyncActions } from '../../lib/initialState';
 import getIconJsx from '../../lib/icon';
 import { RATE_APP_URL } from '../../lib/constants';
+import { combinedUtilProps } from '../../lib/commonProps';
 
 const UPGRADE_TO_PRO = 'Upgrade to Pro';
 const RESTORE_PURCHASES = 'Restore Purchases';
@@ -52,7 +53,7 @@ const resetApp = (props) => {
         onPress: () => onResetPress(props),
         style: 'destructive',
       },
-    ]
+    ],
   );
 };
 
@@ -162,5 +163,7 @@ const MoreScreen = (props) => {
     </ScrollBaseScreen>
   );
 };
+
+MoreScreen.propTypes = { util: combinedUtilProps };
 
 export default MoreScreen;

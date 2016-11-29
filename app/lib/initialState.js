@@ -70,9 +70,9 @@ const days = Array(NUMBER_OF_DAYS_WEEK)
     Object.assign(
       {},
       val,
-      { day: DAYS[index] }
+      { day: DAYS[index] },
     )
-  )
+  ),
 );
 
 const reminderInitialState = {
@@ -100,7 +100,6 @@ const statisticInitialState = {
   selectedYear: new Date(),
   selectedYearChartData: [],
   chartData: [],
-  completed: {},
 };
 
 const analyticsInitialState = {
@@ -141,13 +140,13 @@ export const combinedUtilInitialState = Object.assign(
 export const combinedStatisticInitialState = Object.assign(
   {},
   initialAsyncState,
-  statisticInitialState
+  statisticInitialState,
 );
 
 export const combinedAnalyticsInitialState = Object.assign(
   {},
   initialAsyncState,
-  analyticsInitialState
+  analyticsInitialState,
 );
 
 export const onLoadCreateAsyncActions = (props) => {

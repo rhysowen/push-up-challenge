@@ -71,7 +71,7 @@ const getDays = (days, selectedDay, modalDatePickerDate) => {
         {
           mode,
           date,
-        }
+        },
       );
     }
     return val;
@@ -79,7 +79,7 @@ const getDays = (days, selectedDay, modalDatePickerDate) => {
 };
 
 export default createReducer(combinedReminderInitialState, {
-  [types.REMINDER_FETCH_ATTEMPT](state, action) {
+  [types.REMINDER_FETCH_ATTEMPT]() {
     return assigns.fetchAttempt(combinedReminderInitialState);
   },
   [types.REMINDER_FETCH_SUCCESS](state, action) {
@@ -93,7 +93,7 @@ export default createReducer(combinedReminderInitialState, {
           Object.assign(
             {},
             day,
-            { date: new Date(day.date) }
+            { date: new Date(day.date) },
           )
         )),
       };
@@ -103,30 +103,30 @@ export default createReducer(combinedReminderInitialState, {
 
     return assigns.fetchSuccess(combinedReminderInitialState, ret, result);
   },
-  [types.REMINDER_FETCH_FAILURE](state, action) {
+  [types.REMINDER_FETCH_FAILURE](state) {
     return assigns.fetchFailure(state);
   },
-  [types.REMINDER_SAVE_ATTEMPT](state, action) {
+  [types.REMINDER_SAVE_ATTEMPT](state) {
     return assigns.saveAttempt(state);
   },
-  [types.REMINDER_SAVE_SUCCESS](state, action) {
+  [types.REMINDER_SAVE_SUCCESS](state) {
     return assigns.saveSuccess(state);
   },
-  [types.REMINDER_REMOVE_ATTEMPT](state, action) {
+  [types.REMINDER_REMOVE_ATTEMPT](state) {
     return assigns.removeAttempt(state);
   },
-  [types.REMINDER_REMOVE_SUCCESS](state, action) {
+  [types.REMINDER_REMOVE_SUCCESS]() {
     PushNotification.cancelAllLocalNotifications(0);
     return assigns.removeSuccess(combinedReminderInitialState);
   },
-  [types.REMINDER_REMOVE_FAILURE](state, action) {
+  [types.REMINDER_REMOVE_FAILURE]() {
     return assigns.removeFailure(combinedReminderInitialState);
   },
-  [types.REMINDER_MODAL_TOGGLE](state, action) {
+  [types.REMINDER_MODAL_TOGGLE](state) {
     return Object.assign(
       {},
       state,
-      { modalVisible: !state.modalVisible }
+      { modalVisible: !state.modalVisible },
     );
   },
   [types.REMINDER_SWITCH_TOGGLE](state, action) {
@@ -135,37 +135,37 @@ export default createReducer(combinedReminderInitialState, {
     return Object.assign(
       {},
       state,
-      { days }
+      { days },
     );
   },
   [types.REMINDER_SET_DATE](state, action) {
     return Object.assign(
       {},
       state,
-      { modalDatePickerDate: action.payload }
+      { modalDatePickerDate: action.payload },
     );
   },
   [types.REMINDER_SET_OLD_DATE](state, action) {
     return Object.assign(
       {},
       state,
-      { modalOldDatePickerDate: action.payload }
+      { modalOldDatePickerDate: action.payload },
     );
   },
   [types.REMINDER_SET_SELECTED_DAY](state, action) {
     return Object.assign(
       {},
       state,
-      { modalSelectedDay: action.payload }
+      { modalSelectedDay: action.payload },
     );
   },
-  [types.REMINDER_SET_SELECTED_DAY_TIME](state, action) {
+  [types.REMINDER_SET_SELECTED_DAY_TIME](state) {
     const days = getDays(state.days, state.modalSelectedDay, state.modalDatePickerDate);
 
     return Object.assign(
       {},
       state,
-      { days }
+      { days },
     );
   },
 });

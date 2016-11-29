@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default props => (
+const ContentItem = props => (
   <View
     style={styles.section}
   >
@@ -41,3 +41,10 @@ export default props => (
     </Text>
   </View>
 );
+
+ContentItem.propTypes = {
+  header: React.PropTypes.string,
+  content: React.PropTypes.string,
+};
+
+export default ContentItem;

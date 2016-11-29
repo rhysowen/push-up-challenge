@@ -29,7 +29,7 @@ const yearMap = (state, mode) => {
     {
       selectedYear,
       selectedYearChartData,
-    }
+    },
   );
 };
 
@@ -72,7 +72,7 @@ const getChartData = (state, totalReps) => {
 };
 
 export default createReducer(combinedStatisticInitialState, {
-  [types.STATISTICS_FETCH_ATTEMPT](state, action) {
+  [types.STATISTICS_FETCH_ATTEMPT]() {
     return assigns.fetchAttempt(combinedStatisticInitialState);
   },
   [types.STATISTICS_FETCH_SUCCESS](state, action) {
@@ -96,22 +96,22 @@ export default createReducer(combinedStatisticInitialState, {
 
     return assigns.fetchSuccess(combinedStatisticInitialState, ret, result);
   },
-  [types.STATISTICS_FETCH_FAILURE](state, action) {
+  [types.STATISTICS_FETCH_FAILURE](state) {
     return assigns.fetchFailure(state);
   },
-  [types.STATISTICS_SAVE_ATTEMPT](state, action) {
+  [types.STATISTICS_SAVE_ATTEMPT](state) {
     return assigns.saveAttempt(state);
   },
-  [types.STATISTICS_SAVE_SUCCESS](state, action) {
+  [types.STATISTICS_SAVE_SUCCESS](state) {
     return assigns.saveSuccess(state);
   },
-  [types.STATISTICS_REMOVE_ATTEMPT](state, action) {
+  [types.STATISTICS_REMOVE_ATTEMPT](state) {
     return assigns.removeAttempt(state);
   },
-  [types.STATISTICS_REMOVE_SUCCESS](state, action) {
+  [types.STATISTICS_REMOVE_SUCCESS]() {
     return assigns.removeSuccess(combinedStatisticInitialState);
   },
-  [types.STATISTICS_REMOVE_FAILURE](state, action) {
+  [types.STATISTICS_REMOVE_FAILURE]() {
     return assigns.removeFailure(combinedStatisticInitialState);
   },
   [types.STATISTICS_SET](state, action) {
@@ -128,13 +128,13 @@ export default createReducer(combinedStatisticInitialState, {
         timeElapsed: state.timeElapsed + action.payload.timeElapsed,
         chartData,
         selectedYearChartData,
-      }
+      },
     );
   },
-  [types.STATISTICS_PREVIOUS_YEAR](state, action) {
+  [types.STATISTICS_PREVIOUS_YEAR](state) {
     return yearMap(state, DECREMENT);
   },
-  [types.STATISTICS_NEXT_YEAR](state, action) {
+  [types.STATISTICS_NEXT_YEAR](state) {
     return yearMap(state, INCREMENT);
   },
 });

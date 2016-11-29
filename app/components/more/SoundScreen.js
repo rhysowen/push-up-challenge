@@ -3,8 +3,9 @@ import React from 'react';
 import ScrollBaseScreen from '../shared/ScrollBaseScreen';
 import Option from './Option';
 import { SOUND_ENABLED } from '../../lib/constants';
+import { combinedSoundProps } from '../../lib/commonProps';
 
-export default (props) => {
+const SoundScreen = (props) => {
   const { sound } = props;
 
   const COACH_SOUND = 'Coach';
@@ -30,3 +31,10 @@ export default (props) => {
     </ScrollBaseScreen>
   );
 };
+
+SoundScreen.propTypes = {
+  sound: combinedSoundProps,
+  toggleSoundBeep: React.PropTypes.func,
+};
+
+export default SoundScreen;

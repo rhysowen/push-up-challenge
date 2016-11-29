@@ -52,7 +52,7 @@ const getWrapperStyle = (props) => {
   return Object.assign(
     {},
     wrapper,
-    borderStyle
+    borderStyle,
   );
 };
 
@@ -103,7 +103,7 @@ const getSetsJsx = (props) => {
   });
 };
 
-export default (props) => {
+const DaysItem = (props) => {
   const wrapperStyle = getWrapperStyle(props);
   const setsJsx = getSetsJsx(props);
   const dayText = 'Day ';
@@ -134,3 +134,7 @@ export default (props) => {
     </View>
   );
 };
+
+DaysItem.propTypes = { day: React.PropTypes.number };
+
+export default DaysItem;

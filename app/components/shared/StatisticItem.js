@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default (props) => {
+const StatisticItem = (props) => {
   const wrapperStyle = [
     styles.wrapper,
     typeof props.rightBorderStyle !== 'undefined' ? props.rightBorderStyle : {},
@@ -65,3 +65,22 @@ export default (props) => {
     </View>
   );
 };
+
+StatisticItem.propTypes = {
+  rightBorderStyle: React.PropTypes.shape({
+    borderRightColor: React.PropTypes.string,
+    borderRightWidth: React.PropTypes.number,
+  }),
+  property: React.PropTypes.oneOfType([
+    React.PropTypes.number,
+    React.PropTypes.string,
+  ]),
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.number,
+    React.PropTypes.string,
+  ]),
+  valueColorStyle: React.PropTypes.string,
+  propertyColorStyle: React.PropTypes.string,
+};
+
+export default StatisticItem;

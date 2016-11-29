@@ -30,7 +30,7 @@ const getPositiveCount = (state) => {
 const getShowRateDialog = showRateDialog => showRateDialog === REMIND_LATER;
 
 export default createReducer(combinedAnalyticsInitialState, {
-  [types.ANALYTICS_FETCH_ATTEMPT](state, action) {
+  [types.ANALYTICS_FETCH_ATTEMPT]() {
     return assigns.fetchAttempt(combinedAnalyticsInitialState);
   },
   [types.ANALYTICS_FETCH_SUCCESS](state, action) {
@@ -46,34 +46,34 @@ export default createReducer(combinedAnalyticsInitialState, {
 
     return assigns.fetchSuccess(combinedAnalyticsInitialState, ret, result);
   },
-  [types.ANALYTICS_FETCH_FAILURE](state, action) {
+  [types.ANALYTICS_FETCH_FAILURE](state) {
     return assigns.fetchFailure(state);
   },
-  [types.ANALYTICS_SAVE_ATTEMPT](state, action) {
+  [types.ANALYTICS_SAVE_ATTEMPT](state) {
     return assigns.saveAttempt(state);
   },
-  [types.ANALYTICS_SAVE_SUCCESS](state, action) {
+  [types.ANALYTICS_SAVE_SUCCESS](state) {
     return assigns.saveSuccess(state);
   },
-  [types.ANALYTICS_SAVE_FAILURE](state, action) {
+  [types.ANALYTICS_SAVE_FAILURE](state) {
     return assigns.saveFailure(state);
   },
-  [types.ANALYTICS_REMOVE_ATTEMPT](state, action) {
+  [types.ANALYTICS_REMOVE_ATTEMPT](state) {
     return assigns.removeAttempt(state);
   },
-  [types.ANALYTICS_REMOVE_SUCCESS](state, action) {
+  [types.ANALYTICS_REMOVE_SUCCESS]() {
     return assigns.removeSuccess(combinedAnalyticsInitialState);
   },
-  [types.ANALYTICS_REMOVE_FAILURE](state, action) {
+  [types.ANALYTICS_REMOVE_FAILURE](state) {
     return assigns.removeFailure(state);
   },
-  [types.ANALYTICS_INCREMENT_POSITIVE](state, action) {
+  [types.ANALYTICS_INCREMENT_POSITIVE](state) {
     const positiveCount = getPositiveCount(state);
 
     return Object.assign(
       {},
       state,
-      { positiveCount }
+      { positiveCount },
     );
   },
   [types.ANALYTICS_DIALOG_RESPONSE](state, action) {
@@ -82,7 +82,7 @@ export default createReducer(combinedAnalyticsInitialState, {
     return Object.assign(
       {},
       state,
-      { showRateDialog }
+      { showRateDialog },
     );
   },
 });

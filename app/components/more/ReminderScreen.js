@@ -21,6 +21,7 @@ import {
 import { REMINDER_ENABLED } from '../../lib/constants';
 import getIconJsx from '../../lib/icon';
 import { formatDate } from '../../lib/format';
+import { combinedReminderProps } from '../../lib/commonProps';
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
@@ -48,9 +49,7 @@ const styles = StyleSheet.create({
 });
 
 PushNotification.configure({
-  onNotification: (notification) => {
-    console.log('NOTIFICATION:', notification);
-  },
+  onNotification: () => {},
 });
 
 const onPressActions = {
@@ -179,4 +178,8 @@ export default (props) => {
       </ScrollBaseScreen>
     </View>
   );
+};
+
+getModalJsx.propTypes = {
+  reminder: { combinedReminderProps },
 };

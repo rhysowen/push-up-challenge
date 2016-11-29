@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default (props) => {
+const Information = (props) => {
   const iconJsx = getIconJsx(Icon, 'info', 30, 'white');
 
   return (
@@ -44,4 +44,8 @@ export default (props) => {
       </Text>
     </View>
   );
-}
+};
+
+Information.propTypes = { infoText: React.PropTypes.string };
+
+export default Information;
