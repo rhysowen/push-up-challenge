@@ -4,6 +4,7 @@ import {
   View,
   NavigationExperimental,
   StatusBar,
+  Dimensions,
   Text,
 } from 'react-native';
 
@@ -21,7 +22,6 @@ import {
   TAB_COLOR,
 } from '../theme/style';
 import { NOT_SET } from '../lib/constants';
-import { SMART_BANNER_HEIGHT } from '../lib/ads';
 import { isProEnabled } from '../lib/util';
 import {
   combinedUtilProps,
@@ -43,11 +43,35 @@ const styles = StyleSheet.create({
   },
 });
 
-const getCardWrapperStyle = (proEnabled) => {
+const getAdBanner = () => {
+  const { width } = Dimensions.get('window');
+
+  if (width >= 728) {
+    return {
+      ad: 'leaderboard',
+      height: 90,
+      width: 728,
+    };
+  } else if (width >= 468) {
+    return {
+      ad: 'fullBanner',
+      height: 60,
+      width: 468,
+    };
+  }
+
+  return {
+    ad: 'banner',
+    height: 50,
+    width: 320,
+  };
+};
+
+const getCardWrapperStyle = (proEnabled, adBannerHeight) => {
   let marginTop = NavigationHeader.HEIGHT;
 
   if (!proEnabled) {
-    marginTop += SMART_BANNER_HEIGHT;
+    marginTop += adBannerHeight;
   }
 
   return {
@@ -113,8 +137,10 @@ const AppContainer = (props) => {
     util,
   } = props;
 
+  const adBanner = getAdBanner();
+
   const proEnabled = isProEnabled(util.proMode);
-  const cardWrapper = getCardWrapperStyle(proEnabled);
+  const cardWrapper = getCardWrapperStyle(proEnabled, adBanner.height);
   const title = renderTitle(props);
 
   return (
@@ -134,7 +160,12 @@ const AppContainer = (props) => {
               {...renderProps}
               onNavigateBack={() => props.navigatePop()}
               key={renderProps.scene.route.key}
-              renderScene={() => (<SceneContainer {...renderProps} {...props} />)}
+              renderScene={() => (
+                <SceneContainer
+                  {...renderProps}
+                  {...props}
+                />
+              )}
               style={cardWrapper}
             />
             <NavigationHeader
@@ -154,6 +185,9 @@ const AppContainer = (props) => {
             />
             <AdvertBanner
               hideBanner={proEnabled}
+              bannerSize={adBanner.ad}
+              bannerHeight={adBanner.height}
+              bannerWidth={adBanner.width}
             />
           </View>
         )}

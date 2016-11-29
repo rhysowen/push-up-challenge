@@ -23,18 +23,11 @@ const {
 } = NavigationExperimental;
 
 const {
-  PagerStyleInterpolator: NavigationPagerStyleInterpolator,
+  CardStackStyleInterpolator: NavigationPagerStyleInterpolator,
 } = NavigationCard;
 
 const styles = StyleSheet.create({
-  scene: {
-    flex: 1,
-    position: 'absolute',
-    bottom: 0,
-    top: 0,
-    left: 0,
-    right: 0,
-  },
+  scene: { flex: 1 },
 });
 
 const SceneContainer = (props) => {

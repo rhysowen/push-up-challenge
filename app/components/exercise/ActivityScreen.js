@@ -420,8 +420,9 @@ export default class ActivityScreen extends Component {
       <BaseScreen
         style={styles.wrapper}
       >
-        <View style={styles.topContainer}>
-
+        <View
+          style={styles.topContainer}
+        >
           <View>
             <Text
               style={styles.activeState}

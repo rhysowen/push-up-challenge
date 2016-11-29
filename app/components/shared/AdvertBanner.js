@@ -11,22 +11,14 @@ import { BASE_BACKGROUND_COLOR } from '../../theme/style';
 import {
   TEST_DEVICE_ID,
   BANNER_AD_UNIT_ID,
-  SMART_BANNER_HEIGHT,
 } from '../../lib/ads';
 
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: BASE_BACKGROUND_COLOR,
-    minHeight: SMART_BANNER_HEIGHT,
     alignItems: 'center',
   },
-  bannerStyle: {
-    width: 320,
-    height: 50,
-  },
 });
-
-const BANNER_SIZE = 'banner';
 
 const AdvertBanner = (props) => {
   if (props.hideBanner) {
@@ -35,15 +27,20 @@ const AdvertBanner = (props) => {
     );
   }
 
+  const style = {
+    width: props.bannerWidth,
+    height: props.bannerHeight,
+  };
+
   return (
     <View
       style={styles.wrapper}
     >
       <AdMobBanner
-        bannerSize={BANNER_SIZE}
+        bannerSize={props.bannerSize}
         adUnitID={BANNER_AD_UNIT_ID}
         testDeviceID={TEST_DEVICE_ID}
-        style={styles.bannerStyle}
+        style={style}
       />
     </View>
   );
