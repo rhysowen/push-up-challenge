@@ -8,11 +8,10 @@
  */
 
 #import "AppDelegate.h"
-
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
-
 #import "RCTPushNotificationManager.h"
+#import "SplashScreen.h"
 
 @implementation AppDelegate
 
@@ -33,6 +32,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [SplashScreen show];
   return YES;
 }
 

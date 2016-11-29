@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
+  Modal,
+  Image,
   StyleSheet,
 } from 'react-native';
+
+import SplashScreen from 'react-native-splash-screen';
 
 import { onLoadCreateAsyncActions } from '../../lib/initialState';
 import {
@@ -15,22 +18,16 @@ import {
   combinedAnalyticsProps,
   navigateResetProps,
 } from '../../lib/commonProps';
-import BaseScreen from '../shared/BaseScreen';
-import { BASE_FONT_FAMILY_IOS } from '../../theme/style';
+import { TAB_COLOR } from '../../theme/style';
+
+const loadingGif = require('../../theme/images/screen/config/ring.gif');
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    backgroundColor: TAB_COLOR,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  loaadingText: {
-    fontSize: 20,
-    fontFamily: BASE_FONT_FAMILY_IOS,
-  },
-  progressText: {
-    fontSize: 16,
-    fontFamily: BASE_FONT_FAMILY_IOS,
   },
 });
 
@@ -53,6 +50,10 @@ export default class LoadingScreen extends Component {
     getAsync(this.props);
   }
 
+  componentDidMount() {
+    SplashScreen.hide();
+  }
+
   componentDidUpdate() {
     const {
       program,
@@ -72,11 +73,13 @@ export default class LoadingScreen extends Component {
       setAsync(this.props);
     }
 
-    const isViewRender = program.isViewRender &&
+    const isViewRender =
+      program.isViewRender &&
       exercise.isViewRender &&
       util.isViewRender &&
       reminder.isViewRender &&
-      sound.isViewRender;
+      sound.isViewRender &&
+      analytics.isViewRender;
 
     if (isViewRender) {
       this.props.navigateReset('ApplicationTabs');
@@ -84,51 +87,20 @@ export default class LoadingScreen extends Component {
   }
 
   render() {
-    const {
-      program,
-      exercise,
-      util,
-      reminder,
-      sound,
-      analytics,
-    } = this.props;
-
-    const isProgramViewRender = program.isViewRender;
-    const isExerciseViewRender = exercise.isViewRender;
-    const isUtilViewRender = util.isViewRender;
-    const isReminderViewRender = reminder.isViewRender;
-    const isSoundViewRender = sound.isViewRender;
-    const isAnalyticsViewRender = analytics.isViewRender;
-
-    const viewRenders = [
-      isProgramViewRender,
-      isExerciseViewRender,
-      isUtilViewRender,
-      isReminderViewRender,
-      isSoundViewRender,
-      isAnalyticsViewRender,
-    ];
-
-    const progressSum = viewRenders.reduce((prev, current) => prev + current);
-    const total = viewRenders.length;
-
     return (
-      <BaseScreen>
+      <Modal
+        animationType="none"
+        transparent
+        visible={false}
+      >
         <View
           style={styles.wrapper}
         >
-          <Text
-            style={styles.loaadingText}
-          >
-            Loading...
-          </Text>
-          <Text
-            style={styles.progressText}
-          >
-            ({progressSum} / {total})
-          </Text>
+          <Image
+            source={loadingGif}
+          />
         </View>
-      </BaseScreen>
+      </Modal>
     );
   }
 }
