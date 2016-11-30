@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   wrapper: { flex: 1 },
   exercise: {
     width: null,
-    height: 200,
+    height: 300,
   },
   infoWrapper: { paddingTop: 10 },
   instructionsWrapper: {
@@ -48,6 +48,7 @@ export default () => (
     <Image
       source={exerciseGif}
       style={styles.exercise}
+      resizeMode="stretch"
     />
     <View
       style={styles.infoWrapper}
