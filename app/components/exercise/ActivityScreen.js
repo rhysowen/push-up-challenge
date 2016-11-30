@@ -62,12 +62,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLOR_ORANGE,
+  },
+  bottomContainer: { flex: 1 },
+  touchableMode: {
+    flex: 1,
     borderTopColor: 'black',
     borderTopWidth: 0.5,
     borderBottomColor: 'black',
     borderBottomWidth: 0.5,
   },
-  bottomContainer: { flex: 1 },
   activeState: {
     color: 'white',
     fontFamily: BASE_FONT_FAMILY_IOS,
@@ -469,7 +472,7 @@ export default class ActivityScreen extends Component {
           </View>
         </View>
         <TouchableOpacity
-          style={styles.wrapper}
+          style={styles.touchableMode}
           onPress={() => activeMode(this.props)}
         >
           <View
