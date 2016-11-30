@@ -23,7 +23,7 @@ const {
 } = NavigationExperimental;
 
 const {
-  CardStackStyleInterpolator: NavigationPagerStyleInterpolator,
+ PagerStyleInterpolator: NavigationPagerStyleInterpolator,
 } = NavigationCard;
 
 const styles = StyleSheet.create({
