@@ -66,7 +66,7 @@ const getSoundEnabledCatStatus = (categorySound, soundStatus) => {
 
   if ((soundCoachEnabled && categorySound.category === COACH_SOUND_CATEGORY) ||
       (soundBeepEnabled && categorySound.category === BEEP_SOUND_CATEGORY)) {
-    return categorySound;
+    return playSound(categorySound.file);
   }
 
   return null;
@@ -93,8 +93,7 @@ export const processSound = (soundMode, soundStatus) => {
   }
 
   if (soundObj !== null) {
-    soundObj = getSoundEnabledCatStatus(soundObj, soundStatus);
-    playSound(soundObj.file);
+    getSoundEnabledCatStatus(soundObj, soundStatus);
   }
 };
 

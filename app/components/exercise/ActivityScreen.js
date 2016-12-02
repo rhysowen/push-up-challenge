@@ -28,12 +28,6 @@ import {
   EXERCISE_PAUSE,
   EXERCISE_REST,
   EXERCISE_COMPLETE,
-  NOT_SET_SOUND,
-  PERFORM_PUSH_UP_SOUND,
-  REST_SOUND,
-  EXERCISE_COMPLETE_SOUND,
-  BEEP_SOUND,
-  SOUND_ENABLED,
 } from '../../lib/constants';
 import navigateReset from '../../lib/navigator';
 import getIconJsx from '../../lib/icon';
