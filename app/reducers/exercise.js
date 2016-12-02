@@ -13,6 +13,7 @@ import {
 import { combinedExerciseInitialState } from '../lib/initialState';
 import parseJson from '../lib/parseJson';
 import * as assigns from '../lib/assignReducer';
+import { processSound } from '../lib/sound';
 
 const TIMER_SECONDS = 60;
 
@@ -24,37 +25,25 @@ const getCalories = (repsCompleted) => {
   return CALORIES_BURNT;
 };
 
-const getModeSoundState = (rep, set, sets, mode) => {
+const getModeState = (rep, set, sets, mode, soundCoachEnabled, soundBeepEnabled) => {
   const isLastRep = rep - 1 <= 0;
   const isExerciseComplete = isLastRep && set + 1 === sets.length;
+  let modeReturn = mode;
+  let soundMode = NOT_SET_SOUND;
 
   if (isExerciseComplete) {
-    return {
-      mode: EXERCISE_COMPLETE,
-      sound: EXERCISE_COMPLETE_SOUND,
-    };
+    modeReturn = EXERCISE_COMPLETE;
+    soundMode = EXERCISE_COMPLETE_SOUND;
   } else if (isLastRep) {
-    return {
-      mode: EXERCISE_REST,
-      sound: REST_SOUND,
-    };
+    modeReturn = EXERCISE_REST;
+    soundMode = REST_SOUND;
   }
 
-  return {
-    mode,
-    sound: BEEP_SOUND,
-  };
-};
-
-const getSoundMode = (mode) => {
-  switch (mode) {
-    case EXERCISE_ACTIVE:
-      return PERFORM_PUSH_UP_SOUND;
-    case EXERCISE_REST:
-      return REST_SOUND;
-    default:
-      return NOT_SET_SOUND;
+  if (soundMode !== NOT_SET_SOUND) {
+    processSound(soundMode, { soundCoachEnabled, soundBeepEnabled });
   }
+
+  return modeReturn;
 };
 
 const getNextRep = (state) => {
@@ -75,19 +64,19 @@ const getDecrementRepState = (state) => {
     rep,
     set,
     mode,
-    sound,
     sessionRepsCompleted,
     repsCompleted,
     totalRepsRemaining,
     repCountSet,
     record,
     calories,
+    soundCoachEnabled,
+    soundBeepEnabled,
   } = state;
 
   let repReturn = rep;
   let setReturn = set;
   let modeReturn = mode;
-  let soundReturn = sound;
   let sessionRepsCompletedReturn = sessionRepsCompleted;
   let repsCompletedReturn = repsCompleted;
   let totalRepsRemainingReturn = totalRepsRemaining;
@@ -103,6 +92,8 @@ const getDecrementRepState = (state) => {
     repCountSetReturn += 1;
     recordReturn = getRecord(repCountSetReturn, recordReturn);
     caloriesReturn = getCalories(sessionRepsCompletedReturn);
+
+    processSound(BEEP_SOUND, { soundCoachEnabled, soundBeepEnabled });
   }
 
   if (rep > 1) {
@@ -116,15 +107,19 @@ const getDecrementRepState = (state) => {
     setReturn = set + 1;
   }
 
-  const modeSoundState = getModeSoundState(state.rep, state.set, state.sets, state.mode);
-  modeReturn = modeSoundState.mode;
-  soundReturn = modeSoundState.sound;
+  modeReturn = getModeState(
+    state.rep,
+    state.set,
+    state.sets,
+    state.mode,
+    state.soundCoachEnabled,
+    state.soundBeepEnabled,
+  );
 
   return {
     rep: repReturn,
     set: setReturn,
     mode: modeReturn,
-    sound: soundReturn,
     sessionRepsCompleted: sessionRepsCompletedReturn,
     repsCompleted: repsCompletedReturn,
     totalRepsRemaining: totalRepsRemainingReturn,
@@ -209,14 +204,20 @@ export default createReducer(combinedExerciseInitialState, {
       { rep: action.payload },
     );
   },
-  [types.EXERCISE_SET_SETS](state, action) {
+  [types.EXERCISE_INITIALISE](state, action) {
+    const soundCoachEnabled = action.payload.soundCoachEnabled;
+    const soundBeepEnabled = action.payload.soundBeepEnabled;
+    processSound(PERFORM_PUSH_UP_SOUND, { soundCoachEnabled, soundBeepEnabled });
+
     return Object.assign(
       {},
       state,
       {
-        sets: action.payload,
-        rep: action.payload[state.set],
-        totalRepsRemaining: getTotalRemainingReps(action.payload, state.set),
+        sets: action.payload.sets,
+        rep: action.payload.sets[state.set],
+        totalRepsRemaining: getTotalRemainingReps(action.payload.sets, state.set),
+        soundCoachEnabled,
+        soundBeepEnabled,
       },
     );
   },
@@ -224,9 +225,14 @@ export default createReducer(combinedExerciseInitialState, {
     const nextRep = getNextRep(state);
     const nextSet = nextRep > 0 ? state.set + 1 : 0;
 
-    const modeSoundState = getModeSoundState(0, state.set, state.sets, state.mode);
-    const mode = modeSoundState.mode;
-    const sound = modeSoundState.sound;
+    const mode = getModeState(
+      0,
+      state.set,
+      state.sets,
+      state.mode,
+      state.soundCoachEnabled,
+      state.soundBeepEnabled,
+    );
 
     const totalRepsRemaining = state.totalRepsRemaining - state.rep;
     const repsCompleted = state.repsCompleted + state.rep;
@@ -245,7 +251,6 @@ export default createReducer(combinedExerciseInitialState, {
         set: nextSet,
         rep: nextRep,
         mode,
-        sound,
         totalRepsRemaining,
         repsCompleted,
         sessionRepsCompleted,
@@ -263,7 +268,6 @@ export default createReducer(combinedExerciseInitialState, {
         repsAdded: state.repsAdded + 1,
         rep: state.rep + 1,
         totalRepsRemaining: state.totalRepsRemaining + 1,
-        sound: NOT_SET_SOUND,
       },
     );
   },
@@ -277,15 +281,10 @@ export default createReducer(combinedExerciseInitialState, {
     );
   },
   [types.EXERCISE_SET_MODE](state, action) {
-    const sound = getSoundMode(action.payload);
-
     return Object.assign(
       {},
       state,
-      {
-        mode: action.payload,
-        sound,
-      },
+      { mode: action.payload },
     );
   },
   [types.EXERCISE_SET_DEC_INTERVAL_ID](state, action) {
@@ -342,10 +341,7 @@ export default createReducer(combinedExerciseInitialState, {
     return Object.assign(
       {},
       state,
-      {
-        timeElapsed: state.timeElapsed + 1,
-        sound: NOT_SET_SOUND,
-      },
+      { timeElapsed: state.timeElapsed + 1 },
     );
   },
   [types.EXERCISE_RESET](state) {
@@ -356,12 +352,10 @@ export default createReducer(combinedExerciseInitialState, {
     );
   },
   [types.EXERCISE_SET_PROXIMITY](state, action) {
-    let ret;
+    let ret = {};
 
     if (action.payload && state.mode === EXERCISE_ACTIVE) {
       ret = getDecrementRepState(state);
-    } else {
-      ret = { sound: NOT_SET_SOUND };
     }
 
     return Object.assign(
@@ -376,7 +370,6 @@ export default createReducer(combinedExerciseInitialState, {
       state,
       {
         mode: EXERCISE_ACTIVE,
-        sound: PERFORM_PUSH_UP_SOUND,
         sessionRepsCompleted: 0,
         repsAdded: 0,
         calories: 0,

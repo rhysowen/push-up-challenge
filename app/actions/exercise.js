@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import * as types from './types';
 import {
   EXERCISE_ACTIVE,
@@ -75,10 +77,14 @@ export const setExerciseRep = rep => (
   }
 );
 
-export const setExerciseSets = sets => (
+export const initialiseExercise = (sets, soundStatus) => (
   {
-    type: types.EXERCISE_SET_SETS,
-    payload: sets,
+    type: types.EXERCISE_INITIALISE,
+    payload: {
+      sets,
+      soundCoachEnabled: soundStatus.soundCoachEnabled,
+      soundBeepEnabled: soundStatus.soundBeepEnabled,
+    },
   }
 );
 
@@ -151,9 +157,20 @@ export const resetExercise = () => (
   { type: types.EXERCISE_RESET }
 );
 
-export const setExerciseProximity = data => (
-  {
-    type: types.EXERCISE_SET_PROXIMITY,
-    payload: data.proximity,
+const getExerciseProximityPayload = (data) => {
+  if (Platform.OS === 'ios') {
+    return data.proximity;
   }
-);
+
+  return data.IsNearDevice;
+};
+
+export const setExerciseProximity = (data) => {
+  const payload = getExerciseProximityPayload(data);
+
+  return {
+    type: types.EXERCISE_SET_PROXIMITY,
+    payload,
+  };
+};
+

@@ -31,6 +31,8 @@
 		82C4D85C16CB43028BE81456 /* libKCKeepAwake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B35A20AF212A4B21B0A99DB2 /* libKCKeepAwake.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		95F064F57B564048B05E0DE3 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F762E974DED64E549F3403D0 /* Ionicons.ttf */; };
+		9831CD901DF0DF840012E98B /* exercisecomplete.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9831CD8F1DF0DF840012E98B /* exercisecomplete.mp3 */; };
+		9831CD921DF0DF8A0012E98B /* performpushups.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9831CD911DF0DF8A0012E98B /* performpushups.mp3 */; };
 		984885EA1DDE5EA8002F7D73 /* ABNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885C01DDE5EA7002F7D73 /* ABNumberFormatter.swift */; };
 		984885EB1DDE5EA8002F7D73 /* BarLineChartViewBaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885C11DDE5EA7002F7D73 /* BarLineChartViewBaseExtension.swift */; };
 		984885EC1DDE5EA8002F7D73 /* chartDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984885C21DDE5EA7002F7D73 /* chartDataHelpers.swift */; };
@@ -68,8 +70,6 @@
 		988796381DE8ECB100F40708 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9887960F1DE8EC9500F40708 /* libRCTAnimation.a */; };
 		98D0284B1DB671400033330B /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D0284A1DB671080033330B /* libRNSound.a */; };
 		98D0284F1DB686370033330B /* rest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D0284E1DB686370033330B /* rest.mp3 */; };
-		98D028511DB6863F0033330B /* exercise-complete.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D028501DB6863F0033330B /* exercise-complete.mp3 */; };
-		98D028531DB69CC80033330B /* perform-push-ups.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D028521DB69CC80033330B /* perform-push-ups.mp3 */; };
 		98D028551DB6C6F60033330B /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 98D028541DB6C6F60033330B /* beep.mp3 */; };
 		98EB6A4B1DE8DBCC0058A0D8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98EB6A4A1DE8DBCC0058A0D8 /* StoreKit.framework */; };
 		A2F897D090758F671191991B /* Pods_PushUpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1478C4E8690711CAF58D1046 /* Pods_PushUpsTests.framework */; };
@@ -326,6 +326,8 @@
 		7AE2FD6292F7447EBF314140 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		98021B5D1DDE348E008CA703 /* PushUps-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushUps-Bridging-Header.h"; sourceTree = "<group>"; };
+		9831CD8F1DF0DF840012E98B /* exercisecomplete.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = exercisecomplete.mp3; path = ../app/sounds/exercisecomplete.mp3; sourceTree = "<group>"; };
+		9831CD911DF0DF8A0012E98B /* performpushups.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = performpushups.mp3; path = ../app/sounds/performpushups.mp3; sourceTree = "<group>"; };
 		984885C01DDE5EA7002F7D73 /* ABNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ABNumberFormatter.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/ABNumberFormatter.swift"; sourceTree = "<group>"; };
 		984885C11DDE5EA7002F7D73 /* BarLineChartViewBaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BarLineChartViewBaseExtension.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/BarLineChartViewBaseExtension.swift"; sourceTree = "<group>"; };
 		984885C21DDE5EA7002F7D73 /* chartDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = chartDataHelpers.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/chartDataHelpers.swift"; sourceTree = "<group>"; };
@@ -373,8 +375,6 @@
 		98BFD35B2453492EB4FB7138 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		98D028451DB671080033330B /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
 		98D0284E1DB686370033330B /* rest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = rest.mp3; path = ../app/sounds/rest.mp3; sourceTree = "<group>"; };
-		98D028501DB6863F0033330B /* exercise-complete.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "exercise-complete.mp3"; path = "../app/sounds/exercise-complete.mp3"; sourceTree = "<group>"; };
-		98D028521DB69CC80033330B /* perform-push-ups.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "perform-push-ups.mp3"; path = "../app/sounds/perform-push-ups.mp3"; sourceTree = "<group>"; };
 		98D028541DB6C6F60033330B /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = beep.mp3; path = ../app/sounds/beep.mp3; sourceTree = "<group>"; };
 		98EB6A491DE8DBC20058A0D8 /* PushUps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PushUps.entitlements; path = PushUps/PushUps.entitlements; sourceTree = "<group>"; };
 		98EB6A4A1DE8DBCC0058A0D8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -515,10 +515,10 @@
 		13B07FAE1A68108700A75B9A /* PushUps */ = {
 			isa = PBXGroup;
 			children = (
+				9831CD911DF0DF8A0012E98B /* performpushups.mp3 */,
+				9831CD8F1DF0DF840012E98B /* exercisecomplete.mp3 */,
 				98EB6A491DE8DBC20058A0D8 /* PushUps.entitlements */,
 				98D028541DB6C6F60033330B /* beep.mp3 */,
-				98D028521DB69CC80033330B /* perform-push-ups.mp3 */,
-				98D028501DB6863F0033330B /* exercise-complete.mp3 */,
 				98D0284E1DB686370033330B /* rest.mp3 */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -1158,10 +1158,10 @@
 				704A3E413CD34F528AE14E80 /* Foundation.ttf in Resources */,
 				95F064F57B564048B05E0DE3 /* Ionicons.ttf in Resources */,
 				6FD8C46E98524CA09EBD3901 /* MaterialIcons.ttf in Resources */,
+				9831CD901DF0DF840012E98B /* exercisecomplete.mp3 in Resources */,
 				98D0284F1DB686370033330B /* rest.mp3 in Resources */,
 				2431882F8FDC4B2FB4CF0F77 /* Octicons.ttf in Resources */,
-				98D028511DB6863F0033330B /* exercise-complete.mp3 in Resources */,
-				98D028531DB69CC80033330B /* perform-push-ups.mp3 in Resources */,
+				9831CD921DF0DF8A0012E98B /* performpushups.mp3 in Resources */,
 				98D028551DB6C6F60033330B /* beep.mp3 in Resources */,
 				71C3C45190CB4379B05AFAF2 /* Zocial.ttf in Resources */,
 			);

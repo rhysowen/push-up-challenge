@@ -17,6 +17,7 @@ import {
   combinedProgramProps,
   combinedUtilProps,
 } from '../../lib/commonProps';
+import { getSoundStatus } from '../../lib/sound';
 import {
   COLOR_ORANGE,
   LINE_COLOR,
@@ -93,7 +94,10 @@ const cleanReset = (props) => {
 
 const onPressActions = {
   startProgram: (props, proEnabled) => {
-    const { program } = props;
+    const {
+      program,
+      sound,
+    } = props;
 
     const { preview } = program;
 
@@ -102,8 +106,8 @@ const onPressActions = {
     } else {
       cleanReset(props);
 
-      // No need to explicitly call setSets!
-      props.setExerciseSets(preview.days[0].sets);
+      props.initialiseExercise(preview.days[0].sets, getSoundStatus(sound));
+
       props.setProgramByNameAsync(preview.name);
 
       props.navigateReset('ActivityContainer');

@@ -6,6 +6,7 @@ import PreviewScreen from '../../components/exercise/PreviewScreen';
 
 const mapStateToProps = state => ({
   program: state.program,
+  sound: state.sound,
   util: state.util,
 });
 

@@ -22,6 +22,7 @@ import {
   BASE_FONT_FAMILY_IOS,
 } from '../../theme/style';
 import { PROGRAM_COMPLETE } from '../../lib/constants';
+import { getSoundStatus } from '../../lib/sound';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -75,8 +76,9 @@ const getMapSets = (props) => {
 
 const onPressActions = {
   continueTraining: (props) => {
-    const mapSets = getMapSets(props);
-    props.setExerciseSets(mapSets);
+    const { sound } = props;
+
+    props.initialiseExercise(getMapSets(props), getSoundStatus(sound));
 
     props.navigateReset('ActivityContainer');
   },

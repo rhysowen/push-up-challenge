@@ -4,7 +4,12 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
-import com.mehcode.reactnative.splashscreen.SplashScreenPackage;
+import com.cboy.rn.splashscreen.SplashScreenReactPackage;
+import com.sbugert.rnadmob.RNAdMobPackage;
+import com.corbt.keepawake.KCKeepAwakePackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.zmxv.RNSound.RNSoundPackage;
+import com.rhysowen.rn.proximity.ProximityPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -25,8 +30,13 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-          new SplashScreenPackage()
+        new MainReactPackage(),
+        new SplashScreenReactPackage(),
+        new RNAdMobPackage(),
+        new KCKeepAwakePackage(),
+        new ReactNativePushNotificationPackage(),
+        new RNSoundPackage(),
+        new ProximityPackage()
       );
     }
   };

@@ -9,8 +9,6 @@ import {
 
 import KeepAwake from 'react-native-keep-awake';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Sound from 'react-native-sound';
-import Proximity from 'react-native-proximity';
 
 import BaseScreen from '../shared/BaseScreen';
 import StatisticItem from '../shared/StatisticItem';
@@ -45,6 +43,11 @@ import {
   combinedExerciseProps,
   combinedStatisticsProps,
 } from '../../lib/commonProps';
+import {
+  displayInterstitial,
+  isProEnabled,
+} from '../../lib/ads';
+import Proximity from '../../lib/proximity';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -151,56 +154,6 @@ const onPressActions = {
   },
 };
 
-const loadSound = fileName => (
-  new Sound(fileName, Sound.MAIN_BUNDLE, (error) => {
-    if (error) {
-      // Log this?
-    } else {
-      // All OK.
-    }
-  })
-);
-
-const playSound = (soundCb) => {
-  if (soundCb !== null) {
-    soundCb.play((success) => {
-      if (success) {
-        // All OK.
-      } else {
-        // Log this?
-      }
-    });
-  }
-};
-
-// Load all the sounds
-const peformPushUps = loadSound('perform-push-ups.mp3');
-const exerciseComplete = loadSound('exercise-complete.mp3');
-const rest = loadSound('rest.mp3');
-const beep = loadSound('beep.mp3');
-
-// Sound categories
-const COACH_SOUND_CATEGORY = 'COACH_SOUND_CATEGORY';
-const BEEP_SOUND_CATEGORY = 'BEEP_SOUND_CATEGORY';
-
-// Sound objects
-const peformPushUpsSound = {
-  file: peformPushUps,
-  category: COACH_SOUND_CATEGORY,
-};
-const exerciseCompleteSound = {
-  file: exerciseComplete,
-  category: COACH_SOUND_CATEGORY,
-};
-const restSound = {
-  file: rest,
-  category: COACH_SOUND_CATEGORY,
-};
-const beepSound = {
-  file: beep,
-  category: BEEP_SOUND_CATEGORY,
-};
-
 const getActiveStateTitle = (exercise) => {
   switch (exercise.mode) {
     case EXERCISE_ACTIVE:
@@ -213,41 +166,6 @@ const getActiveStateTitle = (exercise) => {
       return 'Complete';
     default:
       return '';
-  }
-};
-
-const getSoundEnabled = (sounds, props) => {
-  const { sound } = props;
-
-  let coachFilter = [];
-  if (sound.coachMode === SOUND_ENABLED) {
-    coachFilter = sounds.filter(soundObj => soundObj.category === COACH_SOUND_CATEGORY);
-  }
-
-  let beepFilter = [];
-  if (sound.beepMode === SOUND_ENABLED) {
-    beepFilter = sounds.filter(soundObj => soundObj.category === BEEP_SOUND_CATEGORY);
-  }
-
-  return [...coachFilter, ...beepFilter];
-};
-
-const getActiveSoundObj = (props) => {
-  const { exercise } = props;
-
-  switch (exercise.sound) {
-    case NOT_SET_SOUND:
-      return null;
-    case PERFORM_PUSH_UP_SOUND:
-      return getSoundEnabled([peformPushUpsSound], props);
-    case REST_SOUND:
-      return getSoundEnabled([beepSound, restSound], props);
-    case EXERCISE_COMPLETE_SOUND:
-      return getSoundEnabled([beepSound, exerciseCompleteSound], props);
-    case BEEP_SOUND:
-      return getSoundEnabled([beepSound], props);
-    default:
-      return null;
   }
 };
 
@@ -308,20 +226,11 @@ const cleanUpTimers = (props) => {
   props.clearExerciseTimeElapsedIntervalId();
 };
 
-// Should probably re-think this as it's anti-Redux pattern?
-const initSound = (props) => {
-  const sounds = getActiveSoundObj(props);
-  const soundObjExist = sounds !== null && sounds instanceof Array;
-
-  if (soundObjExist) {
-    for (let i = 0; i < sounds.length; i += 1) {
-      playSound(sounds[i].file);
-    }
-  }
-};
-
 const cleanUpState = (props) => {
-  const { exercise } = props;
+  const {
+    exercise,
+    util,
+  } = props;
 
   // Save statistics
   saveStatisticsAsync(props);
@@ -337,6 +246,12 @@ const cleanUpState = (props) => {
 
   // Reset navigiation
   props.navigateReset('CompleteContainer');
+
+  const proEnabled = isProEnabled(util.proMode);
+
+  if (!proEnabled) {
+    displayInterstitial();
+  }
 };
 
 const FADE_COLOR = '#CCCCCC';
@@ -347,7 +262,8 @@ export default class ActivityScreen extends Component {
     this.props.setExerciseTimeElapsedIntervalId(
       setInterval(this.props.timerExerciseElapsedTimeIncrease, 1000),
     );
-    Proximity.addListener(this.props.setExerciseProximity);
+
+    Proximity.start(this.props.setExerciseProximity);
 
     KeepAwake.activate();
   }
@@ -374,7 +290,7 @@ export default class ActivityScreen extends Component {
     // Consider using TimerMixin - no ES6 API so use react-mixin?
     cleanUpTimers(this.props);
 
-    Proximity.removeListener(this.props.setExerciseProximity);
+    Proximity.stop(this.props.setExerciseProximity);
 
     KeepAwake.deactivate();
   }
@@ -416,8 +332,6 @@ export default class ActivityScreen extends Component {
     const setCompleteIconJsx = getIconJsx(Icon, 'done', ...iconStyle);
     const saveCloseIconJsx = getIconJsx(Icon, 'save');
     const abortIconJsx = getIconJsx(Icon, 'close');
-
-    initSound(this.props);
 
     return (
       <BaseScreen

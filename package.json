@@ -15,6 +15,7 @@
     "react-native-ios-charts": "^0.3.0",
     "react-native-keep-awake": "^1.0.7",
     "react-native-proximity": "^0.1.1",
+    "react-native-proximity-android": "^1.0.7",
     "react-native-push-notification": "^2.2.1",
     "react-native-sound": "^0.8.3",
     "react-native-splash-screen": "^1.0.9",

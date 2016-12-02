@@ -23,7 +23,6 @@ const exerciseProps = {
   decIntervalSet: React.PropTypes.bool,
   timeElapsedIntervalId: React.PropTypes.number,
   timeElapsedIntervalSet: React.PropTypes.bool,
-  sound: React.PropTypes.string,
   sessionRepsCompleted: React.PropTypes.number,
   repsCompleted: React.PropTypes.number,
   repsAdded: React.PropTypes.number,
@@ -32,6 +31,8 @@ const exerciseProps = {
   totalRepsRemaining: React.PropTypes.number,
   record: React.PropTypes.number,
   repCountSet: React.PropTypes.number,
+  soundCoachEnabled: React.PropTypes.bool,
+  soundBeepEnabled: React.PropTypes.bool,
 };
 
 export const combinedExerciseProps = React.PropTypes.shape(

@@ -29,10 +29,6 @@ import {
   PROGRAM_ACTIVE,
   PROGRAM_COMPLETE,
 } from '../../lib/constants';
-import {
-  displayInterstitial,
-  isProEnabled,
-} from '../../lib/ads';
 import getIconJsx from '../../lib/icon';
 import { combinedUtilProps } from '../../lib/commonProps';
 
@@ -119,11 +115,6 @@ const CompleteScreen = (props) => {
     viewStatistics,
     manageSettings,
   } = onPressActions;
-
-  const proEnabled = isProEnabled(util.proMode);
-  if (!proEnabled) {
-    displayInterstitial();
-  }
 
   const repsFormat = formatReps(repsCompleted);
   const timeElapsedFormat = formatTimeElapsed(timeElapsed);

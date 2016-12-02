@@ -4,7 +4,6 @@ import {
   PRO_DISABLED,
   PROGRAM_ACTIVE,
   EXERCISE_ACTIVE,
-  PERFORM_PUSH_UP_SOUND,
 } from '../lib/constants';
 import {
   DAYS,
@@ -47,7 +46,6 @@ const exerciseInitialState = {
   decIntervalSet: false,
   timeElapsedIntervalId: 0,
   timeElapsedIntervalSet: false,
-  sound: PERFORM_PUSH_UP_SOUND,
   sessionRepsCompleted: 0,
   repsCompleted: 0,
   repsAdded: 0,
@@ -56,6 +54,8 @@ const exerciseInitialState = {
   totalRepsRemaining: 0,
   record: 0,
   repCountSet: 0,
+  soundCoachEnabled: true,
+  soundBeepEnabled: true,
 };
 
 // Reminder
@@ -152,12 +152,10 @@ export const combinedAnalyticsInitialState = Object.assign(
 export const onLoadCreateAsyncActions = (props) => {
   props.setUtilAsync(combinedUtilInitialState);
   props.setReminderAsync(combinedReminderInitialState);
-  props.setSoundAsync(combinedSoundInitialState);
   props.setAnalyticsAsync(combinedAnalyticsInitialState);
 };
 
 export const onResetCreateAsyncActions = (props) => {
   props.setUtilAsync(combinedUtilInitialState);
   props.setReminderAsync(combinedReminderInitialState);
-  props.setSoundAsync(combinedSoundInitialState);
 };

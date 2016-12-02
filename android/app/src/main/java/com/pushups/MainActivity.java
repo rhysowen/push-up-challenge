@@ -1,6 +1,7 @@
 package com.pushups;
 
 import com.facebook.react.ReactActivity;
+import com.rhysowen.rn.proximity.ProximityPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;

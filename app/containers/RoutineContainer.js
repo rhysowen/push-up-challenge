@@ -7,6 +7,7 @@ import RoutineScreen from '../components/routine/RoutineScreen';
 const mapStateToProps = state => ({
   program: state.program,
   exercise: state.exercise,
+  sound: state.sound,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
