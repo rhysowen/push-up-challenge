@@ -78,8 +78,8 @@ const days = Array(NUMBER_OF_DAYS_WEEK)
 const reminderInitialState = {
   days,
   modalVisible: false,
-  modalDatePickerDate: BASE_DATE,
-  modalOldDatePickerDate: BASE_DATE,
+  datePickerDate: BASE_DATE,
+  oldDatePickerDate: BASE_DATE,
 };
 
 // Sound

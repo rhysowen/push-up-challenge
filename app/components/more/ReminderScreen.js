@@ -2,7 +2,9 @@ import React from 'react';
 import {
   View,
   Modal,
+  Platform,
   DatePickerIOS,
+  TimePickerAndroid,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
@@ -52,6 +54,35 @@ PushNotification.configure({
   onNotification: () => {},
 });
 
+const openTimePickerAndroid = async (date) => {
+  try {
+    const selectedHour = date.getHours();
+    const selectedMinute = date.getMinutes();
+
+    const {
+      action,
+      hour,
+      minute,
+    } = await TimePickerAndroid.open({
+      hour: selectedHour,
+      minute: selectedMinute,
+      is24Hour: false,
+    });
+    if (action !== TimePickerAndroid.dismissedAction) {
+      const todayDate = new Date();
+      todayDate.setHours(hour);
+      todayDate.setMinutes(minute);
+      todayDate.setSeconds(0);
+
+      return todayDate;
+    }
+
+    return null;
+  } catch ({ code, message }) {
+    return null;
+  }
+};
+
 const onPressActions = {
   cancelModal: (props) => {
     props.toggleReminderModal();
@@ -66,13 +97,23 @@ const onPressActions = {
       day,
     } = reminder;
 
-    props.setReminderModalDate(date);
-    props.setReminderModalOldDate(date);
-    props.setReminderModalSelectedDay(day);
-    props.toggleReminderModal();
+    props.setReminderDate(date);
+    props.setReminderSelectedDay(day);
+
+    if (Platform.OS === 'ios') {
+      props.setReminderModalOldDate(date);
+      props.toggleReminderModal();
+    } else {
+      openTimePickerAndroid(date).then((selectedDate) => {
+        if (selectedDate !== null) {
+          props.setReminderDate(selectedDate);
+          props.setReminderSelectedDateIdTimeAsync();
+        }
+      });
+    }
   },
   dateChange: (props, date) => {
-    props.setReminderModalDate(date);
+    props.setReminderDate(date);
   },
 };
 
@@ -85,55 +126,60 @@ const getTouchableIconJsx = (iconJsx, callback) => (
 );
 
 const getModalJsx = (props) => {
-  const { reminder } = props;
+  if (Platform.OS === 'ios') {
+    const { reminder } = props;
 
-  const {
-    modalVisible,
-    modalDatePickerDate,
-  } = reminder;
+    const {
+      modalVisible,
+      datePickerDate,
+    } = reminder;
 
-  const {
-    cancelModal,
-    acceptModal,
-    dateChange,
-  } = onPressActions;
+    const {
+      cancelModal,
+      acceptModal,
+      dateChange,
+    } = onPressActions;
 
-  const cancelIconJsx = getIconJsx(Icon, 'close');
-  const acceptIconJsx = getIconJsx(Icon, 'check');
+    const cancelIconJsx = getIconJsx(Icon, 'close');
+    const acceptIconJsx = getIconJsx(Icon, 'check');
 
-  const cancelTouchableIconJsx = getTouchableIconJsx(cancelIconJsx, () => cancelModal(props));
-  const acceptTouchableIconJsx = getTouchableIconJsx(acceptIconJsx, () => acceptModal(props));
+    const cancelTouchableIconJsx = getTouchableIconJsx(cancelIconJsx, () => cancelModal(props));
+    const acceptTouchableIconJsx = getTouchableIconJsx(acceptIconJsx, () => acceptModal(props));
 
-  return (
-    <Modal
-      animationType={'slide'}
-      transparent
-      visible={modalVisible}
-    >
-      <View
-        style={styles.modalWrapper}
+    return (
+      <Modal
+        animationType={'slide'}
+        transparent
+        visible={modalVisible}
       >
         <View
-          style={styles.modalTopWrapper}
+          style={styles.modalWrapper}
         >
           <View
-            style={styles.modalTopOptions}
+            style={styles.modalTopWrapper}
           >
-            {cancelTouchableIconJsx}
-            {acceptTouchableIconJsx}
-          </View>
-          <View
-            style={styles.modalContentWrapper}
-          >
-            <DatePickerIOS
-              date={modalDatePickerDate}
-              mode="time"
-              onDateChange={date => dateChange(props, date)}
-            />
+            <View
+              style={styles.modalTopOptions}
+            >
+              {cancelTouchableIconJsx}
+              {acceptTouchableIconJsx}
+            </View>
+            <View
+              style={styles.modalContentWrapper}
+            >
+              <DatePickerIOS
+                date={datePickerDate}
+                mode="time"
+                onDateChange={date => dateChange(props, date)}
+              />
+            </View>
           </View>
         </View>
-      </View>
-    </Modal>
+      </Modal>
+    );
+  }
+  return (
+    <View />
   );
 };
 
@@ -163,6 +209,7 @@ const getOptionsJsx = (props) => {
 };
 
 export default (props) => {
+  // Modal is for iOS only
   const modalJsx = getModalJsx(props);
   const optionsJsx = getOptionsJsx(props);
 

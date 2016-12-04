@@ -43,7 +43,6 @@ const getAsync = (props) => {
 
 const setAsync = props => onLoadCreateAsyncActions(props);
 
-
 export default class LoadingScreen extends Component {
 
   componentWillMount() {
@@ -91,7 +90,8 @@ export default class LoadingScreen extends Component {
       <Modal
         animationType="none"
         transparent
-        visible={false}
+        visible
+        onRequestClose={() => -1}
       >
         <View
           style={styles.wrapper}

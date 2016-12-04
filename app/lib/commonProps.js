@@ -81,8 +81,8 @@ const reminderProps = {
     ),
   ),
   modalVisible: React.PropTypes.bool,
-  modalDatePickerDate: React.PropTypes.instanceOf(Date),
-  modalOldDatePickerDate: React.PropTypes.instanceOf(Date),
+  datePickerDate: React.PropTypes.instanceOf(Date),
+  oldDatePickerDate: React.PropTypes.instanceOf(Date),
 };
 
 export const combinedReminderProps = React.PropTypes.shape(

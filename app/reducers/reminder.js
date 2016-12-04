@@ -11,7 +11,29 @@ import {
 } from '../lib/constants';
 import { dayToNumber } from '../lib/reminder';
 
+
 const convertOldDate = (oldDate, selectedDay) => {
+  const getAdditionalDays = (todayDate) => {
+    const todayDay = todayDate.getDay();
+    const todayHours = todayDate.getHours();
+    const todayMinutes = todayDate.getMinutes();
+
+    const oldDay = oldDate.getDay();
+    const oldHours = oldDate.getHours();
+    const oldMinutes = oldDate.getMinutes();
+
+    const INCREMENT_BY_WEEK = 7;
+
+    // Old time = 6:13PM
+    // Today time = 11:14PM
+    if (todayDay === oldDay &&
+       (oldHours < todayHours || (oldHours === todayHours && oldMinutes < todayMinutes))) {
+      return INCREMENT_BY_WEEK;
+    }
+
+    return 0;
+  };
+
   const hours = oldDate.getHours();
   const minutes = oldDate.getMinutes();
   const seconds = oldDate.getSeconds();
@@ -19,23 +41,28 @@ const convertOldDate = (oldDate, selectedDay) => {
   const day = dayToNumber(selectedDay);
 
   const todayDate = new Date();
-  todayDate.setDate((todayDate.getDate() + (day + (7 - todayDate.getDay()))) % 7);
+  const additionalDays = getAdditionalDays(todayDate);
+
+  todayDate.setDate(todayDate.getDate() + ((day + (7 - todayDate.getDay())) % 7) + additionalDays);
   todayDate.setHours(hours, minutes, seconds);
 
   return todayDate;
 };
 
 const scheduleNotification = (day, date) => {
+  const id = day;
+
   PushNotification.localNotificationSchedule({
     message: 'It\'s time to workout!',
     date,
-    userInfo: { day },
+    userInfo: { id },
     repeatInterval: 'week',
+    id,
   });
 };
 
 const cancelScheduleNotification = (day) => {
-  PushNotification.cancelLocalNotifications({ day });
+  PushNotification.cancelLocalNotifications({ id: day });
 };
 
 const doNotificationSchedule = (mode, day, date) => {
@@ -54,16 +81,17 @@ const getMode = (mode) => {
   return REMINDER_DISABLED;
 };
 
-const getDays = (days, selectedDay, modalDatePickerDate) => {
-  const modalDatePickerRequired = typeof modalDatePickerDate !== 'undefined';
+const getDays = (days, selectedDay, datePickerDate) => {
+  const datePickerRequired = typeof datePickerDate !== 'undefined';
 
   return days.map((val) => {
     if (val.day === selectedDay) {
-      const mode = modalDatePickerRequired ? val.mode : getMode(val.mode);
-      const dateToConvert = modalDatePickerRequired ? modalDatePickerDate : val.date;
+      const mode = datePickerRequired ? val.mode : getMode(val.mode);
+      const dateToConvert = datePickerRequired ? datePickerDate : val.date;
       const date = convertOldDate(dateToConvert, selectedDay);
 
-      doNotificationSchedule(mode, selectedDay, date);
+      const day = dayToNumber(selectedDay).toString();
+      doNotificationSchedule(mode, day, date);
 
       return Object.assign(
         {},
@@ -142,25 +170,25 @@ export default createReducer(combinedReminderInitialState, {
     return Object.assign(
       {},
       state,
-      { modalDatePickerDate: action.payload },
+      { datePickerDate: action.payload },
     );
   },
   [types.REMINDER_SET_OLD_DATE](state, action) {
     return Object.assign(
       {},
       state,
-      { modalOldDatePickerDate: action.payload },
+      { oldDatePickerDate: action.payload },
     );
   },
   [types.REMINDER_SET_SELECTED_DAY](state, action) {
     return Object.assign(
       {},
       state,
-      { modalSelectedDay: action.payload },
+      { selectedDay: action.payload },
     );
   },
   [types.REMINDER_SET_SELECTED_DAY_TIME](state) {
-    const days = getDays(state.days, state.modalSelectedDay, state.modalDatePickerDate);
+    const days = getDays(state.days, state.selectedDay, state.datePickerDate);
 
     return Object.assign(
       {},

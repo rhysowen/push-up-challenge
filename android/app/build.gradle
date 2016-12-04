@@ -87,7 +87,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.pushups"
+        applicationId "com.digitalcompile.pushups"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -126,14 +126,21 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-chart-android')
     compile project(':react-native-proximity-android')
     compile project(':react-native-splash-screen')
     compile project(':react-native-vector-icons')
     compile project(':react-native-sound')
     compile project(':react-native-push-notification')
+    compile ('com.google.android.gms:play-services-gcm:10.0.1') {
+        force = true;
+    }
     compile project(':react-native-keep-awake')
     compile project(':react-native-admob')
     compile fileTree(dir: "libs", include: ["*.jar"])
+    compile 'com.facebook.fresco:animated-gif:0.11.0'
+    compile 'com.facebook.fresco:animated-webp:0.11.0'
+    compile 'com.facebook.fresco:webpsupport:0.11.0'
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
 }

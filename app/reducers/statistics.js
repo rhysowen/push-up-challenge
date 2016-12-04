@@ -5,6 +5,16 @@ import * as types from '../actions/types';
 import parseJson from '../lib/parseJson';
 import * as assigns from '../lib/assignReducer';
 
+const currentYearDeepCopy = (currentYear) => {
+  const year = currentYear.year;
+  const month = currentYear.month.slice(0);
+
+  return {
+    year,
+    month,
+  };
+};
+
 const getSelectedYearChartData = (selectedYear, chartData) => {
   const selectedYearDate = selectedYear.getFullYear();
   const selectedYearChartDataFilter = chartData.length > 0 ?
@@ -54,7 +64,7 @@ const getChartData = (state, totalReps) => {
       throw Error('Multiple years found!');
     }
 
-    const currentYearObj = currentYearDataFilter[0];
+    const currentYearObj = currentYearDeepCopy(currentYearDataFilter[0]);
     currentYearObj.month[currentMonth] += totalReps;
 
     ret.push(currentYearObj);

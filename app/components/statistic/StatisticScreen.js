@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { HorizontalBarChart } from 'react-native-ios-charts';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import _ from 'lodash';
 
@@ -23,6 +22,7 @@ import StatisticItem from '../shared/StatisticItem';
 import getIconJsx from '../../lib/icon';
 import { DEFAULT_MONTHS_ARRAY } from '../../lib/constants';
 import { combinedStatisticsProps } from '../../lib/commonProps';
+import Chart from './Chart';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -63,52 +63,7 @@ const styles = StyleSheet.create({
     fontFamily: BASE_FONT_FAMILY_IOS,
     color: FADE_COLOR,
   },
-  chart: {
-    flex: 1,
-    backgroundColor: 'transparent',
-  },
 });
-
-const config = {
-  dataSets: [],
-  backgroundColor: 'transparent',
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Oct', 'Sep', 'Nov', 'Dec'],
-  showLegend: false,
-  minOffset: 20,
-  xAxis: {
-    axisLineWidth: 0,
-    position: 'bottom',
-  },
-  leftAxis: {
-    spaceTop: 0.18,
-  },
-  rightAxis: {
-    enabled: false,
-    drawGridLines: false,
-  },
-  valueFormatter: {
-    type: 'regular',
-  },
-  animation: {
-    yAxisDuration: 1,
-    easingOption: 'easeInQuart',
-  },
-};
-
-const getChartConfig = (props) => {
-  const { statistics } = props;
-
-  const dataSet = {
-    values: statistics.selectedYearChartData,
-    valueTextFontSize: 12,
-    colors: [COLOR_ORANGE],
-  };
-
-  config.dataSets.pop();
-  config.dataSets.push(dataSet);
-
-  return config;
-};
 
 const LEFT = 'LEFT';
 const RIGHT = 'RIGHT';
@@ -130,7 +85,6 @@ const getYearIconJsx = (callback, mode) => {
 const getRenderJsx = (props) => {
   const { statistics } = props;
 
-  const chartConfig = getChartConfig(props);
   const isDefaultMonthEqualDataMonth =
     _.isEqual(DEFAULT_MONTHS_ARRAY, statistics.selectedYearChartData);
 
@@ -140,9 +94,8 @@ const getRenderJsx = (props) => {
 
   if (isChartShow) {
     return (
-      <HorizontalBarChart
-        config={chartConfig}
-        style={styles.chart}
+      <Chart
+        selectedYearChartData={statistics.selectedYearChartData}
       />
     );
   }

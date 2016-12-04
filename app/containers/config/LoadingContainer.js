@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
   sound: state.sound,
   reminder: state.reminder,
   analytics: state.analytics,
+  navigation: state.navigation,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);

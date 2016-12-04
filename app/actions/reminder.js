@@ -57,7 +57,7 @@ export const toggleReminderModal = () => (
   { type: types.REMINDER_MODAL_TOGGLE }
 );
 
-export const setReminderModalDate = date => (
+export const setReminderDate = date => (
   {
     type: types.REMINDER_SET_DATE,
     payload: date,
@@ -71,7 +71,7 @@ export const setReminderModalOldDate = date => (
   }
 );
 
-export const setReminderModalSelectedDay = day => (
+export const setReminderSelectedDay = day => (
   {
     type: types.REMINDER_SET_SELECTED_DAY,
     payload: day,

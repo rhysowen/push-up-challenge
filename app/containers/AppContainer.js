@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,6 +6,8 @@ import {
   StatusBar,
   Dimensions,
   Text,
+  BackAndroid,
+  Platform,
 } from 'react-native';
 
 // Takes in state & actions - will wrap any component we give it.
@@ -131,70 +133,101 @@ const renderComponent = (mode, props) => {
 
 const renderLeftComponent = props => renderComponent(LEFT_COMPONENT, props);
 
-const AppContainer = (props) => {
+const onBackPress = (props) => {
   const {
     navigation,
-    util,
+    navigatePop,
   } = props;
 
-  const adBanner = getAdBanner();
+  const navigationIndex = navigation.index;
+  const isGoBack = navigationIndex > 0;
 
-  const proEnabled = isProEnabled(util.proMode);
-  const cardWrapper = getCardWrapperStyle(proEnabled, adBanner.height);
-  const title = renderTitle(props);
+  navigatePop();
 
-  return (
-    <View
-      style={styles.wrapper}
-    >
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={TAB_COLOR}
-      />
-      <NavigationTransitioner
-        navigationState={navigation}
-        style={styles.wrapper}
-        render={renderProps => (
-          <View style={styles.wrapper}>
-            <NavigationCard
-              {...renderProps}
-              onNavigateBack={() => props.navigatePop()}
-              key={renderProps.scene.route.key}
-              renderScene={() => (
-                <SceneContainer
-                  {...renderProps}
-                  {...props}
-                />
-              )}
-              style={cardWrapper}
-            />
-            <NavigationHeader
-              {...renderProps}
-              onNavigateBack={() => props.navigatePop()}
-              style={styles.navHeader}
-              renderLeftComponent={() => renderLeftComponent(props)}
-              renderTitleComponent={() => (
-                <NavigationHeader.Title>
-                  <Text
-                    style={styles.navTitle}
-                  >
-                    {title}
-                  </Text>
-                </NavigationHeader.Title>
-              )}
-            />
-            <AdvertBanner
-              hideBanner={proEnabled}
-              bannerSize={adBanner.ad}
-              bannerHeight={adBanner.height}
-              bannerWidth={adBanner.width}
-            />
-          </View>
-        )}
-      />
-    </View>
-  );
+  return isGoBack;
 };
+
+class AppContainer extends Component {
+
+  componentDidMount() {
+    if (Platform.OS === 'android') {
+      BackAndroid.addEventListener('hardwareBackPress', () => onBackPress(this.props));
+    }
+  }
+
+  componentWillUnmount() {
+    if (Platform.OS === 'android') {
+      BackAndroid.removeEventListener('hardwareBackPress', () => onBackPress(this.props));
+    }
+  }
+
+  render() {
+    const {
+      navigation,
+      util,
+    } = this.props;
+
+    const adBanner = getAdBanner();
+
+    const proEnabled = isProEnabled(util.proMode);
+    const cardWrapper = getCardWrapperStyle(proEnabled, adBanner.height);
+    const title = renderTitle(this.props);
+
+    return (
+      <View
+        style={styles.wrapper}
+      >
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={TAB_COLOR}
+        />
+        <NavigationTransitioner
+          navigationState={navigation}
+          style={styles.wrapper}
+          render={renderProps => (
+            <View style={styles.wrapper}>
+              <NavigationCard
+                {...renderProps}
+                panHandlers={null}
+                onNavigateBack={() => this.props.navigatePop()}
+                key={renderProps.scene.route.key}
+                renderScene={() => (
+                  <SceneContainer
+                    {...renderProps}
+                    {...this.props}
+                  />
+                )}
+                style={cardWrapper}
+              />
+              <NavigationHeader
+                {...renderProps}
+                onNavigateBack={() => this.props.navigatePop()}
+                style={styles.navHeader}
+                renderLeftComponent={() => renderLeftComponent(this.props)}
+                renderTitleComponent={() => (
+                  <NavigationHeader.Title>
+                    <Text
+                      style={styles.navTitle}
+                    >
+                      {title}
+                    </Text>
+                  </NavigationHeader.Title>
+                )}
+              />
+              <AdvertBanner
+                //hideBanner={proEnabled}
+                hideBanner={true}
+                bannerSize={adBanner.ad}
+                bannerHeight={adBanner.height}
+                bannerWidth={adBanner.width}
+              />
+            </View>
+          )}
+        />
+      </View>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   navigation: state.navigation,
@@ -206,10 +239,6 @@ const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispat
 
 AppContainer.propTypes = {
   util: combinedUtilProps,
-  navigation: navigationProps,
-};
-
-renderComponent.propTypes = {
   navigation: navigationProps,
   navigatePop: React.PropTypes.func,
 };
