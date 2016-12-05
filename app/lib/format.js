@@ -16,7 +16,7 @@ export const formatCalories = number => Math.floor(number);
 
 export const formatReps = number => number;
 
-export const formatDate = date => date.toLocaleTimeString([],
+export const formatDate = date => date.toLocaleTimeString('en-US',
   {
     hour: '2-digit',
     minute: '2-digit',

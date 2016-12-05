@@ -215,8 +215,7 @@ class AppContainer extends Component {
                 )}
               />
               <AdvertBanner
-                //hideBanner={proEnabled}
-                hideBanner={true}
+                hideBanner={proEnabled}
                 bannerSize={adBanner.ad}
                 bannerHeight={adBanner.height}
                 bannerWidth={adBanner.width}
@@ -239,6 +238,11 @@ const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispat
 
 AppContainer.propTypes = {
   util: combinedUtilProps,
+  navigation: navigationProps,
+  navigatePop: React.PropTypes.func,
+};
+
+renderComponent.propTypes = {
   navigation: navigationProps,
   navigatePop: React.PropTypes.func,
 };

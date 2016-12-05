@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
+  switch: { padding: 6 },
 });
 
 const getSecondaryText = (props) => {
@@ -86,6 +87,7 @@ const getMainJsx = (props) => {
           <Switch
             onValueChange={() => props.onValueChanged()}
             value={props.value}
+            style={styles.switch}
           />
         </View>
       </View>

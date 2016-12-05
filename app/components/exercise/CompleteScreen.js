@@ -18,7 +18,6 @@ import {
   BASE_PADDING_LEFT,
   BASE_PADDING_RIGHT,
   ACTIVITY_BACKGROUND_COLOR,
-  FADE_COLOR,
 } from '../../theme/style';
 import {
   formatTimeElapsed,
@@ -30,7 +29,6 @@ import {
   PROGRAM_COMPLETE,
 } from '../../lib/constants';
 import getIconJsx from '../../lib/icon';
-import { combinedUtilProps } from '../../lib/commonProps';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -98,10 +96,7 @@ const getExerciseCompleteText = (props) => {
 };
 
 const CompleteScreen = (props) => {
-  const {
-    complete,
-    util,
-  } = props;
+  const { complete } = props;
 
   const {
     repsCompleted,
@@ -132,6 +127,9 @@ const CompleteScreen = (props) => {
     borderRightWidth: 1,
   };
 
+  const valueColorStyle = '#F2F2F2';
+  const propertyColorStyle = 'white';
+
   return (
     <BaseScreen
       style={styles.wrapper}
@@ -159,19 +157,22 @@ const CompleteScreen = (props) => {
           <StatisticItem
             value={repsFormat}
             property="Reps"
-            propertyColorStyle={FADE_COLOR}
+            valueColorStyle={valueColorStyle}
+            propertyColorStyle={propertyColorStyle}
             rightBorderStyle={rightBorderStyle}
           />
           <StatisticItem
             value={timeElapsedFormat}
             property="Elapsed"
-            propertyColorStyle={FADE_COLOR}
+            valueColorStyle={valueColorStyle}
+            propertyColorStyle={propertyColorStyle}
             rightBorderStyle={rightBorderStyle}
           />
           <StatisticItem
             value={caloriesFormat}
             property="Calories"
-            propertyColorStyle={FADE_COLOR}
+            valueColorStyle={valueColorStyle}
+            propertyColorStyle={propertyColorStyle}
           />
         </View>
       </View>
@@ -218,7 +219,6 @@ CompleteScreen.propTypes = {
       calories: React.PropTypes.number,
     },
   ),
-  util: combinedUtilProps,
 };
 
 export default CompleteScreen;

@@ -1,3 +1,4 @@
 <resources>
-<string name="app_name">PushUps</string>
+    <string name="app_name">PushUps</string>
+    <string name="RNB_GOOGLE_PLAY_LICENSE_KEY">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmZxKI2rPrhptOoTzYLPJBUXXzcNO3J3OBetznZaeM9FzQojLBia8pCFIDBgJUI75uwmo5uah15z9UerAu9HE57d8WtbMwbnqEuDDfwpRaxzNZ28W2O83kotYL8Lui48mnMDd2veGtnZGFc5fAa6O4Ob2Np6a4JrXc1yKVv6Ik0wJF/Zt5RIMCFY5FnLp6OX8pWgzqFF4E8Wzd9FUCUb9c6GPGmbajsw4HuznM9nSV3Ie1mavPIBygC8nVOBfFfaaDxH21BQMybziwC57uv1aYKR+9yse/ceUtmd1VTNyTF2MP5VZxHmw/YSSa7fNK/JUogPBbswbQwHGDmUXjXNOZwIDAQAB</string>
 </resources>

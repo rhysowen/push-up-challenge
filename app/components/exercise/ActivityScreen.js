@@ -243,9 +243,8 @@ const cleanUpState = (props) => {
 
   const proEnabled = isProEnabled(util.proMode);
 
-  //TODO
   if (!proEnabled) {
-    //displayInterstitial();
+    displayInterstitial();
   }
 };
 

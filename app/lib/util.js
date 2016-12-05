@@ -1,7 +1,10 @@
 import {
   Alert,
   NativeModules,
+  Platform,
 } from 'react-native';
+
+import InAppBilling from 'react-native-billing';
 
 import { PRO_ENABLED } from '../lib/constants';
 
@@ -10,7 +13,7 @@ const PRO_IDENTIFIER = 'com.digitalcompile.pushups.pro';
 const PRODUCTS = [PRO_IDENTIFIER];
 const PRO_MESSAAGE = 'Adverts have been removed & all programs are now available.';
 
-const purchaseProduct = (productIdentifier, props) => (
+const purchaseProductIOS = (productIdentifier, props) => (
   InAppUtils.loadProducts(PRODUCTS, () => (
     InAppUtils.purchaseProduct(productIdentifier, (purchaseError, purchaseResponse) => {
       if (purchaseResponse && purchaseResponse.productIdentifier) {
@@ -25,6 +28,34 @@ const purchaseProduct = (productIdentifier, props) => (
     })
   ))
 );
+
+const purchaseProductAndroid = async (productIdentifier, props) => {
+  await InAppBilling.close();
+  try {
+    await InAppBilling.open();
+    if (!await InAppBilling.isPurchased(productIdentifier)) {
+      await InAppBilling.purchase(productIdentifier);
+    }
+  } catch (err) {
+    // Handle this?
+  } finally {
+    await InAppBilling.consumePurchase(productIdentifier).then((isConsumed) => {
+      if (isConsumed) {
+        props.activateProMode();
+      }
+    });
+    await InAppBilling.close();
+  }
+};
+
+const purchaseProduct = (productIdentifier, props) => {
+  if (Platform.OS === 'ios') {
+    return purchaseProductIOS(productIdentifier, props);
+  }
+
+  return purchaseProductAndroid(productIdentifier, props);
+};
+
 
 export const isProEnabled = proMode => proMode === PRO_ENABLED;
 
@@ -45,14 +76,14 @@ export const upgrade = (props) => {
   );
 };
 
-export const restorePurchases = props => (
+const restorePurchasesIOS = (productIdentifier, props) => (
   InAppUtils.restorePurchases((error, response) => {
     if (error) {
       Alert.alert('Error', 'Unable to connect to iTunes Store.');
     } else {
       const proIdentiferFilterResponse =
         response instanceof Array ?
-          response.filter(r => r.productIdentifier === PRO_IDENTIFIER)
+          response.filter(r => r.productIdentifier === productIdentifier)
           : [];
       if (proIdentiferFilterResponse.length > 0) {
         props.activateProMode();
@@ -64,3 +95,12 @@ export const restorePurchases = props => (
     }
   })
 );
+
+export const restorePurchases = (props) => {
+  if (Platform.OS === 'ios') {
+    return restorePurchasesIOS(PRO_IDENTIFIER, props);
+  }
+
+  // We can re-use this for Android.
+  return purchaseProductAndroid(PRO_IDENTIFIER, props);
+};

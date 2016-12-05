@@ -70,7 +70,7 @@ const days = Array(NUMBER_OF_DAYS_WEEK)
     Object.assign(
       {},
       val,
-      { day: DAYS[index] },
+      { day: DAYS[index].name },
     )
   ),
 );

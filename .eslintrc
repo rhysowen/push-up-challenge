@@ -25,5 +25,16 @@
   "rules": {
     "react/no-unused-prop-types": [1, { "skipShapeProps": true }],
     "react/jsx-filename-extension": "off"
-  }
+  },
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [
+					".js",
+					".android.js",
+					".ios.js"
+				]
+			}
+		}
+	}
 }

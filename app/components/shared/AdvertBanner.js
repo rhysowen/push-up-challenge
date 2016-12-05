@@ -46,6 +46,11 @@ const AdvertBanner = (props) => {
   );
 };
 
-AdvertBanner.propTypes = { hideBanner: React.PropTypes.bool };
+AdvertBanner.propTypes = {
+  hideBanner: React.PropTypes.bool,
+  bannerWidth: React.PropTypes.number,
+  bannerHeight: React.PropTypes.number,
+  bannerSize: React.PropTypes.string,
+};
 
 export default AdvertBanner;
