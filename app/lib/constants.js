@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 const APP_NAME = 'Push-Ups Coach';
 const APP_VERSION = '1.0';
 const APP_AUTHOR = 'DigitalCompile';
@@ -46,8 +48,21 @@ const RATE_APP = 'RATE_APP';
 const REMIND_LATER = 'REMIND_LATER';
 const NO_THANKS = 'NO_THANKS';
 
-const APP_ID = '1173126612';
-const RATE_APP_URL = `http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=${APP_ID}&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8`;
+const APP_ID_IOS = '1173126612';
+const RATE_APP_URL_IOS = `http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=${APP_ID_IOS}&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8`;
+
+const APP_ID_ANDROID = 'com.digitalcompile.pushups';
+const RATE_APP_URL_ANDROID = `market://details?id=${APP_ID_ANDROID}`;
+
+const getRateUrl = () => {
+  if (Platform.OS === 'ios') {
+    return RATE_APP_URL_IOS;
+  }
+
+  return RATE_APP_URL_ANDROID;
+};
+
+const RATE_APP_URL = getRateUrl();
 
 export {
   APP_NAME,
