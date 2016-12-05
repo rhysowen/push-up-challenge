@@ -57,6 +57,7 @@ const scheduleNotification = (day, date) => {
     date,
     userInfo: { id },
     repeatInterval: 'week',
+    repeatType: 'week',
     id,
   });
 };
