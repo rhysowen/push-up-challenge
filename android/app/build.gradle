@@ -105,7 +105,7 @@ android {
         applicationId "com.digitalcompile.pushups"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
+        versionCode 4
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -129,6 +129,7 @@ android {
     }
     buildTypes {
         release {
+            manifestPlaceholders = [permissionName: "android.permission.SYSTEM_ALERT_WINDOW"]
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
@@ -153,7 +154,6 @@ dependencies {
     compile project(':react-native-billing')
     compile project(':react-native-chart-android')
     compile project(':react-native-proximity-android')
-    compile project(':react-native-splash-screen')
     compile project(':react-native-vector-icons')
     compile project(':react-native-sound')
     compile project(':react-native-push-notification')

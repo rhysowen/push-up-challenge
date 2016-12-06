@@ -4,6 +4,7 @@ import {
   Modal,
   Image,
   StyleSheet,
+  Platform,
 } from 'react-native';
 
 import SplashScreen from 'react-native-splash-screen';
@@ -50,7 +51,9 @@ export default class LoadingScreen extends Component {
   }
 
   componentDidMount() {
-    SplashScreen.hide();
+    if (Platform.OS === 'ios') {
+      SplashScreen.hide();
+    }
   }
 
   componentDidUpdate() {
