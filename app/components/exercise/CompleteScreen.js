@@ -176,17 +176,17 @@ const CompleteScreen = (props) => {
           />
         </View>
       </View>
-      <View
-        style={styles.infoWrapper}
-      >
-        <Information
-          infoText={infoText}
-        />
-      </View>
-      <View
-        style={styles.bottomWrapper}
-      >
-        <ScrollView>
+      <ScrollView>
+        <View
+          style={styles.infoWrapper}
+        >
+          <Information
+            infoText={infoText}
+          />
+        </View>
+        <View
+          style={styles.bottomWrapper}
+        >
           <Button>
             <Button.Item
               text="Return to Dashboard"
@@ -205,8 +205,8 @@ const CompleteScreen = (props) => {
               lastItem
             />
           </Button>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </BaseScreen>
   );
 };
