@@ -30,8 +30,6 @@ const AdvertBanner = (props) => {
   const style = {
     width: props.bannerWidth,
     height: props.bannerHeight,
-    alignItems: 'center',
-    justifyContent: 'center',
   };
 
   return (
