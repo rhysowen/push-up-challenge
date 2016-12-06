@@ -34,16 +34,18 @@ const purchaseProductAndroid = async (productIdentifier, props) => {
   try {
     await InAppBilling.open();
     if (!await InAppBilling.isPurchased(productIdentifier)) {
-      await InAppBilling.purchase(productIdentifier);
+      await InAppBilling.purchase(productIdentifier).then((purchased) => {
+        if (purchased) {
+          props.activateProMode();
+        }
+      });
+    } else {
+      props.activateProMode();
+      await InAppBilling.open();
     }
   } catch (err) {
     // Handle this?
   } finally {
-    await InAppBilling.consumePurchase(productIdentifier).then((isConsumed) => {
-      if (isConsumed) {
-        props.activateProMode();
-      }
-    });
     await InAppBilling.close();
   }
 };
