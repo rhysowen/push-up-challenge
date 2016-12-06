@@ -128,6 +128,9 @@ android {
         }
     }
     buildTypes {
+        debug {
+            manifestPlaceholders = [permissionName: "android.permission.ACCESS_FINE_LOCATION"]
+        }
         release {
             manifestPlaceholders = [permissionName: "android.permission.SYSTEM_ALERT_WINDOW"]
             minifyEnabled enableProguardInReleaseBuilds
