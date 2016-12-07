@@ -15,7 +15,7 @@ import parseJson from '../lib/parseJson';
 import * as assigns from '../lib/assignReducer';
 import { processSound } from '../lib/sound';
 
-const TIMER_SECONDS = 60;
+const TIMER_SECONDS = 10;
 
 const getCalories = (repsCompleted) => {
   // Assumption is that around 4 push ups burn a single calorie
@@ -130,21 +130,23 @@ const getDecrementRepState = (state) => {
 };
 
 const getDecreaseTimerState = (state) => {
+  const {
+    soundCoachEnabled,
+    soundBeepEnabled,
+  } = state;
+
   const timer = state.timer - 1;
 
   let mode = state.mode;
-  let sound = state.sound;
 
   if (state.mode === EXERCISE_REST && state.timer - 1 === 0) {
     mode = EXERCISE_ACTIVE;
-    sound = PERFORM_PUSH_UP_SOUND;
-  } else {
-    sound = NOT_SET_SOUND;
+    processSound(PERFORM_PUSH_UP_SOUND, { soundCoachEnabled, soundBeepEnabled });
   }
 
   return {
     mode,
-    sound,
+
     timer,
   };
 };
