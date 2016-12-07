@@ -282,6 +282,17 @@ export default createReducer(combinedExerciseInitialState, {
     );
   },
   [types.EXERCISE_SET_MODE](state, action) {
+    const {
+      soundCoachEnabled,
+      soundBeepEnabled,
+    } = state;
+
+    const mode = action.payload;
+
+    if (mode === EXERCISE_ACTIVE) {
+      processSound(PERFORM_PUSH_UP_SOUND, { soundCoachEnabled, soundBeepEnabled });
+    }
+
     return Object.assign(
       {},
       state,
