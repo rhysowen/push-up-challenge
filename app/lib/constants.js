@@ -1,7 +1,15 @@
 import { Platform } from 'react-native';
 
+const getAppVersion = () => {
+  if (Platform.OS === 'ios') {
+    return '1.0';
+  }
+
+  return '1.3';
+};
+
 const APP_NAME = 'Push-Ups Coach';
-const APP_VERSION = '1.0';
+const APP_VERSION = getAppVersion();
 const APP_AUTHOR = 'DigitalCompile';
 
 const EXERCISE_ACTIVE = 'EXERCISE_ACTIVE';
