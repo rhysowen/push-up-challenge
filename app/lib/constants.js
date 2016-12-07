@@ -5,7 +5,7 @@ const getAppVersion = () => {
     return '1.0';
   }
 
-  return '1.3';
+  return '1.2';
 };
 
 const APP_NAME = 'Push-Ups Coach';
